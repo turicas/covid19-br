@@ -1,0 +1,10 @@
+--only-binary pymupdf
+
+cached-property
+click
+https://github.com/turicas/rows/archive/develop.zip#egg=rows
+psycopg2-binary
+pymupdf
+requests
+scrapy
+tqdm
