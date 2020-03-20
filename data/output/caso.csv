@@ -1,4 +1,38 @@
 date,state,city,place_type,notified,confirmed,discarded,suspect,deaths,notes,source_url
+2020-03-06,MG,,state,140,0,17,,0,,https://www.saude.mg.gov.br/component/gmg/story/12232-informe-epidemiologico-coronavirus-06-03-2020
+2020-03-08,MG,,state,140,1,17,,0,"Dados notificados, descartados e mortes repetidos de 06/03 (não contém todos os dados de 08/03 na notícia)",https://www.saude.mg.gov.br/component/gmg/story/12233-confirmacao-do-primeiro-caso-de-coronavirus-covid-19-em-minas-gerais
+2020-03-09,MG,,state,190,1,28,,0,,https://www.saude.mg.gov.br/component/gmg/story/12247-informe-epidemiologico-coronavirus-09-03-2020
+2020-03-10,MG,,state,243,1,29,,0,,https://www.saude.mg.gov.br/component/gmg/story/12255-informe-epidemiologico-coronavirus-10-03-2020
+2020-03-11,MG,,state,279,1,18,,0,,https://www.saude.mg.gov.br/component/gmg/story/12261-informe-epidemiologico-coronavirus-11-03-2020
+2020-03-12,MG,,state,313,2,22,,0,,https://www.saude.mg.gov.br/component/gmg/story/12267-informe-epidemiologico-coronavirus-12-03-2020
+2020-03-13,MG,,state,378,2,69,,0,,https://www.saude.mg.gov.br/component/gmg/story/12276-informe-epidemiologico-coronavirus-13-03-2020
+2020-03-14,MG,,state,386,4,85,,0,,https://www.saude.mg.gov.br/component/gmg/story/12280-informe-epidemiologico-coronavirus-14-03-2020
+2020-03-16,MG,,state,511,6,85,,0,,https://www.saude.mg.gov.br/component/gmg/story/12286-informe-epidemiologico-coronavirus-16-03-2020
+2020-03-16,MG,Ipatinga,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12286-informe-epidemiologico-coronavirus-16-03-2020
+2020-03-16,MG,Divinópolis,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12286-informe-epidemiologico-coronavirus-16-03-2020
+2020-03-16,MG,Juiz de Fora,city,,2,,,,,https://www.saude.mg.gov.br/component/gmg/story/12286-informe-epidemiologico-coronavirus-16-03-2020
+2020-03-16,MG,Belo Horizonte,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12286-informe-epidemiologico-coronavirus-16-03-2020
+2020-03-16,MG,Patrocínio,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12286-informe-epidemiologico-coronavirus-16-03-2020
+2020-03-17,MG,,state,794,14,88,,0,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
+2020-03-17,MG,Belo Horizonte,city,,5,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
+2020-03-17,MG,Nova Lima,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
+2020-03-17,MG,Coronel Fabriciano,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
+2020-03-17,MG,Divinópolis,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
+2020-03-17,MG,Juiz de Fora,city,,2,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
+2020-03-17,MG,Patrocínio,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
+2020-03-17,MG,Ipatinga,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
+2020-03-17,MG,Sete Lagoas,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
+2020-03-17,MG,Uberlândia,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
+2020-03-18,MG,,state,810,19,88,,0,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
+2020-03-18,MG,Belo Horizonte,city,,10,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
+2020-03-18,MG,Coronel Fabriciano,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
+2020-03-18,MG,Divinópolis,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
+2020-03-18,MG,Ipatinga,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
+2020-03-18,MG,Juiz de Fora,city,,2,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
+2020-03-18,MG,Nova Lima,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
+2020-03-18,MG,Patrocínio,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
+2020-03-18,MG,Sete Lagoas,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
+2020-03-18,MG,Uberlândia,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
 2020-03-19,PR,Guaratuba,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_19032020.pdf
 2020-03-19,PR,Matinhos,city,3,0,2,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_19032020.pdf
 2020-03-19,PR,Paranaguá,city,3,0,1,2,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_19032020.pdf
@@ -112,40 +146,16 @@ date,state,city,place_type,notified,confirmed,discarded,suspect,deaths,notes,sou
 2020-03-18,PR,Santo Antônio do Paraíso,city,1,0,1,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_18032020.pdf
 2020-03-18,PR,Guaíra,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_18032020.pdf
 2020-03-18,PR,Marechal Cândido Rondon,city,1,0,1,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_18032020.pdf
-2020-03-06,MG,,state,140,0,17,,0,,https://www.saude.mg.gov.br/component/gmg/story/12232-informe-epidemiologico-coronavirus-06-03-2020
-2020-03-08,MG,,state,140,1,17,,0,"Dados notificados, descartados e mortes repetidos de 06/03 (não contém todos os dados de 08/03 na notícia)",https://www.saude.mg.gov.br/component/gmg/story/12233-confirmacao-do-primeiro-caso-de-coronavirus-covid-19-em-minas-gerais
-2020-03-09,MG,,state,190,1,28,,0,,https://www.saude.mg.gov.br/component/gmg/story/12247-informe-epidemiologico-coronavirus-09-03-2020
-2020-03-10,MG,,state,243,1,29,,0,,https://www.saude.mg.gov.br/component/gmg/story/12255-informe-epidemiologico-coronavirus-10-03-2020
-2020-03-11,MG,,state,279,1,18,,0,,https://www.saude.mg.gov.br/component/gmg/story/12261-informe-epidemiologico-coronavirus-11-03-2020
-2020-03-12,MG,,state,313,2,22,,0,,https://www.saude.mg.gov.br/component/gmg/story/12267-informe-epidemiologico-coronavirus-12-03-2020
-2020-03-13,MG,,state,378,2,69,,0,,https://www.saude.mg.gov.br/component/gmg/story/12276-informe-epidemiologico-coronavirus-13-03-2020
-2020-03-14,MG,,state,386,4,85,,0,,https://www.saude.mg.gov.br/component/gmg/story/12280-informe-epidemiologico-coronavirus-14-03-2020
-2020-03-16,MG,,state,511,6,85,,0,,https://www.saude.mg.gov.br/component/gmg/story/12286-informe-epidemiologico-coronavirus-16-03-2020
-2020-03-16,MG,Ipatinga,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12286-informe-epidemiologico-coronavirus-16-03-2020
-2020-03-16,MG,Divinópolis,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12286-informe-epidemiologico-coronavirus-16-03-2020
-2020-03-16,MG,Juiz de Fora,city,,2,,,,,https://www.saude.mg.gov.br/component/gmg/story/12286-informe-epidemiologico-coronavirus-16-03-2020
-2020-03-16,MG,Belo Horizonte,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12286-informe-epidemiologico-coronavirus-16-03-2020
-2020-03-16,MG,Patrocínio,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12286-informe-epidemiologico-coronavirus-16-03-2020
-2020-03-17,MG,,state,794,14,88,,0,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
-2020-03-17,MG,Belo Horizonte,city,,5,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
-2020-03-17,MG,Nova Lima,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
-2020-03-17,MG,Coronel Fabriciano,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
-2020-03-17,MG,Divinópolis,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
-2020-03-17,MG,Juiz de Fora,city,,2,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
-2020-03-17,MG,Patrocínio,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
-2020-03-17,MG,Ipatinga,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
-2020-03-17,MG,Sete Lagoas,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
-2020-03-17,MG,Uberlândia,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12298-informe-epidemiologico-coronavirus-06-03-2020
-2020-03-18,MG,,state,810,19,88,,0,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
-2020-03-18,MG,Belo Horizonte,city,,10,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
-2020-03-18,MG,Coronel Fabriciano,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
-2020-03-18,MG,Divinópolis,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
-2020-03-18,MG,Ipatinga,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
-2020-03-18,MG,Juiz de Fora,city,,2,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
-2020-03-18,MG,Nova Lima,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
-2020-03-18,MG,Patrocínio,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
-2020-03-18,MG,Sete Lagoas,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
-2020-03-18,MG,Uberlândia,city,,1,,,,,https://www.saude.mg.gov.br/component/gmg/story/12307-informe-epidemiologico-coronavirus-18-03-2020
+2020-03-18,PR,Mercedes,city,1,0,1,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_18032020.pdf
+2020-03-18,PR,Palotina,city,2,0,2,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_18032020.pdf
+2020-03-13,PR,Curitiba,city,56,5,20,31,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
+2020-03-13,PR,São José dos Pinhais,city,2,0,1,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
+2020-03-13,PR,Ponta Grossa,city,10,0,2,8,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
+2020-03-13,PR,Guarapuava,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
+2020-03-13,PR,Turvo,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
+2020-03-13,PR,Foz do Iguaçu,city,7,0,2,5,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
+2020-03-13,PR,Cascavel,city,7,0,2,5,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
+2020-03-13,PR,Corbélia,city,1,0,1,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
 2020-03-16,AP,Macapá,city,,0,,6,,,https://www.portal.ap.gov.br/noticia/1603/boletim-informativo-covid-19-amapa-16-de-marco-de-2020
 2020-03-16,AP,,state,,0,,6,,,https://www.portal.ap.gov.br/noticia/1603/boletim-informativo-covid-19-amapa-16-de-marco-de-2020
 2020-03-17,AP,Macapá,city,,0,,8,,,https://www.portal.ap.gov.br/noticia/1703/boletim-informativo-covid-19-amapa-17-de-marco-de-2020
@@ -160,16 +170,6 @@ date,state,city,place_type,notified,confirmed,discarded,suspect,deaths,notes,sou
 2020-03-20,AP,Laranjal do Jarí,city,,0,,2,,,https://www.portal.ap.gov.br/noticia/2003/boletim-informativo-covid-19-amapa-20-de-marco-de-2020
 2020-03-20,AP,Pedra Branca do Amapari,city,,0,,1,,,https://www.portal.ap.gov.br/noticia/2003/boletim-informativo-covid-19-amapa-20-de-marco-de-2020
 2020-03-20,AP,,state,,1,49,24,,,https://www.portal.ap.gov.br/noticia/2003/boletim-informativo-covid-19-amapa-20-de-marco-de-2020
-2020-03-18,PR,Mercedes,city,1,0,1,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_18032020.pdf
-2020-03-18,PR,Palotina,city,2,0,2,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_18032020.pdf
-2020-03-13,PR,Curitiba,city,56,5,20,31,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
-2020-03-13,PR,São José dos Pinhais,city,2,0,1,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
-2020-03-13,PR,Ponta Grossa,city,10,0,2,8,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
-2020-03-13,PR,Guarapuava,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
-2020-03-13,PR,Turvo,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
-2020-03-13,PR,Foz do Iguaçu,city,7,0,2,5,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
-2020-03-13,PR,Cascavel,city,7,0,2,5,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
-2020-03-13,PR,Corbélia,city,1,0,1,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
 2020-03-13,PR,Umuarama,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
 2020-03-13,PR,Cianorte,city,3,1,0,2,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
 2020-03-13,PR,Maringá,city,8,0,2,6,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_13032020.pdf
