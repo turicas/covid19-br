@@ -9,4 +9,5 @@ for spider in caso boletim; do
 		--logfile=data/log/${spider}.log \
 		-a input_filename=data/${spider}_url.csv \
 		-o data/output/${spider}.csv
+	gzip data/output/${spider}.csv
 done
