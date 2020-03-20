@@ -1,0 +1,202 @@
+{
+  "profile": "tabular-data-package",
+  "resources": [
+    {
+      "name": "boletim",
+      "path": "output/boletim.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "date",
+            "type": "date",
+            "format": "default",
+            "title": "date",
+            "description": "day of the report"
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "format": "default",
+            "title": "state",
+            "description": "2 letter abbreviation code of the federation unit (state)"
+          },
+          {
+            "name": "url",
+            "type": "string",
+            "format": "uri",
+            "title": "URL",
+            "description": "URL address of the official report"
+          }
+        ]
+      },
+      "title": "Reports",
+      "description": "Daily reports from the states' Health Secretariat on COVID-19.",
+      "encoding": "utf-8",
+      "format": "csv"
+    },
+    {
+      "name": "caso",
+      "path": "output/caso.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "date",
+            "type": "date",
+            "format": "default",
+            "title": "date",
+            "description": "day of the report"
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "format": "default",
+            "title": "state",
+            "description": "2 letter abbreviation code of the federation unit (state)"
+          },
+          {
+            "name": "city",
+            "type": "string",
+            "format": "default",
+            "title": "city name",
+            "description": "name of the city"
+          },
+          {
+            "name": "place_type",
+            "type": "string",
+            "format": "default",
+            "title": "place type",
+            "description": "state or city"
+          },
+          {
+            "name": "notified",
+            "type": "integer",
+            "format": "default",
+            "title": "notified",
+            "description": "amount of notified cases"
+          },
+          {
+            "name": "confirmed",
+            "type": "integer",
+            "format": "default",
+            "title": "confirmed",
+            "description": "amount of confirmed cases"
+          },
+          {
+            "name": "discarded",
+            "type": "integer",
+            "format": "default",
+            "title": "discarded",
+            "description": "amount of discarded cases"
+          },
+          {
+            "name": "suspect",
+            "type": "integer",
+            "format": "default",
+            "title": "suspect",
+            "description": "amount of suspected cases"
+          },
+          {
+            "name": "deaths",
+            "type": "integer",
+            "format": "default",
+            "title": "deaths",
+            "description": "death count"
+          },
+          {
+            "name": "notes",
+            "type": "string",
+            "format": "default",
+            "title": "notes",
+            "description": "notes on this account or source"
+          },
+          {
+            "name": "source_url",
+            "type": "string",
+            "format": "uri",
+            "title": "source URL",
+            "description": "URL of the report source of the data"
+          }
+        ]
+      },
+      "title": "Case data",
+      "format": "csv",
+      "encoding": "utf-8",
+      "description": "Daily case data on the spread of COVID-19 in Brazil, by city."
+    },
+    {
+      "name": "boletim-url",
+      "path": "boletim_url.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "state",
+            "type": "string",
+            "format": "default",
+            "title": "state",
+            "description": "2 letter abbreviation code of the federation unit (state)"
+          },
+          {
+            "name": "csv_url",
+            "type": "string",
+            "format": "uri",
+            "title": "CSV URL",
+            "description": "URL to the Google Spreadsheet export to CSV of the sheet with this state's data"
+          }
+        ]
+      },
+      "title": "Boletim URL",
+      "format": "csv",
+      "encoding": "utf-8",
+      "description": "List of URLs tot he Google Spreadsheet exports to CSV of the sheets with each state's report"
+    },
+    {
+      "name": "caso-url",
+      "path": "caso_url.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "state",
+            "type": "string",
+            "format": "default",
+            "title": "state",
+            "description": "2 letter abbreviation code of the federation unit (state)"
+          },
+          {
+            "name": "csv_url",
+            "type": "string",
+            "format": "default",
+            "title": "CSV URL",
+            "description": "URL to the Google Spreadsheet export to CSV of the sheet with this state's data"
+          }
+        ]
+      },
+      "title": "Caso URL",
+      "format": "csv",
+      "encoding": "utf-8",
+      "description": "List of URLs tot he Google Spreadsheet exports to CSV of the sheets with each state's case data"
+    }
+  ],
+  "keywords": [
+    "covid-19",
+    "corona-virus",
+    "brasil",
+    "brazil",
+    "health",
+    "pandemic"
+  ],
+  "name": "covid19-br",
+  "title": "Daily time series on COVID-19 in Brazil",
+  "description": "Data on the evolution of the COVID-19 disease in Brazil, processed from each state Health Secretariat's COVID-19 daily reports.",
+  "homepage": "https://github.com/turicas/covid19-br",
+  "licenses": [
+    {
+      "name": "CC-BY-SA-4.0",
+      "title": "Creative Commons Attribution Share-Alike 4.0",
+      "path": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+  ]
+}

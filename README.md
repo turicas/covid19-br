@@ -1,3 +1,5 @@
+[![goodtables.io](https://goodtables.io/badge/github/turicas/covid19-br.svg)](https://goodtables.io/github/turicas/covid19-br)
+
 # covid19-br
 
 Esse repositório centraliza links e dados sobre boletins de número de casos das
