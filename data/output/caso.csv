@@ -290,3 +290,68 @@ date,state,city,place_type,notified,confirmed,discarded,suspect,deaths,notes,sou
 2020-03-20,PR,Tomazina,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_20032020.pdf
 2020-03-20,PR,Turvo,city,1,0,1,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_20032020.pdf
 2020-03-20,PR,Umuarama,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_20032020.pdf
+2020-03-21,PR,Almirante Tamandaré,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Altônia,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Alto Paraná,city,3,0,3,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Alvorada do Sul,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Ampére,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Apucarana,city,3,0,1,2,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Arapongas,city,2,0,0,2,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Araucária,city,1,0,1,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Assis Chateaubriand,city,2,0,0,2,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Bandeirantes,city,2,0,0,2,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Cambé,city,5,0,1,4,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Campo Largo,city,7,1,1,5,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Capanema,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Carambeí,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Cascavel,city,40,0,12,28,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Cianorte,city,6,2,1,3,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Clevelândia,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Colombo,city,1,0,1,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Conselheiro Mairinck,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Corbélia,city,1,0,1,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Cornélio Procópio,city,5,0,0,5,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Coronel Domingos Soares,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Coronel Vivida,city,3,0,0,3,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Curitiba,city,171,31,88,52,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Faxinal,city,2,0,0,2,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Foz do Iguaçu,city,38,1,6,31,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Francisco Beltrão,city,2,0,0,2,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Guaíra,city,5,1,0,4,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Guarapuava,city,2,0,1,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Guaratuba,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Honório Serpa,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Ibiporã,city,8,0,0,8,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Irati,city,1,0,1,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Ivaiporã,city,2,0,0,2,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Jacarezinho,city,2,0,0,2,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Japira,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Londrina,city,56,3,12,41,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Mangueirinha,city,5,0,0,5,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Marechal Cândido Rondon,city,2,0,2,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Maria Helena,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Maringá,city,22,1,8,13,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Matinhos,city,3,0,2,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Mercedes,city,1,0,1,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Nova Aurora,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Nova Fátima,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Nova Santa Bárbara,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Palotina,city,2,0,2,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Paranaguá,city,4,0,3,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Paranavaí,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Pato Branco,city,7,1,0,6,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Pitangueiras,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Ponta Grossa,city,30,1,16,13,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Porecatu,city,2,0,1,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Renascença,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Santo Antônio do Paraíso,city,1,0,1,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Santo Antônio do Sudoeste,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,São João do Caiuá,city,2,0,2,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,São José dos Pinhais,city,4,0,2,2,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Sertanópolis,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,,state,487,43,172,272,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Telêmaco Borba,city,2,0,0,2,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Toledo,city,5,0,0,5,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Tomazina,city,1,0,0,1,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Turvo,city,1,0,1,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
+2020-03-21,PR,Umuarama,city,2,1,1,0,,,http://www.saude.pr.gov.br/arquivos/File/CORONA_21032020.pdf
