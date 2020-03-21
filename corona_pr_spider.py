@@ -67,7 +67,27 @@ def convert_row(row):
         if field_name in ("casos_confirmados", "casos_descartados", "casos_suspeitos", "total"):
             value = CleanIntegerField.deserialize(value)
         new[field_name] = value
-    return new
+
+    if new["data"] != new["boletim_data"]:
+        print(f"Data do boletim {new['boletim_data']} é diferente da data do PDF {new['data']}")
+
+    city = new["municipio"].strip()
+    if not city:  # "TOTAL" is present. Skip it.
+        return None
+
+    return {
+        "date": new["data"],
+        "state": "PR",
+        "city": city,
+        "place_type": "city",
+        "notified": new["total"],
+        "confirmed": new["casos_confirmados"],
+        "discarded": new["casos_descartados"],
+        "suspect": new["casos_suspeitos"],
+        "deaths": "",  # TODO: fix
+        "notes": "",
+        "source_url": new["boletim_url"],
+    }
 
 
 def parse_pdf(filename, meta):
@@ -123,11 +143,29 @@ class CoronaPrSpider(scrapy.Spider):
         meta = response.meta["row"]
         pdf_doc = rows.plugins.pdf.PyMuPDFBackend(filename)
         pdf_text = "".join(item for item in pdf_doc.extract_text() if item.strip())
+
         if pdf_text and "CLASSIFICAÇÃO\nFINAL" not in pdf_text:
             # This is a new-style PDF, which has the data we want
+
+            result = []
             for row in parse_pdf(filename, meta):
-                if row["data"] != row["boletim_data"]:
-                    self.logger.warning(f"Data do boletim {row['boletim_data']} é diferente da data do PDF {row['data']}")
+                if row is not None:
+                    result.append(row)
+            result.append({
+                "date": result[0]["date"],
+                "state": "PR",
+                "city": "",
+                "place_type": "state",
+                "notified": sum(row["notified"] for row in result),
+                "confirmed": sum(row["confirmed"] for row in result),
+                "discarded": sum(row["discarded"] for row in result),
+                "suspect": sum(row["suspect"] for row in result),
+                "deaths": "",  # TODO: fix
+                "notes": "",
+                "source_url": result[0]["source_url"],
+            })
+            result.sort(key=lambda row: row["city"])
+            for row in result:
                 yield row
 
         else:
