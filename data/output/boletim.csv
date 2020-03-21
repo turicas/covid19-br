@@ -17,13 +17,11 @@ date,state,url
 2020-02-28,PR,http://www.saude.pr.gov.br/arquivos/File/CORONA_28022020.pdf
 2020-02-28,SC,http://www.saude.sc.gov.br/index.php/noticias-geral/11090-governo-do-estado-monitora-oito-casos-suspeitos-do-novo-coronavirus
 2020-02-28,SP,http://www.saopaulo.sp.gov.br/spnoticias/sp-registra-66-casos-suspeitos-de-coronavirus/
-2020-02-29,BA,
 2020-02-29,DF,http://www.saude.df.gov.br/wp-conteudo/uploads/2020/02/Informe_2_COE_COVID19_DF_29fev20.pdf.pdf
 2020-02-29,MT,
 2020-02-29,PA,
 2020-02-29,PE,
 2020-02-29,SP,http://www.saopaulo.sp.gov.br/ultimas-noticias/brasil-confirma-2o-caso-importado-de-coronavirus/
-2020-03-01,BA,
 2020-03-01,DF,http://www.saude.df.gov.br/wp-conteudo/uploads/2020/02/Informe_3_COE_COVID19_DF_1mar20.pdf
 2020-03-01,MT,
 2020-03-01,PA,http://www.saude.pa.gov.br/2020/03/01/nota-informativa-coronavirus/
@@ -91,7 +89,7 @@ date,state,url
 2020-03-07,PE,
 2020-03-07,RS,
 2020-03-07,SP,http://www.saopaulo.sp.gov.br/spnoticias/sp-registra-13-casos-confirmados-para-coronavirus/
-2020-03-08,BA,
+2020-03-08,AL,http://www.saude.al.gov.br/2020/03/09/secretario-diz-que-1o-caso-do-covid-19-nao-causa-panico-em-al/
 2020-03-08,DF,http://www.saude.df.gov.br/wp-conteudo/uploads/2020/02/Informe_COVID19_GDF_20200308.pdf
 2020-03-08,MG,https://www.saude.mg.gov.br/component/gmg/story/12233-confirmacao-do-primeiro-caso-de-coronavirus-covid-19-em-minas-gerais
 2020-03-08,MT,
@@ -119,6 +117,7 @@ date,state,url
 2020-03-10,PR,http://www.saude.pr.gov.br/arquivos/File/CORONA_10032020.pdf
 2020-03-10,RS,
 2020-03-10,SP,http://www.saopaulo.sp.gov.br/spnoticias/sp-registra-19-casos-confirmados-para-coronavirus/
+2020-03-11,AL,http://www.saude.al.gov.br/2020/03/11/alagoas-tem-nove-casos-em-investigacao-para-covid-19/
 2020-03-11,BA,http://www.saude.ba.gov.br/2020/03/11/bahia-confirma-terceiro-caso-do-novo-coronavirus-covid-19/
 2020-03-11,DF,http://www.saude.df.gov.br/wp-conteudo/uploads/2020/02/Informe_COVID19_GDF_20200311-dia-11.pdf
 2020-03-11,MG,https://www.saude.mg.gov.br/component/gmg/story/12261-informe-epidemiologico-coronavirus-11-03-2020
@@ -130,6 +129,7 @@ date,state,url
 2020-03-11,RS,
 2020-03-11,SC,http://www.saude.sc.gov.br/coronavirus/Boletim%20Novo%20%20Coronav%C3%ADrus%20%E2%80%93%20COVID-19%2011-03-2020.html
 2020-03-11,SP,http://saude.sp.gov.br/ses/perfil/cidadao/homepage/destaques/sp-registra-30-casos-confirmados-para-coronavirus
+2020-03-12,AL,http://www.saude.al.gov.br/2020/03/12/alagoas-tem-dez-casos-suspeitos-para-covid-19/
 2020-03-12,BA,http://www.saude.ba.gov.br/2020/03/12/boletim-novo-coronavirus-12-03-2020/
 2020-03-12,DF,http://www.saude.df.gov.br/wp-conteudo/uploads/2020/02/Informe_COVID19_GDF_1203.pdf
 2020-03-12,MG,https://www.saude.mg.gov.br/component/gmg/story/12267-informe-epidemiologico-coronavirus-12-03-2020
@@ -141,6 +141,7 @@ date,state,url
 2020-03-12,RS,
 2020-03-12,SC,http://www.saude.sc.gov.br/index.php/noticias-geral/11118-ses-confirma-dois-casos-do-novo-coronavirus-em-sc
 2020-03-12,SP,http://www.saopaulo.sp.gov.br/sala-de-imprensa/release/sp-ira-ampliar-enfrentamento-ao-coronavirus-com-mil-novos-leitos-de-uti/
+2020-03-13,AL,http://www.saude.al.gov.br/2020/03/13/alagoas-segue-com-dez-casos-suspeitos-para-covid-19/
 2020-03-13,BA,http://www.saude.ba.gov.br/2020/03/13/boletim-novo-coronavirus-13-03-2020/
 2020-03-13,DF,http://www.saude.df.gov.br/wp-conteudo/uploads/2020/02/Informe_COVID19_GDF_13-PDF.pdf
 2020-03-13,MG,https://www.saude.mg.gov.br/component/gmg/story/12276-informe-epidemiologico-coronavirus-13-03-2020
@@ -152,7 +153,6 @@ date,state,url
 2020-03-13,RS,
 2020-03-13,SC,http://www.saude.sc.gov.br/coronavirus/img/boletim-ncovid19-0314.jpg
 2020-03-13,SP,
-2020-03-14,BA,
 2020-03-14,DF,http://www.saude.df.gov.br/wp-conteudo/uploads/2020/02/Informe_COVID19_GDF_20200314-1-ok.pdf
 2020-03-14,MG,https://www.saude.mg.gov.br/component/gmg/story/12280-informe-epidemiologico-coronavirus-14-03-2020
 2020-03-14,MS,http://www.vs.saude.ms.gov.br/wp-content/uploads/2020/03/BOLETIM-CORONA-11-14-03-20-_14h57.pdf
@@ -175,6 +175,7 @@ date,state,url
 2020-03-15,RS,
 2020-03-15,SC,http://www.saude.sc.gov.br/coronavirus/img/boletim-15_03_20.jpeg
 2020-03-15,SP,
+2020-03-16,AL,http://www.saude.al.gov.br/2020/03/16/alagoas-permanece-com-um-caso-confirmado-e-16-sao-investigados-para-covid-19/
 2020-03-16,AP,https://www.portal.ap.gov.br/noticia/1603/boletim-informativo-covid-19-amapa-16-de-marco-de-2020
 2020-03-16,BA,http://www.saude.ba.gov.br/2020/03/16/bahia-confirma-decimo-caso-do-novo-coronavirus-covid-19/
 2020-03-16,DF,http://www.saude.df.gov.br/wp-conteudo/uploads/2020/02/16-Informe_COVID19_GDF_20200316-P.pdf
@@ -188,6 +189,7 @@ date,state,url
 2020-03-16,RS,
 2020-03-16,SC,http://www.saude.sc.gov.br/index.php/noticias-geral/11136-saude-estadual-confirma-setimo-caso-do-covid-19
 2020-03-16,SP,http://www.saude.sp.gov.br/ses/perfil/cidadao/homepage/destaques/sp-registra-152-casos-confirmados-para-coronavirus
+2020-03-17,AL,http://www.saude.al.gov.br/2020/03/17/alagoas-tem-34-casos-em-investigacao-para-covid-19/
 2020-03-17,AP,https://www.portal.ap.gov.br/noticia/1703/boletim-informativo-covid-19-amapa-17-de-marco-de-2020
 2020-03-17,BA,http://www.saude.ba.gov.br/2020/03/17/bahia-confirma-13-casos-do-novo-coronavirus-covid-19/
 2020-03-17,BA,http://www.saude.ba.gov.br/2020/03/17/bahia-confirma-14-casos-do-novo-coronavirus-covid-19/
@@ -202,6 +204,7 @@ date,state,url
 2020-03-17,RS,
 2020-03-17,SC,http://www.saude.sc.gov.br/coronavirus/img/boletim-17-03-20.jpeg
 2020-03-17,SP,http://www.saopaulo.sp.gov.br/spnoticias/capital-registra-primeiro-obito-relacionado-a-covid-19/
+2020-03-18,AL,http://www.saude.al.gov.br/2020/03/18/alagoas-tem-34-casos-suspeitos-para-covid-19-e-um-confirmado/
 2020-03-18,AP,https://www.portal.ap.gov.br/noticia/1803/boletim-informativo-covid-19-amapa-18-de-marco-de-2020
 2020-03-18,BA,http://www.saude.ba.gov.br/2020/03/18/bahia-confirma-18-casos-do-novo-coronavirus-covid-19/
 2020-03-18,BA,http://www.saude.ba.gov.br/2020/03/18/retificacao-%c7%80-bahia-confirma-27-casos-do-novo-coronavirus-covid-19/
@@ -217,6 +220,7 @@ date,state,url
 2020-03-18,RS,https://saude.rs.gov.br/upload/arquivos/202003/18194748-informe-epidemiologico-rs-2019-ncov-18-03-2020.pdf
 2020-03-18,SC,http://www.saude.sc.gov.br/index.php/noticias-geral/11146-coronavirus-em-sc-governo-confirma-14-casos-e-transmissoes-comunitarias
 2020-03-18,SP,http://www.saopaulo.sp.gov.br/spnoticias/estado-de-sp-registra-mais-3-mortes-por-coronavirus/
+2020-03-19,AL,http://www.saude.al.gov.br/2020/03/19/boletim-mostra-que-alagoas-tem-38-casos-suspeitos-para-covid-19/
 2020-03-19,AP,https://www.portal.ap.gov.br/noticia/1903/boletim-informativo-covid-19-amapa-19-de-marco-de-2020
 2020-03-19,BA,http://www.saude.ba.gov.br/2020/03/19/bahia-confirma-30-casos-do-novo-coronavirus-covid-19/
 2020-03-19,BA,http://www.saude.ba.gov.br/2020/03/19/bahia-segue-com-31-casos-confirmados-de-covid-19/
@@ -230,6 +234,7 @@ date,state,url
 2020-03-19,RS,https://saude.rs.gov.br/upload/arquivos/202003/20081553-informe-epidemiologico-rs-2019-ncov-19-03-2020.pdf
 2020-03-19,SC,http://www.saude.sc.gov.br/index.php/noticias-geral/11150-coronavirus-em-sc-governo-do-estado-confirma-21-casos-da-doenca
 2020-03-19,SP,http://www.saopaulo.sp.gov.br/spnoticias/capital-registra-5-mortes-relacionadas-ao-novo-coronavirus/
+2020-03-20,AL,http://www.saude.al.gov.br/2020/03/20/sesau-informa-que-alagoas-tem-seis-casos-confirmados-para-covid-19/
 2020-03-20,AP,https://www.portal.ap.gov.br/noticia/2003/boletim-informativo-covid-19-amapa-20-de-marco-de-2020
 2020-03-20,AP,https://www.portal.ap.gov.br/noticia/2003/coronavirus-primeiro-caso-e-confirmado-no-amapa
 2020-03-20,BA,http://www.saude.ba.gov.br/2020/03/20/bahia-confirma-34-casos-de-covid-19/
