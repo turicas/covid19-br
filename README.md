@@ -19,13 +19,13 @@ a mesma licença**.
 
 ## Dados
 
-Acesse os dados no [dataset covid19 no
-Brasil.IO](https://brasil.io/dataset/covid19).
+Depois de coletados e checados os dados ficam disponíveis [no dataset covid19
+no Brasil.IO](https://brasil.io/dataset/covid19).
 
-Acesse diretamente as planilhas, com separação por UF:
-
-- [Boletins](https://drive.google.com/open?id=11dZ0Ikcpnq2mBCP_B4ltOfM1OIvuuP_WLwGtHih4lXI)
-- [Casos](https://drive.google.com/open?id=1kjeKS6YOdL9lOxhob1E_m2zg9sysYseriFLOfDSgHAg)
+Caso queira acessar os dados antes de serem publicados (ATENÇÃO: pode ser que
+não tenham sido checados), você pode [acessar diretamente as planilhas em que
+estamos
+trabalhando](https://drive.google.com/open?id=1l3tiwrGEcJEV3gxX0yP-VMRNaE1MLfS2).
 
 Se esse programa e/ou os dados resultantes foram úteis a você ou à sua empresa,
 considere [fazer uma doação ao projeto Brasil.IO](https://brasil.io/doe), que é
@@ -67,3 +67,27 @@ Verifique o resultado em `data/output`.
 - [Outros datasets relevantes](datasets-relevantes.md)
 - [Recomendações para secretarias de saúde na disponibilização de
   dados](recomendacoes.md)
+
+## Atualização dos Dados no Brasil.IO
+
+Crie um arquivo `.env` com os valores corretos para as seguintes variáveis de
+ambiente:
+
+```
+BRASILIO_SSH_USER
+BRASILIO_SSH_SERVER
+BRASILIO_DATA_PATH
+BRASILIO_UPDATE_COMMAND
+```
+
+Execute o script:
+
+`./deploy.sh`
+
+Ele irá coletar os dados das planilhas (que estão linkadas em
+`data/boletim_url.csv` e `data/caso_url.csv`), adicionar os dados ao
+repositório, compactá-los, enviá-los ao servidor e executar o comando de
+atualização de dataset.
+
+> Nota: o script que baixa e converte os dados automaticamente deve ser
+> executado separadamente, com o comando `./collect.sh`.
