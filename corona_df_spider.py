@@ -50,31 +50,6 @@ RE_CASES = [RE_CASES_1,
             RE_CASES_2,
             RE_CASES_3]
 
-def parse_pdf(filename, meta):
-    # Extract update date
-    pdf_doc = PyMuPDFBackend(filename)
-    update_date = None
-    for page in pdf_doc.objects():
-        for obj in page:
-            if REGEXP_UPDATE.match(obj.text):
-                update_date = PtBrDateField.deserialize(REGEXP_UPDATE.findall(obj.text)[0])
-                break
-    if update_date is None:  # String not found in PDF
-        # Parse URL to get date inside PDF's filename
-        date = meta["boletim_url"].split("/")[-1].split(".pdf")[0].replace("CORONA_", "").split("_")[0]
-        update_date = PtBrDateField2.deserialize(date)
-
-    # Extract rows and inject update date and metadata
-    table = rows.import_from_pdf(filename, backend="min-x0")
-    for row in table:
-        if row.municipio == "TOTAL GERAL":
-            continue
-        row = row._asdict()
-        row["data"] = update_date
-        row.update(meta)
-        yield convert_row(row)
-
-
 class CoronaDFSpider(scrapy.Spider):
     name = "corona-df"
     start_urls = ["http://www.saude.df.gov.br/informativos-do-centro-de-operacoes-de-emergencia-coe"]
@@ -118,7 +93,6 @@ class CoronaDFSpider(scrapy.Spider):
                     year = groups.get("year")
                 else:
                     year = 2020
-                print(f"{day}/{month}/{year}")
                 break
 
         for re_cases in RE_CASES:
@@ -129,7 +103,6 @@ class CoronaDFSpider(scrapy.Spider):
                 investigation = groups.get("investigation") if "investigation" in groups else ""
                 confirmed = groups.get("confirmed")
                 discarded = groups.get("discarded")
-                print(f' - Investigados: {investigation}\n - Confirmados: {confirmed}\n - Descartados: {discarded}')
                 break
                 
         return {
