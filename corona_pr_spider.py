@@ -18,18 +18,11 @@ import rows
 import scrapy
 from rows.plugins.plugin_pdf import PyMuPDFBackend, same_column
 
+from utils import PtBrDateField, PtBrDateField2, CleanIntegerField
 
 BASE_PATH = Path(__file__).parent
 DOWNLOAD_PATH = BASE_PATH / "data" / "download"
 REGEXP_UPDATE = re.compile("Atualização .* ([0-9]{1,2}/[0-9]{1,2}/[0-9]{4}).*")
-
-
-class PtBrDateField(rows.fields.DateField):
-    INPUT_FORMAT = "%d/%m/%Y"
-
-class PtBrDateField2(rows.fields.DateField):
-    INPUT_FORMAT = "%d%m%Y"
-
 
 class MinX0Backend(PyMuPDFBackend):
     """Filter PDF objects, eliminating first column"""
@@ -45,16 +38,6 @@ class MinX0Backend(PyMuPDFBackend):
         min_x0 = min(obj.x0 for obj in first_column)
         for page in original_objects:
             yield [obj for obj in page if obj.x0 >= min_x0]
-
-class CleanIntegerField(rows.fields.IntegerField):
-
-    @classmethod
-    def deserialize(cls, value):
-        value = str(value or "").strip().replace("*", "")
-        if not value or value == "-":
-            return 0
-        else:
-            return int(value)
 
 
 def convert_row(row):
