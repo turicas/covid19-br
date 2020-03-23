@@ -253,5 +253,5 @@ preenche_es_dia_21_a_23(list_rows)
 preenche_es_dia_24_ao_fim(list_rows)
 
 covid_es = pd.DataFrame(list_rows, columns=['date','state','city','place_type','notified','confirmed','discarded','suspect','deaths','notes','source_url'])
-print(covid_es)
+covid_es = covid_es[covid_es.city!="Total"]
 covid_es.to_csv("data/output/boletins_es.csv", encoding='utf-8')
