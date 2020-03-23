@@ -1,7 +1,12 @@
 #!/bin/bash
 
 set -e
-SCRIPT_PATH=$(dirname $(readlink -f $0))
+if [[ $OSTYPE == "darwin"* ]]; then
+  SCRIPT_PATH=$(dirname $(pwd)/$(basename $0))
+else
+  SCRIPT_PATH=$(dirname $(readlink -f $0))
+fi
+
 DOWNLOAD_PATH="$SCRIPT_PATH/data/download"
 LOG_PATH="$SCRIPT_PATH/data/log"
 OUTPUT_PATH="$SCRIPT_PATH/data/output"
