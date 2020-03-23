@@ -1,0 +1,12 @@
+field_name,field_type
+date,date
+state,text
+city,text
+place_type,text
+confirmed,integer
+deaths,integer
+is_last,bool
+estimated_population_2019,integer
+city_ibge_code,integer
+confirmed_per_100k_inhabitants,float
+death_rate,float
