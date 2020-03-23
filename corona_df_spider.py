@@ -1,22 +1,16 @@
 """
-A Secretaria de Saúde do Paraná liberou um tipo de boletim ao longo dos
-primeiros e dias e outro tipo, mais recentemente:
-
-- O primeiro possui informações específicas sobre cada paciente (se viajou, de
-  onde etc.);
-- O segundo possui informações gerais sobre casos por município.
-
-Esse script coleta o segundo tipo de boletim.
+A Secretaria de Saúde do Distrito Federal publica boletins informativos sobre
+a COVID-19 em formato PDF. Os documentos são majoritariamente em formato de texto
+livre e possuem uma tabela com números referentes a casos da unidade da federação
+como um todo, sem disntinção de municípios ou regiões administrativas.
 """
 
-import os
 import re
 from urllib.parse import urljoin
 from pathlib import Path
 
 import scrapy
 import rows
-from rows.plugins.plugin_pdf import PyMuPDFBackend, same_column
 
 from utils import CleanIntegerField
 
@@ -24,7 +18,8 @@ from utils import CleanIntegerField
 BASE_PATH = Path(__file__).parent
 DOWNLOAD_PATH = BASE_PATH / "data" / "download"
 
-MONTHS = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
+MONTHS = ["janeiro", "fevereiro", "março", "abril", "maio", "junho",
+          "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"]
 
 RE_DAY = "(?P<day>\d{1,2})"
 RE_MONTH = "(?P<month>\d{1,2})"
@@ -42,13 +37,17 @@ RE_DIGIT_INVESTIGATION = f"(?P<investigation>{RE_DIGIT})"
 RE_DIGIT_CONFIRMED = f"(?P<confirmed>{RE_DIGIT})"
 RE_DIGIT_DISCARDED = f"(?P<discarded>{RE_DIGIT})"
 
-RE_CASES_1 = re.compile(f"Em\s+investigação\s+Confirmado[s]?\s+Descartado[s]?\s+{RE_DIGIT_INVESTIGATION}\s+{RE_DIGIT_CONFIRMED}\*?\s+{RE_DIGIT_DISCARDED}\s+{RE_DIGIT_TOTAL}\s")
-RE_CASES_2 = re.compile(f"Excluído[s]?\d?\s+Caso[s]?\s+suspeito[s]?\d?\s+Total\s*Confirmado[s]?\d?\s+Em\s+investigação\d?\s+Descartado[s]?\d?\s+{RE_DIGIT}\s+{RE_DIGIT_CONFIRMED}\s+{RE_DIGIT_INVESTIGATION}\s+{RE_DIGIT_DISCARDED}\s+{RE_DIGIT}")
-RE_CASES_3 = re.compile(f"Caso[s]?\s+Notificado[s]?\s+Total\s+(Suspeito[s]?|Em\s+investigação)\s+Confirmado[s]?\s+Descartado[s]?\s+{RE_DIGIT_INVESTIGATION}\s+{RE_DIGIT_CONFIRMED}\*?\s+{RE_DIGIT_DISCARDED}\s+{RE_DIGIT_TOTAL}")
+RE_CASES_1 = re.compile(f"Em\s+investigação\s+Confirmado[s]?\s+Descartado[s]?\s+"
+                        f"{RE_DIGIT_INVESTIGATION}\s+{RE_DIGIT_CONFIRMED}\*?\s+{RE_DIGIT_DISCARDED}\s+{RE_DIGIT_TOTAL}\s")
+RE_CASES_2 = re.compile(f"Excluído[s]?\d?\s+Caso[s]?\s+suspeito[s]?\d?\s+Total\s*Confirmado[s]?\d?\s+Em\s+investigação"
+                        f"\d?\s+Descartado[s]?\d?\s+{RE_DIGIT}\s+{RE_DIGIT_CONFIRMED}\s+{RE_DIGIT_INVESTIGATION}\s+{RE_DIGIT_DISCARDED}\s+{RE_DIGIT}")
+RE_CASES_3 = re.compile(f"Caso[s]?\s+Notificado[s]?\s+Total\s+(Suspeito[s]?|Em\s+investigação)\s+Confirmado[s]?\s+"
+                        f"Descartado[s]?\s+{RE_DIGIT_INVESTIGATION}\s+{RE_DIGIT_CONFIRMED}\*?\s+{RE_DIGIT_DISCARDED}\s+{RE_DIGIT_TOTAL}")
 
 RE_CASES = [RE_CASES_1,
             RE_CASES_2,
             RE_CASES_3]
+
 
 class CoronaDFSpider(scrapy.Spider):
     name = "corona-df"
@@ -75,7 +74,6 @@ class CoronaDFSpider(scrapy.Spider):
         with open(filename, mode="wb") as fobj:
             fobj.write(response.body)
 
-        meta = response.meta["row"]
         pdf_doc = rows.plugins.pdf.PyMuPDFBackend(filename)
         pdf_text = "".join(item for item in pdf_doc.extract_text() if item.strip())
 
@@ -104,7 +102,7 @@ class CoronaDFSpider(scrapy.Spider):
                 confirmed = groups.get("confirmed")
                 discarded = groups.get("discarded")
                 break
-                
+
         return {
             "date": f"{year}-{month}-{day}",
             "state": "DF",
@@ -114,7 +112,7 @@ class CoronaDFSpider(scrapy.Spider):
             "confirmed": CleanIntegerField.deserialize(confirmed),
             "discarded": CleanIntegerField.deserialize(discarded),
             "suspect": CleanIntegerField.deserialize(investigation),
-            "deaths": 0, 
+            "deaths": 0,
             "notes": "",
             "source_url": response.url
         }
