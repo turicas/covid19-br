@@ -150,11 +150,14 @@ class ConsolidaSpider(scrapy.Spider):
                     row_population = None
                     row_city_code = None
                 else:
+                    state_code = int(self.state_code[row["state"]])
+                    city_code = int(self.city_code[(row["state"], row["city"])])
                     row_population = self.population_per_city[(row["state"], row["city"])]
-                    row_city_code = self.city_code[(row["state"], row["city"])]
+                    row_city_code = f'{state_code:02d}{city_code:05d}'
             elif row["place_type"] == "state":
+                state_code = int(self.state_code[row["state"]])
                 row_population = self.population_per_state[row["state"]]
-                row_city_code = self.state_code[row["state"]]
+                row_city_code = f'{state_code:02d}'
             else:
                 self.logger.error(f"Invalid row: {row}")
                 continue
