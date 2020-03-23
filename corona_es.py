@@ -172,10 +172,85 @@ def preenche_es_dia_21_a_23(list_rows):
             print("")
 
 
+def preenche_es_dia_24_ao_fim(lis_rows):
+    dias_boletins = range(24, dias+2)
+
+    for dia in dias_boletins:
+        print(dia)
+        # gerando URLs
+        url_dia = "https://coronavirus.es.gov.br/Not%C3%ADcia/secretaria-da-saude-divulga-{}o-boletim-de-covid-19".format(dia)
+        url_dia_alternativa = "https://saude.es.gov.br/Not%C3%ADcia/secretaria-da-saude-divulga-{}o-boletim-de-covid-19".format(dia)
+
+        response = requests.get(url_dia_alternativa)
+        if (response.status_code == 200):
+            html_doc = response.text
+            soup = BeautifulSoup(html_doc, 'html.parser')
+            print(url_dia_alternativa)
+
+            #lendo a data do boletim
+            div_data = soup.find("div", class_="published").get_text().split(" ")[0]
+            div_data = div_data.split("/")
+            div_data = '{:%Y-%m-%d}'.format(datetime(int(div_data[2]), int(div_data[1]), int(div_data[0])))
+            print(div_data)
+
+            #Lendo a tabela da URL
+            table = soup.find("table")
+            countRow = 0
+            list_keys = []  
+            list_dia = []
+            list_total = []
+            
+            for row in table.find_all("tr"):            
+                list_municipio = []            
+
+                for col in row.find_all("td"):
+                    if countRow == 1:
+                        list_keys.append(col.get_text().strip('\n').replace("\n"," ").replace("\xa0"," ").replace("Caso ","").replace(" ","").lower())
+                    else:
+                        list_municipio.append(col.get_text().strip('\n').replace("\n"," ").replace("\xa0"," "))
+
+                if countRow > 0:
+                    list_total.append(list_municipio)
+                countRow += 1   
+
+            for municipio in list_total:
+                if (len(municipio) > 1):              
+                    if (municipio[0] == ''):
+                        pass
+                    elif (municipio[1].find("Caso") != -1):
+                        pass
+                    else:
+                        if (municipio[0].find("Total Geral") != -1):
+                            cidade = municipio
+                            res = dict(zip(list_keys[-5:], cidade)) 
+                            
+                            nome_cidade = ""
+                            place_type = "state"
+                        else:
+                            cidade = municipio
+                            #Unindo a lista de chaves da tabela com a linha do total
+                            res = dict(zip(list_keys[-5:], cidade)) 
+
+                            nome_cidade = cidade[0]
+                            place_type = "city"
+
+                        confirmados = np.nan if res["confirmado"] == 0 else res["confirmado"]
+                        notificado = np.nan
+                        descartados = np.nan if res["descartado"] == 0 else res["descartado"]
+                        suspeitos = np.nan if res["suspeito"] == 0 else res["suspeito"]
+                        mortes = np.nan
+
+                        list_dia = [div_data, "ES",nome_cidade,place_type, notificado, confirmados, descartados, suspeitos, mortes, "", url_dia_alternativa]                
+                        list_rows.append(list_dia)       
+
+            print("*****")
+            print("")
+
 
 preenche_es_dia_1_a_4(list_rows)
 preenche_es_dia_5_a_20(list_rows)
 preenche_es_dia_21_a_23(list_rows)
+preenche_es_dia_24_ao_fim(list_rows)
 
 covid_es = pd.DataFrame(list_rows, columns=['date','state','city','place_type','notified','confirmed','discarded','suspect','deaths','notes','source_url'])
 print(covid_es)
