@@ -17,6 +17,7 @@
 .tox
 MANIFEST
 build/*
+covid19/*
 data/
 dist/*
 docs-build/
