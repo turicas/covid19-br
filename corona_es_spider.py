@@ -103,9 +103,7 @@ def parse_03_22(date, response_body, url):
     ]
     output = []
     for row in table_data:
-        if (
-            len(row) > 1 and row[0] != ""
-        ):  # elimina linhas em branco e cabeçalho de regioes
+        if (len(row) > 1 and row[0] != ""):
             row = [col.strip() for col in row]
             if row[0] not in ("Total", "Total Geral") and row[-1] != "Total":
                 if row[1] != "0":
