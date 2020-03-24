@@ -111,7 +111,7 @@ class ConsolidaSpider(scrapy.Spider):
                     elif key.startswith("mortes_"):
                         number_type = "deaths"
                 else:
-                    self.logger.error(f"ERROR PARSING {caso}")
+                    continue
                 if date not in cities[caso["municipio"]]:
                     cities[caso["municipio"]][date] = {}
                 try:
