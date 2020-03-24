@@ -41,3 +41,22 @@ print(f"- {confirmados_estados} casos confirmados (estado)")
 print(f"- {confirmados_municipios} casos confirmados (municípios)")
 print(f"- {mortes_estados} mortes (estado)")
 print(f"- {mortes_municipios} mortes (municípios)")
+
+states = sorted(set(row["state"] for row in casos))
+for state in states:
+    state_rows = list(filter_rows(casos, is_last=True, place_type="state", state=state))
+    city_rows = list(filter_rows(casos, is_last=True, place_type="city", state=state))
+    try:
+        confirmed_state = state_rows[0]["confirmed"]
+    except IndexError:
+        confirmed_state = None
+    confirmed_cities = sum(row["confirmed"] for row in city_rows)
+    try:
+        deaths_state = state_rows[0]["deaths"]
+    except IndexError:
+        deaths_state = None
+    deaths_cities = sum(row["deaths"] for row in city_rows)
+    if confirmed_state != confirmed_cities:
+        print(f"*ATENÇÃO*: {state}: confirmados diferentes {confirmed_state} (estado) versus {confirmed_cities} (municípios)")
+    if deaths_state != deaths_cities:
+        print(f"*ATENÇÃO*: {state}: mortes diferentes {deaths_state} (estado) versus {deaths_cities} (municípios)")
