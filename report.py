@@ -46,16 +46,16 @@ states = sorted(set(row["state"] for row in casos))
 for state in states:
     state_rows = list(filter_rows(casos, is_last=True, place_type="state", state=state))
     city_rows = list(filter_rows(casos, is_last=True, place_type="city", state=state))
-    try:
-        confirmed_state = state_rows[0]["confirmed"]
-    except IndexError:
+    if not state_rows:
         confirmed_state = None
-    confirmed_cities = sum(row["confirmed"] for row in city_rows)
-    try:
-        deaths_state = state_rows[0]["deaths"]
-    except IndexError:
         deaths_state = None
+    else:
+        confirmed_state = sum(row["confirmed"] for row in state_rows)
+        deaths_state = sum(row["deaths"] for row in state_rows)
+
+    confirmed_cities = sum(row["confirmed"] for row in city_rows)
     deaths_cities = sum(row["deaths"] for row in city_rows)
+
     if confirmed_state != confirmed_cities:
         print(f"*ATENÇÃO*: {state}: confirmados diferentes {confirmed_state} (estado) versus {confirmed_cities} (municípios)")
     if deaths_state != deaths_cities:
