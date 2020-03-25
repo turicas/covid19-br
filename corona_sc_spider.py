@@ -21,7 +21,7 @@ from datetime import date
 
 BASE_PATH = Path(__file__).parent
 OUTPUT_PATH = BASE_PATH / "data" / "output"
-DOWNLOAD_PATH = BASE_PATH / "data" / "download"
+DATA_PATH = BASE_PATH / "data"
 REGEXP_UPDATE = re.compile("Atualização .* ([0-9]{1,2}/[0-9]{1,2}/[0-9]{4}).*")
 
 
@@ -109,8 +109,8 @@ class CoronaScSpider(scrapy.Spider):
 	
 	def write_csv(self):
 		
-		df_city_sc = pd.read_csv(DOWNLOAD_PATH / Path("all_cities_sc.csv"))
-		cities_sc = df_city_sc.iloc[:].values
+		df_city_sc = pd.read_csv(DATA_PATH / Path("populacao-estimada-2019.csv"))
+		cities_sc = df_city_sc.iloc[4418:4711,3].values
 		
 		filename = OUTPUT_PATH / Path("caso-sc.csv")
 		
@@ -133,7 +133,7 @@ class CoronaScSpider(scrapy.Spider):
 				
 				CoronaScSpider.data_cities["date"].append("")
 				CoronaScSpider.data_cities["state"].append("SC")
-				CoronaScSpider.data_cities["city"].append(cidade[0])
+				CoronaScSpider.data_cities["city"].append(cidade)
 				CoronaScSpider.data_cities["place_type"].append("city")
 				CoronaScSpider.data_cities["notified"].append("")
 				CoronaScSpider.data_cities["confirmed"].append("")
