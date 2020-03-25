@@ -4,6 +4,7 @@ cached-property
 click
 defusedxml>=0.6.0
 https://github.com/turicas/rows/archive/develop.zip#egg=rows
+jinja2
 openpyxl
 psycopg2-binary
 pymupdf
