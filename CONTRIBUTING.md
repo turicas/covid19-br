@@ -4,7 +4,7 @@
 
 ## Coletando Dados
 
-Para participar do time de coleta de dados, acesse [este link](https://go.rocket.chat/invite?host=chat.brasil.io&path=invite%2FMiMMCk) faça o cadastro e forneça as informações solicitadas no canal `#covid19-onboarding`.
+Para participar do time de coleta de dados, acesse [este link](https://bit.ly/covid19-br-help) faça o cadastro e forneça as informações solicitadas no canal `#covid19-onboarding`.
 
 ### Canais de comunicação
 
