@@ -17,8 +17,12 @@ a mesma licença**.
 
 ## Dados
 
-Depois de coletados e checados os dados ficam disponíveis [no dataset covid19
-no Brasil.IO](https://brasil.io/dataset/covid19).
+Depois de coletados e checados os dados ficam disponíveis de 3 formas no
+[Brasil.IO](https://brasil.io/):
+- [Interface Web](https://brasil.io/dataset/covid19) (feita para humanos)
+- [API](https://brasil.io/api/dataset/covid19) (feita para humanos que
+  desenvolvem programas)
+- [Download do dataset completo](https://data.brasil.io/dataset/covid19/_meta/list.html)
 
 Caso queira acessar os dados antes de serem publicados (ATENÇÃO: pode ser que
 não tenham sido checados), você pode [acessar diretamente as planilhas em que
@@ -28,6 +32,20 @@ trabalhando](https://drive.google.com/open?id=1l3tiwrGEcJEV3gxX0yP-VMRNaE1MLfS2)
 Se esse programa e/ou os dados resultantes foram úteis a você ou à sua empresa,
 considere [fazer uma doação ao projeto Brasil.IO](https://brasil.io/doe), que é
 mantido voluntariamente.
+
+
+### Alerta sobre dados inconsistentes
+
+- As contagens estaduais podem ser diferentes das municipais, por dois motivos:
+  1. Secretaria estadual parou de divulgar dados por município e está somente
+     divulgando por estado (isso está acontecendo com SP);
+  2. Secretaria estadual divulgou errado (às vezes acontece).
+- Nem sempre nossos dados baterão com os do Ministério da Saúde, pois pode ser
+  que nossa coleta seja feita depois da coleta do Ministério e, com isso, teremos dados mais atuais.
+
+Para mais detalhes [veja a metodologia de coleta de
+dados](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFrPpn4).
+
 
 ## Contribuindo
 
