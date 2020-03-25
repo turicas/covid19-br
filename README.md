@@ -19,13 +19,10 @@ a mesma licença**.
 
 Depois de coletados e checados os dados ficam disponíveis de 3 formas no
 [Brasil.IO](https://brasil.io/):
-- Interface Web:
-  [brasil.io/dataset/covid19](https://brasil.io/dataset/covid19) (feito para
-  humanos)
-- API:
-  [brasil.io/api/dataset/covid19](https://brasil.io/api/dataset/covid19)
-- Download do dataset completo:
-  [data.brasil.io/dataset/covid19/_meta/list.html](https://data.brasil.io/dataset/covid19/_meta/list.html)
+- [Interface Web](https://brasil.io/dataset/covid19) (feita para humanos)
+- [API](https://brasil.io/api/dataset/covid19) (feita para humanos que
+  desenvolvem programas)
+- [Download do dataset completo](https://data.brasil.io/dataset/covid19/_meta/list.html)
 
 Caso queira acessar os dados antes de serem publicados (ATENÇÃO: pode ser que
 não tenham sido checados), você pode [acessar diretamente as planilhas em que
