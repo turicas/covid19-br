@@ -1,4 +1,10 @@
+import argparse
+import csv
+import gzip
+import io
 import json
+from itertools import groupby
+from pathlib import Path
 from urllib.request import urlopen
 
 
@@ -19,44 +25,76 @@ def get_brasilio_data(dataset, table, limit=None):
     return data
 
 
+def get_local_data(table):
+    filename = Path(__file__).parent / "data" / "output" / f"{table}.csv.gz"
+    with io.TextIOWrapper(gzip.GzipFile(filename), encoding="utf-8") as fobj:
+        return list(csv.DictReader(fobj))
+
+
 def filter_rows(data, **kwargs):
     for row in data:
         if all(row[key] == value for key, value in kwargs.items()):
             yield row
 
 
-boletins = get_brasilio_data("covid19", "boletim")
-casos = get_brasilio_data("covid19", "caso")
-state_rows = list(filter_rows(casos, is_last=True, place_type="state"))
-city_rows = list(filter_rows(casos, is_last=True, place_type="city"))
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("source", choices=["api", "local"])
+    args = parser.parse_args()
 
-confirmados_estados = sum(row["confirmed"] for row in state_rows)
-confirmados_municipios = sum(row["confirmed"] for row in city_rows)
-mortes_estados = sum(row["deaths"] for row in state_rows)
-mortes_municipios = sum(row["deaths"] for row in city_rows)
-print(f"*DADOS ATUALIZADOS*")
-print()
-print(f"- {len(boletins)} boletins capturados")
-print(f"- {confirmados_estados} casos confirmados (estado)")
-print(f"- {confirmados_municipios} casos confirmados (municípios)")
-print(f"- {mortes_estados} mortes (estado)")
-print(f"- {mortes_municipios} mortes (municípios)")
+    if args.source == "api":
+        boletins = get_brasilio_data("covid19", "boletim")
+        casos = get_brasilio_data("covid19", "caso")
+    elif args.source == "local":
+        boletins = get_local_data("boletim")
+        casos = get_local_data("caso")
 
-states = sorted(set(row["state"] for row in casos))
-for state in states:
-    state_rows = list(filter_rows(casos, is_last=True, place_type="state", state=state))
-    city_rows = list(filter_rows(casos, is_last=True, place_type="city", state=state))
-    if not state_rows:
-        confirmed_state = None
-        deaths_state = None
-    else:
-        confirmed_state = sum(row["confirmed"] for row in state_rows)
-        deaths_state = sum(row["deaths"] for row in state_rows)
+    state_rows = list(filter_rows(casos, is_last=True, place_type="state"))
+    city_rows = list(filter_rows(casos, is_last=True, place_type="city"))
 
-    confirmed_cities = sum(row["confirmed"] for row in city_rows)
-    deaths_cities = sum(row["deaths"] for row in city_rows)
+    confirmados_estados = sum(row["confirmed"] for row in state_rows)
+    confirmados_municipios = sum(row["confirmed"] for row in city_rows)
+    mortes_estados = sum(row["deaths"] for row in state_rows)
+    mortes_municipios = sum(row["deaths"] for row in city_rows)
+    print(f"*DADOS ATUALIZADOS*")
+    print()
+    print(f"- {len(boletins)} boletins capturados")
+    print(f"- {confirmados_estados} casos confirmados (estado)")
+    print(f"- {confirmados_municipios} casos confirmados (municípios)")
+    print(f"- {mortes_estados} mortes (estado)")
+    print(f"- {mortes_municipios} mortes (municípios)")
 
-    if confirmed_state != confirmed_cities:
-        print(f"*ATENÇÃO*: {state}: confirmados diferentes {confirmed_state} (estado) versus {confirmed_cities} (municípios)")
-    if deaths_state != deaths_cities:
-        print(f"*ATENÇÃO*: {state}: mortes diferentes {deaths_state} (estado) versus {deaths_cities} (municípios)")
+    casos.sort(key=lambda row: row["date"], reverse=True)
+    last_date = casos[0]["date"]
+    casos.sort(key=lambda row: row["state"])
+    for state, data in groupby(casos, key=lambda row: row["state"]):
+        data = list(data)
+        state_date = max(row["date"] for row in data)
+        state_rows = list(filter_rows(data, is_last=True, place_type="state"))
+        city_rows = list(filter_rows(data, is_last=True, place_type="city"))
+        if not state_rows:
+            confirmed_state = None
+            deaths_state = None
+        else:
+            confirmed_state = sum(row["confirmed"] for row in state_rows)
+            deaths_state = sum(row["deaths"] for row in state_rows)
+
+        confirmed_cities = sum(row["confirmed"] for row in city_rows)
+        deaths_cities = sum(row["deaths"] for row in city_rows)
+
+        if confirmed_state != confirmed_cities:
+            print(
+                f"*ATENÇÃO*: {state}: confirmados diferentes {confirmed_state} (estado) versus {confirmed_cities} (municípios)"
+            )
+        if deaths_state != deaths_cities:
+            print(
+                f"*ATENÇÃO*: {state}: mortes diferentes {deaths_state} (estado) versus {deaths_cities} (municípios)"
+            )
+        if state_date != last_date:
+            print(
+                f"*ATENÇÃO*: {state}: último boletim ({state_date}) antigo (atual: {last_date})"
+            )
+
+
+if __name__ == "__main__":
+    main()
