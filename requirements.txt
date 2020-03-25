@@ -12,3 +12,5 @@ requests
 s3cmd
 scrapy
 tqdm
+goodtables==2.4.9
+
