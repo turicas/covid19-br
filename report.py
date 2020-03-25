@@ -7,6 +7,32 @@ from itertools import groupby
 from pathlib import Path
 from urllib.request import urlopen
 
+from rows.fields import make_header
+from rows.utils import load_schema
+
+BASE_DIR = Path(__file__).parent
+
+
+class Schema:  # TODO: add this class to rows
+    @classmethod
+    def from_file(cls, filename):
+        obj = cls()
+        obj.filename = filename
+        obj.fields = load_schema(
+            str(filename)
+        )  # TODO: load_schema must support Path objects
+        return obj
+
+    def deserialize(self, row):
+        field_names = list(row.keys())
+        field_mapping = {
+            old: self.fields[new]
+            for old, new in zip(field_names, make_header(field_names))
+        }
+        return {
+            key: field_mapping[key].deserialize(value) for key, value in row.items()
+        }
+
 
 def get_brasilio_data(dataset, table, limit=None):
     url = f"https://brasil.io/api/dataset/{dataset}/{table}/data"
@@ -26,9 +52,10 @@ def get_brasilio_data(dataset, table, limit=None):
 
 
 def get_local_data(table):
-    filename = Path(__file__).parent / "data" / "output" / f"{table}.csv.gz"
+    schema = Schema.from_file(BASE_DIR / "schema" / f"{table}.csv")
+    filename = BASE_DIR / "data" / "output" / f"{table}.csv.gz"
     with io.TextIOWrapper(gzip.GzipFile(filename), encoding="utf-8") as fobj:
-        return list(csv.DictReader(fobj))
+        return [schema.deserialize(row) for row in csv.DictReader(fobj)]
 
 
 def filter_rows(data, **kwargs):
