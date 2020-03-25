@@ -21,7 +21,7 @@ Depois de coletados e checados os dados ficam disponíveis de 3 formas no
 [Brasil.IO](https://brasil.io/):
 - [Interface Web](https://brasil.io/dataset/covid19) (feita para humanos)
 - [API](https://brasil.io/api/dataset/covid19) (feita para humanos que
-  desenvolvem programas)
+  desenvolvem programas) - [veja a documentação da API](api.md)
 - [Download do dataset completo](https://data.brasil.io/dataset/covid19/_meta/list.html)
 
 Caso queira acessar os dados antes de serem publicados (ATENÇÃO: pode ser que
