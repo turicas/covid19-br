@@ -51,6 +51,25 @@ Caso queira analisar os dados usando SQL, veja o script
 dados SQLite e já cria índices e *views* que facilitam o trabalho) e os
 arquivos na pasta [`sql/`](sql/).
 
+### Validando os dados
+
+Os metadados estão descritos conforme os padrões *Data Package* e
+*[Table Schema](https://specs.frictionlessdata.io/table-schema/#language)* do
+*[Frictionless Data](https://frictionlessdata.io/)*. Isso significa que os
+dados podem ser validados automaticamente para detectar, por exemplo, se os
+valores de um campo estão em conformidade com a tipagem definida, se uma data
+é válida, se há colunas faltando ou se há linhas duplicadas.
+
+Para fazer a verificação, ative o ambiente virtual Python e em seguida digite:
+
+```
+goodtables data/datapackage.json
+```
+
+O relatório da ferramenta
+*[Good Tables](https://github.com/frictionlessdata/goodtables-py)* irá indicar
+se houver alguma inconsistência. A validação também pode ser feita *online*
+pelo site [Goodtables.io](http://goodtables.io/).
 
 ## Contribuindo
 
