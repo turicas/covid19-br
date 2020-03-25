@@ -11,22 +11,29 @@
             "name": "date",
             "type": "date",
             "format": "default",
-            "title": "date",
-            "description": "day of the report"
+            "title": "Data",
+            "description": "Data da publicação do boletim"
           },
           {
             "name": "state",
             "type": "string",
             "format": "default",
-            "title": "state",
-            "description": "2 letter abbreviation code of the federation unit (state)"
+            "title": "UF",
+            "description": "Unidade federativa"
           },
           {
             "name": "url",
             "type": "string",
             "format": "uri",
             "title": "URL",
-            "description": "URL address of the official report"
+            "description": "Link para o boletim"
+          },
+          {
+            "name": "notes",
+            "type": "string",
+            "format": "default",
+            "title": "Observações",
+            "description": "Observações"
           }
         ]
       },
@@ -34,96 +41,6 @@
       "description": "Daily reports from the states' Health Secretariat on COVID-19.",
       "encoding": "utf-8",
       "format": "csv"
-    },
-    {
-      "name": "caso",
-      "path": "output/caso.csv",
-      "profile": "tabular-data-resource",
-      "schema": {
-        "fields": [
-          {
-            "name": "date",
-            "type": "date",
-            "format": "default",
-            "title": "date",
-            "description": "day of the report"
-          },
-          {
-            "name": "state",
-            "type": "string",
-            "format": "default",
-            "title": "state",
-            "description": "2 letter abbreviation code of the federation unit (state)"
-          },
-          {
-            "name": "city",
-            "type": "string",
-            "format": "default",
-            "title": "city name",
-            "description": "name of the city"
-          },
-          {
-            "name": "place_type",
-            "type": "string",
-            "format": "default",
-            "title": "place type",
-            "description": "state or city"
-          },
-          {
-            "name": "notified",
-            "type": "integer",
-            "format": "default",
-            "title": "notified",
-            "description": "amount of notified cases"
-          },
-          {
-            "name": "confirmed",
-            "type": "integer",
-            "format": "default",
-            "title": "confirmed",
-            "description": "amount of confirmed cases"
-          },
-          {
-            "name": "discarded",
-            "type": "integer",
-            "format": "default",
-            "title": "discarded",
-            "description": "amount of discarded cases"
-          },
-          {
-            "name": "suspect",
-            "type": "integer",
-            "format": "default",
-            "title": "suspect",
-            "description": "amount of suspected cases"
-          },
-          {
-            "name": "deaths",
-            "type": "integer",
-            "format": "default",
-            "title": "deaths",
-            "description": "death count"
-          },
-          {
-            "name": "notes",
-            "type": "string",
-            "format": "default",
-            "title": "notes",
-            "description": "notes on this account or source"
-          },
-          {
-            "name": "source_url",
-            "type": "string",
-            "format": "uri",
-            "title": "source URL",
-            "description": "URL of the report source of the data"
-          }
-        ]
-      },
-      "title": "Case data",
-      "format": "csv",
-      "encoding": "utf-8",
-      "description": "Daily case data on the spread of COVID-19 in Brazil, by city."
     },
     {
       "name": "boletim-url",
@@ -178,6 +95,92 @@
       "format": "csv",
       "encoding": "utf-8",
       "description": "List of URLs tot he Google Spreadsheet exports to CSV of the sheets with each state's case data"
+    },
+    {
+      "name": "caso",
+      "path": "output/caso.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "date",
+            "type": "date",
+            "format": "default",
+            "title": "Data",
+            "description": "Data"
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "format": "default",
+            "title": "UF",
+            "description": "Unidade federativa"
+          },
+          {
+            "name": "city",
+            "type": "string",
+            "format": "default",
+            "title": "Município",
+            "description": "Município"
+          },
+          {
+            "name": "place_type",
+            "type": "string",
+            "format": "default",
+            "title": "Tipo de local",
+            "description": " Se o dado é referente ao município ou ao estado"
+          },
+          {
+            "name": "confirmed",
+            "type": "integer",
+            "format": "default",
+            "title": "Confirmações",
+            "description": "Quantidade de casos confirmados"
+          },
+          {
+            "name": "deaths",
+            "type": "integer",
+            "format": "default",
+            "title": "Mortes",
+            "description": "Quantidade de mortes"
+          },
+          {
+            "name": "is_last",
+            "type": "boolean",
+            "format": "default",
+            "title": "É a última atualização?",
+            "description": "É a última atualização?"
+          },
+          {
+            "name": "estimated_population_2019",
+            "type": "integer",
+            "format": "default",
+            "title": "População estimada 2019",
+            "description": "População estimada 2019, segundo IBGE"
+          },
+          {
+            "name": "city_ibge_code",
+            "type": "string",
+            "format": "default",
+            "title": "Código IBGE",
+            "description": "Código IBGE do município ou estado"
+          },
+          {
+            "name": "confirmed_per_100k_inhabitants",
+            "type": "number",
+            "format": "default",
+            "title": "Confirmados/100k hab.",
+            "description": "Casos confirmados por 100.000 habitantes"
+          },
+          {
+            "name": "death_rate",
+            "type": "number",
+            "format": "default",
+            "title": "Mortes/confirmados",
+            "description": "Mortes por casos confirmados"
+          }
+        ]
+      }
     }
   ],
   "keywords": [
