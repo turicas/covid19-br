@@ -5,7 +5,6 @@ secretarias de saúde estaduais sobre a pandemia de coronavírus no Brasil. O
 recorte é por município por dia, para acompanharmos localmente a evolução da
 propagação do vírus.
 
-
 ## Licença
 
 A licença do código é [LGPL3](https://www.gnu.org/licenses/lgpl-3.0.en.html) e
@@ -15,7 +14,6 @@ dados, **cite a fonte original e quem tratou os dados**, como: **Fonte:
 Secretarias de Saúde das Unidades Federativas, dados tratados por Álvaro
 Justen/[Brasil.IO](https://brasil.io/)**. Caso compartilhe os dados, **utilize
 a mesma licença**.
-
 
 ## Dados
 
@@ -30,7 +28,6 @@ trabalhando](https://drive.google.com/open?id=1l3tiwrGEcJEV3gxX0yP-VMRNaE1MLfS2)
 Se esse programa e/ou os dados resultantes foram úteis a você ou à sua empresa,
 considere [fazer uma doação ao projeto Brasil.IO](https://brasil.io/doe), que é
 mantido voluntariamente.
-
 
 ## Contribuindo
 
@@ -48,7 +45,6 @@ Procure o seu estado [nas issues desse
 repositório](https://github.com/turicas/covid19-br/issues) e vamos conversar
 por lá.
 
-
 ## Instalando
 
 Necessita de Python 3 (testado em 3.8.2). Para montar seu ambiente:
@@ -60,7 +56,6 @@ Necessita de Python 3 (testado em 3.8.2). Para montar seu ambiente:
 - Rode o script de consolidação: `./run.sh`
 
 Verifique o resultado em `data/output`.
-
 
 ## VEJA TAMBÉM
 
