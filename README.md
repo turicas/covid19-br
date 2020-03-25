@@ -68,12 +68,25 @@ Verifique o resultado em `data/output`.
 - [Recomendações para secretarias de saúde na disponibilização de
   dados](recomendacoes.md)
 
+## Clipping
+
+Outros projetos e/ou notícias na rede que referenciam este projeto.
+
+### Projetos
+
+- [Visualização em Mapa Interativo - GitHub @endoedgar](https://endoedgar.github.io/covid19-monitorbr/)
+
+### Notícias
+
+- [Folha de São Paulo - 25/03/2020 - Brasil tem ao menos 172 cidades com casos confirmados de coronavírus](https://www1.folha.uol.com.br/cotidiano/2020/03/brasil-tem-ao-menos-172-cidades-com-casos-confirmados-de-coronavirus.shtml)
+- [CNN Brasil - 23/03/2020 - Boletins estaduais indicam quase 40 casos de coronavírus a mais do que governo](https://www.cnnbrasil.com.br/saude/2020/03/23/boletins-estaduais-indicam-quase-40-casos-de-coronavirus-a-mais-do-que-governo)
+
 ## Atualização dos Dados no Brasil.IO
 
 Crie um arquivo `.env` com os valores corretos para as seguintes variáveis de
 ambiente:
 
-```
+```shell
 BRASILIO_SSH_USER
 BRASILIO_SSH_SERVER
 BRASILIO_DATA_PATH
