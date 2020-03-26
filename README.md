@@ -91,6 +91,7 @@ Outros projetos e/ou notícias na rede que referenciam este projeto.
 - [Visualização em Mapa Interativo - GitHub @endoedgar](https://endoedgar.github.io/covid19-monitorbr/)
 - [liibre/coronabr](https://liibre.github.io/coronabr/index.html)
 - [Observatório de Dados :: COVID-19 no Brasil CCSL-UFPA](http://ccsl.ufpa.br/covid-19/)
+- [Mapa do Covid-19 no Brasil - Hitalo Silva](https://covid19.hitalos.com)
 
 ### Notícias
 
