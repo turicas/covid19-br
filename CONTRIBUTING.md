@@ -2,6 +2,10 @@
 
 É possível colaborar de duas formas, coletando dados divulgados pelas Sec. de Saúde dos Estados, ou participando do projeto no Github, propondo melhorias, revisando código, discutindo nas issues e afins.
 
+Nas próximas seções, será explicado, em linhas gerais, como funciona a comunicação entre colaboradores e o preenchimento das planilhas de dados.
+
+Para maiores detalhes, acesso o [documento com a metogolodia](https://docs.google.com/document/d/1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFrPpn4/edit?usp=sharing) mais detalhada.
+
 ## Coletando Dados
 
 Para participar do time de coleta de dados, acesse [este link](https://bit.ly/covid19-br-help) faça o cadastro e forneça as informações solicitadas no canal `#covid19-onboarding`.
