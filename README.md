@@ -59,6 +59,8 @@ Você pode contribuir de diversas formas:
 - Lavando as mãos várias vezes ao dia;
 - Sendo solidário aos mais vulneráveis;
 
+Para se voluntariar, [siga estes passos](CONTRIBUTING.md).
+
 Procure o seu estado [nas issues desse
 repositório](https://github.com/turicas/covid19-br/issues) e vamos conversar
 por lá.
