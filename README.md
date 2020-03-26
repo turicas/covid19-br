@@ -19,9 +19,9 @@ a mesma licença**.
 
 Depois de coletados e checados os dados ficam disponíveis de 3 formas no
 [Brasil.IO](https://brasil.io/):
+
 - [Interface Web](https://brasil.io/dataset/covid19) (feita para humanos)
-- [API](https://brasil.io/api/dataset/covid19) (feita para humanos que
-  desenvolvem programas) - [veja a documentação da API](api.md)
+- [API](https://brasil.io/api/dataset/covid19) (feita para humanos que desenvolvem programas) - [veja a documentação da API](api.md)
 - [Download do dataset completo](https://data.brasil.io/dataset/covid19/_meta/list.html)
 
 Caso queira acessar os dados antes de serem publicados (ATENÇÃO: pode ser que
@@ -32,7 +32,6 @@ trabalhando](https://drive.google.com/open?id=1l3tiwrGEcJEV3gxX0yP-VMRNaE1MLfS2)
 Se esse programa e/ou os dados resultantes foram úteis a você ou à sua empresa,
 considere [fazer uma doação ao projeto Brasil.IO](https://brasil.io/doe), que é
 mantido voluntariamente.
-
 
 ### Alerta sobre dados inconsistentes
 
@@ -45,7 +44,6 @@ mantido voluntariamente.
 
 Para mais detalhes [veja a metodologia de coleta de
 dados](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFrPpn4).
-
 
 ## Contribuindo
 
