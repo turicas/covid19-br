@@ -14,7 +14,7 @@ def convert(state, input_filename, output_filename):
             "deaths": rows.fields.IntegerField,
         },
     )
-    state_cities = ["TOTAL NO ESTADO", "Importados"] + sorted(
+    state_cities = ["TOTAL NO ESTADO", "Importados/Indefinidos"] + sorted(
         row.municipio for row in cities if row.uf == state
     )
     confirmed, deaths, dates = {}, {}, []

@@ -146,7 +146,7 @@ class ConsolidaSpider(scrapy.Spider):
         for row in result:
             row["is_last"] = row["date"] == is_last[row_key(row)]
             if row["place_type"] == "city":
-                if row["city"] == "Importados":
+                if row["city"] == "Importados/Indefinidos":
                     row_population = None
                     row_city_code = None
                 else:
