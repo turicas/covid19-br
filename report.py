@@ -3,6 +3,7 @@ import csv
 import gzip
 import io
 import json
+from collections import Counter
 from itertools import groupby
 from pathlib import Path
 from urllib.request import urlopen
@@ -127,10 +128,20 @@ def main():
         confirmed_cities = sum_all(city_rows, "confirmed")
         deaths_cities = sum_all(city_rows, "deaths")
 
-        if confirmed_state != confirmed_cities:
-            confirmed_diff.append(f"{state} ({confirmed_cities}/{confirmed_state})")
-        if deaths_state != deaths_cities:
-            deaths_diff.append(f"{state} ({deaths_cities}/{deaths_state})")
+        confirmed_differs = confirmed_state != confirmed_cities
+        deaths_differs = deaths_state != deaths_cities
+        if confirmed_differs or deaths_differs:
+            date_count = Counter(row["date"] for row in city_rows)
+            if len(date_count) > 1:
+                wrong_date = date_count.most_common()[-1][0]
+                wrong_cities = list(filter_rows(city_rows, date=wrong_date))
+                wrong_str = " - municípios: " + ", ".join(f"{row['city']} {row['date']}" for row in wrong_cities)
+            else:
+                wrong_str = ""
+            if confirmed_differs:
+                confirmed_diff.append(f"{state} ({confirmed_cities}/{confirmed_state}){wrong_str}")
+            if deaths_differs:
+                deaths_diff.append(f"{state} ({deaths_cities}/{deaths_state}){wrong_str}")
         if state_date != last_date:
             updated_diff.append(f"{state} ({state_date})")
     print_stats("desatualizados", updated_diff)
