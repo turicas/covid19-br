@@ -21,7 +21,7 @@ done
 # TODO: generate status page for this dataset
 
 log "Generating file list page"
-python python create_html.py dataset $DATASET $(date +"%Y-%m-%d") $SCRIPT_PATH/data/output/
+python create_html.py dataset $DATASET $(date +"%Y-%m-%d") $SCRIPT_PATH/data/output/
 s3cmd put data/output/SHA512SUMS s3://dataset/$DATASET/SHA512SUMS
 s3cmd put data/output/_meta/list.html s3://dataset/$DATASET/_meta/list.html
 
