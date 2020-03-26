@@ -84,7 +84,6 @@ def main():
     mortes_estados = sum(row["deaths"] for row in state_rows)
     mortes_municipios = sum(row["deaths"] for row in city_rows)
     print(f"*DADOS ATUALIZADOS*")
-    print()
     print(f"- {len(boletins)} boletins capturados")
     print(f"- {confirmados_estados} casos confirmados (estado)")
     print(f"- {confirmados_municipios} casos confirmados (municípios)")
@@ -94,6 +93,7 @@ def main():
     casos.sort(key=lambda row: row["date"], reverse=True)
     last_date = casos[0]["date"]
     casos.sort(key=lambda row: row["state"])
+    confirmed_diff, deaths_diff, updated_diff = [], [], []
     for state, data in groupby(casos, key=lambda row: row["state"]):
         data = list(data)
         state_date = max(row["date"] for row in data)
@@ -110,17 +110,27 @@ def main():
         deaths_cities = sum(row["deaths"] for row in city_rows)
 
         if confirmed_state != confirmed_cities:
-            print(
-                f"*ATENÇÃO*: {state}: confirmados diferentes {confirmed_state} (estado) versus {confirmed_cities} (municípios)"
-            )
+            confirmed_diff.append(f"{state} ({confirmed_cities}/{confirmed_state})")
         if deaths_state != deaths_cities:
-            print(
-                f"*ATENÇÃO*: {state}: mortes diferentes {deaths_state} (estado) versus {deaths_cities} (municípios)"
-            )
+            deaths_diff.append(f"{state} ({deaths_cities}/{deaths_state})")
         if state_date != last_date:
-            print(
-                f"*ATENÇÃO*: {state}: último boletim ({state_date}) antigo (atual: {last_date})"
-            )
+            updated_diff.append(f"{state} ({state_date})")
+    print()
+
+    updated_diff = "- " + "\n- ".join(updated_diff)
+    print(f"*DESATUALIZADOS*:")
+    print(updated_diff)
+    print()
+
+    confirmed_diff = "- " + "\n- ".join(confirmed_diff)
+    print(f"*CONFIRMADOS INCONSISTENTES*:")
+    print(confirmed_diff)
+    print()
+
+    deaths_diff = "- " + "\n- ".join(deaths_diff)
+    print(f"*MORTES INCONSISTENTES*:")
+    print(deaths_diff)
+    print()
 
 
 if __name__ == "__main__":
