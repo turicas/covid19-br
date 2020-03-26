@@ -13,6 +13,10 @@ from rows.utils import load_schema
 BASE_DIR = Path(__file__).parent
 
 
+def sum_all(data, key):
+    return sum(row[key] for row in data if row[key] is not None)
+
+
 class Schema:  # TODO: add this class to rows
     @classmethod
     def from_file(cls, filename):
@@ -64,6 +68,16 @@ def filter_rows(data, **kwargs):
             yield row
 
 
+def print_stats(title, data):
+    print(f"*{title.upper()}*:")
+    if not data:
+        print("Nenhum! o/")
+    else:
+        data = "- " + "\n- ".join(data)
+        print(data)
+    print()
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("source", choices=["api", "local"])
@@ -79,16 +93,20 @@ def main():
     state_rows = list(filter_rows(casos, is_last=True, place_type="state"))
     city_rows = list(filter_rows(casos, is_last=True, place_type="city"))
 
-    confirmados_estados = sum(row["confirmed"] for row in state_rows)
-    confirmados_municipios = sum(row["confirmed"] for row in city_rows)
-    mortes_estados = sum(row["deaths"] for row in state_rows)
-    mortes_municipios = sum(row["deaths"] for row in city_rows)
-    print(f"*DADOS ATUALIZADOS*")
-    print(f"- {len(boletins)} boletins capturados")
-    print(f"- {confirmados_estados} casos confirmados (estado)")
-    print(f"- {confirmados_municipios} casos confirmados (municípios)")
-    print(f"- {mortes_estados} mortes (estado)")
-    print(f"- {mortes_municipios} mortes (municípios)")
+    confirmados_estados = sum_all(state_rows, "confirmed")
+    confirmados_municipios = sum_all(city_rows, "confirmed")
+    mortes_estados = sum_all(state_rows, "deaths")
+    mortes_municipios = sum_all(city_rows, "deaths")
+    print_stats(
+        "dados atualizados",
+        [
+            f"{len(boletins)} boletins capturados",
+            f"{confirmados_estados} casos confirmados (estado)",
+            f"{confirmados_municipios} casos confirmados (municípios)",
+            f"{mortes_estados} mortes (estado)",
+            f"{mortes_municipios} mortes (municípios)",
+        ],
+    )
 
     casos.sort(key=lambda row: row["date"], reverse=True)
     last_date = casos[0]["date"]
@@ -103,11 +121,11 @@ def main():
             confirmed_state = None
             deaths_state = None
         else:
-            confirmed_state = sum(row["confirmed"] for row in state_rows)
-            deaths_state = sum(row["deaths"] for row in state_rows)
+            confirmed_state = sum_all(state_rows, "confirmed")
+            deaths_state = sum_all(state_rows, "deaths")
 
-        confirmed_cities = sum(row["confirmed"] for row in city_rows)
-        deaths_cities = sum(row["deaths"] for row in city_rows)
+        confirmed_cities = sum_all(city_rows, "confirmed")
+        deaths_cities = sum_all(city_rows, "deaths")
 
         if confirmed_state != confirmed_cities:
             confirmed_diff.append(f"{state} ({confirmed_cities}/{confirmed_state})")
@@ -115,22 +133,9 @@ def main():
             deaths_diff.append(f"{state} ({deaths_cities}/{deaths_state})")
         if state_date != last_date:
             updated_diff.append(f"{state} ({state_date})")
-    print()
-
-    updated_diff = "- " + "\n- ".join(updated_diff)
-    print(f"*DESATUALIZADOS*:")
-    print(updated_diff)
-    print()
-
-    confirmed_diff = "- " + "\n- ".join(confirmed_diff)
-    print(f"*CONFIRMADOS INCONSISTENTES*:")
-    print(confirmed_diff)
-    print()
-
-    deaths_diff = "- " + "\n- ".join(deaths_diff)
-    print(f"*MORTES INCONSISTENTES*:")
-    print(deaths_diff)
-    print()
+    print_stats("desatualizados", updated_diff)
+    print_stats("confirmados inconsistentes", confirmed_diff)
+    print_stats("mortes inconsistentes", deaths_diff)
 
 
 if __name__ == "__main__":
