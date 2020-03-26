@@ -90,6 +90,7 @@ Outros projetos e/ou notícias na rede que referenciam este projeto.
 - [25/03/2020 - Análise Descritiva do Coronavírus nos Estados Brasileiros](https://marcusnunes.me/posts/analise-descritiva-do-coronavirus/)
 - [Visualização em Mapa Interativo - GitHub @endoedgar](https://endoedgar.github.io/covid19-monitorbr/)
 - [liibre/coronabr](https://liibre.github.io/coronabr/index.html)
+- [Observatório de Dados :: COVID-19 no Brasil CCSL-UFPA](http://ccsl.ufpa.br/covid-19/)
 
 ### Notícias
 
