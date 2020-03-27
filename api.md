@@ -10,13 +10,13 @@ e colaboradores/[Brasil.IO](https://brasil.io/)**. Caso compartilhe os dados,
 **utilize a mesma licença**.
 
 
-## Acesso aos dados
+## Dados
 
 Depois de coletados e checados os dados ficam disponíveis de 3 formas no
 [Brasil.IO](https://brasil.io/):
+
 - [Interface Web](https://brasil.io/dataset/covid19) (feita para humanos)
-- [API](https://brasil.io/api/dataset/covid19) (feita para humanos que
-  desenvolvem programas)
+- [API](https://brasil.io/api/dataset/covid19) (feita para humanos que desenvolvem programas) - [veja a documentação da API](api.md)
 - [Download do dataset completo](https://data.brasil.io/dataset/covid19/_meta/list.html)
 
 Caso queira acessar os dados antes de serem publicados (ATENÇÃO: pode ser que
@@ -25,24 +25,25 @@ estamos
 trabalhando](https://drive.google.com/open?id=1l3tiwrGEcJEV3gxX0yP-VMRNaE1MLfS2).
 
 Se esse programa e/ou os dados resultantes foram úteis a você ou à sua empresa,
-considere [fazer uma doação ao projeto Brasil.IO](https://brasil.io/doe), que é
-mantido voluntariamente.
+**considere [fazer uma doação ao projeto Brasil.IO](https://brasil.io/doe)**,
+que é mantido voluntariamente.
 
 
-### Alerta sobre dados inconsistentes
+### FAQ SOBRE OS DADOS
 
-- As contagens estaduais podem ser diferentes das municipais, por dois motivos:
-  1. Secretaria estadual parou de divulgar dados por município e está somente
-     divulgando por estado (isso está acontecendo com SP);
-  2. Secretaria estadual divulgou errado (às vezes acontece).
-- Nem sempre nossos dados baterão com os do Ministério da Saúde, pois pode ser
-  que nossa coleta seja feita depois da coleta do Ministério e, com isso, teremos dados mais atuais.
+**Antes de entrar em contato conosco (estamos sobrecarregados) para tirar
+dúvidas sobre os dados, [CONSULTE NOSSO FAQ](faq.md).**
 
 Para mais detalhes [veja a metodologia de coleta de
 dados](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFrPpn4).
 
 
 ## Documentação da API
+
+
+> ATENÇÃO: API tem paginação (10.000 registros por página). Você deve
+> requisitar a página que está linkada em `next` no resultado.
+
 
 ### Boletim
 
@@ -81,4 +82,5 @@ Colunas:
 - [Preencha o formulário de filtros na página do
   dataset](https://brasil.io/dataset/covid19/caso) e copie/cole a
   querystring (a mesma poderá ser passada para a API);
-- Filtre por `is_last=True` para ter os dados mais atuais de cada município/estado
+- Filtre por `is_last=True` para ter os dados mais atuais de cada
+  município/estado.
