@@ -170,7 +170,9 @@ class ConsolidaSpider(scrapy.Spider):
                 if row_confirmed and row_population
                 else None
             )
-            death_rate = row_deaths / row_confirmed if row_deaths and row_confirmed else None
+            death_rate = (
+                row_deaths / row_confirmed if row_deaths and row_confirmed else None
+            )
             row["estimated_population_2019"] = row_population
             row["city_ibge_code"] = row_city_code
             row["confirmed_per_100k_inhabitants"] = (
