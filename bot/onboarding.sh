@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # command dispacther
+# https://github.com/Mosai/workshop/blob/master/doc/dispatch.md
 # -----------------------------------------------------------------------------
 # Changes zsh globbing patterns
 unsetopt NO_MATCH >/dev/null 2>&1 || :
@@ -55,8 +56,10 @@ dispatch ()
 
 source ./rocketchat.sh
 
+ONBOARDING_CHANNEL=covid19-onboarding
+
+# ./onboarding.sh welcome "@username"
 onboarding.sh_command_welcome(){
-    channel=$1; shift
     user=$1; shift
 
 	ONBOARDING_MESSAGE="
@@ -71,25 +74,28 @@ Preciso que você leia as [instrunções](https://github.com/turicas/covid19-br/
 Enquanto isso irei fazer seu cadastro na planilha de colaboradores, e lhe adicionar nos canais #covid19, #covid19-anuncios e no grupo da dua região.
 "
 
-    rocket_msg_send $channel $ONBOARDING_MESSAGE
+    rocket_msg_send $ONBOARDING_CHANNEL $ONBOARDING_MESSAGE
 }
 
-# ./onboarding.sh invite "@username" "#channel"
+# ./onboarding.sh invite "username"
 onboarding.sh_command_invite(){
-    #TODO - implement invite https://rocket.chat/docs/developer-guides/rest-api/channels/invite/
-    # will need to get user_id from username, and then call an invite to each channel
-    echo "adding user to channels"
+    user=$1; shift
+	regiao=$1; shift
+
+	rocket_invite_to_channel "covid19-anuncios" "$user"
+	rocket_invite_to_group "covid19" "$user"
 }
 
-# ./onboarding.sh sheets "#channel" "@username" "nome-da-região"
+# ./onboarding.sh sheets "username" "<região>"
+#TODO - validar regiao informada
 onboarding.sh_command_sheets(){
-    channel=$1; shift
     user=$1; shift
     regiao=$1; shift
 
 	SHEETS_MESSAGE="@turicas , libera o acesso para o ${user} nas planilhas da região ${regiao}"
 
-    rocket_msg_send $channel $SHEETS_MESSAGE
+    rocket_msg_send $ONBOARDING_CHANNEL $SHEETS_MESSAGE
+	rocket_invite_to_group "covid19-$regiao" "$user"
 }
 
 dispatch onboarding.sh "$@"

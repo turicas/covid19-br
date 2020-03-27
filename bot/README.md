@@ -15,7 +15,6 @@ python rocketchat.py --base_url=<base_url> --user_id=<user_id> --auth_token=<aut
 
 Biblioteca: veja o `if __name__ == "__main__"` do `rocketchat.py`.
 
-
 ## Bash
 
 `rocketchat.sh`: funções Bash para login, criação de usuário de bot e
@@ -41,4 +40,14 @@ source rocketchat.sh
 rocket_user_login <username> <password>
 rocket_user_create_bot_user <username> <password> <email> <name>
 rocket_msg_send <channel> <message>
+```
+
+### onboarding.sh
+
+Para automatizar o processo de onboarding de novos voluntários.
+
+```shell
+./onboarding.sh welcome <username>
+./onboarding.sh invite <username>
+./onboarding.sh sheets <username> <regiao>
 ```
