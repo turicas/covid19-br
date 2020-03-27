@@ -3,11 +3,13 @@
 cached-property
 click
 defusedxml>=0.6.0
+html2text
 https://github.com/turicas/rows/archive/develop.zip#egg=rows
 jinja2
 openpyxl
 psycopg2-binary
 pymupdf
+python-Levenshtein
 requests
 scrapy
 tqdm

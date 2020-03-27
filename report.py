@@ -135,13 +135,19 @@ def main():
             if len(date_count) > 1:
                 wrong_date = date_count.most_common()[-1][0]
                 wrong_cities = list(filter_rows(city_rows, date=wrong_date))
-                wrong_str = " - municípios: " + ", ".join(f"{row['city']} {row['date']}" for row in wrong_cities)
+                wrong_str = " - municípios: " + ", ".join(
+                    f"{row['city']} {row['date']}" for row in wrong_cities
+                )
             else:
                 wrong_str = ""
             if confirmed_differs:
-                confirmed_diff.append(f"{state} ({confirmed_cities}/{confirmed_state}){wrong_str}")
+                confirmed_diff.append(
+                    f"{state} ({confirmed_cities}/{confirmed_state}){wrong_str}"
+                )
             if deaths_differs:
-                deaths_diff.append(f"{state} ({deaths_cities}/{deaths_state}){wrong_str}")
+                deaths_diff.append(
+                    f"{state} ({deaths_cities}/{deaths_state}){wrong_str}"
+                )
         if state_date != last_date:
             updated_diff.append(f"{state} ({state_date})")
     print_stats("desatualizados", updated_diff)
