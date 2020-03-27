@@ -18,13 +18,13 @@ Biblioteca: veja o `if __name__ == "__main__"` do `rocketchat.py`.
 
 ## Bash
 
-`rocket_functions.sh`: funções Bash para login, criação de usuário de bot e
+`rocketchat.sh`: funções Bash para login, criação de usuário de bot e
 envio de mensagem
 
 Funções disponíveis:
 
 ```shell
-source rocket_functions.sh
+source rocketchat.sh
 
 rocket_user_login <base_url> <username> <password>
 rocket_user_create_bot_user <base_url> <user_id> <auth_token> <username> <password> <email> <name>
