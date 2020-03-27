@@ -27,9 +27,9 @@ Defina as configurações de autenticação no arquivo `.env`, usando o exemplo 
 cp env-sample .env
 cat .env
 # https://chat.brasil.io/account/tokens
-ROCKETCHAT_BASE_URL="https://chat.brasil.io"
-ROCKETCHAT_USER_ID="<user_id>"
-ROCKETCHAT_AUTH_TOKEN="<auth_token>"
+export ROCKETCHAT_BASE_URL="https://chat.brasil.io"
+export ROCKETCHAT_USER_ID="<user_id>"
+export ROCKETCHAT_AUTH_TOKEN="<auth_token>"
 ...
 ```
 

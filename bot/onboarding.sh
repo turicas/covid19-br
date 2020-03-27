@@ -55,8 +55,6 @@ dispatch ()
 
 source ./rocketchat.sh
 
-export BASE_URL=https://chat.brasil.io
-
 onboarding.sh_command_welcome(){
     channel=$1; shift
     user=$1; shift
