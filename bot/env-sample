@@ -1,0 +1,8 @@
+# https://chat.brasil.io/account/tokens
+export ROCKETCHAT_BASE_URL="https://chat.brasil.io"
+export ROCKETCHAT_USER_ID="<user_id>"
+export ROCKETCHAT_AUTH_TOKEN="<auth_token>"
+
+export BRASILIO_SSH_USER="<username>"
+export BRASILIO_SSH_SERVER="<host>"
+export BRASILIO_UPDATE_COMMAND="/path/to/update/command"

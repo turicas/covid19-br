@@ -21,12 +21,24 @@ Biblioteca: veja o `if __name__ == "__main__"` do `rocketchat.py`.
 `rocketchat.sh`: funções Bash para login, criação de usuário de bot e
 envio de mensagem
 
+Defina as configurações de autenticação no arquivo `.env`, usando o exemplo `.env-sample`.
+
+```shell
+cp env-sample .env
+cat .env
+# https://chat.brasil.io/account/tokens
+ROCKETCHAT_BASE_URL="https://chat.brasil.io"
+ROCKETCHAT_USER_ID="<user_id>"
+ROCKETCHAT_AUTH_TOKEN="<auth_token>"
+...
+```
+
 Funções disponíveis:
 
 ```shell
 source rocketchat.sh
 
-rocket_user_login <base_url> <username> <password>
-rocket_user_create_bot_user <base_url> <user_id> <auth_token> <username> <password> <email> <name>
-rocket_msg_send <base_url> <user_id> <auth_token> <channel> <message>
+rocket_user_login <username> <password>
+rocket_user_create_bot_user <username> <password> <email> <name>
+rocket_msg_send <channel> <message>
 ```
