@@ -1,11 +1,11 @@
 import csv
 import datetime
-import hashlib
 import io
 import os
 
 import rows
 import scrapy
+from Levenshtein import distance as levenshtein_distance
 from html2text import HTML2Text
 
 import rocketchat
@@ -13,10 +13,6 @@ import rocketchat
 
 URL_LIST_URL = "https://docs.google.com/spreadsheets/d/1S77CvorwQripFZjlWTOZeBhK42rh3u57aRL1XZGhSdI/export?format=csv&id=1S77CvorwQripFZjlWTOZeBhK42rh3u57aRL1XZGhSdI&gid=0"
 HASH_LIST_URL = "https://data.brasil.io/dataset/covid19/url-hash.csv"
-
-
-def sha512sum(content):
-    return hashlib.sha512(content).hexdigest()
 
 
 def last_check_str(value):
@@ -29,7 +25,11 @@ def last_check_str(value):
 class URLCheckerSpider(scrapy.Spider):
     name = "url-checker"
     start_urls = [HASH_LIST_URL]
-    custom_settings = {"DNS_TIMEOUT": 10, "DOWNLOAD_TIMEOUT": 10}
+    custom_settings = {
+        "DNS_TIMEOUT": 10,
+        "DOWNLOAD_TIMEOUT": 10,
+        "USER_AGENT": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.69 Safari/537.36",
+    }
 
     def __init__(self, output_filename, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -53,7 +53,7 @@ class URLCheckerSpider(scrapy.Spider):
                 continue
             for url in url_list.split(","):
                 url = url.strip()
-                meta = {"state": row.uf, "url": url, "channel": row.canal}
+                meta = {"state": row.uf, "url": url, "channel": row.canal, "min_distance": row.min_distance}
                 self.urls_to_check.add(url)
                 yield scrapy.Request(
                     url,
@@ -68,7 +68,7 @@ class URLCheckerSpider(scrapy.Spider):
 
     def url_info(self, url):
         return self.url_hashes.get(
-            url, self.URLInfo(url=url, last_check_datetime=None, sha512sum=None)
+            url, self.URLInfo(url=url, last_check_datetime=None, text=None, min_distance=None)
         )
 
     def handle_failure(self, failure):
@@ -76,7 +76,7 @@ class URLCheckerSpider(scrapy.Spider):
         url = meta["url"]
         url_info = self.url_info(url)
         url_info = url_info._asdict()
-        url_info["sha512sum"] = "ERROR"
+        url_info["text"] = "ERROR"
         url_info["last_check_datetime"] = datetime.datetime.now()
         self.urls_to_check.remove(url)
         self.result.append(url_info)
@@ -104,8 +104,7 @@ class URLCheckerSpider(scrapy.Spider):
         html_parser.ignore_links = True
         html_parser.ignore_images = True
         text = html_parser.handle(response.body_as_unicode())
-        content_hash = sha512sum(text.encode("utf-8"))
-        if content_hash != url_info.sha512sum:
+        if levenshtein_distance(text, url_info.text) >= meta["min_distance"]:
             self.notify(
                 meta["channel"],
                 f"@all detectei uma alteração no [site da SES de `{meta['state']}`]({url})."
@@ -114,7 +113,7 @@ class URLCheckerSpider(scrapy.Spider):
         self.urls_to_check.remove(url)
         url_info = url_info._asdict()
         url_info["last_check_datetime"] = now
-        url_info["sha512sum"] = content_hash
+        url_info["text"] = text
         self.result.append(url_info)
 
     @classmethod

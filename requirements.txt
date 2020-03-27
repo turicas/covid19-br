@@ -9,6 +9,7 @@ jinja2
 openpyxl
 psycopg2-binary
 pymupdf
+python-Levenshtein
 requests
 scrapy
 tqdm
