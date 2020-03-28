@@ -4,7 +4,7 @@
 
 Nas próximas seções, será explicado, em linhas gerais, como funciona a comunicação entre colaboradores e o preenchimento das planilhas de dados.
 
-Para maiores detalhes, acesso o [documento com a metogolodia](https://docs.google.com/document/d/1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFrPpn4/edit?usp=sharing) mais detalhada.
+Para maiores detalhes, acesso o [documento com a metodologia](https://docs.google.com/document/d/1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFrPpn4/edit?usp=sharing) mais detalhada.
 
 ## Coletando Dados
 
