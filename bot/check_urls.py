@@ -104,7 +104,9 @@ class URLCheckerSpider(scrapy.Spider):
         html_parser.ignore_links = True
         html_parser.ignore_images = True
         text = html_parser.handle(response.body_as_unicode())
-        if levenshtein_distance(text, url_info.text) >= meta["min_distance"]:
+        text = (text or "").strip()
+        old_text = (url_info.text or "").strip()
+        if levenshtein_distance(text, old_text) >= meta["min_distance"]:
             self.notify(
                 meta["channel"],
                 f"@all detectei uma alteração no [site da SES de `{meta['state']}`]({url})."
