@@ -63,7 +63,7 @@ onboarding.sh_command_welcome(){
     user=$1; shift
 
 	ONBOARDING_MESSAGE="
-Bem vindo ${user} .\\n
+Bem vindo @${user} .\\n
 \\n
 Para iniciar a colaboração em nosso projeto, me informe via mensagem privada 
 o seu nome, e-mail, o Estado que você deseja colaborar com as coletas e checagens, 
