@@ -37,8 +37,9 @@ dados](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFr
 
 ## Documentação da API
 
-> ATENÇÃO: API tem paginação (10.000 registros por página). Você deve
-> requisitar a página que está linkada em `next` no resultado.
+> ATENÇÃO: API tem paginação (máximo de 10.000 registros por página). 
+> Você deve requisitar a página que está linkada em `next` no resultado.
+> Para definir a quantidade de registros por página, utilize o parâmetro `page_size`.
 
 ### Casos
 
