@@ -138,13 +138,18 @@ class ConsolidaSpider(scrapy.Spider):
                     "deaths": deaths,
                 }
                 result.append(row)
+
+        result = sorted(result, key=lambda row:row["date"])
         row_key = lambda row: (row["state"], row["city"], row["place_type"])
         groups = groupby(result, key=row_key)
-        is_last = {}
+        count_groups = {}
         for key, row_list in groups:
-            is_last[key] = max(row["date"] for row in row_list)
+            for row in row_list:
+                count_groups[key] = count_groups.get(key, 0)+1
+                row["order"] = count_groups[key]
+            
         for row in result:
-            row["is_last"] = row["date"] == is_last[row_key(row)]
+            row["is_last"] = row["order"] == count_groups[row_key(row)]
             if row["place_type"] == "city":
                 if row["city"] == "Importados/Indefinidos":
                     row_population = None
