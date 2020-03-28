@@ -5,6 +5,7 @@ city,text
 place_type,text
 confirmed,integer
 deaths,integer
+order,integer
 is_last,bool
 estimated_population_2019,integer
 city_ibge_code,text
