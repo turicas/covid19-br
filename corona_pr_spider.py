@@ -27,6 +27,7 @@ REGEXP_UPDATE = re.compile("Atualização .* ([0-9]{1,2}/[0-9]{1,2}/[0-9]{4}).*"
 class PtBrDateField(rows.fields.DateField):
     INPUT_FORMAT = "%d/%m/%Y"
 
+
 class PtBrDateField2(rows.fields.DateField):
     INPUT_FORMAT = "%d%m%Y"
 
@@ -46,8 +47,8 @@ class MinX0Backend(PyMuPDFBackend):
         for page in original_objects:
             yield [obj for obj in page if obj.x0 >= min_x0]
 
-class CleanIntegerField(rows.fields.IntegerField):
 
+class CleanIntegerField(rows.fields.IntegerField):
     @classmethod
     def deserialize(cls, value):
         value = str(value or "").strip().replace("*", "")
@@ -64,12 +65,19 @@ def convert_row(row):
         value = row.get(field_name, None)
         if value is None and field_name.startswith("casos_"):
             value = row.get(field_name.replace("casos_", ""), None)
-        if field_name in ("casos_confirmados", "casos_descartados", "casos_suspeitos", "total"):
+        if field_name in (
+            "casos_confirmados",
+            "casos_descartados",
+            "casos_suspeitos",
+            "total",
+        ):
             value = CleanIntegerField.deserialize(value)
         new[field_name] = value
 
     if new["data"] != new["boletim_data"]:
-        print(f"Data do boletim {new['boletim_data']} é diferente da data do PDF {new['data']}")
+        print(
+            f"Data do boletim {new['boletim_data']} é diferente da data do PDF {new['data']}"
+        )
 
     city = new["municipio"].strip()
     if not city:  # "TOTAL" is present. Skip it.
@@ -97,11 +105,19 @@ def parse_pdf(filename, meta):
     for page in pdf_doc.objects():
         for obj in page:
             if REGEXP_UPDATE.match(obj.text):
-                update_date = PtBrDateField.deserialize(REGEXP_UPDATE.findall(obj.text)[0])
+                update_date = PtBrDateField.deserialize(
+                    REGEXP_UPDATE.findall(obj.text)[0]
+                )
                 break
     if update_date is None:  # String not found in PDF
         # Parse URL to get date inside PDF's filename
-        date = meta["boletim_url"].split("/")[-1].split(".pdf")[0].replace("CORONA_", "").split("_")[0]
+        date = (
+            meta["boletim_url"]
+            .split("/")[-1]
+            .split(".pdf")[0]
+            .replace("CORONA_", "")
+            .split("_")[0]
+        )
         update_date = PtBrDateField2.deserialize(date)
 
     # Extract rows and inject update date and metadata
@@ -117,22 +133,26 @@ def parse_pdf(filename, meta):
 
 class CoronaPrSpider(scrapy.Spider):
     name = "corona-pr"
-    start_urls = ["http://www.saude.pr.gov.br/modules/conteudo/conteudo.php?conteudo=3507"]
+    start_urls = [
+        "http://www.saude.pr.gov.br/modules/conteudo/conteudo.php?conteudo=3507"
+    ]
 
     def parse(self, response):
         for link in response.xpath("//a[contains(@href, '.pdf')]"):
             data = {
                 "boletim_titulo": link.xpath(".//text()").extract_first(),
-                "boletim_url": urljoin(response.url, link.xpath(".//@href").extract_first()),
+                "boletim_url": urljoin(
+                    response.url, link.xpath(".//@href").extract_first()
+                ),
             }
             if not data["boletim_titulo"].lower().startswith("boletim"):
                 continue
-            data["boletim_data"] = PtBrDateField.deserialize(data["boletim_titulo"].split()[1])
+            data["boletim_data"] = PtBrDateField.deserialize(
+                data["boletim_titulo"].split()[1]
+            )
 
             yield scrapy.Request(
-                url=data["boletim_url"],
-                meta={"row": data},
-                callback=self.parse_pdf,
+                url=data["boletim_url"], meta={"row": data}, callback=self.parse_pdf,
             )
 
     def parse_pdf(self, response):
@@ -151,19 +171,21 @@ class CoronaPrSpider(scrapy.Spider):
             for row in parse_pdf(filename, meta):
                 if row is not None:
                     result.append(row)
-            result.append({
-                "date": result[0]["date"],
-                "state": "PR",
-                "city": "",
-                "place_type": "state",
-                "notified": sum(row["notified"] for row in result),
-                "confirmed": sum(row["confirmed"] for row in result),
-                "discarded": sum(row["discarded"] for row in result),
-                "suspect": sum(row["suspect"] for row in result),
-                "deaths": "",  # TODO: fix
-                "notes": "",
-                "source_url": result[0]["source_url"],
-            })
+            result.append(
+                {
+                    "date": result[0]["date"],
+                    "state": "PR",
+                    "city": "",
+                    "place_type": "state",
+                    "notified": sum(row["notified"] for row in result),
+                    "confirmed": sum(row["confirmed"] for row in result),
+                    "discarded": sum(row["discarded"] for row in result),
+                    "suspect": sum(row["suspect"] for row in result),
+                    "deaths": "",  # TODO: fix
+                    "notes": "",
+                    "source_url": result[0]["source_url"],
+                }
+            )
             result.sort(key=lambda row: row["city"])
             for row in result:
                 yield row
