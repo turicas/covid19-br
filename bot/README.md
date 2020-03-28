@@ -1,10 +1,19 @@
 # Bot RocketChat (chat.brasil.io)
 
-## Python
+Nesse diretório estão os comandos relativos [ao nosso
+robô](https://chat.brasil.io/direct/robo). Você pode usar parte da estrutura de
+scripts Bash e Python para criar suas próprias notificações no RocketChat.
 
-`rocketchat.py`: pode ser usado como biblioteca Python ou script que envia
-mensagem pela linha de comando. Funções implementadas: login, criação de
-usuário de bot e envio de mensagem.
+## Scripts Relevantes
+
+- [`check-urls.sh`](check-urls.sh): verifica se as páginas das SES foram
+  alteradas e envia nofiticações nos canais regionais.
+
+## Biblioteca/CLI em Python
+
+[`rocketchat.py`](rocketchat.py): pode ser usado como biblioteca Python ou
+script que envia mensagem pela linha de comando. Funções implementadas: login,
+criação de usuário de bot e envio de mensagem.
 
 Script:
 
@@ -17,10 +26,11 @@ Biblioteca: veja o `if __name__ == "__main__"` do `rocketchat.py`.
 
 ## Bash
 
-`rocketchat.sh`: funções Bash para login, criação de usuário de bot e
-envio de mensagem
+[`rocketchat.sh`](rocketchat.sh): funções Bash para login, criação de usuário
+de bot e envio de mensagem.
 
-Defina as configurações de autenticação no arquivo `.env`, usando o exemplo `.env-sample`.
+Defina as configurações de autenticação no arquivo `.env`, usando o exemplo
+`env-sample`:
 
 ```shell
 cp env-sample .env

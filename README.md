@@ -67,7 +67,9 @@ Necessita de Python 3 (testado em 3.8.2). Para montar seu ambiente:
 
 - Instale o Python 3.8.2
 - Crie um virtualenv
-- Instale as dependências: `pip install -r requirements.txt`
+- Instale as dependências:
+  - Script de consolidação e robô: `pip install -r requirements.txt`
+  - Extratores de dados estaduais: `pip install -r requirements-collect.txt`
 - Rode o script de coleta: `./collect.sh`
 - Rode o script de consolidação: `./run.sh`
 
