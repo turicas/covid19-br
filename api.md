@@ -65,6 +65,7 @@ Colunas:
 - 🔍 `state` (2 dígitos)
 - 🔍 `city` (pode estar em branco quando o registro é referente ao estado, pode ser preenchido com `Importados` também)
 - 🔍 `place_type` (`city` ou `state`)
+- 🔍 `order` (número que identifica a ordem do registro para este município/estado)
 - 🔍 `is_last` (`True` ou `False`, diz se esse registro é o mais atual para esse município/estado)
 - 🔍 `city_ibge_code` (código IBGE do município ou estado)
 - `confirmed`: número de casos confirmados
