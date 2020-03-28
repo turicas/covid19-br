@@ -139,17 +139,19 @@ class ConsolidaSpider(scrapy.Spider):
                 }
                 result.append(row)
 
-        result = sorted(result, key=lambda row:row["date"])
         row_key = lambda row: (row["state"], row["city"], row["place_type"])
+        result.sort(key=row_key)
         groups = groupby(result, key=row_key)
-        count_groups = {}
-        for key, row_list in groups:
-            for row in row_list:
-                count_groups[key] = count_groups.get(key, 0)+1
-                row["order"] = count_groups[key]
-            
+        for key, row_list_it in groups:
+            row_list = list(row_list_it)
+            row_list.sort(key=lambda row: row["date"])
+            for order, row in enumerate(row_list, start=1):
+                row["order"] = order
+                row["is_last"] = False
+            if row_list:
+                row_list[-1]["is_last"] = True
+
         for row in result:
-            row["is_last"] = row["order"] == count_groups[row_key(row)]
             if row["place_type"] == "city":
                 if row["city"] == "Importados/Indefinidos":
                     row_population = None
