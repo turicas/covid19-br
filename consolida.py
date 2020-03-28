@@ -145,8 +145,8 @@ class ConsolidaSpider(scrapy.Spider):
         for key, row_list_it in groups:
             row_list = list(row_list_it)
             row_list.sort(key=lambda row: row["date"])
-            for order, row in enumerate(row_list, start=1):
-                row["order"] = order
+            for order_for_place, row in enumerate(row_list, start=1):
+                row["order_for_place"] = order_for_place
                 row["is_last"] = False
             if row_list:
                 row_list[-1]["is_last"] = True
