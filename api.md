@@ -37,10 +37,11 @@ dados](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFr
 
 ## Documentação da API
 
-> ATENÇÃO: API tem paginação (máximo de 10.000 registros por página). 
-> Você deve requisitar a página que está linkada em `next` no resultado.
-> Por padrão, a API retornar 1000 registros por página.
-> Para definir a quantidade de registros por página, utilize o parâmetro `page_size`.
+> ATENÇÃO: a API possui paginação e por padrão são devolvidos 1.000 registros
+> por página. Para capturar todos os dados (de todas as páginas), você precisa
+> visitar sempre a página referenciada em `next` no JSON resultante. Caso
+> queira alterar o número de registros por página, basta passar o valor através
+> da *query string* `page_size` (máximo de 10.000 registros por página).
 
 ### Casos
 
@@ -48,19 +49,29 @@ dados](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFr
 
 Colunas :
 
-- 🔍 `search` (full text search)
-- 🔍 `date` (YYY-MM-DD)
-- 🔍 `state` (sigla da UF, ex : SP)
-- 🔍 `city` (pode estar em branco quando o registro é referente ao estado, pode ser preenchido com `Importados` também)
-- 🔍 `place_type` (`city` ou `state`)
-- 🔍 `order` (número que identifica a ordem do registro para este município/estado)
-- 🔍 `is_last` (`True` ou `False`, diz se esse registro é o mais atual para esse município/estado)
-- 🔍 `city_ibge_code` (código IBGE do município ou estado)
-- `confirmed`: número de casos confirmados
-- `deaths`: número de mortes
-- `estimated_population_2019`: população estimada para esse município/estado em 2019, segundo o IBGE
-- `confirmed_per_100k_inhabitants`: número de casos confirmados por 100.000 habitantes
-- `death_rate`: taxa de mortalidade (mortes / confirmados)
+- 🔍 `search`: passe algum valor para executar a busca por texto completo, que
+  compreende algumas das colunas da tabela.
+- 🔍 `date`: data de coleta dos dados no formato YYYY-MM-DD.
+- 🔍 `state`: sigla da unidade federativa, exemplo: SP.
+- 🔍 `city`: nome do município (pode estar em branco quando o registro é
+  referente ao estado, pode ser preenchido com `Importados/Indefinidos`
+  também).
+- 🔍 `place_type`: tipo de local que esse registro descreve, pode ser `city` ou
+  `state`.
+- 🔍 `order_for_place`: número que identifica a ordem do registro para este
+  local. O registro referente ao primeiro boletim em que esse local aparecer
+  será contabilizado como `1` e os demais boletins incrementarão esse valor.
+- 🔍 `is_last`: campo pré-computado que diz se esse registro é o mais novo para
+  esse local, pode ser `True` ou `False` (caso filtre por esse campo, use
+  `is_last=True` ou `is_last=False`, **não use o valor em minúsculas**).
+- 🔍 `city_ibge_code`: código IBGE do local.
+- `confirmed`: número de casos confirmados.
+- `deaths`: número de mortes.
+- `estimated_population_2019`: população estimada para esse município/estado em
+  2019, segundo o IBGE.
+- `confirmed_per_100k_inhabitants`: número de casos confirmados por 100.000
+  habitantes.
+- `death_rate`: taxa de mortalidade (mortes / confirmados).
 
 🔍 = colunas que podem ser filtrados via query string na API e na interface.
 
@@ -200,9 +211,10 @@ curl -X GET https://brasil.io/api/dataset/covid19/caso/data?is_last=True&place_t
 
 Colunas:
 
-- 🔍 `search` (full text search)
-- 🔍 `date` (YYY-MM-DD)
-- 🔍 `state` (sigla da UF, ex.: SP)
+- 🔍 `search`: passe algum valor para executar a busca por texto completo, que
+  compreende algumas das colunas da tabela.
+- 🔍 `date`: data do boletim no formato YYYY-MM-DD.
+- 🔍 `state`: sigla da unidade federativa, exemplo: SP.
 - `url`: link para o boletim
 - `notes`: observações sobre esse boletim
 
