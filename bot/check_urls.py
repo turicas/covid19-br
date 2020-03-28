@@ -3,6 +3,7 @@ import datetime
 import io
 import os
 
+import pytz
 import rows
 import scrapy
 from Levenshtein import distance as levenshtein_distance
@@ -13,11 +14,14 @@ import rocketchat
 
 URL_LIST_URL = "https://docs.google.com/spreadsheets/d/1S77CvorwQripFZjlWTOZeBhK42rh3u57aRL1XZGhSdI/export?format=csv&id=1S77CvorwQripFZjlWTOZeBhK42rh3u57aRL1XZGhSdI&gid=0"
 HASH_LIST_URL = "https://data.brasil.io/dataset/covid19/url-hash.csv"
+TIMEZONE = pytz.timezone("America/Sao_Paulo")
 
 
 def last_check_str(value):
     if value:
-        return f" A última verificação (antes dessa) foi feita em `{value}`."
+        value = TIMEZONE.localize(value)
+        value_str = value.strftime("%Y-%m-%d às %T (UTC%z)")
+        return f" A última verificação (antes dessa) foi feita em `{value_str}`."
     else:
         return " Eu ainda não tinha verificado essa URL."
 
