@@ -6,7 +6,6 @@ source $SCRIPT_PATH/base.sh
 DATASET="covid19"
 
 log "Cleaning data path and collecting data"
-rm -rf $OUTPUT_PATH/*.csv.gz
 ./run.sh
 
 source $SCRIPT_PATH/.env
