@@ -39,7 +39,9 @@ progress = tqdm(voluntarios.items(), desc=" " * 25)
 for username, estados in progress:
     progress.desc = username.center(25)
     responsaveis = {
-        estado: ", ".join(f"@{username_correto[v]}" for v in voluntarios_uf[estado] if v != username)
+        estado: ", ".join(
+            f"@{username_correto[v]}" for v in voluntarios_uf[estado] if v != username
+        )
         for estado in estados
     }
     estados_str = []
@@ -52,6 +54,5 @@ for username, estados in progress:
         estados_str.append(f"- *{estado}* {outros}")
     estados_str = "\n".join(estados_str)
     chat.send_message(
-        f"@{username_correto[username]}",
-        template.replace("<ESTADOS>", estados_str)
+        f"@{username_correto[username]}", template.replace("<ESTADOS>", estados_str)
     )

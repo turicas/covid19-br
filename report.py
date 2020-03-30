@@ -1,4 +1,5 @@
 import argparse
+import datetime
 import csv
 import gzip
 import io
@@ -149,7 +150,10 @@ def main():
                     f"{state} ({deaths_cities}/{deaths_state}){wrong_str}"
                 )
         if state_date != last_date:
-            dias = abs(state_date - last_date).days
+            dias = abs(
+                datetime.date.fromisoformat(str(state_date))
+                - datetime.date.fromisoformat(str(last_date))
+            ).days
             msg_atraso = f" - *{dias} dias de atraso*" if dias >= 2 else ""
             updated_diff.append(f"{state} ({state_date}){msg_atraso}")
     print_stats("desatualizados", updated_diff)
