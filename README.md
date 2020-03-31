@@ -1,4 +1,3 @@
-[![goodtables.io](https://goodtables.io/badge/github/turicas/covid19-br.svg)](https://goodtables.io/github/turicas/covid19-br)
 
 # covid19-br
 
