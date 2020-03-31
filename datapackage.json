@@ -186,6 +186,113 @@
           }
         ]
       }
+    },
+    {
+      "name": "populacao-estimada",
+      "path": "data/populacao-estimada-2019.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "uf",
+            "type": "string",
+            "format": "default",
+            "title": "UF",
+            "description": "Unidade federativa (código de 2 letras)"
+          },
+          {
+            "name": "codigo_uf",
+            "type": "integer",
+            "format": "default",
+            "title": "código da UF",
+            "description": "Código numérico da Unidade Federativa"
+          },
+          {
+            "name": "codigo_municipio",
+            "type": "integer",
+            "format": "default",
+            "title": "código município",
+            "description": "Código numérico do IBGE para o municipio"
+          },
+          {
+            "name": "municipio",
+            "type": "string",
+            "format": "default",
+            "title": "município",
+            "description": "Nome do município"
+          },
+          {
+            "name": "populacao_estimada",
+            "type": "integer",
+            "format": "default",
+            "title": "população estimada",
+            "description": "População estimada no ano de 2019, segundo a PNAD contínua do IBGE"
+          }
+        ]
+      }
+    },
+    {
+      "name": "schema-boletim",
+      "path": "schema/boletim.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "field_name",
+            "type": "string",
+            "format": "default",
+            "title": "Nome do campo"
+          },
+          {
+            "name": "field_type",
+            "type": "string",
+            "format": "default",
+            "title": "Tipo de campo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "schema-caso",
+      "path": "schema/caso.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "field_name",
+            "type": "string",
+            "format": "default",
+            "title": "Nome do campo"
+          },
+          {
+            "name": "field_type",
+            "type": "string",
+            "format": "default",
+            "title": "Tipo de campo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "schema-populacao-estimada",
+      "path": "schema/populacao-estimada-2019.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "field_name",
+            "type": "string",
+            "format": "default",
+            "title": "Nome do campo"
+          },
+          {
+            "name": "field_type",
+            "type": "string",
+            "format": "default",
+            "title": "Tipo de campo"
+          }
+        ]
+      }
     }
   ],
   "keywords": [
