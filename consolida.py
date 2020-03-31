@@ -1,8 +1,8 @@
 import csv
 import io
-from collections import defaultdict
-from itertools import groupby
+from collections import Counter, defaultdict
 from functools import lru_cache
+from itertools import groupby
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
@@ -90,7 +90,7 @@ class ConsolidaSpider(scrapy.Spider):
                 },
             )
         except Exception as exp:
-            self.errors.append(("boletim", state, str(exp)))
+            self.errors.append(("boletim", state, f"{exp.__class__.__name__}: {exp}"))
             return
         for boletim in boletins:
             boletim = boletim._asdict()
@@ -221,24 +221,32 @@ class ConsolidaSpider(scrapy.Spider):
     def parse_state_file(self, response):
         state = response.meta["state"]
 
-        error_filename = f"errors-{state}.csv"
         self.errors = []
         try:
             self.parse_boletim(state, response.body)
         except Exception as exp:
-            self.errors.append(("boletim", state, str(exp)))
+            self.errors.append(("boletim", state, f"{exp.__class__.__name__}: {exp}"))
         try:
             self.parse_caso(state, response.body)
         except Exception as exp:
-            self.errors.append(("boletim", state, str(exp)))
+            self.errors.append(("caso", state, f"{exp.__class__.__name__}: {exp}"))
         if self.errors:
+            error_counter = Counter(error[0] for error in self.errors)
+            error_counter_str = ", ".join(
+                f"{error_type}: {count}" for error_type, count in error_counter.items()
+            )
+            self.logger.error(
+                f"{len(self.errors)} errors found when parsing {state} ({error_counter_str})"
+            )
+            error_header = ("sheet", "state", "message")
             errors = rows.import_from_dicts(
                 [
-                    {"sheet": row[0], "state": row[1], "message": row[2]}
+                    dict(zip(error_header, row))
                     for row in self.errors
                 ]
             )
-            rows.export_to_csv(errors, error_filename)
+            rows.export_to_csv(errors, f"errors-{state}.csv")
+            exit(255)
 
     def __del__(self):
         self.boletim_writer.close()

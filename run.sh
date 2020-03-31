@@ -13,4 +13,3 @@ time scrapy runspider consolida.py \
 	--logfile=$LOG_PATH/consolida.log \
 	-a boletim_filename=$boletim_filename \
 	-a caso_filename=$caso_filename
-#sort_csv $output_filename
