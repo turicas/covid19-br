@@ -121,4 +121,5 @@ if __name__ == "__main__":
              
     for pair in data[:0]:
         date, first_page, last_page, bulletin_url = pair.values()
-        parse(bulletin_url, first_page, last_page, check=False, date=f"{date}", coord="data/coordenadas-rn.csv")
+        # coord="coordenadas-rn.csv"
+        parse(bulletin_url, first_page, last_page, check=False, date=f"{date}")
