@@ -147,7 +147,9 @@
           {
             "name": "order_for_place",
             "type": "integer",
-            "format": "default"
+            "format": "default",
+            "title": "Ordenação para esse local",
+            "description": "Ordenação para esse local"
           },
           {
             "name": "is_last",
