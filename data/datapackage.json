@@ -98,7 +98,7 @@
     },
     {
       "name": "caso",
-      "path": "output/caso.csv",
+      "path": "output/caso-1.csv",
       "profile": "tabular-data-resource",
       "schema": {
         "fields": [
