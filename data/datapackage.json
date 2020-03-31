@@ -145,6 +145,11 @@
             "description": "Quantidade de mortes"
           },
           {
+            "name": "order_for_place",
+            "type": "integer",
+            "format": "default"
+          },
+          {
             "name": "is_last",
             "type": "boolean",
             "format": "default",
