@@ -3,7 +3,7 @@
   "resources": [
     {
       "name": "boletim",
-      "path": "output/boletim.csv",
+      "path": "data/output/boletim.csv",
       "profile": "tabular-data-resource",
       "schema": {
         "fields": [
@@ -44,7 +44,7 @@
     },
     {
       "name": "boletim-url",
-      "path": "boletim_url.csv",
+      "path": "data/boletim_url.csv",
       "profile": "tabular-data-resource",
       "schema": {
         "fields": [
@@ -71,7 +71,7 @@
     },
     {
       "name": "caso-url",
-      "path": "caso_url.csv",
+      "path": "data/caso_url.csv",
       "profile": "tabular-data-resource",
       "schema": {
         "fields": [
@@ -98,7 +98,7 @@
     },
     {
       "name": "caso",
-      "path": "output/caso-1.csv",
+      "path": "data/output/caso-1.csv",
       "profile": "tabular-data-resource",
       "schema": {
         "fields": [
