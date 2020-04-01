@@ -97,6 +97,7 @@ Outros projetos e/ou notícias na rede que referenciam este projeto.
 
 ### Notícias
 
+- [31/03/2020 - UFPA - Centro de Competência em Software Livre da UFPA disponibiliza página para acompanhar a evolução da pandemia da Covid-19 no Brasil](https://portal.ufpa.br/index.php/ultimas-noticias2/11475-centro-de-competencia-em-software-livre-da-ufpa-disponibiliza-pagina-para-acompanhar-a-evolucao-da-pandemia-da-covid-19-no-brasil)
 - [30/03/2020 - UFRGS - Pesquisadores da UFRGS criam sites para acompanhamento de número de casos de Covid-19 nos municípios](https://www.ufrgs.br/coronavirus/base/pesquisadores-da-ufrgs-criam-sites-para-acompanhamento-de-casos-de-covid-19-nos-municipios/)
 - [25/03/2020 - Folha de São Paulo - Brasil tem ao menos 172 cidades com casos confirmados de coronavírus](https://www1.folha.uol.com.br/cotidiano/2020/03/brasil-tem-ao-menos-172-cidades-com-casos-confirmados-de-coronavirus.shtml)
 - [24/03/2020 - Metrópole - Covid-19: Ministério da Saúde divulga menos casos que secretarias](https://www.metropoles.com/brasil/saude-br/covid-19-ministerio-da-saude-divulga-menos-casos-que-secretarias)
