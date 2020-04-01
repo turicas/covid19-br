@@ -95,6 +95,7 @@ class URLCheckerSpider(scrapy.Spider):
                     "url": url,
                     "channel": row.canal,
                     "min_distance": row.min_distance,
+                    "voluntarios": row.voluntarios,
                 }
                 yield scrapy.Request(
                     url,
@@ -129,10 +130,11 @@ class URLCheckerSpider(scrapy.Spider):
             failure_str = f"(HTTP {failure.value.response.status}) {failure.value}"
         else:
             failure_str = str(failure.value)
+        volunteer_mentions = self.__to_volunteer_mentions(meta['voluntarios'])
         self.notify(
             meta["channel"],
             (
-                f"@all tentei checar o [site da SES de `{meta['state']}`]({url}) "
+                f"{volunteer_mentions} tentei checar o [site da SES de `{meta['state']}`]({url}) "
                 f"mas aconteceu um erro! =/ (`{failure_str}`)."
             )
             + last_check_str(url_info["last_check_datetime"]),
@@ -149,15 +151,22 @@ class URLCheckerSpider(scrapy.Spider):
         text = (text or "").strip()
         old_text = (url_info.text or "").strip()
         if levenshtein_distance(text, old_text) >= meta["min_distance"]:
+            volunteer_mentions = self.__to_volunteer_mentions(meta['voluntarios'])
             self.notify(
                 meta["channel"],
-                f"@all detectei uma alteração no [site da SES de `{meta['state']}`]({url})."
+                f"{volunteer_mentions} detectei uma alteração no [site da SES de `{meta['state']}`]({url})."
                 + last_check_str(url_info.last_check_datetime),
             )
         url_info = url_info._asdict()
         url_info["last_check_datetime"] = now_in_brazil()
         url_info["text"] = text
         self.result.append(url_info)
+
+
+    def __to_volunteer_mentions(self, name_list):
+        return ', '.join(
+            ['@{}'.format(nome.strip()) for nome in name_list.split(',')]
+        )
 
     @classmethod
     def from_crawler(cls, crawler, *args, **kwargs):
