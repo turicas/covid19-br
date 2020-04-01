@@ -139,15 +139,21 @@ class ConsolidaSpider(scrapy.Spider):
                     continue
                 if date not in cities[caso["municipio"]]:
                     cities[caso["municipio"]][date] = {}
-                try:
-                    value = int(value) if value not in (None, "") else None
-                except ValueError:
-                    message = (
-                        f"ERROR converting to int: {date} {number_type} {value} {caso}"
-                    )
-                    self.errors.append(("caso", state, message))
-                    self.logger.error(message)
-                    continue
+                if value in (None, ""):
+                    value = None
+                else:
+                    value = str(value)
+                    if value.endswith(".0"):
+                        value = value[:-2]
+                    if value.startswith("=") and value[1:].isdigit():
+                        value = value[1:]
+                    try:
+                        value = int(value)
+                    except ValueError:
+                        message = f"ERROR converting to int: {date} {number_type} {value} {caso}"
+                        self.errors.append(("caso", state, message))
+                        self.logger.error(message)
+                        continue
                 cities[caso["municipio"]][date][number_type] = value
         result = []
         for city, city_data in cities.items():
@@ -240,10 +246,7 @@ class ConsolidaSpider(scrapy.Spider):
             )
             error_header = ("sheet", "state", "message")
             errors = rows.import_from_dicts(
-                [
-                    dict(zip(error_header, row))
-                    for row in self.errors
-                ]
+                [dict(zip(error_header, row)) for row in self.errors]
             )
             rows.export_to_csv(errors, f"errors-{state}.csv")
             exit(255)
