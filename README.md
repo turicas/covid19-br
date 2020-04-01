@@ -67,7 +67,9 @@ Necessita de Python 3 (testado em 3.8.2). Para montar seu ambiente:
 
 - Instale o Python 3.8.2
 - Crie um virtualenv
-- Instale as dependências: `pip install -r requirements.txt`
+- Instale as dependências:
+  - Script de consolidação e robô: `pip install -r requirements.txt`
+  - Extratores de dados estaduais: `pip install -r requirements-collect.txt`
 - Rode o script de coleta: `./collect.sh`
 - Rode o script de consolidação: `./run.sh`
 
@@ -86,13 +88,16 @@ Outros projetos e/ou notícias na rede que referenciam este projeto.
 ### Análises e Projetos
 
 - [25/03/2020 - Análise Descritiva do Coronavírus nos Estados Brasileiros](https://marcusnunes.me/posts/analise-descritiva-do-coronavirus/)
-- [Visualização em Mapa Interativo - GitHub @endoedgar](https://endoedgar.github.io/covid19-monitorbr/)
+- [Visualização em Mapa Interativo](https://endoedgar.github.io/covid19-monitorbr/) por [@endoedgar](https://github.com/endoedgar)
 - [liibre/coronabr](https://liibre.github.io/coronabr/index.html)
 - [Observatório de Dados :: COVID-19 no Brasil CCSL-UFPA](http://ccsl.ufpa.br/covid-19/)
-- [Mapa do Covid-19 no Brasil - Hitalo Silva](https://covid19.hitalos.com)
+- [Mapa do Covid-19 no Brasil](https://covid19.hitalos.com) por [@hitalos](https://github.com/hitalos)
+- [Estimativas de R0 por Estados do Brasil](https://flaviovdf.github.io/covid19/) por [@flaviovdf](https://github.com/flaviovdf)
+- [Instituto de Comunicação e Informação Científica e Tecnológica em Saúde (Icict/Fiocruz)](https://bigdata-covid19.icict.fiocruz.br/)
 
 ### Notícias
 
+- [30/03/2020 - UFRGS - Pesquisadores da UFRGS criam sites para acompanhamento de número de casos de Covid-19 nos municípios](https://www.ufrgs.br/coronavirus/base/pesquisadores-da-ufrgs-criam-sites-para-acompanhamento-de-casos-de-covid-19-nos-municipios/)
 - [25/03/2020 - Folha de São Paulo - Brasil tem ao menos 172 cidades com casos confirmados de coronavírus](https://www1.folha.uol.com.br/cotidiano/2020/03/brasil-tem-ao-menos-172-cidades-com-casos-confirmados-de-coronavirus.shtml)
 - [24/03/2020 - Metrópole - Covid-19: Ministério da Saúde divulga menos casos que secretarias](https://www.metropoles.com/brasil/saude-br/covid-19-ministerio-da-saude-divulga-menos-casos-que-secretarias)
 - [23/03/2020 - CNN Brasil - Boletins estaduais indicam quase 40 casos de coronavírus a mais do que governo](https://www.cnnbrasil.com.br/saude/2020/03/23/boletins-estaduais-indicam-quase-40-casos-de-coronavirus-a-mais-do-que-governo)

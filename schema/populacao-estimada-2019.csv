@@ -1,0 +1,6 @@
+field_name,field_type
+uf,text
+codigo_uf,integer
+codigo_municipio,text
+municipio,text
+populacao_estimada,integer

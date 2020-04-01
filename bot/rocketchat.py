@@ -81,10 +81,8 @@ if __name__ == "__main__":
     auth_token = args.auth_token or os.environ.get("ROCKETCHAT_AUTH_TOKEN")
     if (
         (username, password, user_id, auth_token) == (None, None, None, None)
-        or
-        (username and not password)
-        or
-        (user_id and not auth_token)
+        or (username and not password)
+        or (user_id and not auth_token)
     ):
         print("ERROR: must pass username and password or user_id and auth_token")
         exit(1)

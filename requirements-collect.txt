@@ -1,0 +1,6 @@
+-r requirements.txt
+--only-binary pymupdf
+
+cached-property
+pymupdf
+scrapy

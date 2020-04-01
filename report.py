@@ -1,4 +1,5 @@
 import argparse
+import datetime
 import csv
 import gzip
 import io
@@ -99,7 +100,7 @@ def main():
     mortes_estados = sum_all(state_rows, "deaths")
     mortes_municipios = sum_all(city_rows, "deaths")
     print_stats(
-        "dados atualizados",
+        "últimos dados",
         [
             f"{len(boletins)} boletins capturados",
             f"{confirmados_estados} casos confirmados (estado)",
@@ -149,7 +150,12 @@ def main():
                     f"{state} ({deaths_cities}/{deaths_state}){wrong_str}"
                 )
         if state_date != last_date:
-            updated_diff.append(f"{state} ({state_date})")
+            dias = abs(
+                datetime.date.fromisoformat(str(state_date))
+                - datetime.date.fromisoformat(str(last_date))
+            ).days
+            msg_atraso = f" - *{dias} dias de atraso*" if dias >= 2 else ""
+            updated_diff.append(f"{state} ({state_date}){msg_atraso}")
     print_stats("desatualizados", updated_diff)
     print_stats("confirmados inconsistentes", confirmed_diff)
     print_stats("mortes inconsistentes", deaths_diff)
