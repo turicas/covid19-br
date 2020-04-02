@@ -25,6 +25,8 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Análises e Projetos
 
+- [Corona Cidades - Simulador](https://coronacidades.org/simulacovid/)
+- [Onde tem Coronavírus](https://ondetemcoronavirus.com.br/)
 - [Dashboard do Brasil sobre Covid-19](https://gabrielcesar.github.io/covid-br/) por [@gabrielcesar](https://github.com/gabrielcesar)
 - [Estimativas de R0 por Estados do Brasil](https://flaviovdf.github.io/covid19/) por [@flaviovdf](https://github.com/flaviovdf)
 - [Instituto de Comunicação e Informação Científica e Tecnológica em Saúde (Icict/Fiocruz)](https://bigdata-covid19.icict.fiocruz.br/)
