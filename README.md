@@ -81,27 +81,12 @@ Verifique o resultado em `data/output`.
 - [Recomendações para secretarias de saúde na disponibilização de
   dados](recomendacoes.md)
 
+
 ## Clipping
 
-Outros projetos e/ou notícias na rede que referenciam este projeto.
+Quer saber quais projetos e notícias estão usando nossos dados? [Veja o
+clipping](clipping.md).
 
-### Análises e Projetos
-
-- [25/03/2020 - Análise Descritiva do Coronavírus nos Estados Brasileiros](https://marcusnunes.me/posts/analise-descritiva-do-coronavirus/)
-- [Visualização em Mapa Interativo](https://endoedgar.github.io/covid19-monitorbr/) por [@endoedgar](https://github.com/endoedgar)
-- [liibre/coronabr](https://liibre.github.io/coronabr/index.html)
-- [Observatório de Dados :: COVID-19 no Brasil CCSL-UFPA](http://ccsl.ufpa.br/covid-19/)
-- [Mapa do Covid-19 no Brasil](https://covid19.hitalos.com) por [@hitalos](https://github.com/hitalos)
-- [Estimativas de R0 por Estados do Brasil](https://flaviovdf.github.io/covid19/) por [@flaviovdf](https://github.com/flaviovdf)
-- [Instituto de Comunicação e Informação Científica e Tecnológica em Saúde (Icict/Fiocruz)](https://bigdata-covid19.icict.fiocruz.br/)
-
-### Notícias
-
-- [31/03/2020 - UFPA - Centro de Competência em Software Livre da UFPA disponibiliza página para acompanhar a evolução da pandemia da Covid-19 no Brasil](https://portal.ufpa.br/index.php/ultimas-noticias2/11475-centro-de-competencia-em-software-livre-da-ufpa-disponibiliza-pagina-para-acompanhar-a-evolucao-da-pandemia-da-covid-19-no-brasil)
-- [30/03/2020 - UFRGS - Pesquisadores da UFRGS criam sites para acompanhamento de número de casos de Covid-19 nos municípios](https://www.ufrgs.br/coronavirus/base/pesquisadores-da-ufrgs-criam-sites-para-acompanhamento-de-casos-de-covid-19-nos-municipios/)
-- [25/03/2020 - Folha de São Paulo - Brasil tem ao menos 172 cidades com casos confirmados de coronavírus](https://www1.folha.uol.com.br/cotidiano/2020/03/brasil-tem-ao-menos-172-cidades-com-casos-confirmados-de-coronavirus.shtml)
-- [24/03/2020 - Metrópole - Covid-19: Ministério da Saúde divulga menos casos que secretarias](https://www.metropoles.com/brasil/saude-br/covid-19-ministerio-da-saude-divulga-menos-casos-que-secretarias)
-- [23/03/2020 - CNN Brasil - Boletins estaduais indicam quase 40 casos de coronavírus a mais do que governo](https://www.cnnbrasil.com.br/saude/2020/03/23/boletins-estaduais-indicam-quase-40-casos-de-coronavirus-a-mais-do-que-governo)
 
 ## Atualização dos Dados no Brasil.IO
 
