@@ -25,12 +25,13 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Análises e Projetos
 
+- [Dashboard do Brasil sobre Covid-19](https://gabrielcesar.github.io/covid-br/) por [@gabrielcesar](https://github.com/gabrielcesar)
 - [Estimativas de R0 por Estados do Brasil](https://flaviovdf.github.io/covid19/) por [@flaviovdf](https://github.com/flaviovdf)
 - [Instituto de Comunicação e Informação Científica e Tecnológica em Saúde (Icict/Fiocruz)](https://bigdata-covid19.icict.fiocruz.br/)
 - [Mapa do Covid-19 no Brasil](https://covid19.hitalos.com) por [@hitalos](https://github.com/hitalos)
 - [Observatório de Dados :: COVID-19 no Brasil CCSL-UFPA](http://ccsl.ufpa.br/covid-19/)
 - [Visualização em Mapa Interativo](https://endoedgar.github.io/covid19-monitorbr/) por [@endoedgar](https://github.com/endoedgar)
-- [liibre/coronabr](https://liibre.github.io/coronabr/index.html)
+- [liibre/coronabr (pacote R)](https://liibre.github.io/coronabr/index.html)
 - http://geesc.cedeplar.ufmg.br/wp-content/uploads/2020/03/Nota-tecnica-final-COVID-19-revisado2.pdf
 - http://infovis.sei.ba.gov.br/covid19/
 - http://open-source-covid-19.weileizeng.com/areas
@@ -67,4 +68,3 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://oestatistico.com.br/covid-19-dados-por-municipios/
 - https://www.reddit.com/r/brasil/comments/fo6ezd/o_df_possui_uma_taxa_de_contaminados_por/
 - https://www.youtube.com/watch?v=30FijUpQ1po
-

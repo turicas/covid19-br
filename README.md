@@ -47,6 +47,7 @@ dados](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFr
 
 Você pode contribuir de diversas formas:
 
+- Criando programas (crawlers/scrapers/spiders) para extrair os dados automaticamente ([LEIA ISSO ANTES](#criando-scrapers));
 - Coletando links para os boletins de seu estado;
 - Coletando dados sobre os casos por município por dia;
 - Entrando em contato com a secretaria estadual de seu estado, sugerindo as
@@ -61,7 +62,28 @@ Procure o seu estado [nas issues desse
 repositório](https://github.com/turicas/covid19-br/issues) e vamos conversar
 por lá.
 
+### Criando Scrapers
+
+Estamos mudando a forma de subida dos dados para facilitar o trabalho dos voluntários e deixar o processo mais robusto e confiável e, com isso, será mais fácil que robôs possam subir também os dados; dessa forma, os scrapers ajudarão *bastante* no processo. Porém, ao criar um scraper é importante que você siga algumas regras:
+
+- **Necessário** fazer o scraper usando o `scrapy`;
+- **Não usar** `pandas`, `BeautifulSoap`, `requests` ou outras bibliotecas desnecessárias (a std lib do Python já tem muita biblioteca útil, o `scrapy` com XPath já dá conta de boa parte das raspagens e `rows` já é uma dependência desse repositório);
+- Deve existir alguma maneira fácil de fazer o scraper coletar os boletins e casos para uma data específica (mas ele deve ser capaz de identificar para quais datas os dados disponíveis e de capturar várias datas também);
+- O método de parsing deve devolver (com `yield`) um dicionário com as seguintes chaves:
+  - `date`: data no formato `"YYYY-MM-DD"`
+  - `state`: sigla do estado, com 2 caracteres maiúsculos (deve ser um atributo da classe do spider e usar `self.state`)
+  - `city` (nome do município ou em branco, caso seja o valor do estado, deve ser `None`)
+  - `place_type`: `"city"` para município e `"state"` para estado
+  - `confirmed`: inteiro, número de casos confirmados (ou `None`)
+  - `deaths`: inteiro, número de mortes naquele dia (ou `None`)
+  - **ATENÇÃO**: o scraper deve devolver sempre um registro para o estado que *não seja* a soma dos valores por município (esse dado deve ser extraído da linha "total no estado" no boletim) - essa linha virá com a coluna `city` com o valor `None` e `place_type` com `"state"` - esse dado apenas deve vir preenchido como sendo a soma dos valores municipais *caso o boletim não tenha os dados totais*;
+- Quando possível, use testes automatizados.
+
+Nesse momento não temos muito tempo disponível para revisão, então **por favor**, só crie um *pull request* com código de um novo scraper caso você possa cumprir os requisitos acima.
+
 ## Instalando
+
+### Padrão
 
 Necessita de Python 3 (testado em 3.8.2). Para montar seu ambiente:
 
@@ -75,6 +97,16 @@ Necessita de Python 3 (testado em 3.8.2). Para montar seu ambiente:
 
 Verifique o resultado em `data/output`.
 
+### Docker
+
+Se você preferir utilizar o Docker para executar, basta usar os comandos a seguir :
+
+```shell
+make docker-build   # para construir a imagem
+make docker-collect # para coletar os dados
+make docker-run     # para consolidar os dados
+```
+
 ## VEJA TAMBÉM
 
 - [Outros datasets relevantes](datasets-relevantes.md)
@@ -82,11 +114,34 @@ Verifique o resultado em `data/output`.
   dados](recomendacoes.md)
 
 
+<<<<<<< HEAD
 ## Clipping
+=======
+### Análises e Projetos
+
+- [25/03/2020 - Análise Descritiva do Coronavírus nos Estados Brasileiros](https://marcusnunes.me/posts/analise-descritiva-do-coronavirus/)
+- [Visualização em Mapa Interativo](https://endoedgar.github.io/covid19-monitorbr/) por [@endoedgar](https://github.com/endoedgar)
+- [liibre/coronabr](https://liibre.github.io/coronabr/index.html)
+- [Observatório de Dados :: COVID-19 no Brasil CCSL-UFPA](http://ccsl.ufpa.br/covid-19/)
+- [Mapa do Covid-19 no Brasil](https://covid19.hitalos.com) por [@hitalos](https://github.com/hitalos)
+- [Estimativas de R0 por Estados do Brasil](https://flaviovdf.github.io/covid19/) por [@flaviovdf](https://github.com/flaviovdf)
+- [Instituto de Comunicação e Informação Científica e Tecnológica em Saúde (Icict/Fiocruz)](https://bigdata-covid19.icict.fiocruz.br/)
+- [Dashboard do Brasil sobre Covid-19](https://gabrielcesar.github.io/covid-br/) por [@gabrielcesar](https://github.com/gabrielcesar)
+
+>>>>>>> 69ee1d0b0bd49f1c358f08653154e366e3995abe
 
 Quer saber quais projetos e notícias estão usando nossos dados? [Veja o
 clipping](clipping.md).
 
+<<<<<<< HEAD
+=======
+- [02/04/2010 - UOL - Coronavírus chega ao interior e pequenas cidades viram foco de transmissão](https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2020/04/02/coronavirus-chega-ao-interior-e-pequenas-cidades-viram-foco-de-transmissao.htm)
+- [31/03/2020 - UFPA - Centro de Competência em Software Livre da UFPA disponibiliza página para acompanhar a evolução da pandemia da Covid-19 no Brasil](https://portal.ufpa.br/index.php/ultimas-noticias2/11475-centro-de-competencia-em-software-livre-da-ufpa-disponibiliza-pagina-para-acompanhar-a-evolucao-da-pandemia-da-covid-19-no-brasil)
+- [30/03/2020 - UFRGS - Pesquisadores da UFRGS criam sites para acompanhamento de número de casos de Covid-19 nos municípios](https://www.ufrgs.br/coronavirus/base/pesquisadores-da-ufrgs-criam-sites-para-acompanhamento-de-casos-de-covid-19-nos-municipios/)
+- [25/03/2020 - Folha de São Paulo - Brasil tem ao menos 172 cidades com casos confirmados de coronavírus](https://www1.folha.uol.com.br/cotidiano/2020/03/brasil-tem-ao-menos-172-cidades-com-casos-confirmados-de-coronavirus.shtml)
+- [24/03/2020 - Metrópole - Covid-19: Ministério da Saúde divulga menos casos que secretarias](https://www.metropoles.com/brasil/saude-br/covid-19-ministerio-da-saude-divulga-menos-casos-que-secretarias)
+- [23/03/2020 - CNN Brasil - Boletins estaduais indicam quase 40 casos de coronavírus a mais do que governo](https://www.cnnbrasil.com.br/saude/2020/03/23/boletins-estaduais-indicam-quase-40-casos-de-coronavirus-a-mais-do-que-governo)
+>>>>>>> 69ee1d0b0bd49f1c358f08653154e366e3995abe
 
 ## Atualização dos Dados no Brasil.IO
 

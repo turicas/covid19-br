@@ -1,0 +1,6 @@
+./data/output/*
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/Dockerfile*
