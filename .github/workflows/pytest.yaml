@@ -1,0 +1,18 @@
+name: pytest@docker
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the docker development image
+      run: make docker-build-dev
+    - name: Run pytest suite
+      run: make docker-test
+    - name: Run flake8
+      run: make docker-flake8
