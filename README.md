@@ -94,6 +94,8 @@ Outros projetos e/ou notícias na rede que referenciam este projeto.
 - [Mapa do Covid-19 no Brasil](https://covid19.hitalos.com) por [@hitalos](https://github.com/hitalos)
 - [Estimativas de R0 por Estados do Brasil](https://flaviovdf.github.io/covid19/) por [@flaviovdf](https://github.com/flaviovdf)
 - [Instituto de Comunicação e Informação Científica e Tecnológica em Saúde (Icict/Fiocruz)](https://bigdata-covid19.icict.fiocruz.br/)
+- [Dashboard do Brasil sobre Covid-19](https://gabrielcesar.github.io/covid-br/) por [@gabrielcesar](https://github.com/gabrielcesar)
+
 
 ### Notícias
 
