@@ -83,6 +83,8 @@ Nesse momento não temos muito tempo disponível para revisão, então **por fav
 
 ## Instalando
 
+### Padrão
+
 Necessita de Python 3 (testado em 3.8.2). Para montar seu ambiente:
 
 - Instale o Python 3.8.2
@@ -94,6 +96,16 @@ Necessita de Python 3 (testado em 3.8.2). Para montar seu ambiente:
 - Rode o script de consolidação: `./run.sh`
 
 Verifique o resultado em `data/output`.
+
+### Docker
+
+Se você preferir utilizar o Docker para executar, basta usar os comandos a seguir :
+
+```shell
+make docker-build   # para construir a imagem
+make docker-collect # para coletar os dados
+make docker-run     # para consolidar os dados
+```
 
 ## VEJA TAMBÉM
 
