@@ -42,6 +42,13 @@ dúvidas sobre os dados, [CONSULTE NOSSO FAQ](faq.md).**
 Para mais detalhes [veja a metodologia de coleta de
 dados](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFrPpn4).
 
+### Analisando os dados
+
+Caso queira analisar os dados usando SQL, veja o script
+[`analysis.sh`](analysis.sh) (ele baixa e converte os CSVs para um banco de
+dados SQLite e já cria índices e *views* que facilitam o trabalho) e os
+arquivos na pasta [`sql/`](sql/).
+
 
 ## Contribuindo
 
