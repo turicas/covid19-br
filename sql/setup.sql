@@ -18,22 +18,22 @@ CREATE VIEW all_dates AS
 DROP VIEW IF EXISTS all_places;
 CREATE VIEW all_places AS
 	SELECT
-		uf AS state,
-		municipio AS city,
+		state,
+		city,
 		'city' AS place_type,
-		(codigo_uf || codigo_municipio) AS city_ibge_code,
-		populacao_estimada AS estimated_population_2019
+		city_ibge_code,
+		estimated_population AS estimated_population_2019
 	FROM
 		populacao_estimada_2019
 	UNION
 	SELECT
-		uf AS state,
+		state,
 		'' AS city,
 		'state' AS place_type,
-		codigo_uf AS city_ibge_code,
-		SUM(populacao_estimada) AS estimated_population_2019
+		state_ibge_code AS city_ibge_code,
+		SUM(estimated_population) AS estimated_population_2019
 	FROM populacao_estimada_2019
-	GROUP BY uf;
+	GROUP BY state;
 
 DROP VIEW IF EXISTS place_date_matrix;
 CREATE VIEW place_date_matrix AS

@@ -68,7 +68,10 @@ Colunas :
 - `confirmed`: número de casos confirmados.
 - `deaths`: número de mortes.
 - `estimated_population_2019`: população estimada para esse município/estado em
-  2019, segundo o IBGE.
+  2019, [segundo o
+  IBGE](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=resultados)
+  ([acesse o script que faz o download e conversão dos dados de
+  população](https://github.com/turicas/censo-ibge)).
 - `confirmed_per_100k_inhabitants`: número de casos confirmados por 100.000
   habitantes.
 - `death_rate`: taxa de mortalidade (mortes / confirmados).

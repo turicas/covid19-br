@@ -1,6 +1,6 @@
 field_name,field_type
-uf,text
-codigo_uf,integer
-codigo_municipio,text
-municipio,text
-populacao_estimada,integer
+state,text
+state_ibge_code,integer
+city_ibge_code,integer
+city,text
+estimated_population,integer

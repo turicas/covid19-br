@@ -17,8 +17,8 @@ chat = rocketchat.RocketChat("https://chat.brasil.io/")
 chat.login(your_username, your_password)
 
 url = f"https://docs.google.com/spreadsheets/d/{spreadsheet_id}/export?format=csv#gid=0"
-html = urlopen(url).read()
-table = rows.import_from_csv(io.BytesIO(html), encoding="utf-8")
+csv_data = urlopen(url).read()
+table = rows.import_from_csv(io.BytesIO(csv_data), encoding="utf-8")
 username_correto = {}
 voluntarios = defaultdict(list)
 voluntarios_uf = defaultdict(list)

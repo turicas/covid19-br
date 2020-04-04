@@ -26,29 +26,29 @@ def get_cities():
     )
     cities = defaultdict(dict)
     for row in table:
-        cities[row.uf][row.municipio] = row
+        cities[row.state][row.city] = row
     return cities
 
 
 @lru_cache()
 def get_city_code(state, city):
-    return int(get_cities()[state][city].codigo_municipio)
+    return get_cities()[state][city].city_ibge_code
 
 
 @lru_cache()
 def get_city_population(state, city):
-    return get_cities()[state][city].populacao_estimada
+    return get_cities()[state][city].estimated_population
 
 
 @lru_cache()
 def get_state_code(state):
     for city in get_cities()[state].values():
-        return int(city.codigo_uf)
+        return city.state_ibge_code
 
 
 @lru_cache()
 def get_state_population(state):
-    return sum(city.populacao_estimada for city in get_cities()[state].values())
+    return sum(city.estimated_population for city in get_cities()[state].values())
 
 
 def spreadsheet_download_url(url_or_id, file_format):

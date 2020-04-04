@@ -23,7 +23,9 @@ vez de FTP).
 ## Estimativa de População 2019
 
 O IBGE disponibiliza [a estimativa de população por município em
-2019](https://agenciadenoticias.ibge.gov.br/agencia-detalhe-de-midia.html?view=mediaibge&catid=2103&id=3098).
+2019](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=resultados).
 
-Os dados também estão convertidos nesse dataset:
-[data/populacao-estimada-2019.csv](data/populacao-estimada-2019.csv).
+Os dados também estão convertidos nesse CSV:
+[data/populacao-estimada-2019.csv](data/populacao-estimada-2019.csv) ([acesse o
+script que faz download e conversão desses
+dados](https://github.com/turicas/censo-ibge)).
