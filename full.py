@@ -14,7 +14,7 @@ def get_data(input_filename):
         input_filename, force_types=load_schema(str(SCHEMA_PATH / "caso.csv"))
     )
     casos.order_by("date")
-    dates = list(set(c.date for c in casos))
+    dates = sorted(set(c.date for c in casos))
     row_key = lambda row: (row.place_type, row.state, row.city)
     caso_by_key = defaultdict(list)
     for caso in casos:
@@ -42,8 +42,10 @@ def get_data(input_filename):
 
     order_key = lambda row: row.order_for_place
     last_date = dates[-1]
+    last_case_for_place = {}
     for date in dates:
         for place_key in place_keys:
+            last_case = last_case_for_place.get(place_key, None)
             place_type, state, city = place_key
             place_cases = caso_by_key[place_key]
             place_cases.sort(key=lambda row: row.date, reverse=True)
@@ -56,24 +58,23 @@ def get_data(input_filename):
                 key=order_key,
                 reverse=True
             )
-            # TODO: is_last = True and place_type = city tá dando 6151
             if valid_place_cases:
                 # This place has at least one case for this date (or before),
                 # so use the newest one.
-                last_case = valid_place_cases[0]
+                last_valid_case = valid_place_cases[0]
                 newest_case = place_cases[0]
-                yield {
+                new_case = {
                     "city": city,
-                    "city_ibge_code": last_case.city_ibge_code,
+                    "city_ibge_code": last_valid_case.city_ibge_code,
                     "date": date,
-                    "estimated_population_2019": last_case.estimated_population_2019,
-                    "is_fake": last_case.date != date,
-                    "is_last": date == last_case.date == newest_case.date,
-                    "last_available_confirmed": last_case.confirmed,
-                    "last_available_confirmed_per_100k_inhabitants": last_case.confirmed_per_100k_inhabitants,
-                    "last_available_date": last_case.date,
-                    "last_available_death_rate": last_case.death_rate,
-                    "last_available_deaths": last_case.deaths,
+                    "estimated_population_2019": last_valid_case.estimated_population_2019,
+                    "is_fake": last_valid_case.date != date,
+                    "is_last": date == last_valid_case.date == newest_case.date,
+                    "last_available_confirmed": last_valid_case.confirmed,
+                    "last_available_confirmed_per_100k_inhabitants": last_valid_case.confirmed_per_100k_inhabitants,
+                    "last_available_date": last_valid_case.date,
+                    "last_available_death_rate": last_valid_case.death_rate,
+                    "last_available_deaths": last_valid_case.deaths,
                     "place_type": place_type,
                     "state": state,
                 }
@@ -92,7 +93,7 @@ def get_data(input_filename):
                 else:
                     raise ValueError(f"Unknown place type: {repr(place_type)}")
 
-                yield {
+                new_case = {
                     "city": city,
                     "city_ibge_code": place_code,
                     "date": date,
@@ -107,6 +108,20 @@ def get_data(input_filename):
                     "place_type": place_type,
                     "state": state,
                 }
+            if last_case is None:
+                new_confirmed = 0
+                new_deaths = 0
+            else:
+                last_confirmed = last_case["last_available_confirmed"]
+                new_confirmed = new_case["last_available_confirmed"]
+                new_confirmed = (new_confirmed or 0) - (last_confirmed or 0)
+                last_deaths = last_case["last_available_deaths"]
+                new_deaths = new_case["last_available_deaths"]
+                new_deaths = (new_deaths or 0) - (last_deaths or 0)
+            new_case["new_confirmed"] = new_confirmed
+            new_case["new_deaths"] = new_deaths
+            last_case_for_place[place_key] = new_case
+            yield new_case
 
 if __name__ == "__main__":
     import argparse

@@ -314,6 +314,10 @@ casos em que um boletim não foi divulgado naquele dia, é copiado o dado do
   `date`.
 - `last_available_death_rate`: taxa de mortalidade (mortes / confirmados) do
   último dia disponível igual ou anterior à data `date`.
+- `new_confirmed`: número de novos casos confirmados desde o último dia (note
+  que caso `is_fake` seja `True`, esse valor sempre será `0`).
+- `new_deaths`: número de novos óbitos desde o último dia (note que caso
+  `is_fake` seja `True`, esse valor sempre será `0`).
 
 🔍 = colunas que podem ser filtrados via query string na API e na interface.
 
