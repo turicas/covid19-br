@@ -8,6 +8,6 @@ deaths,integer
 order_for_place,integer
 is_last,bool
 estimated_population_2019,integer
-city_ibge_code,text
+city_ibge_code,integer
 confirmed_per_100k_inhabitants,float
 death_rate,float
