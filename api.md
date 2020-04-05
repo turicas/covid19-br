@@ -43,7 +43,13 @@ dados](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFr
 > queira alterar o número de registros por página, basta passar o valor através
 > da *query string* `page_size` (máximo de 10.000 registros por página).
 
-### Casos
+### `caso`
+
+Essa tabela tem apenas os casos relatados pelos boletins das Secretarias
+Estaduais de Saúde e, por isso, não possui valores para todos os municípios e
+todas as datas - é nossa "tabela canônica", que reflete o que foi publicado.
+Caso você precise dos dados por município por dia completos, veja a tabela
+[`caso-full`](#caso-full).
 
 Número de casos confirmados e óbitos por município por dia, segundo as
 Secretarias Estaduais de Saúde.
@@ -212,7 +218,11 @@ curl -X GET https://brasil.io/api/dataset/covid19/caso/data?is_last=True&place_t
 ...
 ```
 
-### Boletim
+### `boletim`
+
+Tabela que lista os boletins publicados pelas Secretarias Estaduais de Saúde.
+Pode aparecer mais de um para a mesma data e podem existir dias em que as SES
+não publicam boletins.
 
 Links para os boletins das Secretarias Estaduais de Saúde de onde retiramos os
 dados de casos confirmados e mortes.
@@ -262,6 +272,51 @@ curl -X GET https://brasil.io/api/dataset/covid19/boletim/data?state=SP
     },
 ...
 ```
+
+
+### `caso-full`
+
+Tabela gerada a partir da tabela [`caso`](#caso), que possui um registro por
+município (+ Importados/Indefinidos) e estado para cada data disponível; nos
+casos em que um boletim não foi divulgado naquele dia, é copiado o dado do
+último dia disponível e a coluna `is_fake` fica com o valor `True`.
+
+`https://brasil.io/api/dataset/covid19/dados/caso-full`
+
+- 🔍 `date`: data de coleta dos dados no formato YYYY-MM-DD.
+- 🔍 `state`: sigla da unidade federativa, exemplo: SP.
+- 🔍 `city`: nome do município (pode estar em branco quando o registro é
+  referente ao estado, pode ser preenchido com `Importados/Indefinidos`
+  também).
+- 🔍 `place_type`: tipo de local que esse registro descreve, pode ser `city` ou
+  `state`.
+- 🔍 `city_ibge_code`: código IBGE do local.
+- `estimated_population_2019`: população estimada para esse município/estado em
+  2019, [segundo o
+  IBGE](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=resultados)
+  ([acesse o script que faz o download e conversão dos dados de
+  população](https://github.com/turicas/censo-ibge)).
+- 🔍 `is_last`: campo pré-computado que diz se esse registro é o mais novo para
+  esse local, pode ser `True` ou `False` (caso filtre por esse campo, use
+  `is_last=True` ou `is_last=False`, **não use o valor em minúsculas**).
+- 🔍 `is_fake`: campo pré-computado que diz se as informações nesse registro
+  foram publicadas pela Secretaria Estadual de Saúde no dia `date` ou se o dado
+  é repetido do último dia em que o dado está disponível (igual ou anterior a
+  `date`). Isso ocorre pois nem todas as secretarias publicam boletins todos os
+  dias. Veja também o campo `last_available_date`.
+- 🔍 `last_available_date`: data da qual o dado se refere.
+- `last_available_confirmed`: número de casos confirmados do último dia
+  disponível igual ou anterior à data `date`.
+- `last_available_deaths`: número de mortes do último dia disponível igual ou
+  anterior à data `date`.
+- `last_available_confirmed_per_100k_inhabitants`: número de casos confirmados
+  por 100.000 habitantes do último dia disponível igual ou anterior à data
+  `date`.
+- `last_available_death_rate`: taxa de mortalidade (mortes / confirmados) do
+  último dia disponível igual ou anterior à data `date`.
+
+🔍 = colunas que podem ser filtrados via query string na API e na interface.
+
 
 ### Óbitos Registrados em Cartório
 
