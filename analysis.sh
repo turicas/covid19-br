@@ -5,11 +5,18 @@ function create_database() {
 
 	rm -rf "$database_filename"
 	for table in boletim caso obito_cartorio caso_full; do
-		echo "Downloading $table"
-		filename="data/${table}.csv.gz"
-		url="https://data.brasil.io/dataset/covid19/${table}.csv.gz"
-		rm -rf "$filename"
-		wget -q -c -t 0 -O "$filename" "$url"
+		filename="data/${table}.csv"
+		if [ -e "$filename" ]; then
+			echo "Using already downloaded $filename as $table"
+		elif [ -e "${filename}.gz" ]; then
+			filename="${filename}.gz"
+			echo "Using already downloaded $filename as $table"
+		else
+			echo "Downloading $table"
+			url="https://data.brasil.io/dataset/covid19/${table}.csv.gz"
+			rm -rf "$filename"
+			wget -q -c -t 0 -O "$filename" "$url"
+		fi
 		rows csv2sqlite --schemas=schema/${table}.csv "$filename" "$database_filename"
 	done
 	for table in populacao-estimada-2019 epidemiological-week; do
