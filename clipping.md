@@ -70,3 +70,4 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://oestatistico.com.br/covid-19-dados-por-municipios/
 - https://www.reddit.com/r/brasil/comments/fo6ezd/o_df_possui_uma_taxa_de_contaminados_por/
 - https://www.youtube.com/watch?v=30FijUpQ1po
+- https://pt.wikipedia.org/wiki/Pandemia_de_COVID-19_no_Brasil
