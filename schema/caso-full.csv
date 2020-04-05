@@ -3,12 +3,14 @@ city,text
 city_ibge_code,integer
 date,date
 estimated_population_2019,integer
-is_last,bool
 is_fake,bool
+is_last,bool
 last_available_confirmed,text
 last_available_confirmed_per_100k_inhabitants,text
 last_available_date,text
 last_available_death_rate,text
 last_available_deaths,text
-place_type,text
+new_confirmed,integer
 state,text
+new_deaths,integer
+place_type,text
