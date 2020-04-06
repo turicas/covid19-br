@@ -1,18 +1,22 @@
 import csv
 import io
+import os
 from collections import Counter, defaultdict
 from functools import lru_cache
 from itertools import groupby
 from pathlib import Path
+from signal import SIGINT
 from urllib.parse import parse_qs, urlparse
 
 import rows
 import scrapy
 from cached_property import cached_property
 from rows.utils import load_schema
+from scrapy.exceptions import CloseSpider
 
 
 DATA_PATH = Path(__file__).parent / "data"
+ERROR_PATH = DATA_PATH / "error"
 SCHEMA_PATH = Path(__file__).parent / "schema"
 POPULATION_DATA_PATH = DATA_PATH / "populacao-estimada-2019.csv"
 POPULATION_SCHEMA_PATH = SCHEMA_PATH / "populacao-estimada-2019.csv"
@@ -245,8 +249,15 @@ class ConsolidaSpider(scrapy.Spider):
             errors = rows.import_from_dicts(
                 [dict(zip(error_header, row)) for row in self.errors]
             )
-            rows.export_to_csv(errors, f"errors-{state}.csv")
-            exit(255)
+            filename = ERROR_PATH / f"errors-{state}.csv"
+            if not filename.parent.exists():
+                filename.parent.mkdir(parents=True)
+            rows.export_to_csv(errors, filename)
+
+            # Force crawler to stop
+            os.kill(os.getpid(), SIGINT)
+            os.kill(os.getpid(), SIGINT)
+            raise CloseSpider(f"Error found on {state} (see {filename}).")
 
     def __del__(self):
         self.boletim_writer.close()

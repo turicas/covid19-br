@@ -10,6 +10,7 @@ fi
 DOWNLOAD_PATH="$SCRIPT_PATH/data/download"
 LOG_PATH="$SCRIPT_PATH/data/log"
 OUTPUT_PATH="$SCRIPT_PATH/data/output"
+ERROR_PATH="$SCRIPT_PATH/data/error"
 
 function log() {
 	echo "[$(date +"%Y-%m-%d %H:%M:%S")] $@"
