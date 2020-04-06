@@ -9,7 +9,7 @@ docker-build:
 docker-collect:
 	docker container run --rm --name covid19-br --volume $(PWD)/data/output:/opt/covid19-br/data/output covid19-br ./collect.sh
 
-docker-run:
+docker-run: docker-build
 	docker container run --rm --name covid19-br --volume $(PWD)/data/output:/opt/covid19-br/data/output covid19-br ./run.sh
 
 docker-build-dev:
@@ -24,3 +24,6 @@ docker-flake8: docker-build-dev
 
 docker-deploy:
 	docker container run --env-file ./.env --rm --name covid19-br --volume $(PWD)/data/output:/opt/covid19-br/data/output covid19-br ./deploy.sh
+
+docker-validate: docker-run
+	docker container run --rm --name covid19-br --volume $(PWD)/data/output:/opt/covid19-br/data/output covid19-br ./validate.sh

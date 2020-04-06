@@ -16,3 +16,5 @@ jobs:
       run: make docker-test
     - name: Run flake8
       run: make docker-flake8
+    - name: Run gootables
+      run: make docker-validate
