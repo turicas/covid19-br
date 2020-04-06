@@ -43,60 +43,6 @@
       "format": "csv"
     },
     {
-      "name": "boletim-url",
-      "path": "data/boletim_url.csv",
-      "profile": "tabular-data-resource",
-      "schema": {
-        "fields": [
-          {
-            "name": "state",
-            "type": "string",
-            "format": "default",
-            "title": "state",
-            "description": "2 letter abbreviation code of the federation unit (state)"
-          },
-          {
-            "name": "csv_url",
-            "type": "string",
-            "format": "uri",
-            "title": "CSV URL",
-            "description": "URL to the Google Spreadsheet export to CSV of the sheet with this state's data"
-          }
-        ]
-      },
-      "title": "Boletim URL",
-      "format": "csv",
-      "encoding": "utf-8",
-      "description": "List of URLs tot he Google Spreadsheet exports to CSV of the sheets with each state's report"
-    },
-    {
-      "name": "caso-url",
-      "path": "data/caso_url.csv",
-      "profile": "tabular-data-resource",
-      "schema": {
-        "fields": [
-          {
-            "name": "state",
-            "type": "string",
-            "format": "default",
-            "title": "state",
-            "description": "2 letter abbreviation code of the federation unit (state)"
-          },
-          {
-            "name": "csv_url",
-            "type": "string",
-            "format": "default",
-            "title": "CSV URL",
-            "description": "URL to the Google Spreadsheet export to CSV of the sheet with this state's data"
-          }
-        ]
-      },
-      "title": "Caso URL",
-      "format": "csv",
-      "encoding": "utf-8",
-      "description": "List of URLs tot he Google Spreadsheet exports to CSV of the sheets with each state's case data"
-    },
-    {
       "name": "caso",
       "path": "data/output/caso.csv",
       "profile": "tabular-data-resource",
@@ -196,35 +142,35 @@
       "schema": {
         "fields": [
           {
-            "name": "uf",
+            "name": "state",
             "type": "string",
             "format": "default",
             "title": "UF",
             "description": "Unidade federativa (código de 2 letras)"
           },
           {
-            "name": "codigo_uf",
+            "name": "state_ibge_code",
             "type": "integer",
             "format": "default",
             "title": "código da UF",
             "description": "Código numérico da Unidade Federativa"
           },
           {
-            "name": "codigo_municipio",
+            "name": "city_ibge_code",
             "type": "integer",
             "format": "default",
             "title": "código município",
             "description": "Código numérico do IBGE para o municipio"
           },
           {
-            "name": "municipio",
+            "name": "city",
             "type": "string",
             "format": "default",
             "title": "município",
             "description": "Nome do município"
           },
           {
-            "name": "populacao_estimada",
+            "name": "estimated_population",
             "type": "integer",
             "format": "default",
             "title": "população estimada",
