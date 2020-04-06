@@ -279,7 +279,7 @@ curl -X GET https://brasil.io/api/dataset/covid19/boletim/data?state=SP
 Tabela gerada a partir da tabela [`caso`](#caso), que possui um registro por
 município (+ Importados/Indefinidos) e estado para cada data disponível; nos
 casos em que um boletim não foi divulgado naquele dia, é copiado o dado do
-último dia disponível e a coluna `is_fake` fica com o valor `True`.
+último dia disponível e a coluna `is_repeated` fica com o valor `True`.
 
 `https://brasil.io/api/dataset/covid19/dados/caso-full`
 
@@ -299,11 +299,11 @@ casos em que um boletim não foi divulgado naquele dia, é copiado o dado do
 - 🔍 `is_last`: campo pré-computado que diz se esse registro é o mais novo para
   esse local, pode ser `True` ou `False` (caso filtre por esse campo, use
   `is_last=True` ou `is_last=False`, **não use o valor em minúsculas**).
-- 🔍 `is_fake`: campo pré-computado que diz se as informações nesse registro
-  foram publicadas pela Secretaria Estadual de Saúde no dia `date` ou se o dado
-  é repetido do último dia em que o dado está disponível (igual ou anterior a
-  `date`). Isso ocorre pois nem todas as secretarias publicam boletins todos os
-  dias. Veja também o campo `last_available_date`.
+- 🔍 `is_repeated`: campo pré-computado que diz se as informações nesse
+  registro foram publicadas pela Secretaria Estadual de Saúde no dia `date` ou
+  se o dado é repetido do último dia em que o dado está disponível (igual ou
+  anterior a `date`). Isso ocorre pois nem todas as secretarias publicam
+  boletins todos os dias. Veja também o campo `last_available_date`.
 - 🔍 `last_available_date`: data da qual o dado se refere.
 - `last_available_confirmed`: número de casos confirmados do último dia
   disponível igual ou anterior à data `date`.
@@ -315,9 +315,9 @@ casos em que um boletim não foi divulgado naquele dia, é copiado o dado do
 - `last_available_death_rate`: taxa de mortalidade (mortes / confirmados) do
   último dia disponível igual ou anterior à data `date`.
 - `new_confirmed`: número de novos casos confirmados desde o último dia (note
-  que caso `is_fake` seja `True`, esse valor sempre será `0`).
+  que caso `is_repeated` seja `True`, esse valor sempre será `0`).
 - `new_deaths`: número de novos óbitos desde o último dia (note que caso
-  `is_fake` seja `True`, esse valor sempre será `0`).
+  `is_repeated` seja `True`, esse valor sempre será `0`).
 
 🔍 = colunas que podem ser filtrados via query string na API e na interface.
 
