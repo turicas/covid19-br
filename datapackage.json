@@ -1,0 +1,265 @@
+{
+  "profile": "tabular-data-package",
+  "resources": [
+    {
+      "name": "boletim",
+      "path": "data/output/boletim.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "date",
+            "type": "date",
+            "format": "default",
+            "title": "Data",
+            "description": "Data da publicação do boletim"
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "format": "default",
+            "title": "UF",
+            "description": "Unidade federativa"
+          },
+          {
+            "name": "url",
+            "type": "string",
+            "format": "uri",
+            "title": "URL",
+            "description": "Link para o boletim"
+          },
+          {
+            "name": "notes",
+            "type": "string",
+            "format": "default",
+            "title": "Observações",
+            "description": "Observações"
+          }
+        ]
+      },
+      "title": "Reports",
+      "description": "Daily reports from the states' Health Secretariat on COVID-19.",
+      "encoding": "utf-8",
+      "format": "csv"
+    },
+    {
+      "name": "caso",
+      "path": "data/output/caso.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "date",
+            "type": "date",
+            "format": "default",
+            "title": "Data",
+            "description": "Data"
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "format": "default",
+            "title": "UF",
+            "description": "Unidade federativa"
+          },
+          {
+            "name": "city",
+            "type": "string",
+            "format": "default",
+            "title": "Município",
+            "description": "Município"
+          },
+          {
+            "name": "place_type",
+            "type": "string",
+            "format": "default",
+            "title": "Tipo de local",
+            "description": " Se o dado é referente ao município ou ao estado"
+          },
+          {
+            "name": "confirmed",
+            "type": "integer",
+            "format": "default",
+            "title": "Confirmações",
+            "description": "Quantidade de casos confirmados"
+          },
+          {
+            "name": "deaths",
+            "type": "integer",
+            "format": "default",
+            "title": "Mortes",
+            "description": "Quantidade de mortes"
+          },
+          {
+            "name": "order_for_place",
+            "type": "integer",
+            "format": "default",
+            "title": "Ordenação para esse local",
+            "description": "Ordenação para esse local"
+          },
+          {
+            "name": "is_last",
+            "type": "boolean",
+            "format": "default",
+            "title": "É a última atualização?",
+            "description": "É a última atualização?"
+          },
+          {
+            "name": "estimated_population_2019",
+            "type": "integer",
+            "format": "default",
+            "title": "População estimada 2019",
+            "description": "População estimada 2019, segundo IBGE"
+          },
+          {
+            "name": "city_ibge_code",
+            "type": "string",
+            "format": "default",
+            "title": "Código IBGE",
+            "description": "Código IBGE do município ou estado"
+          },
+          {
+            "name": "confirmed_per_100k_inhabitants",
+            "type": "number",
+            "format": "default",
+            "title": "Confirmados/100k hab.",
+            "description": "Casos confirmados por 100.000 habitantes"
+          },
+          {
+            "name": "death_rate",
+            "type": "number",
+            "format": "default",
+            "title": "Mortes/confirmados",
+            "description": "Mortes por casos confirmados"
+          }
+        ]
+      }
+    },
+    {
+      "name": "populacao-estimada",
+      "path": "data/populacao-estimada-2019.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "state",
+            "type": "string",
+            "format": "default",
+            "title": "UF",
+            "description": "Unidade federativa (código de 2 letras)"
+          },
+          {
+            "name": "state_ibge_code",
+            "type": "integer",
+            "format": "default",
+            "title": "código da UF",
+            "description": "Código numérico da Unidade Federativa"
+          },
+          {
+            "name": "city_ibge_code",
+            "type": "integer",
+            "format": "default",
+            "title": "código município",
+            "description": "Código numérico do IBGE para o municipio"
+          },
+          {
+            "name": "city",
+            "type": "string",
+            "format": "default",
+            "title": "município",
+            "description": "Nome do município"
+          },
+          {
+            "name": "estimated_population",
+            "type": "integer",
+            "format": "default",
+            "title": "população estimada",
+            "description": "População estimada no ano de 2019, segundo a PNAD contínua do IBGE"
+          }
+        ]
+      }
+    },
+    {
+      "name": "schema-boletim",
+      "path": "schema/boletim.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "field_name",
+            "type": "string",
+            "format": "default",
+            "title": "Nome do campo"
+          },
+          {
+            "name": "field_type",
+            "type": "string",
+            "format": "default",
+            "title": "Tipo de campo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "schema-caso",
+      "path": "schema/caso.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "field_name",
+            "type": "string",
+            "format": "default",
+            "title": "Nome do campo"
+          },
+          {
+            "name": "field_type",
+            "type": "string",
+            "format": "default",
+            "title": "Tipo de campo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "schema-populacao-estimada",
+      "path": "schema/populacao-estimada-2019.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "field_name",
+            "type": "string",
+            "format": "default",
+            "title": "Nome do campo"
+          },
+          {
+            "name": "field_type",
+            "type": "string",
+            "format": "default",
+            "title": "Tipo de campo"
+          }
+        ]
+      }
+    }
+  ],
+  "keywords": [
+    "covid-19",
+    "corona-virus",
+    "brasil",
+    "brazil",
+    "health",
+    "pandemic"
+  ],
+  "name": "covid19-br",
+  "title": "Daily time series on COVID-19 in Brazil",
+  "description": "Data on the evolution of the COVID-19 disease in Brazil, processed from each state Health Secretariat's COVID-19 daily reports.",
+  "homepage": "https://github.com/turicas/covid19-br",
+  "licenses": [
+    {
+      "name": "CC-BY-SA-4.0",
+      "title": "Creative Commons Attribution Share-Alike 4.0",
+      "path": "https://creativecommons.org/licenses/by-sa/4.0/"
+    }
+  ]
+}
