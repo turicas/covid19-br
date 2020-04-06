@@ -7,6 +7,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias
 
+- [2020-04-06 O Globo - Rumo ao interior: coronavírus já circula em 397 municípios além das capitais e regiões metropolitanas](https://oglobo.globo.com/brasil/rumo-ao-interior-coronavirus-ja-circula-em-397-municipios-alem-das-capitais-regioes-metropolitanas-24353176)
 - [2020-04-02 UOL Notícias - Coronavírus chega ao interior e pequenas cidades viram foco de transmissão](https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2020/04/02/coronavirus-chega-ao-interior-e-pequenas-cidades-viram-foco-de-transmissao.htm)
 - [2020-04-01 O Estado de São Paulo - Metade da população brasileira vive em cidades que já registraram coronavírus](https://saude.estadao.com.br/noticias/geral,metade-da-populacao-brasileira-vive-em-cidades-que-ja-registraram-coronavirus,70003255810) (manchete do impresso!)
 - [2020-03-31 UOL Notícias - Capitais brasileiras concentram 80% dos casos de novo coronavírus no Brasil](https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2020/03/31/capitais-brasileiras-concentram-80-dos-casos-de-novo-coronavirus-no-brasil.htm)
