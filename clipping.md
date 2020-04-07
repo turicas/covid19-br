@@ -51,6 +51,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://public.flourish.studio/visualisation/1707808/
 - https://tiago-gandra.shinyapps.io/COVID-Brasil-io/
 - https://viniciusmsousa.shinyapps.io/coronavirus_monitor/
+- [COVID-19 e os povos indígenas - Instituto Socioambiental](https://covid19.socioambiental.org/)
 
 
 ## Publicações Científicas
