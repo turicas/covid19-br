@@ -80,7 +80,6 @@ CREATE VIEW total_state_from_states AS
 DROP VIEW IF EXISTS total_from_state_and_cities;
 CREATE VIEW total_from_state_and_cities AS
 	SELECT
-		c.date,
 		c.state,
 		c.confirmed AS confirmed_cities,
 		c.deaths AS deaths_cities,
@@ -89,5 +88,4 @@ CREATE VIEW total_from_state_and_cities AS
 	FROM total_state_from_cities AS c
 		JOIN total_state_from_states AS s
 		ON
-			c.date = s.date
-			AND c.state = s.state;
+			c.state = s.state;
