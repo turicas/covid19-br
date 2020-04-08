@@ -1,15 +1,20 @@
 FROM python:3.8-slim
 
-COPY requirements.txt /tmp/requirements.txt
+WORKDIR /opt/covid19-br
+
+ARG PYTHON_REQUIREMENTS=collect
+
+COPY requirements.txt .
+COPY requirements-${PYTHON_REQUIREMENTS}.txt .
 
 RUN apt-get update && apt-get upgrade -y \
     && apt-get install -y \
-        g++ \
+        build-essential \
     && python -m pip install --upgrade pip \
-    && pip install -r /tmp/requirements.txt \
-    && apt-get remove -y g++ \
+    && pip install -r  requirements-${PYTHON_REQUIREMENTS}.txt\
+    && apt-get remove -y build-essential \
     && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/* /tmp/*
+    && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /opt/covid19-br
 COPY ./ /opt/covid19-br

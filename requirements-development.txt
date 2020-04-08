@@ -4,3 +4,5 @@ autoflake
 black
 ipython
 isort
+pytest
+flake8
