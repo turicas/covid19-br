@@ -131,13 +131,13 @@ def get_data(input_filename):
                 new_deaths = (new_deaths or 0) - (last_deaths or 0)
             new_case["new_confirmed"] = new_confirmed
             new_case["new_deaths"] = new_deaths
-            place_had_cases = had_cases.get(place_code)
+            place_had_cases = had_cases.get(place_key, False)
             if not place_had_cases:
                 place_had_cases = (
                     (new_case["last_available_confirmed"] or 0) != 0
                     or (new_case["last_available_deaths"] or 0) != 0
                 )
-                had_cases[place_code] = place_had_cases
+                had_cases[place_key] = place_had_cases
             new_case["had_cases"] = place_had_cases
             last_case_for_place[place_key] = new_case
             yield new_case
