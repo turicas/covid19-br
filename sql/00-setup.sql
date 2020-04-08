@@ -94,3 +94,12 @@ CREATE VIEW total_from_state_and_cities AS
 		JOIN total_state_from_states AS s
 		ON
 			c.state = s.state;
+
+DROP VIEW IF EXISTS city_cases;
+CREATE VIEW city_cases AS
+	SELECT
+		*
+	FROM caso_full
+	WHERE
+		place_type = 'city'
+		AND had_cases = 'True';
