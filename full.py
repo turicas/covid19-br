@@ -9,35 +9,40 @@ DATA_PATH = Path(__file__).parent / "data"
 SCHEMA_PATH = Path(__file__).parent / "schema"
 
 
-def get_data(input_filename):
-    casos = rows.import_from_csv(
+def read_cases(input_filename, order_by=None):
+    cases = rows.import_from_csv(
         input_filename, force_types=load_schema(str(SCHEMA_PATH / "caso.csv"))
     )
-    casos.order_by("date")
+    if order_by:
+        cases.order_by(order_by)
+    return cases
+
+
+def read_population():
+    return rows.import_from_csv(
+        DATA_PATH / "populacao-estimada-2019.csv",
+        force_types=load_schema(str(SCHEMA_PATH / "populacao-estimada-2019.csv")),
+    )
+
+
+def get_data(input_filename):
+    casos = read_cases(input_filename, order_by="date")
     dates = sorted(set(c.date for c in casos))
     row_key = lambda row: (row.place_type, row.state, row.city)
     caso_by_key = defaultdict(list)
     for caso in casos:
         caso_by_key[row_key(caso)].append(caso)
 
-    brasil = rows.import_from_csv(
-        DATA_PATH / "populacao-estimada-2019.csv",
-        force_types=load_schema(str(SCHEMA_PATH / "populacao-estimada-2019.csv")),
-    )
-    population_by_city = defaultdict(lambda: None)
+    brasil = read_population()
+    city_by_key = {(city.state, city.city): city for city in brasil}
     population_by_state, place_keys = Counter(), []
-    place_code_by_city = defaultdict(lambda: None)
     for city in brasil:
-        population_by_city[(city.state, city.city)] = city.estimated_population
-        place_code_by_city[(city.state, city.city)] = city.city_ibge_code
         population_by_state[city.state] += city.estimated_population
         place_keys.append(("city", city.state, city.city))
-    states = {city.state: city.state_ibge_code for city in brasil}
-    place_code_by_state = defaultdict(lambda: None)
-    for state, place_code in states.items():
+    place_code_by_state = {city.state: city.state_ibge_code for city in brasil}
+    for state, place_code in place_code_by_state.items():
         place_keys.append(("state", state, None))
         place_keys.append(("city", state, "Importados/Indefinidos"))
-        place_code_by_state[state] = place_code
     place_keys.sort()
 
     order_key = lambda row: row.order_for_place
@@ -88,8 +93,14 @@ def get_data(input_filename):
                     population = population_by_state[state]
                     place_code = place_code_by_state[state]
                 elif place_type == "city":
-                    population = population_by_city[(state, city)]
-                    place_code = place_code_by_city[(state, city)]
+                    city_row = city_by_key.get((state, city), None)
+                    if city_row is None:
+                        if city != "Importados/Indefinidos":
+                            raise ValueError(f"City {city} not found")
+                        population = place_code = None
+                    else:
+                        population = city_row.estimated_population
+                        place_code = city_row.city_ibge_code
                 else:
                     raise ValueError(f"Unknown place type: {repr(place_type)}")
 
