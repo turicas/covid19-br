@@ -52,10 +52,10 @@ function execute_sql_file_with_output() {
 function setup_database() {
 	database=$1; shift
 
-	echo "Running sql/00-setup.sql"
-	execute_sql_file_no_output "$database" "sql/00-setup.sql"
-	echo "Running sql/01-obitos-setup.sql"
-	execute_sql_file_no_output "$database" "sql/01-obitos-setup.sql"
+	for filename in sql/*setup.sql; do
+		echo "Running setup $filename"
+		execute_sql_file_no_output "$database" "$filename"
+	done
 }
 
 function execute_sql_files() {
@@ -63,8 +63,8 @@ function execute_sql_files() {
 	files=$@
 
 	for filename in $files; do
-		if [ $(basename $filename) != "00-setup.sql" ] && [ $(basename $filename) != "01-obitos-setup.sql" ]; then
-			echo "Running $filename"
+		if [[ "$(basename $filename)" != *"setup.sql" ]]; then
+			echo "Executing $filename and exporting data"
 			output="data/analysis/$(basename $filename | sed 's/\.sql$/.csv.gz/')"
 			execute_sql_file_with_output "$DATABASE" "$filename" "$output"
 		fi
