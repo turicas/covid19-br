@@ -47,20 +47,47 @@ CREATE VIEW place_date_matrix AS
 	FROM all_dates AS d
 		JOIN all_places AS p;
 
-DROP VIEW IF EXISTS ultimas_atualizacoes;
-CREATE VIEW ultimas_atualizacoes AS
+DROP VIEW IF EXISTS total_state_from_cities;
+CREATE VIEW total_state_from_cities AS
 	SELECT
-		MAX(date) AS last_date,
+		date,
 		state,
-		city,
-		place_type,
-		MAX(order_for_place) AS last_order_for_place
+		SUM(confirmed) AS confirmed,
+		SUM(deaths) AS deaths
 	FROM caso
+	WHERE
+		is_last = 'True'
+		AND place_type = 'city'
 	GROUP BY
-		state,
-		city,
-		place_type
+		state
 	ORDER BY
-		last_date,
+		state;
+
+DROP VIEW IF EXISTS total_state_from_states;
+CREATE VIEW total_state_from_states AS
+	SELECT
+		date,
 		state,
-		city;
+		confirmed,
+		deaths
+	FROM caso
+	WHERE
+		is_last = 'True'
+		AND place_type = 'state'
+	ORDER BY
+		state;
+
+DROP VIEW IF EXISTS total_from_state_and_cities;
+CREATE VIEW total_from_state_and_cities AS
+	SELECT
+		c.date,
+		c.state,
+		c.confirmed AS confirmed_cities,
+		c.deaths AS deaths_cities,
+		s.confirmed AS confirmed_state,
+		s.deaths AS deaths_state
+	FROM total_state_from_cities AS c
+		JOIN total_state_from_states AS s
+		ON
+			c.date = s.date
+			AND c.state = s.state;
