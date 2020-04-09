@@ -3,7 +3,6 @@ city,text
 city_ibge_code,integer
 date,date
 estimated_population_2019,integer
-had_cases,bool
 is_last,bool
 is_repeated,bool
 last_available_confirmed,text

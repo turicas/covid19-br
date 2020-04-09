@@ -49,6 +49,17 @@ def get_data(input_filename):
     last_date = dates[-1]
     last_case_for_place, had_cases = {}, {}
     for date in dates:
+        # TODO: faltam os dados (novos casos, novas mortes, last_xxx) para
+        # place_type = 'state'
+        # TODO: São Paulo (município) aparece com 1 caso na data 2020-02-25 em
+        # last_available_confirmed. No entanto, new_confirmed aparece como 0.
+        # Não deveria ser 1, já que foi o primeiro caso confirmado?
+        # TODO: adicionar coluna "day_number_for_place", que
+        # começa em 1 na data em que casos passa a ser maior que 0
+        # TODO: decidir o que fazer com day_number_for_place quando número de
+        # casos voltar a 0 (remanejamento de casos).
+        # TODO: detalhar que valores new_confirmed e new_deaths podem ser
+        # negativos.
         for place_key in place_keys:
             last_case = last_case_for_place.get(place_key, None)
             place_type, state, city = place_key
@@ -138,9 +149,9 @@ def get_data(input_filename):
                     or (new_case["last_available_deaths"] or 0) != 0
                 )
                 had_cases[place_key] = place_had_cases
-            new_case["had_cases"] = place_had_cases
             last_case_for_place[place_key] = new_case
-            yield new_case
+            if place_had_cases:
+                yield new_case
 
 if __name__ == "__main__":
     import argparse
