@@ -66,9 +66,9 @@ class DeathsSpider(scrapy.Spider):
         # `date_utils.date_range` excludes the last, so to get today's data we
         # need to pass tomorrow.
         for date in date_utils.date_range(datetime.date(2020, 1, 1), tomorrow):
-            # Won't cache dates from 7 days ago until today (only historical
+            # Won't cache dates from 30 days ago until today (only historical
             # ones which are unlikely to change).
-            should_cache = today - date > datetime.timedelta(days=7)
+            should_cache = today - date > datetime.timedelta(days=30)
             for state in STATES:
                 for search in ("death-respiratory", "death-covid"):
                     if search == "death-covid":
@@ -101,6 +101,8 @@ class DeathsSpider(scrapy.Spider):
 
         assert row["start_date"] == row.pop("end_date")
         row["date"] = row.pop("start_date")
+        year, month, day = row["date"].split("-")
+        date = datetime.date(int(year), int(month), int(day))
         if "causa" not in row:
             row["causa"] = None
         if "dont_cache" in row:
@@ -111,13 +113,20 @@ class DeathsSpider(scrapy.Spider):
             row["qtd_2019"] = row["qtd_2020"] = 0
         else:
             if "2019" in chart_data and "2020" in chart_data:
-                row["qtd_2019"] = chart_data["2019"]
+                try:
+                    datetime.date(2019, date.month, date.day)
+                except ValueError:
+                    # This day does not exist on 2019 and the API returned
+                    # 2019's next day data.
+                    row["qtd_2019"] = 0
+                else:
+                    row["qtd_2019"] = chart_data["2019"]
                 row["qtd_2020"] = chart_data["2020"]
             else:
                 row["qtd_2019"] = None
                 assert len(chart_data.keys()) == 1
                 key = list(chart_data.keys())[0]
                 day, month = key.split("/")
-                assert f"2020-{int(month):02d}-{int(day):02d}" == row["date"]
+                assert f"2020-{int(month):02d}-{int(day):02d}" == str(date)
                 row["qtd_2020"] = chart_data[key]
         yield row

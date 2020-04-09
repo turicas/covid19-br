@@ -44,7 +44,10 @@ def date_to_dict(date):
 
 @lru_cache(4096)
 def brazilian_epidemiological_week(year, date):
-    """
+    """Calculate Brazilian epidemiological weeks
+    Information from:
+    <https://portalsinan.saude.gov.br/calendario-epidemiologico-2020/43-institucional>
+
     >>> brazilian_epidemiological_week(2019, datetime.date(2019, 1, 1))
     1
     >>> brazilian_epidemiological_week(2019, datetime.date(2019, 1, 6))

@@ -293,6 +293,10 @@ Colunas:
 - `deaths_respiratory_failure_2020`: quantidade de óbitos registrados nesse
   dia/mês/ano (de `date`) em decorrência de insuficiência respiratória para
   esse o estado em `state`.
+- `epidemiological_week_2019`: número da semana epidemiológica para essa data
+  em 2019.
+- `epidemiological_week_2020`: número da semana epidemiológica para essa data
+  em 2020.
 
 🔍 = colunas que podem ser filtrados via query string na API e na interface.
 

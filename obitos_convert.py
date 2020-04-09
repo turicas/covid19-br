@@ -1,10 +1,11 @@
 import argparse
+import datetime
 from itertools import groupby
 
 import rows
 from tqdm import tqdm
 
-from date_utils import brazilian_epidemiological_week
+from date_utils import brazilian_epidemiological_week, one_day
 
 
 def convert_file(filename):
@@ -29,7 +30,15 @@ def convert_file(filename):
                     raise ValueError(f"Invalid value for cause: {item.causa}")
             else:
                 raise ValueError(f"Invalid value for search: {item.search}")
-        row["epidemiological_week_2019"] = brazilian_epidemiological_week(2019, datetime.date(2019, date.month, date.day))
+
+        try:
+            this_day_in_2019 = datetime.date(2019, date.month, date.day)
+        except ValueError:  # This day does not exist in 2019 (29 Februrary)
+            yesterday = date - one_day
+            this_day_in_2019 = datetime.date(2019, yesterday.month, yesterday.day)
+        row["epidemiological_week_2019"] = brazilian_epidemiological_week(
+            2019, this_day_in_2019
+        )
         row["epidemiological_week_2020"] = brazilian_epidemiological_week(2020, date)
         yield row
 

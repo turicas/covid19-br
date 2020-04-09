@@ -6,3 +6,5 @@ deaths_pneumonia_2020,integer
 deaths_covid19,integer
 deaths_respiratory_failure_2019,integer
 deaths_respiratory_failure_2020,integer
+epidemiological_week_2019,integer
+epidemiological_week_2020,integer
