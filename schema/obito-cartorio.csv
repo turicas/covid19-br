@@ -1,0 +1,8 @@
+field_name,field_type
+date,date
+state,text
+deaths_pneumonia_2019,integer
+deaths_pneumonia_2020,integer
+deaths_covid19,integer
+deaths_respiratory_failure_2019,integer
+deaths_respiratory_failure_2020,integer
