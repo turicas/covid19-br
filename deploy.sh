@@ -7,6 +7,7 @@ DATASET="covid19"
 
 log "Cleaning data path and collecting data"
 ./run.sh
+./run-obitos.sh
 
 source $SCRIPT_PATH/.env
 for table in boletim caso obito-cartorio; do

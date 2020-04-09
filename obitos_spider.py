@@ -62,10 +62,13 @@ class DeathsSpider(scrapy.Spider):
 
     def start_requests(self):
         today = date_utils.today()
-        for date in date_utils.date_range(datetime.date(2020, 1, 1), today):
-            # Won't cache dates from 30 days ago until today (only historical
-            # ones which are unlikely to change)
-            should_cache = today - date <= datetime.timedelta(days=30)
+        tomorrow = today + datetime.timedelta(days=1)
+        # `date_utils.date_range` excludes the last, so to get today's data we
+        # need to pass tomorrow.
+        for date in date_utils.date_range(datetime.date(2020, 1, 1), tomorrow):
+            # Won't cache dates from 7 days ago until today (only historical
+            # ones which are unlikely to change).
+            should_cache = today - date > datetime.timedelta(days=7)
             for state in STATES:
                 for search in ("death-respiratory", "death-covid"):
                     if search == "death-covid":
