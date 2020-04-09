@@ -4,6 +4,8 @@ from itertools import groupby
 import rows
 from tqdm import tqdm
 
+from date_utils import brazilian_epidemiological_week
+
 
 def convert_file(filename):
     table = rows.import_from_csv(filename)
@@ -27,6 +29,8 @@ def convert_file(filename):
                     raise ValueError(f"Invalid value for cause: {item.causa}")
             else:
                 raise ValueError(f"Invalid value for search: {item.search}")
+        row["epidemiological_week_2019"] = brazilian_epidemiological_week(2019, datetime.date(2019, date.month, date.day))
+        row["epidemiological_week_2020"] = brazilian_epidemiological_week(2020, date)
         yield row
 
 
