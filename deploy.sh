@@ -9,16 +9,13 @@ log "Cleaning data path and collecting data"
 ./run.sh
 
 source $SCRIPT_PATH/.env
-for table in boletim caso; do
+for table in boletim caso obito-cartorio; do
 	log "[$table] Copying data to static file server"
 	s3cmd put data/output/${table}.csv.gz s3://dataset/$DATASET/${table}.csv.gz
 
 	log "[$table] Executing update command"
 	ssh $BRASILIO_SSH_USER@$BRASILIO_SSH_SERVER "$BRASILIO_UPDATE_COMMAND $DATASET $table"
 done
-table="obito-cartorio"
-log "[$table] Copying data to static file server"
-s3cmd put data/output/${table}.csv.gz s3://dataset/$DATASET/${table}.csv.gz
 # TODO: change collect-date on update command
 # TODO: generate status page for this dataset
 
