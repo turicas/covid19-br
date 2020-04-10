@@ -55,6 +55,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [COVID-19 e os povos indígenas - Instituto Socioambiental](https://covid19.socioambiental.org/)
 - https://public.tableau.com/profile/fabios#!/vizhome/BRMap/MapaCOVID-19BRASILCasosporMunicpio
 - http://covid19.riogrande.ifrs.edu.br/
+- https://mapcovid.com.br/
 
 
 ## Publicações Científicas
