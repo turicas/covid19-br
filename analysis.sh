@@ -4,7 +4,7 @@ function create_database() {
 	database_filename="$1"
 
 	rm -rf "$database_filename"
-	for table in boletim caso; do
+	for table in boletim caso obito-cartorio; do
 		echo "Downloading $table"
 		filename="data/${table}.csv.gz"
 		url="https://data.brasil.io/dataset/covid19/${table}.csv.gz"
@@ -12,8 +12,9 @@ function create_database() {
 		wget -q -c -t 0 -O "$filename" "$url"
 		rows csv2sqlite --schemas=schema/${table}.csv "$filename" "$database_filename"
 	done
-	population="populacao-estimada-2019.csv"
-	rows csv2sqlite --schemas=schema/$population data/$population $database_filename
+	for table in populacao-estimada-2019 epidemiological-week; do
+		rows csv2sqlite --schemas=schema/${table}.csv data/${table}.csv $database_filename
+	done
 }
 
 function execute_sql_file_no_output() {
@@ -39,6 +40,8 @@ function setup_database() {
 
 	echo "Running sql/00-setup.sql"
 	execute_sql_file_no_output "$database" "sql/00-setup.sql"
+	echo "Running sql/01-obitos-setup.sql"
+	execute_sql_file_no_output "$database" "sql/01-obitos-setup.sql"
 }
 
 function execute_sql_files() {
@@ -46,7 +49,7 @@ function execute_sql_files() {
 	files=$@
 
 	for filename in $files; do
-		if [ $(basename $filename) != "00-setup.sql" ]; then
+		if [ $(basename $filename) != "00-setup.sql" ] && [ $(basename $filename) != "01-obitos-setup.sql" ]; then
 			echo "Running $filename"
 			output="data/analysis/$(basename $filename | sed 's/\.sql$/.csv.gz/')"
 			execute_sql_file_with_output "$DATABASE" "$filename" "$output"
