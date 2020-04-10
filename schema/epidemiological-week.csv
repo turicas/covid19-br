@@ -1,0 +1,4 @@
+field_name,field_type
+date,date
+epidemiological_year,integer
+epidemiological_week,integer

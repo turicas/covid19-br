@@ -15,4 +15,3 @@ time scrapy runspider obitos_spider.py \
 	--logfile="$LOG_PATH/obitos.log" \
 	-o "$OUTPUT_FILENAME"
 time python obitos_convert.py "$OUTPUT_FILENAME" "$FINAL_FILENAME"
-rm "$OUTPUT_FILENAME"
