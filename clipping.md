@@ -7,8 +7,11 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias
 
+- [2020-04-08 Metrópoles - Covid-19 se interioriza e chega a 581 cidades. Veja quais](https://www.metropoles.com/saude/covid-19-se-interioriza-e-chega-a-581-cidades-veja-quais)
 - [2020-04-08 The Intercept Brasil - Com coronavírus em disparada e UTIs lotadas, Manaus está à beira do colapso](https://theintercept.com/2020/04/08/coronavirus-manaus-uti-colapso/)
+- [2020-04-07 GaúchaZH - Mortes por coronavírus se concentram em poucas cidades no mundo](https://gauchazh.clicrbs.com.br/geral/noticia/2020/04/mortes-por-coronavirus-se-concentram-em-poucas-cidades-no-mundo-ck8q30xev01d101ll3aoe8uw1.html)
 - [2020-04-06 O Globo - Rumo ao interior: coronavírus já circula em 397 municípios além das capitais e regiões metropolitanas](https://oglobo.globo.com/brasil/rumo-ao-interior-coronavirus-ja-circula-em-397-municipios-alem-das-capitais-regioes-metropolitanas-24353176) (manchete do impresso!)
+- [2020-04-06 Exame - Coronavírus avança no interior do Brasil e atinge 397 municípios](https://exame.abril.com.br/brasil/coronavirus-avanca-no-interior-do-brasil-e-atinge-397-municipios/)
 - [2020-04-02 UOL Notícias - Coronavírus chega ao interior e pequenas cidades viram foco de transmissão](https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2020/04/02/coronavirus-chega-ao-interior-e-pequenas-cidades-viram-foco-de-transmissao.htm)
 - [2020-04-01 O Estado de São Paulo - Metade da população brasileira vive em cidades que já registraram coronavírus](https://saude.estadao.com.br/noticias/geral,metade-da-populacao-brasileira-vive-em-cidades-que-ja-registraram-coronavirus,70003255810) (manchete do impresso!)
 - [2020-03-31 UOL Notícias - Capitais brasileiras concentram 80% dos casos de novo coronavírus no Brasil](https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2020/03/31/capitais-brasileiras-concentram-80-dos-casos-de-novo-coronavirus-no-brasil.htm)
