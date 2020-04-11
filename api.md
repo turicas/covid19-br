@@ -45,9 +45,13 @@ dados](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFr
 
 ### Casos
 
-`https://brasil.io/api/dataset/covid19/dados/caso`
+Número de casos confirmados e óbitos por município por dia, segundo as
+Secretarias Estaduais de Saúde.
 
-Colunas :
+- API: https://brasil.io/api/dataset/covid19/dados/caso
+- Dados completos para download: https://data.brasil.io/dataset/covid19/caso.csv.gz
+
+Colunas:
 
 - 🔍 `search`: passe algum valor para executar a busca por texto completo, que
   compreende algumas das colunas da tabela.
@@ -210,7 +214,11 @@ curl -X GET https://brasil.io/api/dataset/covid19/caso/data?is_last=True&place_t
 
 ### Boletim
 
-`https://brasil.io/api/dataset/covid19/boletim/data`
+Links para os boletins das Secretarias Estaduais de Saúde de onde retiramos os
+dados de casos confirmados e mortes.
+
+- API: https://brasil.io/api/dataset/covid19/boletim/data
+- Dados completos para download: https://data.brasil.io/dataset/covid19/boletim.csv.gz
 
 Colunas:
 
@@ -254,6 +262,44 @@ curl -X GET https://brasil.io/api/dataset/covid19/boletim/data?state=SP
     },
 ...
 ```
+
+### Óbitos Registrados em Cartório
+
+Dados de óbitos por suspeita/confirmação de covid19, pneumonia ou insuficiência
+respiratória registrados nos cartórios e disponíveis no [Portal da
+Transparência do Registro
+Civil](https://transparencia.registrocivil.org.br/especial-covid).
+
+- API: https://brasil.io/api/dataset/covid19/dados/obito_cartorio
+- Dados completos para download: https://data.brasil.io/dataset/covid19/obito_cartorio.csv.gz
+
+Colunas:
+
+- 🔍 `search`: passe algum valor para executar a busca por texto completo, que
+  compreende algumas das colunas da tabela.
+- 🔍 `date`: data da ocorrência do óbito no formato YYYY-MM-DD.
+- 🔍 `state`: sigla da unidade federativa, exemplo: SP.
+- `deaths_pneumonia_2019`: quantidade de óbitos registrados nesse dia e mês (de
+  `date`) em decorrência de pneumonia para o estado em `state`, porém para o
+  ano de 2019.
+- `deaths_pneumonia_2020`: quantidade de óbitos registrados nesse dia/mês/ano
+  (de `date`) em decorrência de pneumonia para esse o estado em `state`.
+- `deaths_covid19`: quantidade de óbitos em decorrência de **suspeita ou
+  confirmação** de covid19 registrados nesse dia e mês (de `date`) para o
+  estado em `state`, porém para o ano de 2019.
+- `deaths_respiratory_failure_2019`: quantidade de óbitos registrados nesse dia
+  e mês (de `date`) em decorrência de insuficiência respiratória para o estado
+  em `state`, porém para o ano de 2019.
+- `deaths_respiratory_failure_2020`: quantidade de óbitos registrados nesse
+  dia/mês/ano (de `date`) em decorrência de insuficiência respiratória para
+  esse o estado em `state`.
+- `epidemiological_week_2019`: número da semana epidemiológica para essa data
+  em 2019.
+- `epidemiological_week_2020`: número da semana epidemiológica para essa data
+  em 2020.
+
+🔍 = colunas que podem ser filtrados via query string na API e na interface.
+
 
 ### Dicas de uso
 

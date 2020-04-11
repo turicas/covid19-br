@@ -7,9 +7,10 @@ DATASET="covid19"
 
 log "Cleaning data path and collecting data"
 ./run.sh
+./run-obitos.sh
 
 source $SCRIPT_PATH/.env
-for table in boletim caso; do
+for table in boletim caso obito-cartorio; do
 	log "[$table] Copying data to static file server"
 	s3cmd put data/output/${table}.csv.gz s3://dataset/$DATASET/${table}.csv.gz
 

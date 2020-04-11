@@ -57,3 +57,18 @@ incluí-los. Por favor, não insista.
 
 A API tem paginação (10.000 registros por página). Você deve requisitar a
 página que está linkada em `next` no resultado.
+
+
+## Por que o número de óbitos dos cartórios divulgado pelo Brasil.IO está diferente do divulgado pelo Portal da Transparência do Registro Civil?
+
+Até onde verificamos, os dados do Portal da Transparência do Registro Civil
+atualiza os dados a cada hora e mesmo dados de óbitos para dias anteriores
+podem mudar (estamos coletando a data do óbito, não do registro do óbito). Como
+fazemos sempre uma coleta inteira dos dados, optamos por não atualizar essa
+tabela de hora em hora, para não sobrecarregar os servidores do Portal. Por
+isso, é esperado que exista alguma diferença nos dados de óbitos,
+principalmente para as datas mais recentes.
+
+Além disso, como os números de óbitos por covid19 são de casos suspeitos e
+confirmados, alguns casos suspeitos podem ser negativados e o número total
+*diminuir*.

@@ -1,12 +1,11 @@
-
 # covid19-br
 
 ![pytest@docker](https://github.com/turicas/covid19-br/workflows/pytest@docker/badge.svg)
 
 Esse repositório centraliza links e dados sobre boletins de número de casos das
-secretarias de saúde estaduais sobre a pandemia de coronavírus no Brasil. O
-recorte é por município por dia, para acompanharmos localmente a evolução da
-propagação do vírus.
+Secretarias Estaduais de Saúde (SES) sobre os casos de covid19 no Brasil (por
+município por dia), além de outros dados relevantes para a análise, como óbitos
+registrados em cartório (por estado por dia).
 
 ## Licença
 
