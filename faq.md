@@ -42,7 +42,7 @@ A tabela `caso` só possui dados disponíveis a partir do primeiro caso
 confirmado/divulgado pela Secretaria Estadual de Saúde e não possui dados para
 todos os dias (nem todas as SES divulgam boletins diários). Caso queira uma
 tabela com valores por município por dia para todos os dias possíveis, veja a
-tabela `caso-full`.
+tabela `caso_full`.
 
 
 ## O site da prefeitura do meu município tem dados mais atuais que os de vocês! Como devo fazer para atualizar?

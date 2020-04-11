@@ -6,7 +6,7 @@ source $SCRIPT_PATH/base.sh
 
 boletim_filename="$OUTPUT_PATH/boletim.csv.gz"
 caso_filename="$OUTPUT_PATH/caso.csv.gz"
-full_filename="$OUTPUT_PATH/caso-full.csv.gz"
+full_filename="$OUTPUT_PATH/caso_full.csv.gz"
 rm -rf "$boletim_filename" "$caso_filename" "$full_filename" "$ERROR_PATH"
 mkdir -p "$OUTPUT_PATH" "$LOG_PATH" "$ERROR_PATH"
 

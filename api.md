@@ -49,7 +49,7 @@ Essa tabela tem apenas os casos relatados pelos boletins das Secretarias
 Estaduais de Saúde e, por isso, não possui valores para todos os municípios e
 todas as datas - é nossa "tabela canônica", que reflete o que foi publicado.
 Caso você precise dos dados por município por dia completos, veja a tabela
-[`caso-full`](#caso-full).
+[`caso_full`](#caso_full).
 
 Número de casos confirmados e óbitos por município por dia, segundo as
 Secretarias Estaduais de Saúde.
@@ -274,14 +274,17 @@ curl -X GET https://brasil.io/api/dataset/covid19/boletim/data?state=SP
 ```
 
 
-### `caso-full`
+### `caso_full`
 
 Tabela gerada a partir da tabela [`caso`](#caso), que possui um registro por
 município (+ Importados/Indefinidos) e estado para cada data disponível; nos
 casos em que um boletim não foi divulgado naquele dia, é copiado o dado do
 último dia disponível e a coluna `is_repeated` fica com o valor `True`.
 
-`https://brasil.io/api/dataset/covid19/dados/caso-full`
+- API: https://brasil.io/api/dataset/covid19/caso_full/data
+- Dados completos para download: https://data.brasil.io/dataset/covid19/caso_full.csv.gz
+
+Colunas:
 
 - 🔍 `date`: data de coleta dos dados no formato YYYY-MM-DD.
 - 🔍 `state`: sigla da unidade federativa, exemplo: SP.
@@ -386,5 +389,5 @@ Colunas:
   querystring (a mesma poderá ser passada para a API);
 - Em `caso` filtre por `is_last=True` para ter os dados mais atuais de cada
   município/estado;
-- Em `caso-full` filtre por `had_cases=True` para ter dados apenas a partir das
+- Em `caso_full` filtre por `had_cases=True` para ter dados apenas a partir das
   datas em que os locais começaram a reportar o número de casos maior que 1.
