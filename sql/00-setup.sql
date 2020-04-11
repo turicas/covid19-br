@@ -101,5 +101,12 @@ CREATE VIEW city_cases AS
 		*
 	FROM caso_full
 	WHERE
-		place_type = 'city'
-		AND had_cases = 'True';
+		place_type = 'city';
+
+DROP VIEW IF EXISTS state_cases;
+CREATE VIEW state_cases AS
+	SELECT
+		*
+	FROM caso_full
+	WHERE
+		place_type = 'state';
