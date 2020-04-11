@@ -5,7 +5,7 @@ SCRIPT_PATH=$(dirname $(readlink -f $0))
 source $SCRIPT_PATH/base.sh
 
 OUTPUT_FILENAME="$DOWNLOAD_PATH/obitos.csv"
-FINAL_FILENAME="$OUTPUT_PATH/obito-cartorio.csv.gz"
+FINAL_FILENAME="$OUTPUT_PATH/obito_cartorio.csv.gz"
 rm -rf "$OUTPUT_FILENAME" "$FINAL_FILENAME"
 mkdir -p "$DOWNLOAD_PATH" "$OUTPUT_PATH" "$LOG_PATH"
 time scrapy runspider obitos_spider.py \

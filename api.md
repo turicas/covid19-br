@@ -270,8 +270,8 @@ respiratória registrados nos cartórios e disponíveis no [Portal da
 Transparência do Registro
 Civil](https://transparencia.registrocivil.org.br/especial-covid).
 
-- API: https://brasil.io/api/dataset/covid19/dados/obito-cartorio
-- Dados completos para download: https://data.brasil.io/dataset/covid19/obito-cartorio.csv.gz
+- API: https://brasil.io/api/dataset/covid19/dados/obito_cartorio
+- Dados completos para download: https://data.brasil.io/dataset/covid19/obito_cartorio.csv.gz
 
 Colunas:
 
