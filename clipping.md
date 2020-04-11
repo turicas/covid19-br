@@ -58,6 +58,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://public.tableau.com/profile/fabios#!/vizhome/BRMap/MapaCOVID-19BRASILCasosporMunicpio
 - http://covid19.riogrande.ifrs.edu.br/
 - https://mapcovid.com.br/
+- https://mapadocovid19.com.br/
 - https://dashboard-covid.now.sh/ https://github.com/mathcunha/dashboard-covid
 - https://dadoscoronavirus.com/brasil/
 - https://public.tableau.com/profile/thiago.ficagna#!/vizhome/Coronavirus_15851416584640/PainelCOVID19
