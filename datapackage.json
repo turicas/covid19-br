@@ -241,6 +241,182 @@
           }
         ]
       }
+    },
+    {
+      "name": "schema-epidemiological-week",
+      "path": "schema/epidemiological-week.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "field_name",
+            "type": "string",
+            "format": "default",
+            "title": "Nome do campo"
+          },
+          {
+            "name": "field_type",
+            "type": "string",
+            "format": "default",
+            "title": "Tipo de campo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "schema-obito_cartorio",
+      "path": "schema/obito_cartorio.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "field_name",
+            "type": "string",
+            "format": "default",
+            "title": "Nome do campo"
+          },
+          {
+            "name": "field_type",
+            "type": "string",
+            "format": "default",
+            "title": "Tipo de campo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "epidemiological-week",
+      "path": "data/epidemiological-week.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "date",
+            "type": "date",
+            "format": "default",
+            "title": "Data"
+          },
+          {
+            "name": "epidemiological_year",
+            "type": "integer",
+            "format": "default",
+            "title": "Ano epidemiológico"
+          },
+          {
+            "name": "epidemiological_week",
+            "type": "integer",
+            "format": "default",
+            "title": "Semana epidemiológica"
+          }
+        ]
+      }
+    },
+    {
+      "name": "obito_cartorio",
+      "path": "data/output/obito_cartorio.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "date",
+            "type": "date",
+            "format": "default",
+            "title": "Data do óbito",
+            "description": "Data da ocorrência do óbito no formato YYYY-MM-DD"
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "format": "default",
+            "title": "UF",
+            "description": "Sigla da unidade federativa com dois dígitos, exemplo: SP."
+          },
+          {
+            "name": "new_deaths_respiratory_failure_2019",
+            "type": "integer",
+            "format": "default",
+            "title": "Óbitos por pneumonia nesta data em 2019",
+            "description": "Quantidade de óbitos registrados nesse dia e mês (de `date`) em decorrência de pneumonia para o estado em `state`, porém para o ano de 2019."
+          },
+          {
+            "name": "new_deaths_respiratory_failure_2020",
+            "type": "integer",
+            "format": "default",
+            "title": "Óbitos por pneumonia (2020)",
+            "description": "Quantidade de óbitos registrados nesse dia/mês/ano (de `date`) em decorrência de pneumonia para esse o estado em `state`."
+          },
+          {
+            "name": "new_deaths_pneumonia_2019",
+            "type": "integer",
+            "format": "default",
+            "title": "Óbitos por suspeita ou confirmação de covid19",
+            "description": "Quantidade de óbitos em decorrência de **suspeita ou confirmação** de covid19 registrados nesse dia e mês (de `date`) para o estado em `state`, porém para o ano de 2019."
+          },
+          {
+            "name": "new_deaths_pneumonia_2020",
+            "type": "integer",
+            "format": "default",
+            "title": "Óbitos por insuficiência respiratória nesta data em 2019",
+            "description": "Quantidade de óbitos registrados nesse dia e mês (de `date`) em decorrência de insuficiência respiratória para o estado em `state`, porém para o ano de 2019."
+          },
+          {
+            "name": "new_deaths_covid19",
+            "type": "integer",
+            "format": "default",
+            "title": "Óbitos por insuficiência respiratória (2020)",
+            "description": "Quantidade de óbitos registrados nesse dia/mês/ano (de `date`) em decorrência de insuficiência respiratória para esse o estado em `state`."
+          },
+          {
+            "name": "epidemiological_week_2019",
+            "type": "integer",
+            "format": "default",
+            "title": "Semana epidemiológica (2019)",
+            "description": "Número da semana epidemiológica para essa data em 2019."
+          },
+          {
+            "name": "epidemiological_week_2020",
+            "type": "integer",
+            "format": "default",
+            "title": "Semana epidemiológica (2020)",
+            "description": "Número da semana epidemiológica para essa data em 2020."
+          },
+          {
+            "name": "deaths_covid19",
+            "type": "integer",
+            "format": "default",
+            "title": "Novas mortes por pneumonia Novas mortes por pneumonia nesta data (2019)nesta data (2019)",
+            "description": "Novas mortes por pneumonia nesta data (2019)"
+          },
+          {
+            "name": "deaths_respiratory_failure_2019",
+            "type": "integer",
+            "format": "default",
+            "title": "Novas mortes por pneumonia (2020)",
+            "description": "Novas mortes por pneumonia (2020)"
+          },
+          {
+            "name": "deaths_respiratory_failure_2020",
+            "type": "integer",
+            "format": "default",
+            "title": "Novas mortes por covid19",
+            "description": "Novas mortes por covid19"
+          },
+          {
+            "name": "deaths_pneumonia_2019",
+            "type": "integer",
+            "format": "default",
+            "title": "Novas mortes por insuficiência respiratória nesta data (2019)",
+            "description": "Novas mortes por insuficiência respiratória nesta data (2019)"
+          },
+          {
+            "name": "deaths_pneumonia_2020",
+            "type": "integer",
+            "format": "default",
+            "title": "Novas mortes por insuficiência respiratória (2020)",
+            "description": "Novas mortes por insuficiência respiratória (2020)"
+          }
+        ]
+      }
     }
   ],
   "keywords": [
