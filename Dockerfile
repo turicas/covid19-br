@@ -10,6 +10,7 @@ COPY requirements-${PYTHON_REQUIREMENTS}.txt .
 RUN apt-get update && apt-get upgrade -y \
     && apt-get install -y \
         build-essential \
+        wget \
     && python -m pip install --upgrade pip \
     && pip install -r  requirements-${PYTHON_REQUIREMENTS}.txt\
     && apt-get remove -y build-essential \
