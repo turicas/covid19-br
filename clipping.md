@@ -7,10 +7,10 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias
 
-- https://ijnet.org/pt-br/story/covid-19-exp%C3%B5e-falta-de-democracia-da-informa%C3%A7%C3%A3o-no-brasil
+- [2020-04-13 CNN Brasil - Uma a cada quatro cidades do estado de São Paulo tem casos de coronavírus](https://www.cnnbrasil.com.br/nacional/2020/04/13/1-a-cada-4-cidades-do-estado-de-sao-paulo-tem-casos-de-coronavirus)
 - [2020-04-08 The Intercept Brasil - Com coronavírus em disparada e UTIs lotadas, Manaus está à beira do colapso](https://theintercept.com/2020/04/08/coronavirus-manaus-uti-colapso/)
-- https://oglobo.globo.com/brasil/cidades-do-interior-na-rota-do-coronavirus-somam-mais-de-4-milhoes-de-idosos-1-24353172
 - [2020-04-06 O Globo - Rumo ao interior: coronavírus já circula em 397 municípios além das capitais e regiões metropolitanas](https://oglobo.globo.com/brasil/rumo-ao-interior-coronavirus-ja-circula-em-397-municipios-alem-das-capitais-regioes-metropolitanas-24353176) (manchete do impresso!)
+- [2020-04-02 IJNet - COVID-19 expõe falta de democracia da informação no Brasil](https://ijnet.org/pt-br/story/covid-19-exp%C3%B5e-falta-de-democracia-da-informa%C3%A7%C3%A3o-no-brasil)
 - [2020-04-02 UOL Notícias - Coronavírus chega ao interior e pequenas cidades viram foco de transmissão](https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2020/04/02/coronavirus-chega-ao-interior-e-pequenas-cidades-viram-foco-de-transmissao.htm)
 - [2020-04-01 O Estado de São Paulo - Metade da população brasileira vive em cidades que já registraram coronavírus](https://saude.estadao.com.br/noticias/geral,metade-da-populacao-brasileira-vive-em-cidades-que-ja-registraram-coronavirus,70003255810) (manchete do impresso!)
 - [2020-03-31 UOL Notícias - Capitais brasileiras concentram 80% dos casos de novo coronavírus no Brasil](https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2020/03/31/capitais-brasileiras-concentram-80-dos-casos-de-novo-coronavirus-no-brasil.htm)
