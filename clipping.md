@@ -62,6 +62,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://dashboard-covid.now.sh/ https://github.com/mathcunha/dashboard-covid
 - https://dadoscoronavirus.com/brasil/
 - https://public.tableau.com/profile/thiago.ficagna#!/vizhome/Coronavirus_15851416584640/PainelCOVID19
+- https://kondado.com.br/blog/recursos-para-o-covid-19/
 
 
 ## Publicações Científicas
