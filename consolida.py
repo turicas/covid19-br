@@ -177,6 +177,12 @@ class ConsolidaSpider(scrapy.Spider):
                     "confirmed": confirmed,
                     "deaths": deaths,
                 }
+                confirmed = row["confirmed"]
+                deaths = row["deaths"]
+                NULL = (None, "")
+                if (confirmed in NULL and deaths not in NULL) or (deaths in NULL and confirmed not in NULL):
+                    message = f"ERROR: only one field is filled for {date}, {state}, {city}"
+                    self.errors[state].append(("caso", state, message))
                 result.append(row)
 
         row_key = lambda row: (row["state"], row["city"], row["place_type"])
