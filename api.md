@@ -282,14 +282,14 @@ Colunas:
 - `new_deaths_covid19`: quantidade de óbitos em decorrência de **suspeita ou
   confirmação** de covid19 para o estado `state` ocorridos na data `date`
   (em 2020).
-- `new_deaths_respiratory_failure_2019`: quantidade de óbitos em decorrência de 
+- `new_deaths_respiratory_failure_2019`: quantidade de óbitos em decorrência de
   insuficiência respiratória para o estado `state` ocorridos no dia/mês de
-  `date`, porém em 2019.
+  `date`, porém em 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
 - `new_deaths_respiratory_failure_2020`: quantidade de óbitos em decorrência de
   insuficiência respiratória para o estado `state` ocorridos na data `date`
   (em 2020).
 - `new_deaths_pneumonia_2019`: quantidade de óbitos em decorrência de 
-  pneumonia para o estado `state` ocorridos no dia/mês de `date`, porém em 2019.
+  pneumonia para o estado `state` ocorridos no dia/mês de `date`, porém em 2019
   (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
 - `new_deaths_pneumonia_2020`: quantidade de óbitos em decorrência de
   pneumonia para o estado `state` ocorridos na data `date` (em 2020).
@@ -299,7 +299,7 @@ Colunas:
   em 2020.
 - `deaths_covid19`: quantidade de óbitos em decorrência de **suspeita ou
   confirmação** de covid19 para o estado `state` acumulados no ano de 2020
-  (de 1 de janeiro de 2020 a `date`);
+  (de 1 de janeiro de 2020 a `date`).
 - `deaths_respiratory_failure_2019`: quantidade de óbitos em decorrência de 
   insuficiência respiratória para o estado `state` acumulados no ano de 2019
   (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
