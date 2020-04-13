@@ -76,6 +76,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Outras Publicações
 
+- [2020-04-12 Live do Átila Iamarino](https://www.youtube.com/watch?v=vEwDdXim8bQ)
 - [2020-03-25 Análise Descritiva do Coronavírus nos Estados Brasileiros](https://marcusnunes.me/posts/analise-descritiva-do-coronavirus/)
 - https://dev.to/diogomqbm_/in-times-of-crisis-help-others-174e
 - https://medium.com/@leonardopiechacaldeira/os-9-melhores-sites-para-encontrar-datasets-para-projetos-de-data-science-b58abbd2b1b8
