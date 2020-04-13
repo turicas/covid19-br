@@ -71,6 +71,7 @@ class ConsolidaSpider(scrapy.Spider):
         super().__init__(*args, **kwargs)
         self.boletim_writer = rows.utils.CsvLazyDictWriter(boletim_filename)
         self.caso_writer = rows.utils.CsvLazyDictWriter(caso_filename)
+        self.errors = defaultdict(list)
 
     def parse(self, response):
         table = rows.import_from_csv(io.BytesIO(response.body), encoding="utf-8")
@@ -94,7 +95,7 @@ class ConsolidaSpider(scrapy.Spider):
                 },
             )
         except Exception as exp:
-            self.errors.append(("boletim", state, f"{exp.__class__.__name__}: {exp}"))
+            self.errors[state].append(("boletim", state, f"{exp.__class__.__name__}: {exp}"))
             return
         for boletim in boletins:
             boletim = boletim._asdict()
@@ -131,7 +132,7 @@ class ConsolidaSpider(scrapy.Spider):
                         _, day, month = key.split("_")
                     except ValueError:
                         message = f"ERROR PARSING {repr(key)} - {repr(value)} - {caso}"
-                        self.errors.append(("caso", state, message))
+                        self.errors[state].append(("caso", state, message))
                         self.logger.error(message)
                         continue
                     date = f"2020-{int(month):02d}-{int(day):02d}"
@@ -155,7 +156,7 @@ class ConsolidaSpider(scrapy.Spider):
                         value = int(value)
                     except ValueError:
                         message = f"ERROR converting to int: {date} {number_type} {value} {caso}"
-                        self.errors.append(("caso", state, message))
+                        self.errors[state].append(("caso", state, message))
                         self.logger.error(message)
                         continue
                 cities[caso["municipio"]][date][number_type] = value
@@ -203,7 +204,7 @@ class ConsolidaSpider(scrapy.Spider):
                 row_population = get_state_population(row["state"])
             else:
                 message = f"Invalid row: {row}"
-                self.errors.append(("caso", state, message))
+                self.errors[state].append(("caso", state, message))
                 self.logger.error(message)
                 continue
             row_deaths = row["deaths"]
@@ -228,37 +229,37 @@ class ConsolidaSpider(scrapy.Spider):
     def parse_state_file(self, response):
         state = response.meta["state"]
 
-        self.errors = []
         try:
             self.parse_boletim(state, response.body)
         except Exception as exp:
-            self.errors.append(("boletim", state, f"{exp.__class__.__name__}: {exp}"))
+            self.errors[state].append(("boletim", state, f"{exp.__class__.__name__}: {exp}"))
         try:
             self.parse_caso(state, response.body)
         except Exception as exp:
-            self.errors.append(("caso", state, f"{exp.__class__.__name__}: {exp}"))
-        if self.errors:
-            error_counter = Counter(error[0] for error in self.errors)
+            self.errors[state].append(("caso", state, f"{exp.__class__.__name__}: {exp}"))
+        if self.errors[state]:
+            error_counter = Counter(error[0] for error in self.errors[state])
             error_counter_str = ", ".join(
                 f"{error_type}: {count}" for error_type, count in error_counter.items()
             )
             self.logger.error(
-                f"{len(self.errors)} errors found when parsing {state} ({error_counter_str})"
+                f"{len(self.errors[state])} errors found when parsing {state} ({error_counter_str})"
             )
             error_header = ("sheet", "state", "message")
             errors = rows.import_from_dicts(
-                [dict(zip(error_header, row)) for row in self.errors]
+                [dict(zip(error_header, row)) for row in self.errors[state]]
             )
             filename = ERROR_PATH / f"errors-{state}.csv"
             if not filename.parent.exists():
                 filename.parent.mkdir(parents=True)
             rows.export_to_csv(errors, filename)
 
+    def __del__(self):
+        self.boletim_writer.close()
+        self.caso_writer.close()
+
+        if any(errors for errors in self.errors.values()):
             # Force crawler to stop
             os.kill(os.getpid(), SIGINT)
             os.kill(os.getpid(), SIGINT)
             raise CloseSpider(f"Error found on {state} (see {filename}).")
-
-    def __del__(self):
-        self.boletim_writer.close()
-        self.caso_writer.close()
