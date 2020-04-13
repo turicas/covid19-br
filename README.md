@@ -23,7 +23,7 @@ Depois de coletados e checados os dados ficam disponíveis de 3 formas no
 [Brasil.IO](https://brasil.io/):
 
 - [Interface Web](https://brasil.io/dataset/covid19) (feita para humanos)
-- [API](https://brasil.io/api/dataset/covid19) (feita para humanos que desenvolvem programas) - [veja a documentação da API](api.md)
+- [API](https://brasil.io/api/dataset/covid19) (feita para humanos que desenvolvem programas) - [veja a documentação da API](docs/api.md)
 - [Download do dataset completo](https://data.brasil.io/dataset/covid19/_meta/list.html)
 
 Caso queira acessar os dados antes de serem publicados (ATENÇÃO: pode ser que
@@ -39,7 +39,7 @@ que é mantido voluntariamente.
 ### FAQ SOBRE OS DADOS
 
 **Antes de entrar em contato conosco (estamos sobrecarregados) para tirar
-dúvidas sobre os dados, [CONSULTE NOSSO FAQ](faq.md).**
+dúvidas sobre os dados, [CONSULTE NOSSO FAQ](docs/faq.md).**
 
 Para mais detalhes [veja a metodologia de coleta de
 dados](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFrPpn4).
@@ -79,7 +79,7 @@ Você pode contribuir de diversas formas:
 - Coletando links para os boletins de seu estado;
 - Coletando dados sobre os casos por município por dia;
 - Entrando em contato com a secretaria estadual de seu estado, sugerindo as
-  [recomendações de liberação dos dados](recomendacoes.md);
+  [recomendações de liberação dos dados](docs/recomendacoes.md);
 - Evitando contato com humanos;
 - Lavando as mãos várias vezes ao dia;
 - Sendo solidário aos mais vulneráveis;
@@ -137,15 +137,15 @@ make docker-run     # para consolidar os dados
 
 ## VEJA TAMBÉM
 
-- [Outros datasets relevantes](datasets-relevantes.md)
+- [Outros datasets relevantes](docs/datasets-relevantes.md)
 - [Recomendações para secretarias de saúde na disponibilização de
-  dados](recomendacoes.md)
+  dados](docs/recomendacoes.md)
 
 
 ## Clipping
 
 Quer saber quais projetos e notícias estão usando nossos dados? [Veja o
-clipping](clipping.md).
+clipping](docs/clipping.md).
 
 
 ## Atualização dos Dados no Brasil.IO
