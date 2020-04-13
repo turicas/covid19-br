@@ -279,19 +279,19 @@ Colunas:
   compreende algumas das colunas da tabela.
 - 🔍 `date`: data da ocorrência do óbito no formato YYYY-MM-DD.
 - 🔍 `state`: sigla da unidade federativa, exemplo: SP.
-- `deaths_covid19`: quantidade de óbitos em decorrência de **suspeita ou
+- `new_deaths_covid19`: quantidade de óbitos em decorrência de **suspeita ou
   confirmação** de covid19 para o estado `state` ocorridos na data `date`
   (em 2020).
-- `deaths_respiratory_failure_2019`: quantidade de óbitos em decorrência de 
+- `new_deaths_respiratory_failure_2019`: quantidade de óbitos em decorrência de 
   insuficiência respiratória para o estado `state` ocorridos no dia/mês de
   `date`, porém em 2019.
-- `deaths_respiratory_failure_2020`: quantidade de óbitos em decorrência de
+- `new_deaths_respiratory_failure_2020`: quantidade de óbitos em decorrência de
   insuficiência respiratória para o estado `state` ocorridos na data `date`
   (em 2020).
-- `deaths_pneumonia_2019`: quantidade de óbitos em decorrência de 
+- `new_deaths_pneumonia_2019`: quantidade de óbitos em decorrência de 
   pneumonia para o estado `state` ocorridos no dia/mês de `date`, porém em 2019.
   (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
-- `deaths_pneumonia_2020`: quantidade de óbitos em decorrência de
+- `new_deaths_pneumonia_2020`: quantidade de óbitos em decorrência de
   pneumonia para o estado `state` ocorridos na data `date` (em 2020).
 - `epidemiological_week_2019`: número da semana epidemiológica para essa data
   em 2019.
