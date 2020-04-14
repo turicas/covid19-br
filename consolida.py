@@ -264,8 +264,9 @@ class ConsolidaSpider(scrapy.Spider):
         self.boletim_writer.close()
         self.caso_writer.close()
 
-        if any(errors for errors in self.errors.values()):
+        state_errors = [errors for errors in self.errors.values() if errors]
+        if state_errors:
             # Force crawler to stop
             os.kill(os.getpid(), SIGINT)
             os.kill(os.getpid(), SIGINT)
-            raise CloseSpider(f"Error found on {state} (see {filename}).")
+            raise CloseSpider(f"Error found on {len(state_errors)} state(s).")
