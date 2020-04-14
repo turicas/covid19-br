@@ -17,7 +17,6 @@ for table in boletim caso obito-cartorio; do
 	log "[$table] Executing update command"
 	ssh $BRASILIO_SSH_USER@$BRASILIO_SSH_SERVER "$BRASILIO_UPDATE_COMMAND $DATASET $table"
 done
-# TODO: change collect-date on update command
 # TODO: generate status page for this dataset
 
 log "Generating file list page"
@@ -25,13 +24,4 @@ python create_html.py dataset $DATASET $(date +"%Y-%m-%d") $SCRIPT_PATH/data/out
 s3cmd put data/output/SHA512SUMS s3://dataset/$DATASET/SHA512SUMS
 s3cmd put data/output/_meta/list.html s3://dataset/$DATASET/_meta/list.html
 
-log "Update complete! :) Creating report..."
-tempfile=$(mktemp)
-python report.py api | tee $tempfile
-if [ ! -z "$ROCKETCHAT_USER_ID" ] && [ ! -z "$ROCKETCHAT_AUTH_TOKEN=" ]; then
-	python $SCRIPT_PATH/bot/rocketchat.py \
-		--user_id $ROCKETCHAT_USER_ID \
-		--auth_token $ROCKETCHAT_AUTH_TOKEN \
-		"#covid19-anuncios" "$(cat $tempfile)"
-fi
-rm -rf $tempfile
+./report.sh

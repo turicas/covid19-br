@@ -6,7 +6,7 @@ source $SCRIPT_PATH/base.sh
 
 boletim_filename="$OUTPUT_PATH/boletim.csv.gz"
 caso_filename="$OUTPUT_PATH/caso.csv.gz"
-rm -rf "$boletim_filename" "$caso_filename"
+rm -rf "$boletim_filename" "$caso_filename" "$ERROR_PATH"
 mkdir -p "$OUTPUT_PATH" "$LOG_PATH" "$ERROR_PATH"
 
 time scrapy runspider consolida.py \
