@@ -78,7 +78,7 @@ class SPSpider(scrapy.Spider):
             "state": self.name,
         }
         yield {
-            "city": "TOTAL NO ESTADO",
+            "city": None,
             "city_ibge_code": self.state_ibge_code,
             "confirmed": total_confirmed,
             "date": today,
