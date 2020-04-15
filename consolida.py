@@ -102,14 +102,20 @@ class ConsolidaSpider(scrapy.Spider):
             boletim_data = [item for item in boletim.values() if item]
             if not boletim_data:
                 continue
-            boletim = {
-                "date": boletim["date"],
-                "state": state,
-                "url": boletim["url"],
-                "notes": boletim["notes"],
-            }
-            self.logger.debug(boletim)
-            self.boletim_writer.writerow(boletim)
+            date = boletim["date"]
+            url = (boletim["url"] or "").strip()
+            if not url:
+                message = f"Boletim URL not found for {state} on {date}"
+                self.errors[state].append(("boletim", state, message))
+            else:
+                boletim = {
+                    "date": date,
+                    "state": state,
+                    "url": url,
+                    "notes": boletim["notes"],
+                }
+                self.logger.debug(boletim)
+                self.boletim_writer.writerow(boletim)
 
     def parse_caso(self, state, data):
         self.logger.info(f"Parsing {state} caso")
