@@ -15,7 +15,6 @@ function upload_table_file() {
 function update_table() {
 	table=$1
 
-	# TODO: change collect-date on update command
 	log "[$table] Executing update command"
 	ssh $BRASILIO_SSH_USER@$BRASILIO_SSH_SERVER "$BRASILIO_UPDATE_COMMAND $DATASET $table"
 }
