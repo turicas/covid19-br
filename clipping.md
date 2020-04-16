@@ -86,3 +86,4 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://www.youtube.com/watch?v=30FijUpQ1po
 - https://pt.wikipedia.org/wiki/Pandemia_de_COVID-19_no_Brasil
 - https://youtu.be/aA9q1Zk0AeU
+- https://www.tableau.com/pt-br/learn/webinars/projeto-brasilio-covid19-dados-publicos-acessiveis
