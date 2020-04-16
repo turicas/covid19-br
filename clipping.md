@@ -63,6 +63,9 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://dadoscoronavirus.com/brasil/
 - https://public.tableau.com/profile/thiago.ficagna#!/vizhome/Coronavirus_15851416584640/PainelCOVID19
 - https://kondado.com.br/blog/recursos-para-o-covid-19/
+- http://corona.contratempo.info/
+- https://fehann.github.io/COVID-19-Brazil/
+- https://public.flourish.studio/visualisation/1895814/
 
 
 ## Publicações Científicas
