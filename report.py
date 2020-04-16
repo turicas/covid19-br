@@ -7,6 +7,7 @@ import json
 from collections import Counter
 from itertools import groupby
 from pathlib import Path
+from urllib.parse import urlencode
 from urllib.request import urlopen
 
 from rows.fields import make_header
@@ -40,10 +41,10 @@ class Schema:  # TODO: add this class to rows
         }
 
 
-def get_brasilio_data(dataset, table, limit=None):
+def get_brasilio_data(dataset, table, **filters):
     url = f"https://brasil.io/api/dataset/{dataset}/{table}/data"
-    if limit:
-        url += f"?page_size={limit}"
+    if filters:
+        url += "?" + urlencode(filters)
 
     finished = False
     data = []
@@ -86,8 +87,8 @@ def main():
     args = parser.parse_args()
 
     if args.source == "api":
-        boletins = get_brasilio_data("covid19", "boletim")
-        casos = get_brasilio_data("covid19", "caso")
+        boletins = get_brasilio_data("covid19", "boletim", is_last=True)
+        casos = get_brasilio_data("covid19", "caso", is_last=True)
     elif args.source == "local":
         boletins = get_local_data("boletim")
         casos = get_local_data("caso")
