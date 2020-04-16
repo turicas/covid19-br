@@ -90,3 +90,4 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://pt.wikipedia.org/wiki/Pandemia_de_COVID-19_no_Brasil
 - https://youtu.be/aA9q1Zk0AeU
 - https://www.tableau.com/pt-br/learn/webinars/projeto-brasilio-covid19-dados-publicos-acessiveis
+- [2o Datosy y Coronavirus](https://www.youtube.com/watch?v=C5qXnE6AlMY) ([veja os slides](http://bit.ly/socialtic-brasilio-covid19))
