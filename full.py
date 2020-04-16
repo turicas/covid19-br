@@ -28,10 +28,12 @@ def read_population():
 def get_data(input_filename):
     casos = read_cases(input_filename, order_by="date")
     dates = sorted(set(c.date for c in casos))
-    row_key = lambda row: (row.place_type, row.state, row.city)
+    row_key = lambda row: (row.place_type, row.state, row.city or None)
     caso_by_key = defaultdict(list)
     for caso in casos:
         caso_by_key[row_key(caso)].append(caso)
+    for place_cases in caso_by_key.values():
+        place_cases.sort(key=lambda row: row.date, reverse=True)
 
     brasil = read_population()
     city_by_key = {(city.state, city.city): city for city in brasil}
@@ -49,8 +51,6 @@ def get_data(input_filename):
     last_date = dates[-1]
     last_case_for_place, had_cases = {}, {}
     for date in dates:
-        # TODO: faltam os dados (novos casos, novas mortes, last_xxx) para
-        # place_type = 'state'
         # TODO: São Paulo (município) aparece com 1 caso na data 2020-02-25 em
         # last_available_confirmed. No entanto, new_confirmed aparece como 0.
         # Não deveria ser 1, já que foi o primeiro caso confirmado?
@@ -61,45 +61,16 @@ def get_data(input_filename):
         # TODO: detalhar que valores new_confirmed e new_deaths podem ser
         # negativos.
         for place_key in place_keys:
-            last_case = last_case_for_place.get(place_key, None)
             place_type, state, city = place_key
             place_cases = caso_by_key[place_key]
-            place_cases.sort(key=lambda row: row.date, reverse=True)
             valid_place_cases = sorted(
-                [
-                    item
-                    for item in place_cases
-                    if item.date <= date
-                ],
+                [item for item in place_cases if item.date <= date],
                 key=order_key,
-                reverse=True
+                reverse=True,
             )
-            if valid_place_cases:
-                # This place has at least one case for this date (or before),
-                # so use the newest one.
-                last_valid_case = valid_place_cases[0]
-                newest_case = place_cases[0]
-                new_case = {
-                    "city": city,
-                    "city_ibge_code": last_valid_case.city_ibge_code,
-                    "date": date,
-                    "estimated_population_2019": last_valid_case.estimated_population_2019,
-                    "is_repeated": last_valid_case.date != date,
-                    "is_last": date == last_valid_case.date == newest_case.date,
-                    "last_available_confirmed": last_valid_case.confirmed,
-                    "last_available_confirmed_per_100k_inhabitants": last_valid_case.confirmed_per_100k_inhabitants,
-                    "last_available_date": last_valid_case.date,
-                    "last_available_death_rate": last_valid_case.death_rate,
-                    "last_available_deaths": last_valid_case.deaths,
-                    "place_type": place_type,
-                    "state": state,
-                }
-            else:
-                if place_cases:
-                    newest_case = place_cases[0]
-                    is_last = date == newest_case.date
-                else:
-                    is_last = date == last_date
+            if not valid_place_cases:  # First case being converted for this place
+                newest_case_date = place_cases[0].date if place_cases else last_date
+                is_last = date == newest_case_date
                 if place_type == "state":
                     population = population_by_state[state]
                     place_code = place_code_by_state[state]
@@ -114,7 +85,6 @@ def get_data(input_filename):
                         place_code = city_row.city_ibge_code
                 else:
                     raise ValueError(f"Unknown place type: {repr(place_type)}")
-
                 new_case = {
                     "city": city,
                     "city_ibge_code": place_code,
@@ -130,6 +100,29 @@ def get_data(input_filename):
                     "place_type": place_type,
                     "state": state,
                 }
+            else:
+                # This place has at least one case for this date (or before),
+                # so use the newest one.
+                last_valid_case = valid_place_cases[0]
+                newest_case = place_cases[0]
+                is_last = date == last_valid_case.date == newest_case.date
+                new_case = {
+                    "city": city,
+                    "city_ibge_code": last_valid_case.city_ibge_code,
+                    "date": date,
+                    "estimated_population_2019": last_valid_case.estimated_population_2019,
+                    "is_repeated": last_valid_case.date != date,
+                    "is_last": is_last,
+                    "last_available_confirmed": last_valid_case.confirmed,
+                    "last_available_confirmed_per_100k_inhabitants": last_valid_case.confirmed_per_100k_inhabitants,
+                    "last_available_date": last_valid_case.date,
+                    "last_available_death_rate": last_valid_case.death_rate,
+                    "last_available_deaths": last_valid_case.deaths,
+                    "place_type": place_type,
+                    "state": state,
+                }
+
+            last_case = last_case_for_place.get(place_key, None)
             if last_case is None:
                 new_confirmed = 0
                 new_deaths = 0
@@ -142,22 +135,22 @@ def get_data(input_filename):
                 new_deaths = (new_deaths or 0) - (last_deaths or 0)
             new_case["new_confirmed"] = new_confirmed
             new_case["new_deaths"] = new_deaths
+            last_case_for_place[place_key] = new_case
+
             place_had_cases = had_cases.get(place_key, False)
             if not place_had_cases:
-                place_had_cases = (
-                    (new_case["last_available_confirmed"] or 0) != 0
-                    or (new_case["last_available_deaths"] or 0) != 0
-                )
+                place_had_cases = (new_case["last_available_confirmed"] or 0) != 0 or (
+                    new_case["last_available_deaths"] or 0
+                ) != 0
                 had_cases[place_key] = place_had_cases
-            last_case_for_place[place_key] = new_case
             if place_had_cases:
                 yield new_case
+
 
 if __name__ == "__main__":
     import argparse
 
     from tqdm import tqdm
-
 
     parser = argparse.ArgumentParser()
     parser.add_argument("input_filename")
