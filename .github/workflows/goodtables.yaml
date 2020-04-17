@@ -10,5 +10,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Run gootables
+    - name: Run goodtables
       run: make docker-validate
