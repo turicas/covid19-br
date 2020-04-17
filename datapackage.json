@@ -332,20 +332,6 @@
             "description": "Sigla da unidade federativa com dois dígitos, exemplo: SP."
           },
           {
-            "name": "new_deaths_respiratory_failure_2019",
-            "type": "integer",
-            "format": "default",
-            "title": "Óbitos por pneumonia nesta data em 2019",
-            "description": "Quantidade de óbitos registrados nesse dia e mês (de `date`) em decorrência de pneumonia para o estado em `state`, porém para o ano de 2019."
-          },
-          {
-            "name": "new_deaths_respiratory_failure_2020",
-            "type": "integer",
-            "format": "default",
-            "title": "Óbitos por pneumonia (2020)",
-            "description": "Quantidade de óbitos registrados nesse dia/mês/ano (de `date`) em decorrência de pneumonia para esse o estado em `state`."
-          },
-          {
             "name": "new_deaths_pneumonia_2019",
             "type": "integer",
             "format": "default",
@@ -358,6 +344,20 @@
             "format": "default",
             "title": "Óbitos por insuficiência respiratória nesta data em 2019",
             "description": "Quantidade de óbitos registrados nesse dia e mês (de `date`) em decorrência de insuficiência respiratória para o estado em `state`, porém para o ano de 2019."
+          },
+          {
+            "name": "new_deaths_respiratory_failure_2019",
+            "type": "integer",
+            "format": "default",
+            "title": "Óbitos por pneumonia nesta data em 2019",
+            "description": "Quantidade de óbitos registrados nesse dia e mês (de `date`) em decorrência de pneumonia para o estado em `state`, porém para o ano de 2019."
+          },
+          {
+            "name": "new_deaths_respiratory_failure_2020",
+            "type": "integer",
+            "format": "default",
+            "title": "Óbitos por pneumonia (2020)",
+            "description": "Quantidade de óbitos registrados nesse dia/mês/ano (de `date`) em decorrência de pneumonia para esse o estado em `state`."
           },
           {
             "name": "new_deaths_covid19",
