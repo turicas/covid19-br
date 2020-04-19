@@ -70,6 +70,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - http://corona.contratempo.info/
 - https://fehann.github.io/COVID-19-Brazil/
 - https://public.flourish.studio/visualisation/1895814/
+- http://www.covidbr.info/pnl/covid.wgx?open=1
 
 
 ## Publicações Científicas
