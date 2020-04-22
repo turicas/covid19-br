@@ -80,6 +80,9 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://www.climaesociedade.org/post/como-estamos-em-meio-pandemia
 - https://sites.almg.gov.br/coronavirus/index.html
 - https://g1.globo.com/mundo/blog/helio-gurovitz/post/2020/04/11/se-ligue-nos-links-11-de-abril.ghtml
+- https://leobezerra.github.io/covid19/colab/2020/04/01/nordeste.html
+- http://lades.peq.coppe.ufrj.br/index.php/covid-19/
+- http://infopguaifpr.com.br/docentes/hugo.perlin/mapa_covid_pr/
 
 
 ## Publicações Científicas
