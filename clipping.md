@@ -72,6 +72,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://public.flourish.studio/visualisation/1895814/
 - http://www.covidbr.info/pnl/covid.wgx?open=1
 - http://covid-brasil-io.herokuapp.com/
+- https://covid-19-brazil.tasafo.org/
 
 
 ## Publicações Científicas
