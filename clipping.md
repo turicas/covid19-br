@@ -75,6 +75,10 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - http://covid-brasil-io.herokuapp.com/
 - https://covid-19-brazil.tasafo.org/
 - http://plataforma.longeviver.com/covid19/
+- http://dapp.fgv.br/43-da-populacao-brasileira-mora-em-municipios-sem-estrutura-recomendada-de-respiradores-ou-leitos-de-uti/
+- https://www.tavaresassessoria.com.br/coronavirus/cidades.php
+- https://www.climaesociedade.org/post/como-estamos-em-meio-pandemia
+- https://sites.almg.gov.br/coronavirus/index.html
 
 
 ## Publicações Científicas
