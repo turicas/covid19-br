@@ -79,6 +79,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://www.tavaresassessoria.com.br/coronavirus/cidades.php
 - https://www.climaesociedade.org/post/como-estamos-em-meio-pandemia
 - https://sites.almg.gov.br/coronavirus/index.html
+- https://g1.globo.com/mundo/blog/helio-gurovitz/post/2020/04/11/se-ligue-nos-links-11-de-abril.ghtml
 
 
 ## Publicações Científicas
