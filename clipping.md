@@ -74,6 +74,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - http://www.covidbr.info/pnl/covid.wgx?open=1
 - http://covid-brasil-io.herokuapp.com/
 - https://covid-19-brazil.tasafo.org/
+- http://plataforma.longeviver.com/covid19/
 
 
 ## Publicações Científicas
