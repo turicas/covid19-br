@@ -71,6 +71,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://fehann.github.io/COVID-19-Brazil/
 - https://public.flourish.studio/visualisation/1895814/
 - http://www.covidbr.info/pnl/covid.wgx?open=1
+- http://covid-brasil-io.herokuapp.com/
 
 
 ## Publicações Científicas
