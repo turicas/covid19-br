@@ -7,6 +7,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias
 
+- [2020-04-20 Congresso em Foco - Painel traz dados da pandemia em tempo real na sua cidade e no mundo](https://congressoemfoco.uol.com.br/congresso-em-foco/painel-traz-dados-da-pandemia-em-tempo-real-na-sua-cidade-e-no-mundo/)
 - [2020-04-18 Band News - Coronavírus: pesquisa mede o ritmo de infecção no Brasil](https://www.youtube.com/watch?v=kGzapwndJwE)
 - [2020-04-16 UFMG Notícias - Estudo acompanha evolução da transmissão do coronavírus nos estados](https://ufmg.br/comunicacao/noticias/estudo-de-professor-do-dcc-acompanha-evolucao-da-transmissao-do-coronavirus-nos-estados)
 - [2020-04-16 UOL Notícias - Coronavírus avança para o interior do Brasil; veja evolução em mapa](https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2020/04/16/coronavirus-avanca-para-o-interior-do-brasil-veja-evolucao-em-mapa.htm)
@@ -73,6 +74,18 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://fehann.github.io/COVID-19-Brazil/
 - https://public.flourish.studio/visualisation/1895814/
 - http://www.covidbr.info/pnl/covid.wgx?open=1
+- http://covid-brasil-io.herokuapp.com/
+- https://covid-19-brazil.tasafo.org/
+- http://plataforma.longeviver.com/covid19/
+- http://dapp.fgv.br/43-da-populacao-brasileira-mora-em-municipios-sem-estrutura-recomendada-de-respiradores-ou-leitos-de-uti/
+- https://www.tavaresassessoria.com.br/coronavirus/cidades.php
+- https://www.climaesociedade.org/post/como-estamos-em-meio-pandemia
+- https://sites.almg.gov.br/coronavirus/index.html
+- https://g1.globo.com/mundo/blog/helio-gurovitz/post/2020/04/11/se-ligue-nos-links-11-de-abril.ghtml
+- https://leobezerra.github.io/covid19/colab/2020/04/01/nordeste.html
+- http://lades.peq.coppe.ufrj.br/index.php/covid-19/
+- http://infopguaifpr.com.br/docentes/hugo.perlin/mapa_covid_pr/
+- https://app.powerbi.com/view?r=eyJrIjoiMmQ4YWZjZGItNzk0Ny00Nzk1LTg2NzQtNjJkZjA3YjVlMzczIiwidCI6IjUyYzU3MzYwLWY3MzgtNGNkOC05NGY2LWYwM2NlOWFjZDk5YiJ9
 
 
 ## Publicações Científicas
