@@ -83,6 +83,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://leobezerra.github.io/covid19/colab/2020/04/01/nordeste.html
 - http://lades.peq.coppe.ufrj.br/index.php/covid-19/
 - http://infopguaifpr.com.br/docentes/hugo.perlin/mapa_covid_pr/
+- https://app.powerbi.com/view?r=eyJrIjoiMmQ4YWZjZGItNzk0Ny00Nzk1LTg2NzQtNjJkZjA3YjVlMzczIiwidCI6IjUyYzU3MzYwLWY3MzgtNGNkOC05NGY2LWYwM2NlOWFjZDk5YiJ9
 
 
 ## Publicações Científicas
