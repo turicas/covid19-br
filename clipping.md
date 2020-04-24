@@ -97,7 +97,8 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Podcasts
 
-- https://intervalodeconfianca.com.br/2020/04/01/ic-14-numeros-podem-explicar-uma-pandemia/
+- [Intervalo de Confiança](https://intervalodeconfianca.com.br/2020/04/01/ic-14-numeros-podem-explicar-uma-pandemia/)
+- [Podcast Rio Bravo](https://soundcloud.com/riobravoinvestimentos/podcast-590-alvaro-justen-o-brasilio-e-a-defesa-ao-acesso-aos-dados-publicos)
 
 
 ## Outras Publicações
