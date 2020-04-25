@@ -4,6 +4,10 @@ Para entender quais decisões tomamos no trabalho de coleta, normalização e
 checagem dos dados [veja a metodologia de coleta de
 dados](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFrPpn4).
 
+## Como citar a base de dados COVID-19 do Brasil.IO?
+
+Leia a seção [Licença e citação](https://github.com/turicas/covid19-br/blob/master/README.md#licen%C3%A7a-e-cita%C3%A7%C3%A3o) do README desse repositório.
+
 
 ## As contagens estaduais podem ser diferentes das municipais?
 
