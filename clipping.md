@@ -36,6 +36,12 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [2020-03-23 CNN Brasil - Boletins estaduais indicam quase 40 casos de coronavírus a mais do que governo](https://www.cnnbrasil.com.br/saude/2020/03/23/boletins-estaduais-indicam-quase-40-casos-de-coronavirus-a-mais-do-que-governo)
 
 
+## Podcasts
+
+- [Intervalo de Confiança](https://intervalodeconfianca.com.br/2020/04/01/ic-14-numeros-podem-explicar-uma-pandemia/)
+- [Podcast Rio Bravo](https://soundcloud.com/riobravoinvestimentos/podcast-590-alvaro-justen-o-brasilio-e-a-defesa-ao-acesso-aos-dados-publicos)
+
+
 ## Análises e Projetos
 
 - [Corona Cidades - Simulador](https://coronacidades.org/simulacovid/)
@@ -88,17 +94,11 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - http://lades.peq.coppe.ufrj.br/index.php/covid-19/
 - http://infopguaifpr.com.br/docentes/hugo.perlin/mapa_covid_pr/
 - https://app.powerbi.com/view?r=eyJrIjoiMmQ4YWZjZGItNzk0Ny00Nzk1LTg2NzQtNjJkZjA3YjVlMzczIiwidCI6IjUyYzU3MzYwLWY3MzgtNGNkOC05NGY2LWYwM2NlOWFjZDk5YiJ9
-
+- https://public.tableau.com/profile/noemi.da.veiga#!/vizhome/httpspublic_tableau_comnoemi_da_veiga/Cover
 
 ## Publicações Científicas
 
 - ?
-
-
-## Podcasts
-
-- [Intervalo de Confiança](https://intervalodeconfianca.com.br/2020/04/01/ic-14-numeros-podem-explicar-uma-pandemia/)
-- [Podcast Rio Bravo](https://soundcloud.com/riobravoinvestimentos/podcast-590-alvaro-justen-o-brasilio-e-a-defesa-ao-acesso-aos-dados-publicos)
 
 
 ## Outras Publicações
