@@ -56,8 +56,11 @@ def get_state_population(state):
 
 
 def spreadsheet_download_url(url_or_id, file_format):
-    if url_or_id.startswith("http"):
-        spreadsheet_id = parse_qs(urlparse(url_or_id).query)["id"][0]
+    parsed = urlparse(url_or_id)
+    if parsed.netloc == "brasil.io":
+        return url_or_id
+    elif url_or_id.startswith("http"):
+        spreadsheet_id = parse_qs(parsed.query)["id"][0]
     else:
         spreadsheet_id = url_or_id
     return f"https://docs.google.com/spreadsheets/u/0/d/{spreadsheet_id}/export?format={file_format}&id={spreadsheet_id}"
