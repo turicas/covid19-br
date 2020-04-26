@@ -77,7 +77,7 @@ class ConsolidaSpider(scrapy.Spider):
         table = rows.import_from_csv(io.BytesIO(response.body), encoding="utf-8")
         for row in table:
             yield scrapy.Request(
-                spreadsheet_download_url(row.planilha_brasilio, "xlsx"),
+                spreadsheet_download_url(row.link_planilha_consolidada, "xlsx"),
                 meta={"state": row.uf},
                 callback=self.parse_state_file,
             )
