@@ -9,7 +9,7 @@ import rows
 import scrapy
 
 
-BASE_PATH = Path(__file__).parent
+BASE_PATH = Path(__file__).parent.parent.parent
 POPULATION_PATH = BASE_PATH / "data" / "populacao-estimada-2019.csv"
 population_pe = [
     row
