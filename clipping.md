@@ -96,6 +96,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - http://infopguaifpr.com.br/docentes/hugo.perlin/mapa_covid_pr/
 - https://app.powerbi.com/view?r=eyJrIjoiMmQ4YWZjZGItNzk0Ny00Nzk1LTg2NzQtNjJkZjA3YjVlMzczIiwidCI6IjUyYzU3MzYwLWY3MzgtNGNkOC05NGY2LWYwM2NlOWFjZDk5YiJ9
 - https://public.tableau.com/profile/noemi.da.veiga#!/vizhome/httpspublic_tableau_comnoemi_da_veiga/Cover
+- [COVID - MapBiomas](https://covid.mapbiomas.org/)
 
 ## Publicações Científicas
 
