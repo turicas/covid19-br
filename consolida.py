@@ -69,6 +69,9 @@ def spreadsheet_download_url(url_or_id, file_format):
 class ConsolidaSpider(scrapy.Spider):
     name = "consolida"
     start_urls = [spreadsheet_download_url(STATE_LINKS_SPREADSHEET_ID, "csv")]
+    custom_settings = {
+        "CONCURRENT_REQUESTS_PER_DOMAIN": 4,
+    }
 
     def __init__(self, boletim_filename, caso_filename, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -81,8 +84,9 @@ class ConsolidaSpider(scrapy.Spider):
         for row in table:
             yield scrapy.Request(
                 spreadsheet_download_url(row.link_planilha_consolidada, "xlsx"),
-                meta={"state": row.uf},
+                meta={"state": row.uf, "handle_httpstatus_all": True},
                 callback=self.parse_state_file,
+
             )
 
     def parse_boletim(self, state, data):
@@ -243,15 +247,18 @@ class ConsolidaSpider(scrapy.Spider):
 
     def parse_state_file(self, response):
         state = response.meta["state"]
+        if response.status >= 400:
+            self.errors[state].append(("connection", state, f"HTTP status code: {response.status}"))
+        else:
+            try:
+                self.parse_boletim(state, response.body)
+            except Exception as exp:
+                self.errors[state].append(("boletim", state, f"{exp.__class__.__name__}: {exp}"))
+            try:
+                self.parse_caso(state, response.body)
+            except Exception as exp:
+                self.errors[state].append(("caso", state, f"{exp.__class__.__name__}: {exp}"))
 
-        try:
-            self.parse_boletim(state, response.body)
-        except Exception as exp:
-            self.errors[state].append(("boletim", state, f"{exp.__class__.__name__}: {exp}"))
-        try:
-            self.parse_caso(state, response.body)
-        except Exception as exp:
-            self.errors[state].append(("caso", state, f"{exp.__class__.__name__}: {exp}"))
         if self.errors[state]:
             error_counter = Counter(error[0] for error in self.errors[state])
             error_counter_str = ", ".join(
