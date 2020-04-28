@@ -4,7 +4,9 @@ set -e
 SCRIPT_PATH=$(dirname $(readlink -f $0))
 
 cd $SCRIPT_PATH
-source ../.env
+if [ -e "../.env" ]; then
+	source ../.env
+fi
 mkdir -p data
 OUTPUT_FILENAME="data/url-hash.csv"
 rm -rf "$OUTPUT_FILENAME"

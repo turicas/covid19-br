@@ -1,6 +1,6 @@
 FROM python:3.8-slim
 
-WORKDIR /opt/covid19-br
+WORKDIR /app
 
 ARG PYTHON_REQUIREMENTS=collect
 
@@ -17,11 +17,9 @@ RUN apt-get update && apt-get upgrade -y \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /opt/covid19-br
-COPY ./ /opt/covid19-br
+RUN mkdir -p /app
+COPY ./ /app
 
-VOLUME [ "/opt/covid19-br/data/output" ]
+VOLUME [ "/app/data/output" ]
 
-WORKDIR /opt/covid19-br
-
-CMD [ "/opt/covid19-br/run.sh"]
+CMD [ "/app/web.sh" ]
