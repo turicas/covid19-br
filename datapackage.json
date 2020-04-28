@@ -198,7 +198,11 @@
             "title": "Tipo de campo"
           }
         ]
-      }
+      },
+      "description": "Tabela de tipos para os campos da tabela boletim, usada pelo sistema enquanto não migra para Data Packages.",
+      "title": "Equema da tabela boletim",
+      "format": "csv",
+      "encoding": "utf-8"
     },
     {
       "name": "schema-caso",
@@ -219,7 +223,11 @@
             "title": "Tipo de campo"
           }
         ]
-      }
+      },
+      "title": "Esquema da tabela caso",
+      "format": "csv",
+      "encoding": "utf-8",
+      "description": "Tabela de tipos para os campos da tabela caso, usada pelo sistema enquanto não migra para Data Packages."
     },
     {
       "name": "schema-populacao-estimada",
@@ -240,7 +248,11 @@
             "title": "Tipo de campo"
           }
         ]
-      }
+      },
+      "title": "Esquema da tabela populacao-estimada-2019",
+      "format": "csv",
+      "encoding": "utf-8",
+      "description": "Tabela de tipos para os campos da tabela populacao-estimada-2019, usada pelo sistema enquanto não migra para Data Packages."
     },
     {
       "name": "schema-epidemiological-week",
@@ -261,7 +273,11 @@
             "title": "Tipo de campo"
           }
         ]
-      }
+      },
+      "description": "Tabela de tipos para os campos da tabela epidemiological-week, usada pelo sistema enquanto não migra para Data Packages.",
+      "title": "Esquema da tabela epidemiological-week",
+      "format": "csv",
+      "encoding": "utf-8"
     },
     {
       "name": "schema-obito_cartorio",
@@ -282,7 +298,11 @@
             "title": "Tipo de campo"
           }
         ]
-      }
+      },
+      "title": "Esquema da tabela obito_cartorio",
+      "description": "Tabela de tipos para os campos da tabela obito_cartorio, usada pelo sistema enquanto não migra para Data Packages.",
+      "format": "csv",
+      "encoding": "utf-8"
     },
     {
       "name": "epidemiological-week",
@@ -417,6 +437,148 @@
           }
         ]
       }
+    },
+    {
+      "name": "caso_full",
+      "path": "data/output/caso_full.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "city",
+            "type": "string",
+            "format": "default",
+            "description": "nome do município (pode estar em branco quando o registro é referente ao estado, pode ser preenchido com Importados/Indefinidos também).",
+            "title": "nome do município"
+          },
+          {
+            "name": "city_ibge_code",
+            "type": "integer",
+            "format": "default",
+            "title": "código do município",
+            "description": "código IBGE do local."
+          },
+          {
+            "name": "date",
+            "type": "date",
+            "format": "default",
+            "title": "data",
+            "description": "data de coleta dos dados no formato YYYY-MM-DD."
+          },
+          {
+            "name": "estimated_population_2019",
+            "type": "integer",
+            "format": "default",
+            "description": "população estimada para esse município/estado em 2019, segundo o IBGE",
+            "title": "população estimada em 2019"
+          },
+          {
+            "name": "is_last",
+            "type": "boolean",
+            "format": "default",
+            "description": "campo pré-computado que diz se esse registro é o mais novo para esse local, pode ser True ou False (caso filtre por esse campo, use is_last=True ou is_last=False, não use o valor em minúsculas).",
+            "title": "é o último"
+          },
+          {
+            "name": "is_repeated",
+            "type": "boolean",
+            "format": "default",
+            "title": "é repetido",
+            "description": "campo pré-computado que diz se as informações nesse registro foram publicadas pela Secretaria Estadual de Saúde no dia date ou se o dado é repetido do último dia em que o dado está disponível (igual ou anterior a date). Isso ocorre pois nem todas as secretarias publicam boletins todos os dias. Veja também o campo last_available_date."
+          },
+          {
+            "name": "last_available_confirmed",
+            "type": "integer",
+            "format": "default",
+            "title": "último confirmados disponível",
+            "description": "número de casos confirmados do último dia disponível igual ou anterior à data date."
+          },
+          {
+            "name": "last_available_confirmed_per_100k_inhabitants",
+            "type": "number",
+            "format": "default",
+            "title": "último confirmados por 100 mil habitantes disponível",
+            "description": "número de casos confirmados por 100.000 habitantes do último dia disponível igual ou anterior à data date."
+          },
+          {
+            "name": "last_available_date",
+            "type": "date",
+            "format": "default",
+            "title": "última data disponível",
+            "description": "data à qual o dado se refere."
+          },
+          {
+            "name": "last_available_death_rate",
+            "type": "number",
+            "format": "default",
+            "title": "última taxa de mortalidade disponível",
+            "description": "taxa de mortalidade (mortes / confirmados) do último dia disponível igual ou anterior à data date."
+          },
+          {
+            "name": "last_available_deaths",
+            "type": "integer",
+            "format": "default",
+            "title": "último mortos disponível",
+            "description": "número de mortes do último dia disponível igual ou anterior à data date."
+          },
+          {
+            "name": "new_confirmed",
+            "type": "integer",
+            "format": "default",
+            "title": "novos confirmados",
+            "description": "número de novos casos confirmados desde o último dia (note que caso is_repeated seja True, esse valor sempre será 0)."
+          },
+          {
+            "name": "new_deaths",
+            "type": "integer",
+            "format": "default",
+            "title": "novas mortes",
+            "description": "número de novos óbitos desde o último dia (note que caso is_repeated seja True, esse valor sempre será 0)."
+          },
+          {
+            "name": "place_type",
+            "type": "string",
+            "format": "default",
+            "title": "tipo de local",
+            "description": "tipo de local que esse registro descreve, pode ser city ou state."
+          },
+          {
+            "name": "state",
+            "type": "string",
+            "format": "default",
+            "title": "estado",
+            "description": "sigla da unidade federativa, exemplo: SP."
+          }
+        ]
+      },
+      "description": "Tabela gerada a partir da tabela caso, que possui um registro por município (+ Importados/Indefinidos) e estado para cada data disponível; nos casos em que um boletim não foi divulgado naquele dia, é copiado o dado do último dia disponível e a coluna is_repeated fica com o valor True.",
+      "format": "csv",
+      "encoding": "utf-8"
+    },
+    {
+      "name": "schema-caso_full",
+      "path": "schema/caso_full.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "field_name",
+            "type": "string",
+            "format": "default",
+            "title": "Nome do campo"
+          },
+          {
+            "name": "field_type",
+            "type": "string",
+            "format": "default",
+            "title": "Tipo de campo"
+          }
+        ]
+      },
+      "title": "Esquema da tabela caso_full",
+      "format": "csv",
+      "encoding": "utf-8",
+      "description": "Tabela de tipos para os campos da tabela caso_full, usada pelo sistema enquanto não migra para Data Packages."
     }
   ],
   "keywords": [
