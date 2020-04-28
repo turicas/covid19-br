@@ -5,28 +5,10 @@ import io
 from flask import Flask, make_response
 from scrapy.crawler import CrawlerProcess
 
-from .spiders.corona_pe_spider import Covid19PESpider
+from .spiders.spider_pe import Covid19PESpider
 
 
 app = Flask(__name__)
-
-
-class CustomPESpider(Covid19PESpider):
-    def __init__(self, fobj, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fobj = fobj
-        self.writer = None
-
-    def write_row(self, row):
-        if self.writer is None:
-            self.writer = csv.DictWriter(self.fobj, fieldnames=list(row.keys()))
-            self.writer.writeheader()
-        self.writer.writerow(row)
-
-    def parse(self, response):
-        for row in super().parse(response):
-            self.write_row(row)
-
 
 @app.route("/")
 def index():
@@ -44,20 +26,24 @@ def index():
     </html>
     """
 
-
-@app.route("/PE")
-def pe():
+def get_spider_response(SpiderClass, state):
     now = datetime.datetime.now()
     today = datetime.date(now.year, now.month, now.day)  # TODO: UTC-3?
     fobj = io.StringIO()
     process = CrawlerProcess(settings={})
-    process.crawl(CustomPESpider, fobj=fobj)
+    process.crawl(SpiderClass, fobj=fobj)
     process.start()
 
     response = make_response(fobj.getvalue())
-    response.headers["Content-Disposition"] = f"attachment; filename=caso-pe-{today}.csv"
+    response.headers[
+        "Content-Disposition"
+    ] = f"attachment; filename=caso-{state}-{today}.csv"
     response.headers["Content-type"] = "text/csv"
     return response
+
+@app.route("/PE")
+def pe():
+    return get_spider_response(Covid19PESpider, "PE")
 
 
 if __name__ == "__main__":
