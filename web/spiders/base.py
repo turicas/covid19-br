@@ -15,13 +15,10 @@ class BaseCovid19Spider(scrapy.Spider):
     def __init__(self, fobj, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fobj = fobj
-        self.writer = None
+        self.data = []
 
     def write_row(self, row):
-        if self.writer is None:
-            self.writer = csv.DictWriter(self.fobj, fieldnames=list(row.keys()))
-            self.writer.writeheader()
-        self.writer.writerow(row)
+        self.data.append(row)
 
     @cached_property
     def brazilian_population(self):
@@ -54,3 +51,29 @@ class BaseCovid19Spider(scrapy.Spider):
 
     def get_city_name_from_id(self, city_id):
         return self.city_name_from_id[city_id]
+
+    @classmethod
+    def from_crawler(cls, crawler, *args, **kwargs):
+        spider = super().from_crawler(crawler, *args, **kwargs)
+        crawler.signals.connect(spider.spider_closed, signal=scrapy.signals.spider_closed)
+        return spider
+
+    @property
+    def normalized_data(self):
+        def order_function(row):
+            if row["municipio"] == "TOTAL NO ESTADO":
+                return "0"
+            elif row["municipio"] == "Importados/Indefinidos":
+                return "1"
+            else:
+                return rows.fields.slug(row["municipio"])
+        return sorted(self.data, key=order_function)
+
+    def spider_closed(self, spider):
+        data = self.normalized_data
+        print(data)
+        first_row = data[0]
+        writer = csv.DictWriter(self.fobj, fieldnames=list(first_row.keys()))
+        writer.writeheader()
+        for row in data:
+            writer.writerow(row)
