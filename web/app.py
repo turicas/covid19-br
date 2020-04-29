@@ -29,17 +29,20 @@ def index():
     """
 
 def get_spider_response(SpiderClass, state):
-    now = datetime.datetime.now()
-    today = datetime.date(now.year, now.month, now.day)  # TODO: UTC-3?
-    fobj = io.StringIO()
+    report_fobj, case_fobj = io.StringIO(), io.StringIO()
     process = CrawlerProcess(settings={})
-    process.crawl(SpiderClass, fobj=fobj)
+    process.crawl(SpiderClass, report_fobj=report_fobj, case_fobj=case_fobj)
     process.start()
 
-    response = make_response(fobj.getvalue())
+    report_fobj.seek(0)
+    reports = list(csv.DictReader(report_fobj))
+    date = reports[0]["date"]
+    # TODO: do something with reports
+
+    response = make_response(case_fobj.getvalue())
     response.headers[
         "Content-Disposition"
-    ] = f"attachment; filename=caso-{state}-{today}.csv"
+    ] = f"attachment; filename=caso-{state}-{date}.csv"
     response.headers["Content-type"] = "text/csv"
     return response
 

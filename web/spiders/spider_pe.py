@@ -45,8 +45,13 @@ class Covid19PESpider(BaseCovid19Spider):
             row = dict(zip(header, row))
             result.append(self.fix_row(row))
 
-        now = datetime.datetime.now()
-        date = datetime.date(now.year, now.month, now.day)
+        last_date = max(row["dt_notificacao"] or "" for row in result)
+        year, month, day = last_date.split("-")
+        self.add_report(
+            date=datetime.date(int(year), int(month), int(day)),
+            url=self.start_urls[0],  # TODO: should add PDF/PPT report URL?
+        )
+
         row_key = lambda row: str(row["cd_municipio"])
         result.sort(key=row_key)
         total_confirmed = total_deaths = 0
@@ -55,20 +60,16 @@ class Covid19PESpider(BaseCovid19Spider):
             city_data = [row for row in city_data if row["classe"] == "CONFIRMADO"]
             confirmed = len(city_data)
             deaths = sum(1 for row in city_data if row["evolucao"] == "ÓBITO")
-            row = {
-                "municipio": self.get_city_name_from_id(city_ibge_code),
-                "confirmados": confirmed,
-                "mortes": deaths,
-            }
+            self.add_city_case(
+                city=self.get_city_name_from_id(city_ibge_code),
+                confirmed=confirmed,
+                deaths=deaths,
+            )
             total_confirmed += confirmed
             total_deaths += deaths
-            self.write_row(row)
-        self.write_row(
-            {
-                "municipio": "TOTAL NO ESTADO",
-                "confirmados": total_confirmed,
-                "mortes": total_deaths,
-            }
+        self.add_state_case(
+            confirmed=total_confirmed,
+            deaths=total_deaths,
         )
 
     def fix_row(self, row):
@@ -96,7 +97,7 @@ class Covid19PESpider(BaseCovid19Spider):
                     city_id = self.get_city_id_from_name(municipio)
                     municipio = self.get_city_name_from_id(city_id)
                 except KeyError:
-                    print(f"Error converting city in PE: {municipio}")
+                    self.logger.error(f"Error converting city in PE: {municipio}")
                     municipio = "Importados/Indefinidos"
                 new["mun_notificacao"] = municipio
                 new["cd_municipio"] = self.get_city_id_from_name(municipio)

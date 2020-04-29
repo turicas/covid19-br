@@ -1,3 +1,4 @@
+import datetime
 import io
 
 import rows
@@ -10,24 +11,34 @@ class Covid19RRSpider(BaseCovid19Spider):
     start_urls = ["https://roraimacontraocorona.rr.gov.br/winner/public/mapa.xhtml"]
 
     def parse(self, response):
+        date = response.body_as_unicode().split("Atualizado em")[1].split()[0]
+        day, month, year = date.split("/")
+        self.add_report(
+            date=datetime.date(int(year), int(month), int(day)),
+            url=self.start_urls[0],
+        )
+
         table = rows.import_from_html(io.BytesIO(response.body), encoding=response.encoding)
         for row in table:
             if (row.confirmados, row.obitos) == (None, None):
                 continue
             city_name = row.cidade
+            confirmed = row.confirmados
+            deaths = row.obitos or 0
             if city_name.lower().strip() == "total:":
-                city_name = "TOTAL NO ESTADO"
+                self.add_state_case(
+                    confirmed=confirmed,
+                    deaths=deaths,
+                )
             else:
-                city_id = self.get_city_id_from_name(city_name)
-                city_name = self.get_city_name_from_id(city_id)
-
-            self.write_row({
-                "municipio": city_name,
-                "confirmados": row.confirmados,
-                "mortes": row.obitos or 0,
-            })
-        self.write_row({
-            "municipio": "Importados/Indefinidos",
-            "confirmados": None,
-            "mortes": None,
-        })
+                self.add_city_case(
+                    city=city_name,
+                    confirmed=confirmed,
+                    deaths=deaths,
+                )
+        self.add_city_case(
+            city="Importados/Indefinidos",
+            confirmed=None,
+            deaths=None,
+        )
+        # TODO: is there any way to get Importados/Indefinidos?

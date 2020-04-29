@@ -1,5 +1,6 @@
 import csv
 import io
+from functools import lru_cache
 from pathlib import Path
 
 import rows
@@ -12,18 +13,44 @@ POPULATION_PATH = BASE_PATH / "data" / "populacao-estimada-2019.csv"
 
 
 class BaseCovid19Spider(scrapy.Spider):
-    def __init__(self, fobj, *args, **kwargs):
+    def __init__(self, report_fobj, case_fobj, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fobj = fobj
-        self.data = []
+        self.case_fobj = case_fobj
+        self.report_fobj = report_fobj
+        self.case_data = []
+        self.report_data = []
 
-    def write_row(self, row):
-        self.data.append(row)
+    def add_report(self, date, url):
+        self.report_data.append({
+            "date": date,
+            "url": url,
+        })
+
+    def add_city_case(self, city, confirmed, deaths):
+        try:
+            city_id = self.get_city_id_from_name(city)
+            city_name = self.get_city_name_from_id(city_id)
+        except KeyError:
+            raise ValueError(f"Unknown city '{city}' for state {self.name}")
+
+        self.case_data.append({
+            "municipio": city_name,
+            "confirmados": confirmed,
+            "mortes": deaths,
+        })
+
+    def add_state_case(self, confirmed, deaths):
+        self.case_data.append({
+            "municipio": "TOTAL NO ESTADO",
+            "confirmados": confirmed,
+            "mortes": deaths,
+        })
 
     @cached_property
     def brazilian_population(self):
         return rows.import_from_csv(POPULATION_PATH)
 
+    @lru_cache(maxsize=900)
     def state_population(self, state):
         return [row for row in self.brazilian_population if row.state == state]
 
@@ -37,6 +64,7 @@ class BaseCovid19Spider(scrapy.Spider):
         data[rows.fields.slug("Importados/Indefinidos")] = None
         return data
 
+    @lru_cache(maxsize=900)
     def get_city_id_from_name(self, name):
         return {
             rows.fields.slug(key): value
@@ -49,17 +77,12 @@ class BaseCovid19Spider(scrapy.Spider):
         data[None] = "Importados/Indefinidos"
         return data
 
+    @lru_cache(maxsize=900)
     def get_city_name_from_id(self, city_id):
         return self.city_name_from_id[city_id]
 
-    @classmethod
-    def from_crawler(cls, crawler, *args, **kwargs):
-        spider = super().from_crawler(crawler, *args, **kwargs)
-        crawler.signals.connect(spider.spider_closed, signal=scrapy.signals.spider_closed)
-        return spider
-
     @property
-    def normalized_data(self):
+    def normalized_case_data(self):
         def order_function(row):
             if row["municipio"] == "TOTAL NO ESTADO":
                 return "0"
@@ -67,13 +90,25 @@ class BaseCovid19Spider(scrapy.Spider):
                 return "1"
             else:
                 return rows.fields.slug(row["municipio"])
-        return sorted(self.data, key=order_function)
+        return sorted(self.case_data, key=order_function)
 
-    def spider_closed(self, spider):
-        data = self.normalized_data
-        print(data)
+    @property
+    def normalized_report_data(self):
+        return self.report_data
+
+    def write_csv(self, data, fobj):
         first_row = data[0]
-        writer = csv.DictWriter(self.fobj, fieldnames=list(first_row.keys()))
+        writer = csv.DictWriter(fobj, fieldnames=list(first_row.keys()))
         writer.writeheader()
         for row in data:
             writer.writerow(row)
+
+    @classmethod
+    def from_crawler(cls, crawler, *args, **kwargs):
+        spider = super().from_crawler(crawler, *args, **kwargs)
+        crawler.signals.connect(spider.spider_closed, signal=scrapy.signals.spider_closed)
+        return spider
+
+    def spider_closed(self, spider):
+        self.write_csv(self.normalized_case_data, self.case_fobj)
+        self.write_csv(self.normalized_report_data, self.report_fobj)
