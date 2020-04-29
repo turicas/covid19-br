@@ -67,10 +67,7 @@ class Covid19PESpider(BaseCovid19Spider):
             )
             total_confirmed += confirmed
             total_deaths += deaths
-        self.add_state_case(
-            confirmed=total_confirmed,
-            deaths=total_deaths,
-        )
+        self.add_state_case(confirmed=total_confirmed, deaths=total_deaths)
 
     def fix_row(self, row):
         new = row.copy()

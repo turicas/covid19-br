@@ -12,6 +12,13 @@ BASE_PATH = Path(__file__).parent.parent.parent
 POPULATION_PATH = BASE_PATH / "data" / "populacao-estimada-2019.csv"
 
 
+def normalize_city_name(city):
+    city = rows.fields.slug(city)
+    for word in ("da", "das", "de", "do", "dos"):
+        city = city.replace(f"_{word}_", "_")
+    return city
+
+
 class BaseCovid19Spider(scrapy.Spider):
     def __init__(self, report_fobj, case_fobj, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -21,10 +28,7 @@ class BaseCovid19Spider(scrapy.Spider):
         self.report_data = []
 
     def add_report(self, date, url):
-        self.report_data.append({
-            "date": date,
-            "url": url,
-        })
+        self.report_data.append({"date": date, "url": url})
 
     def add_city_case(self, city, confirmed, deaths):
         try:
@@ -33,18 +37,14 @@ class BaseCovid19Spider(scrapy.Spider):
         except KeyError:
             raise ValueError(f"Unknown city '{city}' for state {self.name}")
 
-        self.case_data.append({
-            "municipio": city_name,
-            "confirmados": confirmed,
-            "mortes": deaths,
-        })
+        self.case_data.append(
+            {"municipio": city_name, "confirmados": confirmed, "mortes": deaths}
+        )
 
     def add_state_case(self, confirmed, deaths):
-        self.case_data.append({
-            "municipio": "TOTAL NO ESTADO",
-            "confirmados": confirmed,
-            "mortes": deaths,
-        })
+        self.case_data.append(
+            {"municipio": "TOTAL NO ESTADO", "confirmados": confirmed, "mortes": deaths}
+        )
 
     @cached_property
     def brazilian_population(self):
@@ -61,15 +61,16 @@ class BaseCovid19Spider(scrapy.Spider):
     @cached_property
     def city_id_from_name(self):
         data = {row.city: int(row.city_ibge_code) for row in self.population}
-        data[rows.fields.slug("Importados/Indefinidos")] = None
+        data["Importados/Indefinidos"] = None
         return data
 
     @lru_cache(maxsize=900)
     def get_city_id_from_name(self, name):
-        return {
-            rows.fields.slug(key): value
+        normalized_cities = {
+            normalize_city_name(key): value
             for key, value in self.city_id_from_name.items()
-        }[rows.fields.slug(name)]
+        }
+        return normalized_cities[normalize_city_name(name)]
 
     @cached_property
     def city_name_from_id(self):
@@ -90,6 +91,7 @@ class BaseCovid19Spider(scrapy.Spider):
                 return "1"
             else:
                 return rows.fields.slug(row["municipio"])
+
         return sorted(self.case_data, key=order_function)
 
     @property
@@ -106,7 +108,9 @@ class BaseCovid19Spider(scrapy.Spider):
     @classmethod
     def from_crawler(cls, crawler, *args, **kwargs):
         spider = super().from_crawler(crawler, *args, **kwargs)
-        crawler.signals.connect(spider.spider_closed, signal=scrapy.signals.spider_closed)
+        crawler.signals.connect(
+            spider.spider_closed, signal=scrapy.signals.spider_closed
+        )
         return spider
 
     def spider_closed(self, spider):
