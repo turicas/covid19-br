@@ -5,11 +5,12 @@ import io
 from flask import Flask, make_response
 from scrapy.crawler import CrawlerProcess
 
+from .spiders.spider_es import Covid19ESSpider
 from .spiders.spider_pe import Covid19PESpider
 from .spiders.spider_pr import Covid19PRSpider
 from .spiders.spider_rr import Covid19RRSpider
 
-SPIDERS = [Covid19PESpider, Covid19PRSpider, Covid19RRSpider]
+SPIDERS = [Covid19ESSpider, Covid19PESpider, Covid19PRSpider, Covid19RRSpider]
 STATE_SPIDERS = {SpiderClass.name: SpiderClass for SpiderClass in SPIDERS}
 
 
