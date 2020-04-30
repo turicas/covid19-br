@@ -48,7 +48,7 @@ dados](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFr
 Número de casos confirmados e óbitos por município por dia, segundo as
 Secretarias Estaduais de Saúde.
 
-- API: https://brasil.io/api/dataset/covid19/dados/caso
+- API: https://brasil.io/api/dataset/covid19/caso/data
 - Dados completos para download: https://data.brasil.io/dataset/covid19/caso.csv.gz
 
 Colunas:
@@ -270,7 +270,7 @@ respiratória registrados nos cartórios e disponíveis no [Portal da
 Transparência do Registro
 Civil](https://transparencia.registrocivil.org.br/especial-covid).
 
-- API: https://brasil.io/api/dataset/covid19/dados/obito_cartorio
+- API: https://brasil.io/api/dataset/covid19/obito_cartorio/data
 - Dados completos para download: https://data.brasil.io/dataset/covid19/obito_cartorio.csv.gz
 
 Colunas:
