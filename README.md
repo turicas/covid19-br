@@ -1,3 +1,5 @@
+[🇺🇸 English?](README.en.md)
+
 # covid19-br
 
 ![pytest@docker](https://github.com/turicas/covid19-br/workflows/pytest@docker/badge.svg)
