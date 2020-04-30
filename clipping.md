@@ -102,7 +102,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Publicações Científicas
 
-- ?
+- [COVID-19 e hospitalizações por SRAG no Brasil: uma comparação até a 12a semana epidemiológica de 2020](https://www.scielo.br/pdf/csp/v36n4/1678-4464-csp-36-04-e00070120.pdf)
 
 
 ## Outras Publicações
