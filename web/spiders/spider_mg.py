@@ -6,6 +6,7 @@ import string
 import scrapy
 from datetime import datetime, timedelta
 
+from .base import BaseCovid19Spider
 
 
 class MGSpider(BaseCovid19Spider):
