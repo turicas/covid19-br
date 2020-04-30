@@ -31,6 +31,7 @@ class MGSpider(BaseCovid19Spider):
         return self.parse_pdf(filename)
 
     def parse_pdf(self, file_path):
+        current_day = datetime.today().strftime('%d.%m.%Y')
         df = PyMuPDFBackend(file_path)
 
         it = df.objects()
