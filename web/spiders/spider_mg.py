@@ -1,3 +1,7 @@
+import rows
+import fitz as pymupdf
+from rows.plugins.plugin_pdf import PyMuPDFBackend, same_column
+
 import string
 import scrapy
 from datetime import datetime, timedelta
