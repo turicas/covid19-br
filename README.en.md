@@ -29,7 +29,7 @@ If this program and/or the data resulting are useful to you or your company, **c
 
 ### FAQ ABOUT DATA
 
-**Before contacting us (we're overloaded) to consult about the data, [CONSULT OUR FAQ](faq.md).**
+**Before contacting us to consult about the data (we're overloaded), [CONSULT OUR FAQ](faq.md)** (still in Portuguese).
 
 For more information [see the data collection methodology](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFrPpn4).
 
