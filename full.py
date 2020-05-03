@@ -65,13 +65,8 @@ def get_data(input_filename):
     order_key = lambda row: row.order_for_place
     last_date = dates[-1]
     last_case_for_place = {}
+    order_for_place = Counter()
     for date in dates:
-        # TODO: adicionar coluna "day_number_for_place", que
-        # começa em 1 na data em que casos passa a ser maior que 0
-        # TODO: decidir o que fazer com day_number_for_place quando número de
-        # casos voltar a 0 (remanejamento de casos).
-        # TODO: detalhar que valores new_confirmed e new_deaths podem ser
-        # negativos.
         for place_key in place_keys:
             place_type, state, city = place_key
             place_cases = caso_by_key[place_key]
@@ -89,18 +84,21 @@ def get_data(input_filename):
             last_valid_case = valid_place_cases[0]
             newest_case = place_cases[0]
             is_last = date == last_valid_case.date == newest_case.date
+            order_for_place[place_key] += 1
             new_case = {
                 "city": city,
                 "city_ibge_code": last_valid_case.city_ibge_code,
                 "date": date,
+                "epidemiological_week": epidemiological_week(date),
                 "estimated_population_2019": last_valid_case.estimated_population_2019,
-                "is_repeated": last_valid_case.date != date,
                 "is_last": is_last,
+                "is_repeated": last_valid_case.date != date,
                 "last_available_confirmed": last_valid_case.confirmed,
                 "last_available_confirmed_per_100k_inhabitants": last_valid_case.confirmed_per_100k_inhabitants,
                 "last_available_date": last_valid_case.date,
                 "last_available_death_rate": last_valid_case.death_rate,
                 "last_available_deaths": last_valid_case.deaths,
+                "order_for_place": order_for_place[place_key],
                 "place_type": place_type,
                 "state": state,
             }
@@ -114,7 +112,6 @@ def get_data(input_filename):
                 new_deaths = new_case["last_available_deaths"] - last_case["last_available_deaths"]
             new_case["new_confirmed"] = new_confirmed
             new_case["new_deaths"] = new_deaths
-            new_case["epidemiological_week"] = epidemiological_week(new_case["date"])
             last_case_for_place[place_key] = new_case
 
             yield new_case

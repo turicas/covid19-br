@@ -286,14 +286,11 @@ casos em que um boletim não foi divulgado naquele dia, é copiado o dado do
 
 Colunas:
 
-- 🔍 `date`: data de coleta dos dados no formato YYYY-MM-DD.
-- 🔍 `state`: sigla da unidade federativa, exemplo: SP.
 - 🔍 `city`: nome do município (pode estar em branco quando o registro é
   referente ao estado, pode ser preenchido com `Importados/Indefinidos`
   também).
-- 🔍 `place_type`: tipo de local que esse registro descreve, pode ser `city` ou
-  `state`.
 - 🔍 `city_ibge_code`: código IBGE do local.
+- 🔍 `date`: data de coleta dos dados no formato YYYY-MM-DD.
 - 🔍 `epidemiological_week`: número da semana epidemiológica.
 - `estimated_population_2019`: população estimada para esse município/estado em
   2019, [segundo o
@@ -308,24 +305,29 @@ Colunas:
   se o dado é repetido do último dia em que o dado está disponível (igual ou
   anterior a `date`). Isso ocorre pois nem todas as secretarias publicam
   boletins todos os dias. Veja também o campo `last_available_date`.
-- 🔍 `last_available_date`: data da qual o dado se refere.
-- 🔍 `had_cases`: `True` para todos os registros do local a partir do primeiro
-  dia que esse passou a reportar ao menos 1 caso confirmado (ótimo para pegar o
-  histórico completo de algum local, eliminando as datas em que esse local
-  ainda não possuía casos);
 - `last_available_confirmed`: número de casos confirmados do último dia
   disponível igual ou anterior à data `date`.
-- `last_available_deaths`: número de mortes do último dia disponível igual ou
-  anterior à data `date`.
 - `last_available_confirmed_per_100k_inhabitants`: número de casos confirmados
   por 100.000 habitantes do último dia disponível igual ou anterior à data
   `date`.
+- 🔍 `last_available_date`: data da qual o dado se refere.
 - `last_available_death_rate`: taxa de mortalidade (mortes / confirmados) do
   último dia disponível igual ou anterior à data `date`.
+- `last_available_deaths`: número de mortes do último dia disponível igual ou
+  anterior à data `date`.
+- 🔍 `order_for_place`: número que identifica a ordem do registro para este
+  local. O registro referente ao primeiro boletim em que esse local aparecer
+  será contabilizado como `1` e os demais boletins incrementarão esse valor.
+- 🔍 `place_type`: tipo de local que esse registro descreve, pode ser `city` ou
+  `state`.
+- 🔍 `state`: sigla da unidade federativa, exemplo: SP.
 - `new_confirmed`: número de novos casos confirmados desde o último dia (note
-  que caso `is_repeated` seja `True`, esse valor sempre será `0`).
+  que caso `is_repeated` seja `True`, esse valor sempre será `0` e que esse
+  valor pode ser negativo caso a SES remaneje os casos desse município para
+  outro).
 - `new_deaths`: número de novos óbitos desde o último dia (note que caso
-  `is_repeated` seja `True`, esse valor sempre será `0`).
+  `is_repeated` seja `True`, esse valor sempre será `0` e que esse valor pode
+  ser negativo caso a SES remaneje os casos desse município para outro).
 
 🔍 = colunas que podem ser filtrados via query string na API e na interface.
 
