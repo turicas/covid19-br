@@ -64,7 +64,7 @@ def get_data(input_filename):
 
     order_key = lambda row: row.order_for_place
     last_date = dates[-1]
-    last_case_for_place, had_cases = {}, {}
+    last_case_for_place = {}
     for date in dates:
         # TODO: São Paulo (município) aparece com 1 caso na data 2020-02-25 em
         # last_available_confirmed. No entanto, new_confirmed aparece como 0.
@@ -83,64 +83,35 @@ def get_data(input_filename):
                 key=order_key,
                 reverse=True,
             )
-            if not valid_place_cases:  # First case being converted for this place
-                newest_case_date = place_cases[0].date if place_cases else last_date
-                is_last = date == newest_case_date
-                if place_type == "state":
-                    population = population_by_state[state]
-                    place_code = place_code_by_state[state]
-                elif place_type == "city":
-                    city_row = city_by_key.get((state, city), None)
-                    if city_row is None:
-                        if city != "Importados/Indefinidos":
-                            raise ValueError(f"City {city} not found")
-                        population = place_code = None
-                    else:
-                        population = city_row.estimated_population
-                        place_code = city_row.city_ibge_code
-                else:
-                    raise ValueError(f"Unknown place type: {repr(place_type)}")
-                new_case = {
-                    "city": city,
-                    "city_ibge_code": place_code,
-                    "date": date,
-                    "estimated_population_2019": population,
-                    "is_last": is_last,
-                    "is_repeated": False,
-                    "last_available_confirmed": None,
-                    "last_available_confirmed_per_100k_inhabitants": None,
-                    "last_available_date": None,
-                    "last_available_death_rate": None,
-                    "last_available_deaths": None,
-                    "place_type": place_type,
-                    "state": state,
-                }
-            else:
-                # This place has at least one case for this date (or before),
-                # so use the newest one.
-                last_valid_case = valid_place_cases[0]
-                newest_case = place_cases[0]
-                is_last = date == last_valid_case.date == newest_case.date
-                new_case = {
-                    "city": city,
-                    "city_ibge_code": last_valid_case.city_ibge_code,
-                    "date": date,
-                    "estimated_population_2019": last_valid_case.estimated_population_2019,
-                    "is_repeated": last_valid_case.date != date,
-                    "is_last": is_last,
-                    "last_available_confirmed": last_valid_case.confirmed,
-                    "last_available_confirmed_per_100k_inhabitants": last_valid_case.confirmed_per_100k_inhabitants,
-                    "last_available_date": last_valid_case.date,
-                    "last_available_death_rate": last_valid_case.death_rate,
-                    "last_available_deaths": last_valid_case.deaths,
-                    "place_type": place_type,
-                    "state": state,
-                }
+            if not valid_place_cases:
+                # There are no cases for this city for this date - skip
+                continue
+
+            # This place has at least one case for this date (or before),
+            # so use the newest one.
+            last_valid_case = valid_place_cases[0]
+            newest_case = place_cases[0]
+            is_last = date == last_valid_case.date == newest_case.date
+            new_case = {
+                "city": city,
+                "city_ibge_code": last_valid_case.city_ibge_code,
+                "date": date,
+                "estimated_population_2019": last_valid_case.estimated_population_2019,
+                "is_repeated": last_valid_case.date != date,
+                "is_last": is_last,
+                "last_available_confirmed": last_valid_case.confirmed,
+                "last_available_confirmed_per_100k_inhabitants": last_valid_case.confirmed_per_100k_inhabitants,
+                "last_available_date": last_valid_case.date,
+                "last_available_death_rate": last_valid_case.death_rate,
+                "last_available_deaths": last_valid_case.deaths,
+                "place_type": place_type,
+                "state": state,
+            }
 
             last_case = last_case_for_place.get(place_key, None)
             if last_case is None:
-                new_confirmed = 0
-                new_deaths = 0
+                new_confirmed = 0  # TODO: change for new value
+                new_deaths = 0  # TODO: change for new value
             else:
                 last_confirmed = last_case["last_available_confirmed"]
                 new_confirmed = new_case["last_available_confirmed"]
@@ -153,14 +124,7 @@ def get_data(input_filename):
             new_case["epidemiological_week"] = epidemiological_week(new_case["date"])
             last_case_for_place[place_key] = new_case
 
-            place_had_cases = had_cases.get(place_key, False)
-            if not place_had_cases:
-                place_had_cases = (new_case["last_available_confirmed"] or 0) != 0 or (
-                    new_case["last_available_deaths"] or 0
-                ) != 0
-                had_cases[place_key] = place_had_cases
-            if place_had_cases:
-                yield new_case
+            yield new_case
 
 
 if __name__ == "__main__":
