@@ -1,4 +1,5 @@
 from collections import Counter, defaultdict
+from functools import lru_cache
 from pathlib import Path
 
 import rows
@@ -23,6 +24,20 @@ def read_population():
         DATA_PATH / "populacao-estimada-2019.csv",
         force_types=load_schema(str(SCHEMA_PATH / "populacao-estimada-2019.csv")),
     )
+
+@lru_cache()
+def read_epidemiological_week():
+    filename = "data/epidemiological-week.csv"
+    table = rows.import_from_csv(filename)
+    return {
+        row.date: row.epidemiological_week
+        for row in table
+    }
+
+
+@lru_cache(maxsize=6000)
+def epidemiological_week(date):
+    return read_epidemiological_week()[date]
 
 
 def get_data(input_filename):
@@ -135,6 +150,7 @@ def get_data(input_filename):
                 new_deaths = (new_deaths or 0) - (last_deaths or 0)
             new_case["new_confirmed"] = new_confirmed
             new_case["new_deaths"] = new_deaths
+            new_case["epidemiological_week"] = epidemiological_week(new_case["date"])
             last_case_for_place[place_key] = new_case
 
             place_had_cases = had_cases.get(place_key, False)

@@ -294,6 +294,7 @@ Colunas:
 - 🔍 `place_type`: tipo de local que esse registro descreve, pode ser `city` ou
   `state`.
 - 🔍 `city_ibge_code`: código IBGE do local.
+- 🔍 `epidemiological_week`: número da semana epidemiológica.
 - `estimated_population_2019`: população estimada para esse município/estado em
   2019, [segundo o
   IBGE](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=resultados)
@@ -354,7 +355,7 @@ Colunas:
 - `new_deaths_respiratory_failure_2020`: quantidade de óbitos em decorrência de
   insuficiência respiratória para o estado `state` ocorridos na data `date`
   (em 2020).
-- `new_deaths_pneumonia_2019`: quantidade de óbitos em decorrência de 
+- `new_deaths_pneumonia_2019`: quantidade de óbitos em decorrência de
   pneumonia para o estado `state` ocorridos no dia/mês de `date`, porém em 2019
   (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
 - `new_deaths_pneumonia_2020`: quantidade de óbitos em decorrência de
@@ -366,13 +367,13 @@ Colunas:
 - `deaths_covid19`: quantidade de óbitos em decorrência de **suspeita ou
   confirmação** de covid19 para o estado `state` acumulados no ano de 2020
   (de 1 de janeiro de 2020 a `date`).
-- `deaths_respiratory_failure_2019`: quantidade de óbitos em decorrência de 
+- `deaths_respiratory_failure_2019`: quantidade de óbitos em decorrência de
   insuficiência respiratória para o estado `state` acumulados no ano de 2019
   (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
 - `deaths_respiratory_failure_2020`: quantidade de óbitos em decorrência de
   insuficiência respiratória para o estado `state` acumulados no ano de 2020
   (de 1 de janeiro de 2020 a `date`).
-- `deaths_pneumonia_2019`: quantidade de óbitos em decorrência de 
+- `deaths_pneumonia_2019`: quantidade de óbitos em decorrência de
   pneumonia para o estado `state` acumulados no ano de 2019
   (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
 - `deaths_pneumonia_2020`: quantidade de óbitos em decorrência de
