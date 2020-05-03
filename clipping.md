@@ -62,7 +62,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://anticorona.io
 - https://carusojrea.maps.arcgis.com/apps/opsdashboard/index.html
 - https://covid-19.t10.digital/
-- https://covid19.getuff.com.br/panoramas/panorama-do-rio-de-janeiro
+- https://covid19.getuff.com.br/panoramas/panorama-do-rio-de-janeiro https://covid19.getuff.com.br/panoramas/panorama-de-niter%C3%B3i
 - https://covid19.ifnoar.com.br
 - https://github.com/estadao/covid-nos-estados/
 - https://github.com/inf-covid19/covid19-data
@@ -99,6 +99,9 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://public.tableau.com/profile/noemi.da.veiga#!/vizhome/httpspublic_tableau_comnoemi_da_veiga/Cover
 - [COVID - MapBiomas](https://covid.mapbiomas.org/)
 - [Algoritmos que salvam vidas | Nerdologia Tech](https://www.youtube.com/watch?v=m0ibiy-NX9c)
+- https://valoradicionado.wordpress.com/2020/04/28/sao-paulo-e-outras-quatro-capitais-proximas-do-colapso-na-saude/
+- https://www.mamiraua.org.br/covid-amazonas
+
 
 ## Publicações Científicas
 
