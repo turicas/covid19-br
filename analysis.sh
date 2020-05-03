@@ -8,17 +8,13 @@ function create_database() {
 
 	rm -rf "$database_filename"
 	for table in boletim caso obito_cartorio caso_full; do
-		filename="data/${table}.csv"
-		if [ "$clean" = "--clean" ] && [ "$table" != "populacao-estimada-2019" ]; then
-			rm -rf "$filename" "${filename}.gz"
+		filename="data/output/${table}.csv.gz"
+		if [ "$clean" = "--clean" ]; then
+			rm -rf "$filename"
 		fi
 		if [ -e "$filename" ]; then
 			echo "Using already downloaded $filename as $table"
-		elif [ -e "${filename}.gz" ]; then
-			filename="${filename}.gz"
-			echo "Using already downloaded $filename as $table"
 		else
-			filename="${filename}.gz"
 			echo "Downloading $table"
 			url="https://data.brasil.io/dataset/covid19/${table}.csv.gz"
 			rm -rf "$filename"
@@ -72,7 +68,7 @@ function execute_sql_files() {
 }
 
 DATABASE="data/covid19.sqlite"
-mkdir -p data/analysis
-create_database $DATABASE "$1"
-setup_database $DATABASE
-execute_sql_files $DATABASE sql/*.sql
+mkdir -p "data/analysis" "data/output"
+create_database "$DATABASE" "$1"
+setup_database "$DATABASE"
+execute_sql_files "$DATABASE" sql/*.sql
