@@ -66,9 +66,6 @@ def get_data(input_filename):
     last_date = dates[-1]
     last_case_for_place = {}
     for date in dates:
-        # TODO: São Paulo (município) aparece com 1 caso na data 2020-02-25 em
-        # last_available_confirmed. No entanto, new_confirmed aparece como 0.
-        # Não deveria ser 1, já que foi o primeiro caso confirmado?
         # TODO: adicionar coluna "day_number_for_place", que
         # começa em 1 na data em que casos passa a ser maior que 0
         # TODO: decidir o que fazer com day_number_for_place quando número de
@@ -110,15 +107,11 @@ def get_data(input_filename):
 
             last_case = last_case_for_place.get(place_key, None)
             if last_case is None:
-                new_confirmed = 0  # TODO: change for new value
-                new_deaths = 0  # TODO: change for new value
-            else:
-                last_confirmed = last_case["last_available_confirmed"]
                 new_confirmed = new_case["last_available_confirmed"]
-                new_confirmed = (new_confirmed or 0) - (last_confirmed or 0)
-                last_deaths = last_case["last_available_deaths"]
                 new_deaths = new_case["last_available_deaths"]
-                new_deaths = (new_deaths or 0) - (last_deaths or 0)
+            else:
+                new_confirmed = new_case["last_available_confirmed"] - last_case["last_available_confirmed"]
+                new_deaths = new_case["last_available_deaths"] - last_case["last_available_deaths"]
             new_case["new_confirmed"] = new_confirmed
             new_case["new_deaths"] = new_deaths
             new_case["epidemiological_week"] = epidemiological_week(new_case["date"])
