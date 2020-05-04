@@ -24,12 +24,10 @@ log "Cleaning data path and collecting data"
 ./run.sh
 
 source $SCRIPT_PATH/.env
-for table in boletim caso obito_cartorio; do
+for table in boletim caso caso_full obito_cartorio; do
 	upload_table_file $table
 	update_table $table
 done
-# TODO: generate status page for this dataset
-upload_table_file "caso_full"  # TODO: adicionar tabela ao `for`
 
 log "Generating file list page"
 python create_html.py dataset $DATASET $(date +"%Y-%m-%d") $SCRIPT_PATH/data/output/
