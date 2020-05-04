@@ -6,6 +6,14 @@ CREATE INDEX IF NOT EXISTS idx_caso_key ON caso (
 );
 UPDATE caso SET city = '' WHERE place_type = 'state';  /* Remove NULLs */
 
+CREATE INDEX IF NOT EXISTS idx_caso_full_key ON caso_full (
+	date,
+	state,
+	city,
+	place_type
+);
+UPDATE caso_full SET city = '' WHERE place_type = 'state';  /* Remove NULLs */
+
 DROP VIEW IF EXISTS all_dates;
 CREATE VIEW all_dates AS
 	SELECT
@@ -20,20 +28,17 @@ CREATE VIEW all_places AS
 	SELECT
 		state,
 		city,
-		'city' AS place_type,
+		place_type,
 		city_ibge_code,
-		estimated_population AS estimated_population_2019
+		estimated_population_2019
 	FROM
-		populacao_estimada_2019
-	UNION
-	SELECT
+		caso_full
+	GROUP BY
 		state,
-		'' AS city,
-		'state' AS place_type,
-		state_ibge_code AS city_ibge_code,
-		SUM(estimated_population) AS estimated_population_2019
-	FROM populacao_estimada_2019
-	GROUP BY state;
+		city,
+		place_type,
+		city_ibge_code,
+		estimated_population_2019;
 
 DROP VIEW IF EXISTS place_date_matrix;
 CREATE VIEW place_date_matrix AS
@@ -89,3 +94,19 @@ CREATE VIEW total_from_state_and_cities AS
 		JOIN total_state_from_states AS s
 		ON
 			c.state = s.state;
+
+DROP VIEW IF EXISTS city_cases;
+CREATE VIEW city_cases AS
+	SELECT
+		*
+	FROM caso_full
+	WHERE
+		place_type = 'city';
+
+DROP VIEW IF EXISTS state_cases;
+CREATE VIEW state_cases AS
+	SELECT
+		*
+	FROM caso_full
+	WHERE
+		place_type = 'state';

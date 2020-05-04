@@ -126,30 +126,39 @@ def main():
         else:
             confirmed_state = sum_all(state_rows, "confirmed")
             deaths_state = sum_all(state_rows, "deaths")
+            state_date = state_rows[0]["date"]
 
         confirmed_cities = sum_all(city_rows, "confirmed")
         deaths_cities = sum_all(city_rows, "deaths")
 
         confirmed_differs = confirmed_state != confirmed_cities
         deaths_differs = deaths_state != deaths_cities
-        if confirmed_differs or deaths_differs:
-            date_count = Counter(row["date"] for row in city_rows)
-            if len(date_count) > 1:
-                wrong_date = date_count.most_common()[-1][0]
-                wrong_cities = list(filter_rows(city_rows, date=wrong_date))
-                wrong_str = " - municípios: " + ", ".join(
-                    f"{row['city']} {row['date']}" for row in wrong_cities
+        date_count = Counter(row["date"] for row in city_rows)
+        if len(date_count) > 1:
+            wrong_cities = []
+            for date, _ in date_count.most_common():
+                if date != state_date:
+                    wrong_cities.extend(list(filter_rows(city_rows, date=date)))
+            wrong_str = " - municípios: " + ", ".join(
+                sorted(
+                    f"{row['city']} ({row['date']})"
+                    for row in wrong_cities
                 )
-            else:
-                wrong_str = ""
-            if confirmed_differs:
-                confirmed_diff.append(
-                    f"{state} ({confirmed_cities}/{confirmed_state}){wrong_str}"
-                )
-            if deaths_differs:
-                deaths_diff.append(
-                    f"{state} ({deaths_cities}/{deaths_state}){wrong_str}"
-                )
+            )
+        else:
+            wrong_str = ""
+        if confirmed_differs:
+            confirmed_diff.append(
+                f"{state} ({confirmed_cities}/{confirmed_state}){wrong_str}"
+            )
+        elif wrong_str:
+            confirmed_diff.append(
+                f"{state} {wrong_str}"
+            )
+        if deaths_differs:
+            deaths_diff.append(
+                f"{state} ({deaths_cities}/{deaths_state})"
+            )
         if state_date != last_date:
             dias = abs(
                 datetime.date.fromisoformat(str(state_date))

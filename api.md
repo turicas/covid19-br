@@ -43,7 +43,13 @@ dados](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFr
 > queira alterar o número de registros por página, basta passar o valor através
 > da *query string* `page_size` (máximo de 10.000 registros por página).
 
-### Casos
+### `caso`
+
+Essa tabela tem apenas os casos relatados pelos boletins das Secretarias
+Estaduais de Saúde e, por isso, não possui valores para todos os municípios e
+todas as datas - é nossa "tabela canônica", que reflete o que foi publicado.
+Caso você precise dos dados por município por dia completos, veja a tabela
+[`caso_full`](#caso_full).
 
 Número de casos confirmados e óbitos por município por dia, segundo as
 Secretarias Estaduais de Saúde.
@@ -212,7 +218,11 @@ curl -X GET https://brasil.io/api/dataset/covid19/caso/data?is_last=True&place_t
 ...
 ```
 
-### Boletim
+### `boletim`
+
+Tabela que lista os boletins publicados pelas Secretarias Estaduais de Saúde.
+Pode aparecer mais de um para a mesma data e podem existir dias em que as SES
+não publicam boletins.
 
 Links para os boletins das Secretarias Estaduais de Saúde de onde retiramos os
 dados de casos confirmados e mortes.
@@ -263,6 +273,65 @@ curl -X GET https://brasil.io/api/dataset/covid19/boletim/data?state=SP
 ...
 ```
 
+
+### `caso_full`
+
+Tabela gerada a partir da tabela [`caso`](#caso), que possui um registro por
+município (+ Importados/Indefinidos) e estado para cada data disponível; nos
+casos em que um boletim não foi divulgado naquele dia, é copiado o dado do
+último dia disponível e a coluna `is_repeated` fica com o valor `True`.
+
+- API: https://brasil.io/api/dataset/covid19/caso_full/data
+- Dados completos para download: https://data.brasil.io/dataset/covid19/caso_full.csv.gz
+
+Colunas:
+
+- 🔍 `city`: nome do município (pode estar em branco quando o registro é
+  referente ao estado, pode ser preenchido com `Importados/Indefinidos`
+  também).
+- 🔍 `city_ibge_code`: código IBGE do local.
+- 🔍 `date`: data de coleta dos dados no formato YYYY-MM-DD.
+- 🔍 `epidemiological_week`: número da semana epidemiológica.
+- `estimated_population_2019`: população estimada para esse município/estado em
+  2019, [segundo o
+  IBGE](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=resultados)
+  ([acesse o script que faz o download e conversão dos dados de
+  população](https://github.com/turicas/censo-ibge)).
+- 🔍 `is_last`: campo pré-computado que diz se esse registro é o mais novo para
+  esse local, pode ser `True` ou `False` (caso filtre por esse campo, use
+  `is_last=True` ou `is_last=False`, **não use o valor em minúsculas**).
+- 🔍 `is_repeated`: campo pré-computado que diz se as informações nesse
+  registro foram publicadas pela Secretaria Estadual de Saúde no dia `date` ou
+  se o dado é repetido do último dia em que o dado está disponível (igual ou
+  anterior a `date`). Isso ocorre pois nem todas as secretarias publicam
+  boletins todos os dias. Veja também o campo `last_available_date`.
+- `last_available_confirmed`: número de casos confirmados do último dia
+  disponível igual ou anterior à data `date`.
+- `last_available_confirmed_per_100k_inhabitants`: número de casos confirmados
+  por 100.000 habitantes do último dia disponível igual ou anterior à data
+  `date`.
+- 🔍 `last_available_date`: data da qual o dado se refere.
+- `last_available_death_rate`: taxa de mortalidade (mortes / confirmados) do
+  último dia disponível igual ou anterior à data `date`.
+- `last_available_deaths`: número de mortes do último dia disponível igual ou
+  anterior à data `date`.
+- 🔍 `order_for_place`: número que identifica a ordem do registro para este
+  local. O registro referente ao primeiro boletim em que esse local aparecer
+  será contabilizado como `1` e os demais boletins incrementarão esse valor.
+- 🔍 `place_type`: tipo de local que esse registro descreve, pode ser `city` ou
+  `state`.
+- 🔍 `state`: sigla da unidade federativa, exemplo: SP.
+- `new_confirmed`: número de novos casos confirmados desde o último dia (note
+  que caso `is_repeated` seja `True`, esse valor sempre será `0` e que esse
+  valor pode ser negativo caso a SES remaneje os casos desse município para
+  outro).
+- `new_deaths`: número de novos óbitos desde o último dia (note que caso
+  `is_repeated` seja `True`, esse valor sempre será `0` e que esse valor pode
+  ser negativo caso a SES remaneje os casos desse município para outro).
+
+🔍 = colunas que podem ser filtrados via query string na API e na interface.
+
+
 ### Óbitos Registrados em Cartório
 
 Dados de óbitos por suspeita/confirmação de covid19, pneumonia ou insuficiência
@@ -288,7 +357,7 @@ Colunas:
 - `new_deaths_respiratory_failure_2020`: quantidade de óbitos em decorrência de
   insuficiência respiratória para o estado `state` ocorridos na data `date`
   (em 2020).
-- `new_deaths_pneumonia_2019`: quantidade de óbitos em decorrência de 
+- `new_deaths_pneumonia_2019`: quantidade de óbitos em decorrência de
   pneumonia para o estado `state` ocorridos no dia/mês de `date`, porém em 2019
   (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
 - `new_deaths_pneumonia_2020`: quantidade de óbitos em decorrência de
@@ -300,13 +369,13 @@ Colunas:
 - `deaths_covid19`: quantidade de óbitos em decorrência de **suspeita ou
   confirmação** de covid19 para o estado `state` acumulados no ano de 2020
   (de 1 de janeiro de 2020 a `date`).
-- `deaths_respiratory_failure_2019`: quantidade de óbitos em decorrência de 
+- `deaths_respiratory_failure_2019`: quantidade de óbitos em decorrência de
   insuficiência respiratória para o estado `state` acumulados no ano de 2019
   (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
 - `deaths_respiratory_failure_2020`: quantidade de óbitos em decorrência de
   insuficiência respiratória para o estado `state` acumulados no ano de 2020
   (de 1 de janeiro de 2020 a `date`).
-- `deaths_pneumonia_2019`: quantidade de óbitos em decorrência de 
+- `deaths_pneumonia_2019`: quantidade de óbitos em decorrência de
   pneumonia para o estado `state` acumulados no ano de 2019
   (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
 - `deaths_pneumonia_2020`: quantidade de óbitos em decorrência de
@@ -321,5 +390,7 @@ Colunas:
 - [Preencha o formulário de filtros na página do
   dataset](https://brasil.io/dataset/covid19/caso) e copie/cole a
   querystring (a mesma poderá ser passada para a API);
-- Filtre por `is_last=True` para ter os dados mais atuais de cada
-  município/estado.
+- Em `caso` filtre por `is_last=True` para ter os dados mais atuais de cada
+  município/estado;
+- Em `caso_full` filtre por `had_cases=True` para ter dados apenas a partir das
+  datas em que os locais começaram a reportar o número de casos maior que 1.

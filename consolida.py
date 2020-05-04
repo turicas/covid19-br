@@ -234,14 +234,14 @@ class ConsolidaSpider(scrapy.Spider):
                 else None
             )
             death_rate = (
-                row_deaths / row_confirmed if row_deaths and row_confirmed else None
+                row_deaths / row_confirmed if row_deaths is not None and row_confirmed not in (None, 0) else 0
             )
             row["estimated_population_2019"] = row_population
             row["city_ibge_code"] = row_city_code
             row["confirmed_per_100k_inhabitants"] = (
                 f"{confirmed_per_100k:.5f}" if confirmed_per_100k else None
             )
-            row["death_rate"] = f"{death_rate:.4f}" if death_rate else None
+            row["death_rate"] = f"{death_rate:.4f}"
             self.logger.debug(row)
             self.caso_writer.writerow(row)
 
