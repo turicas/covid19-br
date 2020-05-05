@@ -113,6 +113,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Outras Publicações
 
+- [2020-05-01 CWB Resiste - Entrevista com Álvaro Justen](https://medium.com/cwbresiste/n%C3%A3o-teremos-o-n%C3%BAmero-de-%C3%B3bitos-reais-enquanto-n%C3%A3o-tivermos-transpar%C3%AAncia-sobre-isso-afirma-f74fad5d673e)
 - [2020-04-12 Live do Átila Iamarino](https://www.youtube.com/watch?v=vEwDdXim8bQ)
 - [2020-03-25 Análise Descritiva do Coronavírus nos Estados Brasileiros](https://marcusnunes.me/posts/analise-descritiva-do-coronavirus/)
 - https://dev.to/diogomqbm_/in-times-of-crisis-help-others-174e
