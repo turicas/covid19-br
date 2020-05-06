@@ -1,5 +1,6 @@
 import datetime
 import io
+import os
 import re
 
 import rows
@@ -20,6 +21,7 @@ def convert_city(city):
 
 
 class Covid19RNSpider(BaseCovid19Spider):
+    http_proxy = os.environ.get("HTTP_PROXY", None)
     name = "RN"
     start_urls = [
         "http://www.saude.rn.gov.br/Conteudo.asp?TRAN=ITEM&TARG=223456&ACT=&PAGE=&PARM=&LBL=MAT%C9RIA"
@@ -34,14 +36,18 @@ class Covid19RNSpider(BaseCovid19Spider):
     def parse_pdf(self, response):
         pdf = rows.plugins.pdf.PyMuPDFBackend(io.BytesIO(response.body))
         pages = pdf.text_objects(starts_after=re.compile("EM INVESTIGAÇÃO.*"))
+        found = False
         for page in pages:
             for obj in page:
-                if obj.text.startswith("Fonte:"):
+                if "Dados extraídos" in obj.text:
                     day, month, year = re.compile(
                         "([0-9]{2})/([0-9]{2})/([0-9]{4})"
                     ).findall(obj.text)[0]
                     date = datetime.date(int(year), int(month), int(day))
+                    found = True
                     break
+            if found:
+                break
         self.add_report(date=date, url=response.url)
 
         table = rows.import_from_pdf(
