@@ -12,53 +12,35 @@ STATES = "AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS S
 
 class DeathsSpider(scrapy.Spider):
     name = "obitos"
-    deaths_url = "https://transparencia.registrocivil.org.br/api/record/death"
-    covid_url = "https://transparencia.registrocivil.org.br/api/covid"
+    registral_url = "https://transparencia.registrocivil.org.br/api/covid-covid-registral"
 
-    def make_deaths_request(self, start_date, end_date, callback):
-        data = {
-            "start_date": str(start_date),
-            "end_date": str(end_date),
-        }
-        return scrapy.Request(
-            url=urljoin(self.deaths_url, "?" + urlencode(data)), callback=callback,
-        )
+    causes_map = {
+        "sars": "SRAG",
+        "pneumonia": "PNEUMONIA",
+        "respiratory_failure": "INSUFICIENCIA_RESPIRATORIA",
+        "septicemia": "SEPTICEMIA",
+        "indeterminate": "INDETERMINADA",
+        "others": "OUTRAS"
+    }
 
-    def make_covid_request(
+    def make_registral_request(
         self,
         start_date,
         end_date,
-        date_type,
-        search,
-        cause,
         state,
         callback,
         dont_cache=False,
     ):
-        assert date_type in ("data_ocorrido", "data_registro")
-        assert search in ("death-respiratory", "death-covid")
-        assert cause in ("pneumonia", "insuficiencia_respiratoria", None)
-        if search == "death-respiratory" and not cause:
-            raise ValueError("Must specify cause for respiratory")
-        elif search == "death-covid" and cause is not None:
-            raise ValueError("Cannot specify cause for covid")
-
         data = {
-            "data_type": date_type,
-            "search": search,
             "state": state,
             "start_date": str(start_date),
             "end_date": str(end_date),
         }
-        if cause is not None:
-            data["causa"] = cause
         return scrapy.Request(
-            url=urljoin(self.covid_url, "?" + urlencode(data)),
+            url=urljoin(self.registral_url, "?" + urlencode(data)),
             callback=callback,
             meta={"row": data, "dont_cache": dont_cache},
         )
-
-    # TODO: death-covid &groupBy=gender
 
     def start_requests(self):
         today = date_utils.today()
@@ -70,63 +52,47 @@ class DeathsSpider(scrapy.Spider):
             # ones which are unlikely to change).
             should_cache = today - date > datetime.timedelta(days=30)
             for state in STATES:
-                for search in ("death-respiratory", "death-covid"):
-                    if search == "death-covid":
-                        yield self.make_covid_request(
-                            start_date=date,
-                            end_date=date,
-                            date_type="data_ocorrido",
-                            search=search,
-                            cause=None,
-                            state=state,
-                            callback=self.parse_covid_request,
-                            dont_cache=not should_cache,
-                        )
-                    else:
-                        for cause in ("pneumonia", "insuficiencia_respiratoria"):
-                            yield self.make_covid_request(
-                                start_date=date,
-                                end_date=date,
-                                date_type="data_ocorrido",
-                                search=search,
-                                cause=cause,
-                                state=state,
-                                callback=self.parse_covid_request,
-                                dont_cache=not should_cache,
-                            )
+                yield self.make_registral_request(
+                    start_date=date,
+                    end_date=date,
+                    state=state,
+                    callback=self.parse_registral_request,
+                    dont_cache=not should_cache,
+                )
 
-    def parse_covid_request(self, response):
+    def add_causes(self, row, data, year):
+        for cause, portuguese_name in self.causes_map.items():
+            row[cause + "_" + year] = data[portuguese_name]
+
+    def parse_registral_request(self, response):
         row = response.meta["row"].copy()
         data = json.loads(response.body)
-
         assert row["start_date"] == row.pop("end_date")
         row["date"] = row.pop("start_date")
         year, month, day = row["date"].split("-")
         date = datetime.date(int(year), int(month), int(day))
-        if "causa" not in row:
-            row["causa"] = None
         if "dont_cache" in row:
             del row["dont_cache"]
 
+        for year in ["2019", "2020"]:
+            for cause in self.causes_map:
+                row[cause + "_" + year] = 0
+
+        row["covid"] = 0
+
         chart_data = data["chart"]
-        if not chart_data:
-            row["qtd_2019"] = row["qtd_2020"] = 0
-        else:
+        if chart_data:
             if "2019" in chart_data and "2020" in chart_data:
                 try:
                     datetime.date(2019, date.month, date.day)
                 except ValueError:
                     # This day does not exist on 2019 and the API returned
                     # 2019's next day data.
-                    row["qtd_2019"] = 0
+                    pass
                 else:
-                    row["qtd_2019"] = chart_data["2019"]
-                row["qtd_2020"] = chart_data["2020"]
-            else:
-                row["qtd_2019"] = None
-                assert len(chart_data.keys()) == 1
-                key = list(chart_data.keys())[0]
-                day, month = key.split("/")
-                assert f"2020-{int(month):02d}-{int(day):02d}" == str(date)
-                row["qtd_2020"] = chart_data[key]
+                    self.add_causes(row, chart_data["2019"], "2019")
+
+                self.add_causes(row, chart_data["2020"], "2020")
+                row["covid"] = chart_data["2020"]["COVID"]
+
         yield row
