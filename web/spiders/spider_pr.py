@@ -30,9 +30,13 @@ class Covid19PRSpider(BaseCovid19Spider):
         )
 
     def parse_csv(self, response):
-        date = response.meta["row"]["date"]
         table = rows.import_from_csv(
-            io.BytesIO(response.body), encoding=response.encoding
+            io.BytesIO(response.body),
+            encoding=response.encoding,
+            force_types={
+                "confirmados": rows.fields.IntegerField,
+                "obitos": rows.fields.IntegerField,
+            },
         )
         total_confirmed = total_deaths = 0
         for row in table:
