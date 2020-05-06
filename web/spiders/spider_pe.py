@@ -43,7 +43,9 @@ class Covid19PESpider(BaseCovid19Spider):
         result = []
         for row in zip(*case_data):
             row = dict(zip(header, row))
-            result.append(self.fix_row(row))
+            new = self.fix_row(row)
+            if new:  # TODO: remove
+                result.append(new)
 
         last_date = max(row["dt_notificacao"] or "" for row in result)
         year, month, day = last_date.split("-")
@@ -81,6 +83,12 @@ class Covid19PESpider(BaseCovid19Spider):
                 elif not municipio:
                     municipio = "Importados/Indefinidos"
                 else:
+                    try:
+                        municipio.encode("iso-8859-1").decode("utf-8")
+                    except UnicodeDecodeError:
+                        print("ERROR", repr(municipio))
+                        return {}
+
                     municipio = (
                         municipio.encode("iso-8859-1")
                         .decode("utf-8")
