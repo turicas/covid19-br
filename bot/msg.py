@@ -1,5 +1,5 @@
-import io
 import getpass
+import io
 from collections import defaultdict
 from urllib.request import urlopen
 
@@ -7,7 +7,6 @@ import rows
 from tqdm import tqdm
 
 import rocketchat
-
 
 your_username = "fill-your-username-here"
 your_password = getpass.getpass()

@@ -1,7 +1,5 @@
 import datetime
-
 from functools import lru_cache
-
 
 one_day = datetime.timedelta(days=1)
 

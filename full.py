@@ -5,7 +5,6 @@ from pathlib import Path
 import rows
 from rows.utils import load_schema
 
-
 DATA_PATH = Path(__file__).parent / "data"
 SCHEMA_PATH = Path(__file__).parent / "schema"
 
@@ -25,14 +24,12 @@ def read_population():
         force_types=load_schema(str(SCHEMA_PATH / "populacao-estimada-2019.csv")),
     )
 
+
 @lru_cache()
 def read_epidemiological_week():
     filename = "data/epidemiological-week.csv"
     table = rows.import_from_csv(filename)
-    return {
-        row.date: row.epidemiological_week
-        for row in table
-    }
+    return {row.date: row.epidemiological_week for row in table}
 
 
 @lru_cache(maxsize=6000)
@@ -63,7 +60,6 @@ def get_data(input_filename):
     place_keys.sort()
 
     order_key = lambda row: row.order_for_place
-    last_date = dates[-1]
     last_case_for_place = {}
     order_for_place = Counter()
     for date in dates:
@@ -108,8 +104,14 @@ def get_data(input_filename):
                 new_confirmed = new_case["last_available_confirmed"]
                 new_deaths = new_case["last_available_deaths"]
             else:
-                new_confirmed = new_case["last_available_confirmed"] - last_case["last_available_confirmed"]
-                new_deaths = new_case["last_available_deaths"] - last_case["last_available_deaths"]
+                new_confirmed = (
+                    new_case["last_available_confirmed"]
+                    - last_case["last_available_confirmed"]
+                )
+                new_deaths = (
+                    new_case["last_available_deaths"]
+                    - last_case["last_available_deaths"]
+                )
             new_case["new_confirmed"] = new_confirmed
             new_case["new_deaths"] = new_deaths
             last_case_for_place[place_key] = new_case

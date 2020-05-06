@@ -1,12 +1,10 @@
 import csv
-import io
 from functools import lru_cache
 from pathlib import Path
 
 import rows
 import scrapy
 from cached_property import cached_property
-
 
 BASE_PATH = Path(__file__).parent.parent.parent
 POPULATION_PATH = BASE_PATH / "data" / "populacao-estimada-2019.csv"

@@ -1,4 +1,3 @@
-import csv
 import datetime
 import io
 import os
@@ -6,11 +5,10 @@ import os
 import pytz
 import rows
 import scrapy
-from Levenshtein import distance as levenshtein_distance
 from html2text import HTML2Text
+from Levenshtein import distance as levenshtein_distance
 
 import rocketchat
-
 
 URL_LIST_URL = "https://docs.google.com/spreadsheets/d/1S77CvorwQripFZjlWTOZeBhK42rh3u57aRL1XZGhSdI/export?format=csv&id=1S77CvorwQripFZjlWTOZeBhK42rh3u57aRL1XZGhSdI&gid=0"
 HASH_LIST_URL = "https://data.brasil.io/dataset/covid19/url-hash.csv"
@@ -130,7 +128,7 @@ class URLCheckerSpider(scrapy.Spider):
             failure_str = f"(HTTP {failure.value.response.status}) {failure.value}"
         else:
             failure_str = str(failure.value)
-        volunteer_mentions = self.__to_volunteer_mentions(meta['voluntarios'])
+        volunteer_mentions = self.__to_volunteer_mentions(meta["voluntarios"])
         self.notify(
             meta["channel"],
             (
@@ -151,7 +149,7 @@ class URLCheckerSpider(scrapy.Spider):
         text = (text or "").strip()
         old_text = (url_info.text or "").strip()
         if levenshtein_distance(text, old_text) >= meta["min_distance"]:
-            volunteer_mentions = self.__to_volunteer_mentions(meta['voluntarios'])
+            volunteer_mentions = self.__to_volunteer_mentions(meta["voluntarios"])
             self.notify(
                 meta["channel"],
                 f"{volunteer_mentions} detectei uma alteração no [site da SES de `{meta['state']}`]({url})."
@@ -162,11 +160,8 @@ class URLCheckerSpider(scrapy.Spider):
         url_info["text"] = text
         self.result.append(url_info)
 
-
     def __to_volunteer_mentions(self, name_list):
-        return ', '.join(
-            ['@{}'.format(nome.strip()) for nome in name_list.split(',')]
-        )
+        return ", ".join(["@{}".format(nome.strip()) for nome in name_list.split(",")])
 
     @classmethod
     def from_crawler(cls, crawler, *args, **kwargs):

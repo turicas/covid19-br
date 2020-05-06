@@ -17,3 +17,4 @@ goodtables==2.4.9
 
 gunicorn
 flask
+epiweeks

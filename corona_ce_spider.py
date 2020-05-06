@@ -1,6 +1,6 @@
 import datetime
 import json
-from urllib.parse import urljoin, urlencode
+from urllib.parse import urlencode, urljoin
 
 import scrapy
 
@@ -33,9 +33,7 @@ class CearaSpider(scrapy.Spider):
     def start_requests(self):
         for date in date_utils.date_range(self.start_date, date_utils.today()):
             yield self.make_state_confirmed_request(
-                date,
-                callback=self.parse_state_confirmed,
-                meta={"row": {"date": date}},
+                date, callback=self.parse_state_confirmed, meta={"row": {"date": date}},
             )
 
     def parse_state_confirmed(self, response):
