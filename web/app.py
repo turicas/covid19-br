@@ -1,18 +1,8 @@
 import csv
-import datetime
-import io
 
 from flask import Flask, make_response
-from scrapy.crawler import CrawlerProcess
 
-from .spiders.spider_es import Covid19ESSpider
-from .spiders.spider_pe import Covid19PESpider
-from .spiders.spider_pr import Covid19PRSpider
-from .spiders.spider_rn import Covid19RNSpider
-from .spiders.spider_rr import Covid19RRSpider
-
-SPIDERS = [Covid19ESSpider, Covid19PESpider, Covid19PRSpider, Covid19RRSpider, Covid19RNSpider]
-STATE_SPIDERS = {SpiderClass.name: SpiderClass for SpiderClass in SPIDERS}
+from web.spiders import run_state_spider, STATE_SPIDERS
 
 
 app = Flask(__name__)
@@ -21,7 +11,7 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     spider_links = "\n".join(
-        f'<li> <a href="/{state}">{state}</a> </li>' for state in STATE_SPIDERS.keys()
+        f'<li> <a href="/{state}">{state}</a> </li>' for state in STATE_SPIDERS
     )
     return f"""
     <!DOCTYPE html>
@@ -38,14 +28,16 @@ def index():
     """
 
 
-def get_spider_response(SpiderClass, state):
-    report_fobj, case_fobj = io.StringIO(), io.StringIO()
-    process = CrawlerProcess(settings={})
-    process.crawl(SpiderClass, report_fobj=report_fobj, case_fobj=case_fobj)
-    process.start()
+def get_spider_response(state):
+    status, response = run_state_spider(state)
+    if status == "error":
+        return make_response(f"Error while running spider: {response}", 500)
 
-    report_fobj.seek(0)
+    report_fobj, case_fobj = response
     reports = list(csv.DictReader(report_fobj))
+    if not reports:
+        return make_response(f"Could not find any report (see spider logs)", 500)
+
     date = reports[0]["date"]
     # TODO: do something with reports
 
@@ -63,7 +55,7 @@ def get_state_csv(state):
     if state not in STATE_SPIDERS:
         return "State not found", 404
 
-    return get_spider_response(STATE_SPIDERS[state], state)
+    return get_spider_response(state)
 
 
 if __name__ == "__main__":
