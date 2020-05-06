@@ -1,5 +1,5 @@
-import io
 import datetime
+import io
 from urllib.parse import urljoin
 
 import rows

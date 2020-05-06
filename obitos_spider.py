@@ -6,13 +6,14 @@ import scrapy
 
 import date_utils
 
-
 STATES = "AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO".split()
 
 
 class DeathsSpider(scrapy.Spider):
     name = "obitos"
-    registral_url = "https://transparencia.registrocivil.org.br/api/covid-covid-registral"
+    registral_url = (
+        "https://transparencia.registrocivil.org.br/api/covid-covid-registral"
+    )
 
     causes_map = {
         "sars": "SRAG",
@@ -20,16 +21,11 @@ class DeathsSpider(scrapy.Spider):
         "respiratory_failure": "INSUFICIENCIA_RESPIRATORIA",
         "septicemia": "SEPTICEMIA",
         "indeterminate": "INDETERMINADA",
-        "others": "OUTRAS"
+        "others": "OUTRAS",
     }
 
     def make_registral_request(
-        self,
-        start_date,
-        end_date,
-        state,
-        callback,
-        dont_cache=False,
+        self, start_date, end_date, state, callback, dont_cache=False
     ):
         data = {
             "state": state,

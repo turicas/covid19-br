@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from urllib.parse import urljoin
-import requests
 
+import requests
 
 HTTP_METHODS = "GET HEAD POST PUT DELETE CONNECT OPTIONS TRACE PATCH".lower().split()
 

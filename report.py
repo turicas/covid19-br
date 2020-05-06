@@ -1,6 +1,6 @@
 import argparse
-import datetime
 import csv
+import datetime
 import gzip
 import io
 import json
@@ -140,10 +140,7 @@ def main():
                 if date != state_date:
                     wrong_cities.extend(list(filter_rows(city_rows, date=date)))
             wrong_str = " - municípios: " + ", ".join(
-                sorted(
-                    f"{row['city']} ({row['date']})"
-                    for row in wrong_cities
-                )
+                sorted(f"{row['city']} ({row['date']})" for row in wrong_cities)
             )
         else:
             wrong_str = ""
@@ -152,13 +149,9 @@ def main():
                 f"{state} ({confirmed_cities}/{confirmed_state}){wrong_str}"
             )
         elif wrong_str:
-            confirmed_diff.append(
-                f"{state} {wrong_str}"
-            )
+            confirmed_diff.append(f"{state} {wrong_str}")
         if deaths_differs:
-            deaths_diff.append(
-                f"{state} ({deaths_cities}/{deaths_state})"
-            )
+            deaths_diff.append(f"{state} ({deaths_cities}/{deaths_state})")
         if state_date != last_date:
             dias = abs(
                 datetime.date.fromisoformat(str(state_date))

@@ -11,13 +11,12 @@ Esse script coleta o segundo tipo de boletim.
 
 import os
 import re
-from urllib.parse import urljoin
 from pathlib import Path
+from urllib.parse import urljoin
 
 import rows
 import scrapy
 from rows.plugins.plugin_pdf import PyMuPDFBackend, same_column
-
 
 BASE_PATH = Path(__file__).parent
 DOWNLOAD_PATH = BASE_PATH / "data" / "download"

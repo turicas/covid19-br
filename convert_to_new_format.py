@@ -2,7 +2,6 @@ import argparse
 
 import rows
 
-
 cities = rows.import_from_csv("data/populacao-estimada-2019.csv")
 
 

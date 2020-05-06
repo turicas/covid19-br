@@ -1,6 +1,5 @@
 import argparse
 import datetime
-import json
 from collections import Counter
 from itertools import groupby
 
@@ -8,6 +7,7 @@ import rows
 from tqdm import tqdm
 
 from date_utils import brazilian_epidemiological_week, one_day
+
 
 def convert_file(filename):
     table = rows.import_from_csv(filename)
@@ -50,7 +50,7 @@ def convert_file(filename):
                 "respiratory_failure",
                 "septicemia",
                 "indeterminate",
-                "others"
+                "others",
             ):
                 accumulated_key = f"{state}-{cause}-{year}"
                 new_deaths = row[f"new_deaths_{cause}_{year}"]
@@ -71,6 +71,7 @@ def convert_file(filename):
         row["deaths_total_2019"] = accumulated[f"{state}-total-2019"]
         row["deaths_total_2020"] = accumulated[f"{state}-total-2020"]
         yield row
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
