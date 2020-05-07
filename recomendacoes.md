@@ -4,7 +4,7 @@
 ## Para Secretarias de Saúde
 
 Oi! Obrigado por chegar até aqui. Nesse momento é muito importante que os
-cidadãos saibam **o quanto antes** a situação do covid-19 **em seus
+cidadãos saibam **o quanto antes** a situação da covid-19 **em seus
 municípios**. Para que jornalistas e outras pessoas tenham acesso a esse dado
 da maneira mais rápida possível, sugerimos que:
 
@@ -28,15 +28,74 @@ mortes etc.).
 ### Libere os Dados em Formato Estruturado e Aberto
 
 Muitas secretarias disponibilizam os dados em imagens, PDFs ou mesmo em texto
-corrido dentro de uma notícia do site. Isso dificulta demais qualquer tipo de
-análise dos dados.
+corrido dentro de uma notícia do site. Isso dificulta muito qualquer tipo de
+extração e análise dos dados.
 
-Disponibilize os dados em formato de planilha (se possível em CSV, que é
-aberto, e/ou outros formatos conhecidos, como ODS, XLS, XLSX). Evite colocar
-imagens e outras informações irrelevantes na planilha: coloque apenas o
-cabeçalho com os nomes das colunas e os valores. Para uma mesma coluna, não
-mude o tipo de dado (exemplo: na coluna de número de casos confirmados, coloque
-apenas números, não adicione asteriscos, parenteses ou outros caracteres).
+- Disponibilize os dados em formato de planilha;
+- Evite colocar imagens e outras informações na planilha: coloque apenas o
+  cabeçalho com os nomes das colunas e os valores. Informações como fonte dos
+  dados, logotipo da Secretaria, dentre outras podem ficar no site da
+  Secretaria;
+- Para uma mesma coluna, não altere o tipo de dado (exemplo: na coluna de
+  número de casos confirmados, coloque apenas números, não adicione asteriscos,
+  parenteses ou outros caracteres);
+- Para facilitar a leitura dos dados, a planilha disponível deve estar em um
+  dos seguintes formatos (nessa ordem de prioridade):
+  - CSV
+  - ODS
+  - XLSX
+  - XLS
+
+### Endereço para download
+
+É muito importante que o endereço para download dos dados seja padronizado,
+dessa forma o processo de coleta pode ser facilmente automatizável.
+
+Exemplo, para o dia 01/05/2020, o link para download do CSV poderia ser:
+https://www.saude.uf.gov.br/covid19/boletim/2020-05-01.csv
+
+Também é importante existir uma página que possua links para todos os boletins
+disponíveis.
+
+
+#### Para dados agregados
+
+Nessa planilha, cada município que possui casos confirmados deve ter uma linha
+por dia, com os valores agregados para aquela data. As colunas são:
+
+- `data`: data a qual a informação se refere.
+- `uf`: sigla da unidade da federação na qual o caso pertence (quando é um caso
+  importado de outro estado, pode ser usado um outro estado ou deixar a célula
+  vazia, caso não se saiba).
+- `municipio`: nome do município [segundo essa
+  planilha](https://raw.githubusercontent.com/turicas/covid19-br/master/data/populacao-estimada-2019.csv);
+  pode ser também "Importado", "Indefinido" ou "TOTAL NO ESTADO" (esse último
+  para nessa linha divulgar o número total oficial para aquela data).
+- `codigo_ibge`: código IBGE do município com 7 dígitos (retirar da planilha
+  acima, que é dos dados do IBGE) - no caso de município "Importado",
+  "Indefinido" ou "TOTAL NO ESTADO", deixar vazio.
+- `casos_confirmados`: número (inteiro) acumulado de casos confirmados até a
+  data.
+- `obitos_confirmados`: número (inteiro) acumulado de óbitos até a data.
+- `observacao`: opcional, pode incluir texto livre sobre alguma questão
+  específica com relação aos dados desse município, exemplo: "o caso incluído
+  no dia anterior estava incorreto e hoje foi remanejado para município o X".
+
+Caso também estejam disponíveis outras informações agregadas (como total de
+leitos ocupados, leitos totais no município, total de testes feitos, total de
+testes negativos/positivos etc.), pode-se adicionar outras colunas.
+
+> Nota: caso prefira, a Secretaria também pode incluir com os valores "0" os
+> municípios que ainda não possuem casos confirmados.
+
+(em breve incluiremos exemplos)
+
+
+#### Para microdados
+
+Para liberação de microdados, sugerimos utilizar [o modelo proposto pela Open
+Knowledge Foundation
+Brasil](https://transparenciacovid19.ok.org.br/files/Toolkit_1_microdados_basicos.pdf).
 
 
 ## Para Jornalistas/Ativistas/Cidadãos
