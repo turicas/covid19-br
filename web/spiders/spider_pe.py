@@ -11,7 +11,7 @@ from .base import BaseCovid19Spider
 
 class Covid19PESpider(BaseCovid19Spider):
     name = "PE"
-    start_urls = ["https://dados.seplag.pe.gov.br/apps/corona.html#dados-pe"]
+    start_urls = ["https://dados.seplag.pe.gov.br/apps/corona_dados.html"]
 
     @cached_property
     def city_name_from_id(self):
