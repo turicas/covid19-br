@@ -75,8 +75,8 @@ class Covid19PESpider(BaseCovid19Spider):
             cd_municipio = 0
 
         if int(cd_municipio) == 0 or not new["cd_municipio"]:
-            municipio = new["mun_notificacao"]
-            if municipio in ("OUTRO ESTADO", "OUTRO PAÍS"):
+            municipio = new["municipio"]
+            if municipio.upper() in ("OUTRO ESTADO", "OUTRO PAÍS", "OUTRO PAIS"):
                 new["cd_municipio"] = 0
             else:
                 if municipio.endswith("GUA PRETA"):
