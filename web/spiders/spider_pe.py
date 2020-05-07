@@ -30,10 +30,7 @@ class Covid19PESpider(BaseCovid19Spider):
         case_data = None
         for json_data in page_jsons.extract():
             data = json.loads(json_data)["x"]
-            if (
-                "csv" not in data["options"].get("buttons", [])
-                or "mun_notificacao" not in data["container"]
-            ):
+            if data['options'].get('buttons'):
                 continue
             case_data = data["data"]
             break
