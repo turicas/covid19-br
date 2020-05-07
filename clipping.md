@@ -18,6 +18,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [2020-04-16 O Estado de São Paulo - Veja a evolução do coronavírus por cidades e microrregiões do Brasil](https://www.estadao.com.br/infograficos/saude,veja-a-evolucao-do-corona-por-cidades-e-microrregioes-do-brasil,1089150)
 - [2020-04-13 CNN Brasil - Uma a cada quatro cidades do estado de São Paulo tem casos de coronavírus](https://www.cnnbrasil.com.br/nacional/2020/04/13/1-a-cada-4-cidades-do-estado-de-sao-paulo-tem-casos-de-coronavirus)
 - [2020-04-11 CoronaVírus MG - Registros em cartórios sugerem o triplo de mortes por Covid-19 em Minas Gerais](https://www.coronavirus-mg.com.br/post/registros-em-cart%C3%B3rios-sugerem-o-triplo-de-mortes-por-covid-19-em-minas-gerais)
+- [2020-04-09 Bom Dia Pará - Ciência Pai D'égua: pesquisadores apontam impacto do isolamento no combate a Covid-19](https://globoplay.globo.com/v/8469247/)
 - [2020-04-08 Metrópoles - Covid-19 se interioriza e chega a 581 cidades. Veja quais](https://www.metropoles.com/saude/covid-19-se-interioriza-e-chega-a-581-cidades-veja-quais)
 - [2020-04-08 The Intercept Brasil - Com coronavírus em disparada e UTIs lotadas, Manaus está à beira do colapso](https://theintercept.com/2020/04/08/coronavirus-manaus-uti-colapso/)
 - [2020-04-07 GaúchaZH - Mortes por coronavírus se concentram em poucas cidades no mundo](https://gauchazh.clicrbs.com.br/geral/noticia/2020/04/mortes-por-coronavirus-se-concentram-em-poucas-cidades-no-mundo-ck8q30xev01d101ll3aoe8uw1.html)
