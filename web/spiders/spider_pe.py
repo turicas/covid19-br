@@ -26,7 +26,7 @@ class Covid19PESpider(BaseCovid19Spider):
         return data
 
     def parse(self, response):
-        page_jsons = response.xpath("//script[@type = 'application/json']/text()")
+        page_jsons = response.xpath("//script[@type='application/json' and @data-for]/text()")
         case_data = None
         for json_data in page_jsons.extract():
             data = json.loads(json_data)["x"]
