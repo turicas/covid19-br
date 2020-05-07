@@ -70,7 +70,11 @@ class Covid19PESpider(BaseCovid19Spider):
 
     def fix_row(self, row):
         new = row.copy()
-        if int(new["cd_municipio"]) == 0 or not new["cd_municipio"]:
+        cd_municipio = new["cd_municipio"]
+        if cd_municipio == '-':
+            cd_municipio = 0
+
+        if int(cd_municipio) == 0 or not new["cd_municipio"]:
             municipio = new["mun_notificacao"]
             if municipio in ("OUTRO ESTADO", "OUTRO PAÍS"):
                 new["cd_municipio"] = 0
