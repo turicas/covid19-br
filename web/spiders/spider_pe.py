@@ -11,7 +11,7 @@ from .base import BaseCovid19Spider
 
 class Covid19PESpider(BaseCovid19Spider):
     name = "PE"
-    start_urls = ["https://dados.seplag.pe.gov.br/apps/corona.html#dados-pe"]
+    start_urls = ["https://dados.seplag.pe.gov.br/apps/corona_dados.html"]
 
     @cached_property
     def city_name_from_id(self):
@@ -26,14 +26,11 @@ class Covid19PESpider(BaseCovid19Spider):
         return data
 
     def parse(self, response):
-        page_jsons = response.xpath("//script[@type = 'application/json']/text()")
+        page_jsons = response.xpath("//script[@type='application/json' and @data-for]/text()")
         case_data = None
         for json_data in page_jsons.extract():
             data = json.loads(json_data)["x"]
-            if (
-                "csv" not in data["options"].get("buttons", [])
-                or "mun_notificacao" not in data["container"]
-            ):
+            if data['options'].get('buttons'):
                 continue
             case_data = data["data"]
             break
@@ -73,9 +70,13 @@ class Covid19PESpider(BaseCovid19Spider):
 
     def fix_row(self, row):
         new = row.copy()
-        if int(new["cd_municipio"]) == 0 or not new["cd_municipio"]:
-            municipio = new["mun_notificacao"]
-            if municipio in ("OUTRO ESTADO", "OUTRO PAÍS"):
+        cd_municipio = new["cd_municipio"]
+        if cd_municipio == '-':
+            cd_municipio = 0
+
+        if int(cd_municipio) == 0 or not new["cd_municipio"]:
+            municipio = new["municipio"]
+            if municipio.upper() in ("OUTRO ESTADO", "OUTRO PAÍS", "OUTRO PAIS"):
                 new["cd_municipio"] = 0
             else:
                 if municipio.endswith("GUA PRETA"):
