@@ -29,7 +29,8 @@ mortes etc.).
 
 Muitas secretarias disponibilizam os dados em imagens, PDFs ou mesmo em texto
 corrido dentro de uma notícia do site. Isso dificulta muito qualquer tipo de
-extração e análise dos dados.
+extração e análise dos dados. Outras, disponibilizam painéis onde não é possível
+fazer download dos dados completos. Recomendações:
 
 - Disponibilize os dados em formato de planilha;
 - Evite colocar imagens e outras informações na planilha: coloque apenas o
@@ -46,7 +47,7 @@ extração e análise dos dados.
   - XLSX
   - XLS
 
-### Endereço para download
+### Download dos dados
 
 É muito importante que o endereço para download dos dados seja padronizado,
 dessa forma o processo de coleta pode ser facilmente automatizável.
@@ -93,7 +94,7 @@ testes negativos/positivos etc.), pode-se adicionar outras colunas.
 
 #### Para microdados
 
-Para liberação de microdados, sugerimos utilizar [o modelo proposto pela Open
+Ainda não temos uma recomendação de microdados, por enquanto sugerimos utilizar [o modelo proposto pela Open
 Knowledge Foundation
 Brasil](https://transparenciacovid19.ok.org.br/files/Toolkit_1_microdados_basicos.pdf).
 
