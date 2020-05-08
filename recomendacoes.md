@@ -64,7 +64,8 @@ disponíveis.
 Nessa planilha, cada município que possui casos confirmados deve ter uma linha
 por dia, com os valores agregados para aquela data. As colunas são:
 
-- `data`: data a qual a informação se refere.
+- `data`: data a qual a informação se refere (seguir padrão ISO 8601 (AAAA-MM-DD)
+  Ex.: 2020-05-17 equivale a 17 de Maio de 2020)
 - `uf`: sigla da unidade da federação na qual o caso pertence (quando é um caso
   importado de outro estado, pode ser usado um outro estado ou deixar a célula
   vazia, caso não se saiba).
@@ -89,14 +90,28 @@ testes negativos/positivos etc.), pode-se adicionar outras colunas.
 > Nota: caso prefira, a Secretaria também pode incluir com os valores "0" os
 > municípios que ainda não possuem casos confirmados.
 
-(em breve incluiremos exemplos)
+##### CSV Exemplo
 
+Segue um exemplo para o Estado de Alagoas
+
+```csv
+data,uf,municipio,codigo_ibge,casos_confirmados,obtitos_confirmados,observacao
+2020-05-06,AL,Anadia,2700201,1,1,
+2020-05-06,AL,Arapiraca,2700300,37,3,
+2020-05-06,AL,Atalaia,2700409,1,0,
+2020-05-06,AL,Barra de Santo Antônio,2700508,1,0,
+2020-05-06,AL,Barra de São Miguel,2700607,5,0,
+2020-05-06,AL,TOTAL NO ESTADO,2700607,45,4,
+```
 
 #### Para microdados
 
 Ainda não temos uma recomendação de microdados, por enquanto sugerimos utilizar [o modelo proposto pela Open
 Knowledge Foundation
 Brasil](https://transparenciacovid19.ok.org.br/files/Toolkit_1_microdados_basicos.pdf).
+
+Veja [aqui](https://docs.google.com/spreadsheets/d/1mgZe2GjKz_7zH5w4cEVfTh4LfvqDlUs3lxFSD6NJFjw/edit) 
+um modelo de planilha proposto pela OKBR.
 
 
 ## Para Jornalistas/Ativistas/Cidadãos
