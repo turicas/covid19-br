@@ -9,6 +9,22 @@ import date_utils
 STATES = "AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO".split()
 
 
+def qs_to_dict(data):
+    """
+    >>> qs_to_dict([("a", 1), ("b", 2)])
+    {'a': 1, 'b': 2}
+    >>> qs_to_dict([("b", 0), ("a", 1), ("b", 2)])
+    {'a': 1, 'b': [0, 2]}
+    """
+    from collections import defaultdict
+    new = defaultdict(list)
+    for key, value in data:
+        new[key].append(value)
+    return {
+        key: value if len(value) > 1 else value[0]
+        for key, value in new.items()
+    }
+
 class DeathsSpider(scrapy.Spider):
     name = "obitos"
     registral_url = (
@@ -27,15 +43,21 @@ class DeathsSpider(scrapy.Spider):
     def make_registral_request(
         self, start_date, end_date, state, callback, dont_cache=False
     ):
-        data = {
-            "state": state,
-            "start_date": str(start_date),
-            "end_date": str(end_date),
-        }
+        data = [
+            ("chart", "chart1"),
+            ("city_id", "all"),
+            ("end_date", str(end_date)),
+            ("places[]", "HOSPITAL"),
+            ("places[]", "DOMICILIO"),
+            ("places[]", "VIA_PUBLICA"),
+            ("places[]", "OUTROS"),
+            ("start_date", str(start_date)),
+            ("state", state),
+        ]
         return scrapy.Request(
             url=urljoin(self.registral_url, "?" + urlencode(data)),
             callback=callback,
-            meta={"row": data, "dont_cache": dont_cache},
+            meta={"row": qs_to_dict(data), "dont_cache": dont_cache},
         )
 
     def start_requests(self):
