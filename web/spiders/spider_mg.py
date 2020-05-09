@@ -22,18 +22,28 @@ class MGSpider(BaseCovid19Spider):
             )
 
         # Filter the table to only have confirmed cases
-        table = [row for row in table if "Confirmado" in row.classificacao_caso]
+        # table = [row for row in table if "Confirmado" in row.classificacao_caso]
+        # Apparently one row is reading "None". To avoid problems not reading
+        # the last row from the file, do a "manual" checking
+        table_conf = []
+        for row in table:
+            if row != None:
+                if row.classificacao_caso == None:
+                    pass
+                else:
+                    if "Confirmado" in row.classificacao_caso:
+                        table_conf.append(row)
 
         # The last report date
         last_date = datetime.datetime.strptime(str(table[0].data_atualizacao), "%Y-%m-%d").strftime('%d/%m/%y')
 
         row_key = lambda r: r.municipio_residencia
-        table.sort(key=row_key)
+        table_conf.sort(key=row_key)
 
         total_confirmed = total_deaths = 0
         imported_confirmed = imported_deaths = None
 
-        for city, cases in groupby(table, key=row_key):
+        for city, cases in groupby(table_conf, key=row_key):
             cases = list(cases)
             confirmed = len(cases)
             deaths = sum([1 for c in cases if "óbito" in c.classificacao_caso.lower()])
