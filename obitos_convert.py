@@ -56,7 +56,7 @@ def convert_file(filename):
             row[f"deaths_total_{year}"] = None
 
         for item in data:
-            for year, cause, key in iterate_year_causes_keys("new_deaths", [item.date.year]):
+            for year, cause, key in iterate_year_causes_keys("new_deaths", [str(item.date.year)]):
                 row[key] = getattr(item, cause)
 
         new_deaths_total = Counter()
