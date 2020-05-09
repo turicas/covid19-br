@@ -32,13 +32,13 @@ class DeathsSpider(scrapy.Spider):
     )
 
     causes_map = {
-        "covid": "COVID",
         "sars": "SRAG",
         "pneumonia": "PNEUMONIA",
         "respiratory_failure": "INSUFICIENCIA_RESPIRATORIA",
         "septicemia": "SEPTICEMIA",
         "indeterminate": "INDETERMINADA",
         "others": "OUTRAS",
+        "covid19": "COVID",
     }
 
     def make_registral_request(
@@ -82,6 +82,6 @@ class DeathsSpider(scrapy.Spider):
             
             row = {"date": date, "state": state}
             for cause, portuguese_name in self.causes_map.items():
-                row[cause] = chart[portuguese_name][0]["total"] if portuguese_name in chart else 0
+                row[cause] = chart[portuguese_name][0]["total"] if portuguese_name in chart else None
             
             yield row
