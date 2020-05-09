@@ -11,12 +11,13 @@ from date_utils import brazilian_epidemiological_week, one_day
 
 def convert_file(filename):
     table = rows.import_from_csv(filename)
-    row_key = lambda row: (row.date, row.state)
+    row_key = lambda row: (row.state, datetime.date(2020, row.date.month, row.date.day))
     table = sorted(table, key=row_key)
     accumulated = Counter()
     for key, data in groupby(table, key=row_key):
-        date, state = key
-        row = {"date": date, "state": state}
+        state, date = key
+        row = { "date": date, "state": state }
+
         try:
             this_day_in_2019 = datetime.date(2019, date.month, date.day)
         except ValueError:  # This day does not exist in 2019 (29 February)
@@ -27,20 +28,40 @@ def convert_file(filename):
         )[1]
         row["epidemiological_week_2020"] = brazilian_epidemiological_week(date)[1]
 
+        # There are some missing days on the registral, so default to zero
+        row.update({
+            "new_deaths_sars_2019": 0,
+            "new_deaths_pneumonia_2019": 0,
+            "new_deaths_respiratory_failure_2019": 0,
+            "new_deaths_septicemia_2019": 0,
+            "new_deaths_indeterminate_2019": 0,
+            "new_deaths_others_2019": 0,
+            "new_deaths_sars_2020": 0,
+            "new_deaths_pneumonia_2020": 0,
+            "new_deaths_respiratory_failure_2020": 0,
+            "new_deaths_septicemia_2020": 0,
+            "new_deaths_indeterminate_2020": 0,
+            "new_deaths_others_2020": 0,
+            "new_deaths_covid19": 0
+        })
+
         for item in data:
-            row["new_deaths_sars_2019"] = item.sars_2019
-            row["new_deaths_pneumonia_2019"] = item.pneumonia_2019
-            row["new_deaths_respiratory_failure_2019"] = item.respiratory_failure_2019
-            row["new_deaths_septicemia_2019"] = item.septicemia_2019
-            row["new_deaths_indeterminate_2019"] = item.indeterminate_2019
-            row["new_deaths_others_2019"] = item.others_2019
-            row["new_deaths_sars_2020"] = item.sars_2020
-            row["new_deaths_pneumonia_2020"] = item.pneumonia_2020
-            row["new_deaths_respiratory_failure_2020"] = item.respiratory_failure_2020
-            row["new_deaths_septicemia_2020"] = item.septicemia_2020
-            row["new_deaths_indeterminate_2020"] = item.indeterminate_2020
-            row["new_deaths_others_2020"] = item.others_2020
-            row["new_deaths_covid19"] = item.covid
+            year = item.date.year
+            if year == 2020:
+                row["new_deaths_sars_2020"] = item.sars
+                row["new_deaths_pneumonia_2020"] = item.pneumonia
+                row["new_deaths_respiratory_failure_2020"] = item.respiratory_failure
+                row["new_deaths_septicemia_2020"] = item.septicemia
+                row["new_deaths_indeterminate_2020"] = item.indeterminate
+                row["new_deaths_others_2020"] = item.others
+                row["new_deaths_covid19"] = item.covid
+            elif year == 2019:
+                row["new_deaths_sars_2019"] = item.sars
+                row["new_deaths_pneumonia_2019"] = item.pneumonia
+                row["new_deaths_respiratory_failure_2019"] = item.respiratory_failure
+                row["new_deaths_septicemia_2019"] = item.septicemia
+                row["new_deaths_indeterminate_2019"] = item.indeterminate
+                row["new_deaths_others_2019"] = item.others
 
         new_deaths_total = Counter()
         for year in ("2019", "2020"):
