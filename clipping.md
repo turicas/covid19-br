@@ -105,6 +105,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://valoradicionado.wordpress.com/2020/04/28/sao-paulo-e-outras-quatro-capitais-proximas-do-colapso-na-saude/
 - https://www.mamiraua.org.br/covid-amazonas
 - https://www.irrd.org/covid-19/graficos-interativos/
+- https://cleberjamaral.github.io/fastpages/ Blog utilizando [fastpages](https://fastpages.fast.ai/) que converte notebooks python em páginas web. Aceita Pull Requests com atualizações.
 
 
 ## Publicações Científicas
