@@ -73,4 +73,8 @@ Belém,,
 ...
 ```
 
-Na linha `TOTAL NO ESTADO`, deve ser informada a soma de todos os casos reportados no boletim da SES, e quando o município não for informado ou seja município de outro Estado, você deve preencher na linha `Importados/Indefinidos`.
+A linha `TOTAL NO ESTADO` deve ser preenchida sempre com o total informado pela SES (e não pela soma dos municípios).
+
+Casos e óbitos em que o município não estiver claro ou for de outros estados/ países devem ser inseridos na linha `Importados/Indefinidos`.
+
+Se a SES não divulgou os dados dos municípios, somente a linha `TOTAL NO ESTADO` deve ser preenchida (não preencher `Importados/Indefinidos`).
