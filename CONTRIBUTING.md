@@ -47,10 +47,10 @@ O sistema fornece um modelo de planilha, para cada Estado, com todos os municíp
 
 Sempre que houver atualização de dados para o Estado, você deve :
 
-* informando a data de referência dos dados;
+* informar a data de referência dos dados;
 * anexar a planilha preenchida;
-* informando os links onde as informações foram obtidas;
-* informando observações relevantes.
+* informar o(s) link(s) onde as informações foram obtidas;
+* informar observações relevantes.
 
 [Veja aqui](https://drive.google.com/open?id=1pORD1BtOJsuQR-MqXcIAPwddx4WBe_mu) um vídeo explicando como deve ser usado o sistema.
 
