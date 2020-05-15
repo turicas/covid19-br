@@ -3,6 +3,7 @@ import json
 from urllib.parse import urlencode, urljoin
 
 import scrapy
+from scrapy.http.cookies import CookieJar
 
 import date_utils
 
@@ -27,9 +28,14 @@ def qs_to_dict(data):
 
 class DeathsSpider(scrapy.Spider):
     name = "obitos"
+
+    login_url = "https://transparencia.registrocivil.org.br/registral-covid"
+
     registral_url = (
         "https://transparencia.registrocivil.org.br/api/covid-covid-registral"
     )
+
+    xsrf_token = ""
 
     causes_map = {
         "sars": "SRAG",
@@ -38,13 +44,39 @@ class DeathsSpider(scrapy.Spider):
         "septicemia": "SEPTICEMIA",
         "indeterminate": "INDETERMINADA",
         "others": "OUTRAS",
+        "covid19": "COVID",
     }
 
+    cookie_jar = CookieJar()
+
+    def start_requests(self):
+        yield self.make_login_request()
+
+    def make_login_request(self):
+        return scrapy.Request(
+            url=self.login_url,
+            callback=self.parse_login_response,
+            meta={"dont_cache": True},
+        )
+
+    def parse_login_response(self, response):
+        self.cookie_jar.extract_cookies(response, response.request)
+        self.xsrf_token = next(c for c in self.cookie_jar if c.name == "XSRF-TOKEN").value
+
+        for state in STATES:
+            for year in [2020, 2019]:
+                yield self.make_registral_request(
+                    start_date=datetime.date(year, 1, 1),
+                    end_date=datetime.date(year, 12, 31),
+                    state=state,
+                    dont_cache=True,
+                )
+
     def make_registral_request(
-        self, start_date, end_date, state, callback, dont_cache=False
+        self, start_date, end_date, state, dont_cache=False
     ):
         data = [
-            ("chart", "chart1"),
+            ("chart", "chart5"),
             ("city_id", "all"),
             ("end_date", str(end_date)),
             ("places[]", "HOSPITAL"),
@@ -56,61 +88,18 @@ class DeathsSpider(scrapy.Spider):
         ]
         return scrapy.Request(
             url=urljoin(self.registral_url, "?" + urlencode(data)),
-            callback=callback,
+            headers={"X-XSRF-TOKEN" : self.xsrf_token},
+            callback=self.parse_registral_request,
             meta={"row": qs_to_dict(data), "dont_cache": dont_cache},
         )
 
-    def start_requests(self):
-        today = date_utils.today()
-        tomorrow = today + datetime.timedelta(days=1)
-        # `date_utils.date_range` excludes the last, so to get today's data we
-        # need to pass tomorrow.
-        for date in date_utils.date_range(datetime.date(2020, 1, 1), tomorrow):
-            # Won't cache dates from 30 days ago until today (only historical
-            # ones which are unlikely to change).
-            should_cache = today - date > datetime.timedelta(days=30)
-            for state in STATES:
-                yield self.make_registral_request(
-                    start_date=date,
-                    end_date=date,
-                    state=state,
-                    callback=self.parse_registral_request,
-                    dont_cache=not should_cache,
-                )
-
-    def add_causes(self, row, data, year):
-        for cause, portuguese_name in self.causes_map.items():
-            row[cause + "_" + year] = data[portuguese_name]
-
     def parse_registral_request(self, response):
-        row = response.meta["row"].copy()
+        state = response.meta["row"]["state"]
         data = json.loads(response.body)
-        assert row["start_date"] == row.pop("end_date")
-        row["date"] = row.pop("start_date")
-        year, month, day = row["date"].split("-")
-        date = datetime.date(int(year), int(month), int(day))
-        if "dont_cache" in row:
-            del row["dont_cache"]
 
-        for year in ["2019", "2020"]:
-            for cause in self.causes_map:
-                row[cause + "_" + year] = 0
-
-        row["covid"] = 0
-
-        chart_data = data["chart"]
-        if chart_data:
-            if "2019" in chart_data and "2020" in chart_data:
-                try:
-                    datetime.date(2019, date.month, date.day)
-                except ValueError:
-                    # This day does not exist on 2019 and the API returned
-                    # 2019's next day data.
-                    pass
-                else:
-                    self.add_causes(row, chart_data["2019"], "2019")
-
-                self.add_causes(row, chart_data["2020"], "2020")
-                row["covid"] = chart_data["2020"]["COVID"]
-
-        yield row
+        for date, chart in data["chart"].items():
+            row = {"date": date, "state": state}
+            for cause, portuguese_name in self.causes_map.items():
+                row[cause] = chart[portuguese_name][0]["total"] if portuguese_name in chart else None
+            
+            yield row
