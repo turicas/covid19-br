@@ -3,6 +3,7 @@ import json
 from urllib.parse import urlencode, urljoin
 
 import scrapy
+from scrapy.http.cookies import CookieJar
 
 import date_utils
 
@@ -27,9 +28,14 @@ def qs_to_dict(data):
 
 class DeathsSpider(scrapy.Spider):
     name = "obitos"
+
+    login_url = "https://transparencia.registrocivil.org.br/registral-covid"
+
     registral_url = (
         "https://transparencia.registrocivil.org.br/api/covid-covid-registral"
     )
+
+    xsrf_token = ""
 
     causes_map = {
         "sars": "SRAG",
@@ -41,8 +47,33 @@ class DeathsSpider(scrapy.Spider):
         "covid19": "COVID",
     }
 
+    cookie_jar = CookieJar()
+
+    def start_requests(self):
+        yield self.make_login_request()
+
+    def make_login_request(self):
+        return scrapy.Request(
+            url=self.login_url,
+            callback=self.parse_login_response,
+            meta={"dont_cache": True},
+        )
+
+    def parse_login_response(self, response):
+        self.cookie_jar.extract_cookies(response, response.request)
+        self.xsrf_token = next(c for c in self.cookie_jar if c.name == "XSRF-TOKEN").value
+
+        for state in STATES:
+            for year in [2020, 2019]:
+                yield self.make_registral_request(
+                    start_date=datetime.date(year, 1, 1),
+                    end_date=datetime.date(year, 12, 31),
+                    state=state,
+                    dont_cache=True,
+                )
+
     def make_registral_request(
-        self, start_date, end_date, state, callback, dont_cache=False
+        self, start_date, end_date, state, dont_cache=False
     ):
         data = [
             ("chart", "chart5"),
@@ -57,29 +88,16 @@ class DeathsSpider(scrapy.Spider):
         ]
         return scrapy.Request(
             url=urljoin(self.registral_url, "?" + urlencode(data)),
-            callback=callback,
+            headers={"X-XSRF-TOKEN" : self.xsrf_token},
+            callback=self.parse_registral_request,
             meta={"row": qs_to_dict(data), "dont_cache": dont_cache},
         )
-
-    def start_requests(self):
-        for state in STATES:
-            for year in [2020, 2019]:
-                yield self.make_registral_request(
-                    start_date=datetime.date(year, 1, 1),
-                    end_date=datetime.date(year, 12, 31),
-                    state=state,
-                    callback=self.parse_registral_request,
-                    dont_cache=True,
-                )
 
     def parse_registral_request(self, response):
         state = response.meta["row"]["state"]
         data = json.loads(response.body)
 
-        for br_date, chart in data["chart"].items():
-            day, month, year = br_date.split("/")
-            date = datetime.date(int(year), int(month), int(day))
-            
+        for date, chart in data["chart"].items():
             row = {"date": date, "state": state}
             for cause, portuguese_name in self.causes_map.items():
                 row[cause] = chart[portuguese_name][0]["total"] if portuguese_name in chart else None
