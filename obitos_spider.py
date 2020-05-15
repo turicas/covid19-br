@@ -78,7 +78,7 @@ class DeathsSpider(BaseRegistroCivilSpider):
         "covid19": "COVID",
     }
 
-    def start_requests_after_login(self, response):
+    def start_requests_after_login(self):
         for state in STATES:
             for year in [2020, 2019]:
                 yield self.make_registral_request(
