@@ -18,36 +18,18 @@ def qs_to_dict(data):
     {'a': 1, 'b': [0, 2]}
     """
     from collections import defaultdict
+
     new = defaultdict(list)
     for key, value in data:
         new[key].append(value)
-    return {
-        key: value if len(value) > 1 else value[0]
-        for key, value in new.items()
-    }
+    return {key: value if len(value) > 1 else value[0] for key, value in new.items()}
 
-class DeathsSpider(scrapy.Spider):
-    name = "obitos"
 
-    login_url = "https://transparencia.registrocivil.org.br/registral-covid"
-
-    registral_url = (
-        "https://transparencia.registrocivil.org.br/api/covid-covid-registral"
-    )
-
-    xsrf_token = ""
-
-    causes_map = {
-        "sars": "SRAG",
-        "pneumonia": "PNEUMONIA",
-        "respiratory_failure": "INSUFICIENCIA_RESPIRATORIA",
-        "septicemia": "SEPTICEMIA",
-        "indeterminate": "INDETERMINADA",
-        "others": "OUTRAS",
-        "covid19": "COVID",
-    }
-
+class BaseRegistroCivilSpider(scrapy.Spider):
     cookie_jar = CookieJar()
+    login_url = "https://transparencia.registrocivil.org.br/registral-covid"
+    start_urls = []
+    xsrf_token = ""
 
     def start_requests(self):
         yield self.make_login_request()
@@ -59,10 +41,44 @@ class DeathsSpider(scrapy.Spider):
             meta={"dont_cache": True},
         )
 
+    def make_request(self, *args, **kwargs):
+        kwargs["headers"] = kwargs.get("headers", {})
+        kwargs["headers"]["X-XSRF-TOKEN"] = self.xsrf_token
+        return scrapy.Request(*args, **kwargs)
+
+    def start_requests_after_login(self):
+        for url in self.start_urls:
+            yield self.make_request(url, callback=self.parse)
+
     def parse_login_response(self, response):
         self.cookie_jar.extract_cookies(response, response.request)
-        self.xsrf_token = next(c for c in self.cookie_jar if c.name == "XSRF-TOKEN").value
+        self.xsrf_token = next(
+            c for c in self.cookie_jar if c.name == "XSRF-TOKEN"
+        ).value
 
+        for request in self.start_requests_after_login():
+            yield request
+
+    def parse(self):
+        raise NotImplementedError()
+
+
+class DeathsSpider(BaseRegistroCivilSpider):
+    name = "obitos"
+    registral_url = (
+        "https://transparencia.registrocivil.org.br/api/covid-covid-registral"
+    )
+    causes_map = {
+        "sars": "SRAG",
+        "pneumonia": "PNEUMONIA",
+        "respiratory_failure": "INSUFICIENCIA_RESPIRATORIA",
+        "septicemia": "SEPTICEMIA",
+        "indeterminate": "INDETERMINADA",
+        "others": "OUTRAS",
+        "covid19": "COVID",
+    }
+
+    def start_requests_after_login(self, response):
         for state in STATES:
             for year in [2020, 2019]:
                 yield self.make_registral_request(
@@ -72,9 +88,7 @@ class DeathsSpider(scrapy.Spider):
                     dont_cache=True,
                 )
 
-    def make_registral_request(
-        self, start_date, end_date, state, dont_cache=False
-    ):
+    def make_registral_request(self, start_date, end_date, state, dont_cache=False):
         data = [
             ("chart", "chart5"),
             ("city_id", "all"),
@@ -86,9 +100,9 @@ class DeathsSpider(scrapy.Spider):
             ("start_date", str(start_date)),
             ("state", state),
         ]
-        return scrapy.Request(
+        return self.make_request(
             url=urljoin(self.registral_url, "?" + urlencode(data)),
-            headers={"X-XSRF-TOKEN" : self.xsrf_token},
+            headers={"X-XSRF-TOKEN": self.xsrf_token},
             callback=self.parse_registral_request,
             meta={"row": qs_to_dict(data), "dont_cache": dont_cache},
         )
@@ -100,6 +114,10 @@ class DeathsSpider(scrapy.Spider):
         for date, chart in data["chart"].items():
             row = {"date": date, "state": state}
             for cause, portuguese_name in self.causes_map.items():
-                row[cause] = chart[portuguese_name][0]["total"] if portuguese_name in chart else None
-            
+                row[cause] = (
+                    chart[portuguese_name][0]["total"]
+                    if portuguese_name in chart
+                    else None
+                )
+
             yield row
