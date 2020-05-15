@@ -11,6 +11,9 @@ mkdir -p "$DOWNLOAD_PATH" "$OUTPUT_PATH" "$LOG_PATH"
 time scrapy runspider obitos_spider.py \
 	-s HTTPCACHE_ENABLED=True \
 	-s HTTPCACHE_ALWAYS_STORE=True \
+	-s HTTPCACHE_IGNORE_HTTP_CODES=500,504 \
+	-s AUTOTHROTTLE_ENABLED=True \
+	-s RETRY_TIMES=4 \
 	--loglevel=INFO \
 	--logfile="$LOG_PATH/obitos.log" \
 	-o "$OUTPUT_FILENAME"
