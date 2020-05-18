@@ -26,11 +26,13 @@ class Covid19PESpider(BaseCovid19Spider):
         return data
 
     def parse(self, response):
-        page_jsons = response.xpath("//script[@type='application/json' and @data-for]/text()")
+        page_jsons = response.xpath(
+            "//script[@type='application/json' and @data-for]/text()"
+        )
         case_data = None
         for json_data in page_jsons.extract():
             data = json.loads(json_data)["x"]
-            if data['options'].get('buttons'):
+            if data["options"].get("buttons"):
                 continue
             case_data = data["data"]
             break
@@ -71,7 +73,7 @@ class Covid19PESpider(BaseCovid19Spider):
     def fix_row(self, row):
         new = row.copy()
         cd_municipio = new["cd_municipio"]
-        if cd_municipio == '-':
+        if cd_municipio == "-":
             cd_municipio = 0
 
         if int(cd_municipio) == 0 or not new["cd_municipio"]:
