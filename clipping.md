@@ -7,6 +7,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias
 
+- [2020-05-12 The New York Times - 71,000 Missing Deaths: Tracking the True Toll of the Coronavirus Outbreak](https://www.nytimes.com/interactive/2020/04/21/world/coronavirus-missing-deaths.html?action=click&module=RelatedLinks&pgtype=Article)
 - [2020-05-05 Jornal Nacional - Mortes naturais aumentam 30% nas cinco cidades mais atingidas por coronavírus no Brasil](https://globoplay.globo.com/v/8533526/programa/)
 - [2020-05-04 Revista Piauí - A pandemia no interior do país](https://piaui.folha.uol.com.br/pandemia-no-interior-do-pais/)
 - [2020-04-30 Nexo Jornal - A evolução dos casos de covid-19 nos municípios brasileiros](https://www.nexojornal.com.br/grafico/2020/04/30/A-evolu%C3%A7%C3%A3o-dos-casos-de-covid-19-nos-munic%C3%ADpios-brasileiros)
@@ -105,6 +106,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://valoradicionado.wordpress.com/2020/04/28/sao-paulo-e-outras-quatro-capitais-proximas-do-colapso-na-saude/
 - https://www.mamiraua.org.br/covid-amazonas
 - https://www.irrd.org/covid-19/graficos-interativos/
+- http://institutovotorantim.org.br/municipioscontraocorona/ivm/
 
 
 ## Publicações Científicas
@@ -127,3 +129,5 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://youtu.be/aA9q1Zk0AeU
 - https://www.tableau.com/pt-br/learn/webinars/projeto-brasilio-covid19-dados-publicos-acessiveis
 - [2o Datosy y Coronavirus](https://www.youtube.com/watch?v=C5qXnE6AlMY) ([veja os slides](http://bit.ly/socialtic-brasilio-covid19))
+- http://www3.eca.usp.br/noticias/plataforma-mapeia-dados-sobre-covid-19-nos-estados-brasileiros
+- [Live Open Knowledge Foundation Brasil](https://www.youtube.com/watch?v=8vmbfgnRuos)
