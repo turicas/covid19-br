@@ -47,5 +47,6 @@ class Covid19ROSpider(BaseCovid19Spider):
 
             self.add_city_case(city=city, confirmed=confirmed, deaths=deaths)
 
+        #  TODO: in the future we'll might have to change this once this data is available
         self.add_city_case(city="Importados/Indefinidos", confirmed=None, deaths=None)
         self.add_state_case(confirmed=total_confirmed, deaths=total_deaths)
