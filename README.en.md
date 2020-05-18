@@ -4,13 +4,13 @@
 
 ![pytest@docker](https://github.com/turicas/covid19-br/workflows/pytest@docker/badge.svg)
 
-This repository unifies links and data about reports on the number of cases from the Health State Secretaries (Secretarias Estaduais de Saúde - SES), about the cases of covid19 in Brazil (at each city, daily), amongst other relevant data for analysis, such as deaths by respiratory diseases accounted in the registry (by state, daily).
+This repository unifies links and data about reports on the number of cases from the Health State Secretaries (Secretarias Estaduais de Saúde - SES), about the cases of covid19 in Brazil (at each city, daily), amongst other relevant data for analysis, such as deaths by respiratory diseases accounted in the notary service (by state, daily).
 
 ## License and Quote
 
-The code's license is [LGPL3](https://www.gnu.org/licenses/lgpl-3.0.en.html) and the converted data is [Creative Commons Attribution ShareAlike](https://creativecommons.org/licenses/by-sa/4.0/). In case you use the data, **mention the original font and who treated the data** and in case you share the data, **use the same license**.
+The code's license is [LGPL3](https://www.gnu.org/licenses/lgpl-3.0.en.html) and the converted data is [Creative Commons Attribution ShareAlike](https://creativecommons.org/licenses/by-sa/4.0/). In case you use the data, **mention the original data source and who treated the data** and in case you share the data, **use the same license**.
 Example of how the data can be quoted:
-- **Source: Secretarias de Saúde das Unidades Federativas, data treated by Álvaro Justen and team of voluntaries [Brasil.IO](https://brasil.io/)**
+- **Source: Secretarias de Saúde das Unidades Federativas, data treated by Álvaro Justen and team of volunteers [Brasil.IO](https://brasil.io/)**
 - **Brasil.IO: epidemiologic reports of COVID-19 by city daily, available at: https://brasil.io/dataset/covid19/ (last checked in: XX of XX of XXXX, access in XX of XX of XXXX).**
 
 
