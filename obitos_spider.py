@@ -12,10 +12,14 @@ STATES = "AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS S
 
 def qs_to_dict(data):
     """
-    >>> qs_to_dict([("a", 1), ("b", 2)])
-    {'a': 1, 'b': 2}
-    >>> qs_to_dict([("b", 0), ("a", 1), ("b", 2)])
-    {'a': 1, 'b': [0, 2]}
+    >>> result = qs_to_dict([("a", 1), ("b", 2)])
+    >>> expected = {'a': 1, 'b': 2}
+    >>> result == expected
+    True
+    >>> result = qs_to_dict([("b", 0), ("a", 1), ("b", 2)])
+    >>> expected = {'a': 1, 'b': [0, 2]}
+    >>> result == expected
+    True
     """
     from collections import defaultdict
 
