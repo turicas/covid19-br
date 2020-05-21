@@ -1,13 +1,16 @@
 import io
 import json
+import os
 from urllib.parse import urlencode
+
+import scrapy
 
 from .base import BaseCovid19Spider
 
 
 class Covid19PASpider(BaseCovid19Spider):
     name = "PA"
-    base_url = "https://www.covid-19.pa.gov.br/monitoramento-corona-service/statuscorona/casos-confirmados-obitos-por-municipio"]
+    base_url = "https://www.covid-19.pa.gov.br/monitoramento-corona-service/statuscorona/casos-confirmados-obitos-por-municipio"
     splash_url = os.environ.get("SPLASH_URL", None)
 
     def start_requests(self):
