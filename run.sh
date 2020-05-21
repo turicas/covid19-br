@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-SCRIPT_PATH=$(dirname $(readlink -f $0))
+SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
 source $SCRIPT_PATH/base.sh
 
 boletim_filename="$OUTPUT_PATH/boletim.csv.gz"
