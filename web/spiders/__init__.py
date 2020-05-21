@@ -3,6 +3,7 @@ import multiprocessing
 
 from scrapy.crawler import CrawlerProcess
 
+from .spider_ce import Covid19CESpider
 from .spider_es import Covid19ESSpider
 from .spider_pe import Covid19PESpider
 from .spider_pr import Covid19PRSpider
@@ -11,11 +12,12 @@ from .spider_rr import Covid19RRSpider
 
 
 SPIDERS = [
+    Covid19CESpider,
     Covid19ESSpider,
     Covid19PESpider,
     Covid19PRSpider,
-    Covid19RRSpider,
     Covid19RNSpider,
+    Covid19RRSpider,
 ]
 STATE_SPIDERS = {SpiderClass.name: SpiderClass for SpiderClass in SPIDERS}
 # TODO: do autodiscovery from base class' subclasses
