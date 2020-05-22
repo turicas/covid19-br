@@ -4,12 +4,12 @@
 
 ![pytest@docker](https://github.com/turicas/covid19-br/workflows/pytest@docker/badge.svg)
 
-This repository unifies links and data about reports on the number of cases from State Health Secretariats (Secretarias Estaduais de Saúde - SES), about the cases of covid19 in Brazil (at each city, daily), amongst other data relevant for analysis, such as deaths tolls accounted for in the notary service (by state, daily).
+This repository consolidate links and data about reports on the number of cases from State Health Department (Secretarias Estaduais de Saúde - SES), about the cases of covid19 in Brazil (at each city, daily), amongst other relevant data for analysis, such as deaths tolls accounted for in the notary service (by state, daily).
 
-## License and Quotations
+## License and Citation
 
 The code's license is [LGPL3](https://www.gnu.org/licenses/lgpl-3.0.en.html) and the converted data is [Creative Commons Attribution ShareAlike](https://creativecommons.org/licenses/by-sa/4.0/). In case you use the data, **mention the original data source and who treated the data** and in case you share the data, **use the same license**.
-Example of how the data can be quoted:
+Example of how the data can be cited:
 - **Source: Secretarias de Saúde das Unidades Federativas, data treated by Álvaro Justen and a team of volunteers [Brasil.IO](https://brasil.io/)**
 - **Brasil.IO: epidemiological reports of COVID-19 by city daily, available at: https://brasil.io/dataset/covid19/ (last checked in: XX of XX of XXXX, access in XX XX, XXXX).**
 
@@ -29,16 +29,15 @@ If this program and/or the resulting data are useful to you or your company, **c
 
 ### FAQ ABOUT THE DATA
 
-**Before contacting us to ask questions about the data (we're quite busy), [CHECK OUR FAQ](faq.md)** (still in Portuguese).
+**Before contacting us to ask about the data (we're quite busy), [CHECK OUR FAQ](faq.md)** (still in Portuguese).
 
 For more information [see the data collection methodology](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFrPpn4).
 
-### Analyzing the data
+### Data Analysis
 
 In case you want to analyze our data using SQL, look at the script [`analysis.sh`](analysis.sh) (it downloads and transforms CSVs to an SQLite database and create indexes and views that make the job easier) and the archives in the folder [`sql/`](sql/).
 
-By default, the script reuses the same files if they have already been
-downloaded; in order to always download the most up-to-date version of
+By default, the script reuses the same files if they have already been downloaded; in order to always download the most up-to-date version of
 the data, run `./analysis.sh --clean`.
 
 ### Validating the data
@@ -124,7 +123,7 @@ make docker-run     # to consolidate the data
 
 ## Clipping
 
-Wanna see which projects and news are using our data? [See the clipping](clipping.md).
+Do you want to check where people are using our data (projects and news)? [Check our clipping](clipping.md).
 
 
 ## Data Update on Brasil.IO
