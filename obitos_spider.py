@@ -34,6 +34,7 @@ class BaseRegistroCivilSpider(scrapy.Spider):
     login_url = "https://transparencia.registrocivil.org.br/registral-covid"
     start_urls = []
     xsrf_token = ""
+    custom_settings = { "USER_AGENT": "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.44 Safari/537.36", }
 
     def start_requests(self):
         yield self.make_login_request()
