@@ -7,6 +7,8 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias
 
+- [2020-05-29 O Estado de São Paulo - Em SP, 86% das cidades que tiveram alta de casos poderão reabrir comércio](https://saude.estadao.com.br/noticias/geral,em-sp-86-das-cidades-que-tiveram-alta-de-casos-poderao-reabrir-comercio,70003318294)
+- [2020-05-29 IstoÉ - Plataforma facilita visualização do avanço da Covid-19 no Brasil](https://istoe.com.br/plataforma-facilita-visualizacao-do-avanco-da-covid-19-no-brasil/)
 - [2020-05-12 The New York Times - 71,000 Missing Deaths: Tracking the True Toll of the Coronavirus Outbreak](https://www.nytimes.com/interactive/2020/04/21/world/coronavirus-missing-deaths.html?action=click&module=RelatedLinks&pgtype=Article)
 - [2020-05-05 Jornal Nacional - Mortes naturais aumentam 30% nas cinco cidades mais atingidas por coronavírus no Brasil](https://globoplay.globo.com/v/8533526/programa/)
 - [2020-05-04 Revista Piauí - A pandemia no interior do país](https://piaui.folha.uol.com.br/pandemia-no-interior-do-pais/)
