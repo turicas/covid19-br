@@ -109,6 +109,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://www.mamiraua.org.br/covid-amazonas
 - https://www.irrd.org/covid-19/graficos-interativos/
 - http://institutovotorantim.org.br/municipioscontraocorona/ivm/
+- https://www.covidbr.dev/
 
 
 ## Publicações Científicas
