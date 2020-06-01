@@ -18,6 +18,8 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [2020-04-18 Band News - Coronavírus: pesquisa mede o ritmo de infecção no Brasil](https://www.youtube.com/watch?v=kGzapwndJwE)
 - [2020-04-16 UFMG Notícias - Estudo acompanha evolução da transmissão do coronavírus nos estados](https://ufmg.br/comunicacao/noticias/estudo-de-professor-do-dcc-acompanha-evolucao-da-transmissao-do-coronavirus-nos-estados)
 - [2020-04-16 UOL Notícias - Coronavírus avança para o interior do Brasil; veja evolução em mapa](https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2020/04/16/coronavirus-avanca-para-o-interior-do-brasil-veja-evolucao-em-mapa.htm)
+- [2020-04-16 Projeto da UFRGS mapeia casos de coronavírus por unidades de saúde do RS]
+(https://g1.globo.com/rs/rio-grande-do-sul/noticia/2020/04/16/projeto-da-ufrgs-mapeia-casos-de-coronavirus-por-unidades-de-saude-em-porto-alegre.ghtml)
 - [2020-04-16 O Estado de São Paulo - Veja a evolução do coronavírus por cidades e microrregiões do Brasil](https://www.estadao.com.br/infograficos/saude,veja-a-evolucao-do-corona-por-cidades-e-microrregioes-do-brasil,1089150)
 - [2020-04-13 CNN Brasil - Uma a cada quatro cidades do estado de São Paulo tem casos de coronavírus](https://www.cnnbrasil.com.br/nacional/2020/04/13/1-a-cada-4-cidades-do-estado-de-sao-paulo-tem-casos-de-coronavirus)
 - [2020-04-11 CoronaVírus MG - Registros em cartórios sugerem o triplo de mortes por Covid-19 em Minas Gerais](https://www.coronavirus-mg.com.br/post/registros-em-cart%C3%B3rios-sugerem-o-triplo-de-mortes-por-covid-19-em-minas-gerais)
@@ -109,6 +111,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://www.mamiraua.org.br/covid-amazonas
 - https://www.irrd.org/covid-19/graficos-interativos/
 - http://institutovotorantim.org.br/municipioscontraocorona/ivm/
+- [Site do grupo CovidMetrika](https://www.ufrgs.br/covidmetrika/) - [Repositório](https://github.com/CovidMetrika)
 
 
 ## Publicações Científicas
