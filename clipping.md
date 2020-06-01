@@ -112,6 +112,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://www.irrd.org/covid-19/graficos-interativos/
 - http://institutovotorantim.org.br/municipioscontraocorona/ivm/
 - [Site do grupo CovidMetrika](https://www.ufrgs.br/covidmetrika/) - [Repositório](https://github.com/CovidMetrika)
+- [Chicó - SINFO/UFRN](https://chico.ufrn.br/)
 
 
 ## Publicações Científicas
