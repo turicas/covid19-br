@@ -124,15 +124,28 @@ We're changing the way we upload the data to make the job easier for volunteers 
 
 - It's **required** that you create it using `scrapy`;
 - **Do Not** use `pandas`, `BeautifulSoap`, `requests` or other unnecessary libraries (the standard Python lib already has lots of useful libs, `scrapy` with XPath is already capable of handling most of the scraping and `rows` is already a dependency of this repository);
+- Create a file named `web/spiders/spider_xx.py`, where `xx` is the state
+  acronym, in lower case. Create a new class and inherit from the
+  `BaseCovid19Spider` class, from `base.py`. The state acronym, in two upper
+  case characters, must be an attribute of the class and use `self.state`.
+  See the examples that have already been implemented;
 - There must be an easy way to make the scraper collect reports and cases for an specific date (but it should be able to identify which dates the data is available for and to capture several dates too);
-- The parsing method must return (with `yield`) a dictionary with the following keys:
-  - `date`: in the format `"YYYY-MM-DD"`
-  - `state`: the state initials, with 2 characters in caps (must be an attribute from the class of the spider and use `self.state`)
-  - `city` (city name or blank, in case its the state's value, it must be `None`)
-  - `place_type`: use `"city"` when it's municipal data and `"state"` it's from the whole state
-  - `confirmed`: integer, number of cases confirmed (or `None`)
-  - `deaths`: integer, number of deaths on that day (or `None`)
-  - **ATTENTION**:	the scraper must always return a register to the state that *isn't* the sum of values by city (this data should be extracted by a row named "total in state" in the report) - this row will have the column `city` with the value `None` and `place_type` with `state` - this data must come filled as being the sum of all municipal values *in case the report doesn't have the totalling data*
+- The data can be read from the tallies by municipality or from individual case
+  microdata. In that latter case, the scraper must tally up itself the
+  municipal numbers;
+- The `parse` method must cal the `self.add_report(date, url)` method, with
+  `date` being the report date and `url` the URL of the information source;
+- For each municipality in the state, call the `self.add_city_case` method with
+  the following parameters:
+  - `city`: name of the municipality
+  - `confirmed`: integer, number of confirmed cases (or `None`)
+  - `death`: integer, number of deaths on that day (or `None`)
+- Read the state totals from the source of information, if available. One
+  should sum up the numbers of each municipality *only if that information
+  is not available in the original source*. Include the total numbers of the
+  state by calling the `self.add_state_case` method. The parameters are the
+  same as the ones in the method used for the municipality, except for the
+  omission of the `city` parameter;
 - When possible, use automated tests;
 
 Right now we don't have much time available for reviews, so **please**, only create a pull request with code of a new scraper if you can fulfill the requirements above.

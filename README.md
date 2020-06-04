@@ -127,6 +127,42 @@ Procure o seu estado [nas issues desse
 repositório](https://github.com/turicas/covid19-br/issues) e vamos conversar
 por lá.
 
+### Criando Scrapers
+
+Estamos mudando a forma de subida dos dados para facilitar o trabalho dos voluntários e deixar o processo mais robusto e confiável e, com isso, será mais fácil que robôs possam subir também os dados; dessa forma, os scrapers ajudarão *bastante* no processo. Porém, ao criar um scraper é importante que você siga algumas regras:
+
+- **Necessário** fazer o scraper usando o `scrapy`;
+- **Não usar** `pandas`, `BeautifulSoap`, `requests` ou outras bibliotecas
+  desnecessárias (a std lib do Python já tem muita biblioteca útil, o `scrapy`
+  com XPath já dá conta de boa parte das raspagens e `rows` já é uma
+  dependência desse repositório);
+- Criar um arquivo `web/spiders/spider_xx.py`, onde `xx` é a sigla do estado,
+  em minúsculas. Criar uma nova classe e herdar da classe `BaseCovid19Spider`,
+  do `base.py`. A sigla do estado, com 2 caracteres maiúsculos, deve ser um
+  atributo da classe do spider e usar `self.state`. Veja os exemplos já
+  implementados;
+- Deve existir alguma maneira fácil de fazer o scraper coletar os boletins e
+  casos para uma data específica (mas ele deve ser capaz de identificar para
+  quais datas os dados disponíveis e de capturar várias datas também);
+- A leitura pode ser feita a partir de contagens por município ou de microdados
+  de casos individuais. Neste caso, é necessário que o próprio scraper calcule
+  os totais por município;
+- O método `parse` deve chamar o método `self.add_report(date, url)`, sendo
+  `date` a data do relatório e `url` a URL da fonte de informação;
+- Para cada município no estado, chamar o método `self.add_city_case` com os
+  seguintes parâmetros:
+  - `city`: nome do município
+  - `confirmed`: inteiro, número de casos confirmados (ou `None`)
+  - `death`: inteiro, número de óbitos naquele dia (ou `None`)
+- Ler os totais do estado a partir da fonte da informação, se estiver
+  disponível. Deve-se somar os números de cada município *somente se essa
+  informação não estiver disponível na fonte original*. Incluir os números
+  totais no estado chamando o método
+  `self.add_state_case`. Os parâmetros são os mesmos do método usado para o
+  município, exceto pela omissão do parâmetro `city`;
+- Quando possível, use testes automatizados.
+
+Nesse momento não temos muito tempo disponível para revisão, então **por favor**, só crie um *pull request* com código de um novo scraper caso você possa cumprir os requisitos acima.
 
 ## Instalando
 
