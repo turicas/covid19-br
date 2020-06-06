@@ -8,7 +8,7 @@ from .base import BaseCovid19Spider
 
 class Covid19ALSpider(BaseCovid19Spider):
     name = "AL"
-    start_urls = ["http://covid19.dados.al.gov.br/dados/sintomas"]
+    start_urls = ["https://covid19.dados.al.gov.br/sintomas"]
 
     def parse(self, response):
         encoding = "utf-8"
