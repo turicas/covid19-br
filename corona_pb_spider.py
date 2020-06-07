@@ -33,14 +33,22 @@ class PBSpider(scrapy.Spider):
         return f'{day_and_month}2020'
 
     def __get_total_cases(self, response):
-        cell_text, *_ = [p.get() for p in response.css('.p1') if 'Casos Confirmados' in p.get()]
+        cell_text, *_ = self.__get_confirmed_paragraph(response)
 
         return self.__extract_number(cell_text)
+
+    def __get_confirmed_paragraph(self, response):
+        return [p.get() for p in response.css('p') if 'Casos Confirmados' in p.get()] or \
+               [p.get() for p in response.css('p') if 'TOTAL CONFIRMADOS' in p.get()]
 
     def __get_total_deaths(self, response):
-        cell_text, *_ = [p.get() for p in response.css('.p1') if 'Óbitos confirmados' in p.get()]
+        cell_text, *_ = self.__get_deaths_paragraph(response)
 
         return self.__extract_number(cell_text)
+
+    def __get_deaths_paragraph(self, response):
+        return [p.get() for p in response.css('p') if 'Óbitos confirmados' in p.get()] or \
+               [p.get() for p in response.css('p') if 'TOTAL DE ÓBITOS' in p.get()]
 
     def __extract_number(self, text_cell):
         raw_number = re.search('[0-9]+\.?[0-9]+', text_cell).group(0)
