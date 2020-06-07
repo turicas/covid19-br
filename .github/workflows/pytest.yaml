@@ -2,7 +2,11 @@ name: pytest@docker
 
 on:
   pull_request:
-  push: 
+    paths-ignore:
+      - '**.md'
+  push:
+    paths-ignore:
+      - '**.md'
 
 jobs:
   build:
