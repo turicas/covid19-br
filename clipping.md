@@ -115,6 +115,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [Chicó - SINFO/UFRN](https://chico.ufrn.br/)
 - [Monitoramento do número de casos de COVID-19 no Brasil](https://covid19br.wcota.me/) – [repositório](https://github.com/wcota/covid19br), por [@wcota](https://github.com/wcota)
 - [Empacotador de dados da Covid-19 para o Kibana/ElasticSearch](https://github.com/dpereira/es-covid19-br), por [@dpereira](https://github.com/dpereira)
+- [Algumas Análises e Explorações com dados da Covid-19 (Brasil e Mundo)](https://momenezes.github.io/covid19/), por [@momenezes](https://github.com/momenezes/covid19)
 
 
 ## Publicações Científicas
