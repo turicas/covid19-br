@@ -5,6 +5,7 @@ import scrapy
 
 class PBSpider(scrapy.Spider):
     name = "PB"
+    state = "PB"
 
     def start_requests(self):
         urls = [
@@ -23,9 +24,12 @@ class PBSpider(scrapy.Spider):
         paragraphs = response.css('p')
 
         yield {
-            "date": self.__get_date(paragraphs),
+            "date": self.__get_date(response),
+            "state": self.state,
+            "city": None,
+            "place_type": "state",
+            "confirmed": self.__get_total_cases(paragraphs),
             "deaths": self.__get_total_deaths(paragraphs),
-            "confirmed": self.__get_total_cases(paragraphs)
         }
 
     def __get_date(self, response):
