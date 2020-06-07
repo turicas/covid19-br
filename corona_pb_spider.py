@@ -15,11 +15,13 @@ class PBSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        for raw_url in response.css('.url'):
-            url = raw_url.attrib['href']
+        if self.__in_root_page(response):
+            for raw_url in response.css('.url'):
+                url = raw_url.attrib['href']
 
-            if url.startswith('https://paraiba.pb.gov.br/diretas/saude/coronavirus/noticias/atualizacao-covid-19'):
-                yield response.follow(url, self.parse)
+                if url.startswith('https://paraiba.pb.gov.br/diretas/saude/coronavirus/noticias/atualizacao-covid-19'):
+                    yield response.follow(url, self.parse)
+            return
 
         paragraphs = response.css('p')
 
@@ -59,3 +61,6 @@ class PBSpider(scrapy.Spider):
     def __extract_number(self, text_cell):
         raw_number = re.search('[0-9]+\.?[0-9]+', text_cell).group(0)
         return int(raw_number.replace('.', ''))
+
+    def __in_root_page(self, response):
+        return response.url == 'https://paraiba.pb.gov.br/diretas/saude/coronavirus/noticias'
