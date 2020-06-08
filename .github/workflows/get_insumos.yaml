@@ -1,0 +1,14 @@
+name: get_insumos
+
+on:
+  schedule:
+    - cron:  '0 12 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Get insumos
+      run: make docker-get-insumos
