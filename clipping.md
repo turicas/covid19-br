@@ -7,6 +7,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias
 
+- [2020-06-08  CBN Tecnologia da Informação - Iniciativas utilizam a tecnologia para coletar e divulgar dados sobre a Covid-19](https://cbn.globoradio.globo.com/media/audio/304208/iniciativas-utilizam-tecnologia-para-coletar-e-div.htm)
 - [2020-05-29 O Estado de São Paulo - Em SP, 86% das cidades que tiveram alta de casos poderão reabrir comércio](https://saude.estadao.com.br/noticias/geral,em-sp-86-das-cidades-que-tiveram-alta-de-casos-poderao-reabrir-comercio,70003318294)
 - [2020-05-29 IstoÉ - Plataforma facilita visualização do avanço da Covid-19 no Brasil](https://istoe.com.br/plataforma-facilita-visualizacao-do-avanco-da-covid-19-no-brasil/)
 - [2020-05-12 The New York Times - 71,000 Missing Deaths: Tracking the True Toll of the Coronavirus Outbreak](https://www.nytimes.com/interactive/2020/04/21/world/coronavirus-missing-deaths.html?action=click&module=RelatedLinks&pgtype=Article)
