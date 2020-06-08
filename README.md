@@ -177,7 +177,10 @@ Você pode montar seu ambiente de desenvolvimento utilizando o
 2. Crie um virtualenv (você pode usar
   [venv](https://docs.python.org/pt-br/3/library/venv.html) para isso).
 3. Instale as dependências: `pip install -r requirements-development.txt`
-
+4. Rode o script de coleta: `./run-spiders.sh`
+5. Rode o script de consolidação: `./run.sh`
+6. Rode o script que sobe o serviço de scraping: `./web.sh`
+  - Os scrapers estarão disponíveis por uma interface web a partir do endereço http://localhost:5000
 
 ### Setup com Docker
 

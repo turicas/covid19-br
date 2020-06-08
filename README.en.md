@@ -165,6 +165,10 @@ Requires Python 3 (tested in 3.8.2). To set up your environment:
 2. Create a virtualenv (you can use
    [venv](https://docs.python.org/pt-br/3/library/venv.html) for this).
 3. Install the dependencies: `pip install -r requirements-development.txt`
+4. Run the collect script: `./run-spiders.sh`
+5. Run the consolidation script: `./run.sh`
+6. Run the script that starts the scraping service: `./web.sh`
+  - The scrapers will be available through a web interface at the URL http://localhost:5000
 
 ### Docker setup
 
