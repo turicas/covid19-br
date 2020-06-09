@@ -16,9 +16,9 @@ class Covid19SESpider(BaseCovid19Spider):
             for row in table_rows[1:]
         ]
 
-        assert cases[0]["municipio"] == "Amparo de São Francisco", data[0]
-        assert cases[37]["municipio"] == "Maruim", data[37]
-        assert cases[-1]["municipio"] == "Umbaúba", data[-1]
+        assert cases[0]["municipio"] == "Amparo de São Francisco", cases[0]
+        assert cases[37]["municipio"] == "Maruim", cases[37]
+        assert cases[-1]["municipio"] == "Umbaúba", cases[-1]
 
         self.add_cases(cases, last_updated)
 
