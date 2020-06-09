@@ -7,7 +7,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias
 
-- [2020-06-09 Correio Brasiliense - Governos e sociedade fazem contagem paralela de casos de covid-19](https://www.correiobraziliense.com.br/app/noticia/brasil/2020/06/09/interna-brasil,862304/governos-e-sociedade-fazem-contagem-paralela-de-casos-de-covid-19.shtml)
+- [2020-06-09 Correio Braziliense - Governos e sociedade fazem contagem paralela de casos de covid-19](https://www.correiobraziliense.com.br/app/noticia/brasil/2020/06/09/interna-brasil,862304/governos-e-sociedade-fazem-contagem-paralela-de-casos-de-covid-19.shtml)
 - [2020-06-08  CBN Tecnologia da Informação - Iniciativas utilizam a tecnologia para coletar e divulgar dados sobre a Covid-19](https://cbn.globoradio.globo.com/media/audio/304208/iniciativas-utilizam-tecnologia-para-coletar-e-div.htm)
 - [2020-05-29 O Estado de São Paulo - Em SP, 86% das cidades que tiveram alta de casos poderão reabrir comércio](https://saude.estadao.com.br/noticias/geral,em-sp-86-das-cidades-que-tiveram-alta-de-casos-poderao-reabrir-comercio,70003318294)
 - [2020-05-29 IstoÉ - Plataforma facilita visualização do avanço da Covid-19 no Brasil](https://istoe.com.br/plataforma-facilita-visualizacao-do-avanco-da-covid-19-no-brasil/)
