@@ -9,7 +9,7 @@ class Covid19SESpider(BaseCovid19Spider):
 
     def parse(self, response):
         last_updated = self._parse_last_updated(response)
-        table_rows = response.xpath("//table[@id='footable_4258']//tr")
+        table_rows = response.xpath("//div[@id='recipiente-distribuicao']//tr")
 
         cases = [
             self._parse_row(row.xpath("td/text()").extract())
@@ -21,6 +21,12 @@ class Covid19SESpider(BaseCovid19Spider):
         assert cases[-1]["municipio"] == "Umbaúba", cases[-1]
 
         self.add_cases(cases, last_updated)
+
+        self.add_city_case(
+            city="Importados/Indefinidos",
+            confirmed=None,
+            deaths=None
+        )
 
     def add_cases(self, cases, last_updated):
         self.add_report(date=last_updated, url=self.start_urls[0])
