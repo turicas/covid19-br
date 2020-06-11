@@ -129,6 +129,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://covid19sc.github.io/
 - https://github.com/wendeldavid/covid-19-alexa-skill
 - https://sites.google.com/unesp.br/mapeamento-covid19
+- [Portal Censura Não - Painel Coronavírus](https://www.censuranao.com), por [@hugomn](https://github.com/hugomn)
 
 
 ## Publicações Científicas
