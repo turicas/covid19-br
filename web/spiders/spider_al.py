@@ -18,7 +18,7 @@ class Covid19ALSpider(BaseCovid19Spider):
         )
         table = [row for row in table if row.classificacao == "Confirmado"]
 
-        # TODO - get last_date from another source at *.al.gov.br
+        # TODO - get last_date from response header Ex. : b'Content-Disposition': [b'attachment; filename=paciente10.06.2020.csv']
         last_date = datetime.now().date()
         self.add_report(date=last_date, url=self.start_urls[0])
 
@@ -31,7 +31,7 @@ class Covid19ALSpider(BaseCovid19Spider):
         for city, cases in groupby(table, key=row_key):         
             cases = list(cases)
             confirmed = len(cases)
-            deaths = sum(1 for row in cases if row.data_obito != '')
+            deaths = sum(1 for row in cases if row.situacao_atual == 'Óbito')
             try:
                 self.get_city_id_from_name(city)
             except KeyError:
