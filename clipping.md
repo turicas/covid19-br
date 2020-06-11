@@ -7,8 +7,13 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias
 
+- [2020-06-10 Band News FM Curitida - Voluntários criam plataforma que atualiza casos de coronavírus em todas as regiões brasileiras](https://bandnewsfmcuritiba.com/voluntarios-criam-plataforma-que-atualiza-casos-de-coronavirus-em-todas-as-regioes-brasileiras/)
+- [2020-06-10 CNN Brasil - A briga pelo número certo da Covid-19](https://www.cnnbrasil.com.br/saude/2020/06/10/coronavirus-fato-x-ficcao-a-briga-pelo-numero-certo-da-covid-19)
+- [2020-06-09 Pública - Na trincheira contra o apagão de dados da pandemia](https://apublica.org/2020/06/na-trincheira-contra-o-apagao-de-dados-da-pandemia/)
+- [2020-06-09 O Povo - A Importância de se disponibilizar dados para a Saúde](https://mais.opovo.com.br/jornal/reportagem/2020/06/09/a-importancia-de-se-disponibilizar-dados-para-a-saude.html)
+- [2020-06-09 Estadão - Governos e sociedade fazem contagem paralela de casos do novo coronavírus](https://saude.estadao.com.br/noticias/geral,governos-e-sociedade-fazem-contagem-paralela-de-casos,70003328908 (manchete - ver tweet no twitter.com/estadao pra linkar tweet da imagem ))
 - [2020-06-09 Correio Braziliense - Governos e sociedade fazem contagem paralela de casos de covid-19](https://www.correiobraziliense.com.br/app/noticia/brasil/2020/06/09/interna-brasil,862304/governos-e-sociedade-fazem-contagem-paralela-de-casos-de-covid-19.shtml)
-- [2020-06-08  CBN Tecnologia da Informação - Iniciativas utilizam a tecnologia para coletar e divulgar dados sobre a Covid-19](https://cbn.globoradio.globo.com/media/audio/304208/iniciativas-utilizam-tecnologia-para-coletar-e-div.htm)
+- [2020-06-07 The Brazilian Report -  Brazilians respond to government Covid-19 data tampering](https://brazilian.report/coronavirus-brazil-live-blog/2020/06/07/brazilians-responds-to-government-tampering-with-covid-19-data/)
 - [2020-05-29 O Estado de São Paulo - Em SP, 86% das cidades que tiveram alta de casos poderão reabrir comércio](https://saude.estadao.com.br/noticias/geral,em-sp-86-das-cidades-que-tiveram-alta-de-casos-poderao-reabrir-comercio,70003318294)
 - [2020-05-29 IstoÉ - Plataforma facilita visualização do avanço da Covid-19 no Brasil](https://istoe.com.br/plataforma-facilita-visualizacao-do-avanco-da-covid-19-no-brasil/)
 - [2020-05-12 The New York Times - 71,000 Missing Deaths: Tracking the True Toll of the Coronavirus Outbreak](https://www.nytimes.com/interactive/2020/04/21/world/coronavirus-missing-deaths.html?action=click&module=RelatedLinks&pgtype=Article)
@@ -47,10 +52,13 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [2020-03-23 CNN Brasil - Boletins estaduais indicam quase 40 casos de coronavírus a mais do que governo](https://www.cnnbrasil.com.br/saude/2020/03/23/boletins-estaduais-indicam-quase-40-casos-de-coronavirus-a-mais-do-que-governo)
 
 
-## Podcasts
+## Podcasts e Rádio
 
-- [Intervalo de Confiança](https://intervalodeconfianca.com.br/2020/04/01/ic-14-numeros-podem-explicar-uma-pandemia/)
-- [Podcast Rio Bravo](https://soundcloud.com/riobravoinvestimentos/podcast-590-alvaro-justen-o-brasilio-e-a-defesa-ao-acesso-aos-dados-publicos)
+- [2020-06-10 FM Cultura - Programa Cultura na Mesa](https://www.mixcloud.com/Cultura1077/10062020-cultura-na-mesa/)
+- [2020-06-08 CBN Tecnologia da Informação - Iniciativas utilizam a tecnologia para coletar e divulgar dados sobre a Covid-19](https://cbn.globoradio.globo.com/media/audio/304208/iniciativas-utilizam-tecnologia-para-coletar-e-div.htm)
+- [2020-06-06 Rádio Guaíba - Programa Redação Guaíba](https://www.youtube.com/watch?v=knBWg-H4wuc)
+- [2020-04-24 Podcast Rio Bravo](https://soundcloud.com/riobravoinvestimentos/podcast-590-alvaro-justen-o-brasilio-e-a-defesa-ao-acesso-aos-dados-publicos)
+- [2020-04-01 Intervalo de Confiança](https://intervalodeconfianca.com.br/2020/04/01/ic-14-numeros-podem-explicar-uma-pandemia/)
 
 
 ## Análises e Projetos
