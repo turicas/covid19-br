@@ -130,6 +130,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://github.com/wendeldavid/covid-19-alexa-skill
 - https://sites.google.com/unesp.br/mapeamento-covid19
 - [Portal Censura Não - Painel Coronavírus](https://www.censuranao.com), por [@hugomn](https://github.com/hugomn)
+- [Dashboard Covid-19 – Gyro UTFPR](https://projetogyro.pythonanywhere.com/)
 
 
 ## Publicações Científicas
