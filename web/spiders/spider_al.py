@@ -1,4 +1,5 @@
 import io
+import re
 from itertools import groupby
 from datetime import datetime
 
@@ -18,8 +19,10 @@ class Covid19ALSpider(BaseCovid19Spider):
         )
         table = [row for row in table if row.classificacao == "Confirmado"]
 
-        # TODO - get last_date from response header Ex. : b'Content-Disposition': [b'attachment; filename=paciente10.06.2020.csv']
-        last_date = datetime.now().date()
+        get_date = re.compile(r'(\d{2}\.\d{2}\.\d{4})\.csv$')
+        date_string = get_date.search(response.headers.get('Content-Disposition').decode()).group(1)
+        last_date = datetime.strptime(date_string, '%d.%m.%Y').date()
+
         self.add_report(date=last_date, url=self.start_urls[0])
 
         row_key = lambda row: row.municipio_residencia
