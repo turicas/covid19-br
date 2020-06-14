@@ -7,7 +7,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias
 
-- [2020-06-10 Band News FM Curitida - Voluntários criam plataforma que atualiza casos de coronavírus em todas as regiões brasileiras](https://bandnewsfmcuritiba.com/voluntarios-criam-plataforma-que-atualiza-casos-de-coronavirus-em-todas-as-regioes-brasileiras/)
+- [2020-06-10 Band News FM Curitiba - Voluntários criam plataforma que atualiza casos de coronavírus em todas as regiões brasileiras](https://bandnewsfmcuritiba.com/voluntarios-criam-plataforma-que-atualiza-casos-de-coronavirus-em-todas-as-regioes-brasileiras/)
 - [2020-06-10 CNN Brasil - A briga pelo número certo da Covid-19](https://www.cnnbrasil.com.br/saude/2020/06/10/coronavirus-fato-x-ficcao-a-briga-pelo-numero-certo-da-covid-19)
 - [2020-06-09 Pública - Na trincheira contra o apagão de dados da pandemia](https://apublica.org/2020/06/na-trincheira-contra-o-apagao-de-dados-da-pandemia/)
 - [2020-06-09 O Povo - A Importância de se disponibilizar dados para a Saúde](https://mais.opovo.com.br/jornal/reportagem/2020/06/09/a-importancia-de-se-disponibilizar-dados-para-a-saude.html)
@@ -141,6 +141,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Outras Publicações
 
+- [2020-06-10 Webinar: Acesso aberto a dados de saúde na perspectiva da pandemia ICICT:FIOCRUZ](https://www.youtube.com/watch?v=gtcSrxcmniQ)
 - [2020-05-01 CWB Resiste - Entrevista com Álvaro Justen](https://medium.com/cwbresiste/n%C3%A3o-teremos-o-n%C3%BAmero-de-%C3%B3bitos-reais-enquanto-n%C3%A3o-tivermos-transpar%C3%AAncia-sobre-isso-afirma-f74fad5d673e)
 - [2020-04-12 Live do Átila Iamarino](https://www.youtube.com/watch?v=vEwDdXim8bQ)
 - [2020-03-25 Análise Descritiva do Coronavírus nos Estados Brasileiros](https://marcusnunes.me/posts/analise-descritiva-do-coronavirus/)
