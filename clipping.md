@@ -7,6 +7,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias
 
+- [2020-06-15 GloboNews - Interiorização da Covid-19 faz seis estados do país registrarem mais mortes em cidades interioranas](https://g1.globo.com/bemestar/coronavirus/noticia/2020/06/15/interiorizacao-da-covid-19-faz-seis-estados-do-pais-registrarem-mais-mortes-em-cidades-interioranas.ghtml)
 - [2020-06-14 Jornal Opção - Monitoramento paralelo do coronavírus é mais confiável que o oficial](https://www.jornalopcao.com.br/reportagens/monitoramento-paralelo-do-coronavirus-e-mais-confiavel-que-o-oficial-260914/)
 - [2020-06-10 Band News FM Curitiba - Voluntários criam plataforma que atualiza casos de coronavírus em todas as regiões brasileiras](https://bandnewsfmcuritiba.com/voluntarios-criam-plataforma-que-atualiza-casos-de-coronavirus-em-todas-as-regioes-brasileiras/)
 - [2020-06-10 CNN Brasil - A briga pelo número certo da Covid-19](https://www.cnnbrasil.com.br/saude/2020/06/10/coronavirus-fato-x-ficcao-a-briga-pelo-numero-certo-da-covid-19)
