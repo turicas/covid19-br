@@ -7,6 +7,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias
 
+- [2020-06-14 Jornal Opção - Monitoramento paralelo do coronavírus é mais confiável que o oficial](https://www.jornalopcao.com.br/reportagens/monitoramento-paralelo-do-coronavirus-e-mais-confiavel-que-o-oficial-260914/)
 - [2020-06-10 Band News FM Curitiba - Voluntários criam plataforma que atualiza casos de coronavírus em todas as regiões brasileiras](https://bandnewsfmcuritiba.com/voluntarios-criam-plataforma-que-atualiza-casos-de-coronavirus-em-todas-as-regioes-brasileiras/)
 - [2020-06-10 CNN Brasil - A briga pelo número certo da Covid-19](https://www.cnnbrasil.com.br/saude/2020/06/10/coronavirus-fato-x-ficcao-a-briga-pelo-numero-certo-da-covid-19)
 - [2020-06-09 Pública - Na trincheira contra o apagão de dados da pandemia](https://apublica.org/2020/06/na-trincheira-contra-o-apagao-de-dados-da-pandemia/)
