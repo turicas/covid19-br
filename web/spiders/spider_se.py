@@ -45,9 +45,6 @@ class Covid19SESpider(BaseCovid19Spider):
         self.add_state_case(confirmed=total_no_estado, deaths=obitos)
 
     def _parse_row(self, row):
-        def _parse_float(num):
-            return float(num.replace(",", "."))
-
         column_types = {
             "municipio": str,
             "confirmado": int,
@@ -55,9 +52,9 @@ class Covid19SESpider(BaseCovid19Spider):
             "letalidade": _parse_float,
             "incidencia_por_100000_habitantes": _parse_float,
             "mortalidade_por_100000_habitantes": _parse_float,
-            "isolamento_social": lambda num: int(num.replace("%", "")) / 10,
+            "isolamento_social": _parse_nullable_percent,
         }
-        
+
         return {
             key: cast_func(column)
             for ((key, cast_func), column) in zip(column_types.items(), row)
@@ -67,3 +64,16 @@ class Covid19SESpider(BaseCovid19Spider):
         text = response.xpath("//div[@id='texto-atualizacao']//strong/text()").extract()
         last_updated = datetime.datetime.strptime(text[0].split()[0], "%d/%m/%y")
         return last_updated.date()
+
+
+def _parse_float(num):
+    return float(num.replace(",", "."))
+
+
+def _parse_nullable_percent(percent_str):
+    if percent_str.strip() == "-":
+        value = None
+    else:
+        value = int(percent_str.replace("%", "")) / 10
+
+    return value
