@@ -5,8 +5,9 @@ utilizado nossos dados. Se esses dados foram úteis de alguma forma, avise-nos -
 você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :)
 
 
-## Notícias
+## Notícias e Entrevistas
 
+- [2020-06-17 DATACTIVE - Liberating COVID-19 data with volunteers in Brazil](https://data-activism.net/2020/06/bigdatasur-covid-liberating-covid-19-data-with-volunteers-in-brazil/)
 - [2020-06-15 GloboNews - Interiorização da Covid-19 faz seis estados do país registrarem mais mortes em cidades interioranas](https://g1.globo.com/bemestar/coronavirus/noticia/2020/06/15/interiorizacao-da-covid-19-faz-seis-estados-do-pais-registrarem-mais-mortes-em-cidades-interioranas.ghtml)
 - [2020-06-14 Jornal Opção - Monitoramento paralelo do coronavírus é mais confiável que o oficial](https://www.jornalopcao.com.br/reportagens/monitoramento-paralelo-do-coronavirus-e-mais-confiavel-que-o-oficial-260914/)
 - [2020-06-10 Band News FM Curitiba - Voluntários criam plataforma que atualiza casos de coronavírus em todas as regiões brasileiras](https://bandnewsfmcuritiba.com/voluntarios-criam-plataforma-que-atualiza-casos-de-coronavirus-em-todas-as-regioes-brasileiras/)
@@ -133,6 +134,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://sites.google.com/unesp.br/mapeamento-covid19
 - [Portal Censura Não - Painel Coronavírus](https://www.censuranao.com), por [@hugomn](https://github.com/hugomn)
 - [Dashboard Covid-19 – Gyro UTFPR](https://projetogyro.pythonanywhere.com/)
+- http://nis.org.br/monitoramento-covid-19/
 
 
 ## Publicações Científicas
