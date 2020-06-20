@@ -7,6 +7,8 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias e Entrevistas
 
+
+- [2020-06-18 NEXO - A distribuição geográfica das mortes por covid-19 no Brasil](https://www.nexojornal.com.br/grafico/2020/06/18/A-distribuição-geográfica-das-mortes-por-covid-19-no-Brasil)
 - [2020-06-17 DATACTIVE - Liberating COVID-19 data with volunteers in Brazil](https://data-activism.net/2020/06/bigdatasur-covid-liberating-covid-19-data-with-volunteers-in-brazil/)
 - [2020-06-15 GloboNews - Interiorização da Covid-19 faz seis estados do país registrarem mais mortes em cidades interioranas](https://g1.globo.com/bemestar/coronavirus/noticia/2020/06/15/interiorizacao-da-covid-19-faz-seis-estados-do-pais-registrarem-mais-mortes-em-cidades-interioranas.ghtml)
 - [2020-06-14 Jornal Opção - Monitoramento paralelo do coronavírus é mais confiável que o oficial](https://www.jornalopcao.com.br/reportagens/monitoramento-paralelo-do-coronavirus-e-mais-confiavel-que-o-oficial-260914/)
