@@ -43,6 +43,8 @@ class Schema:  # TODO: add this class to rows
 
 def get_brasilio_data(dataset, table, **filters):
     url = f"https://brasil.io/api/dataset/{dataset}/{table}/data/"
+    if "page_size" not in filters:
+        filters["page_size"] = 10_000
     if filters:
         url += "?" + urlencode(filters)
 
