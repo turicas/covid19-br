@@ -2,7 +2,7 @@
 
 # covid19-br
 
-![pytest@docker](https://github.com/turicas/covid19-br/workflows/pytest@docker/badge.svg)
+![pytest@docker](https://github.com/turicas/covid19-br/workflows/pytest@docker/badge.svg) ![goodtables](https://github.com/turicas/covid19-br/workflows/goodtables/badge.svg)
 
 This repository unifies links and data about reports on the number of cases from State Health Secretariats (Secretarias Estaduais de Saúde - SES), about the cases of covid19 in Brazil (at each city, daily), amongst other data relevant for analysis, such as deaths tolls accounted for in the notary service (by state, daily).
 
