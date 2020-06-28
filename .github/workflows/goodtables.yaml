@@ -3,6 +3,12 @@ name: goodtables
 on:
   schedule:
     - cron:  '0 1 * * *'
+  pull_request:
+    paths:
+      - 'schema/*.csv'
+  push:
+    paths:
+      - 'schema/*.csv'
 
 jobs:
   build:
