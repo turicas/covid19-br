@@ -15,6 +15,13 @@
             "description": "Data da publicação do boletim"
           },
           {
+            "name": "notes",
+            "type": "string",
+            "format": "default",
+            "title": "Observações",
+            "description": "Observações"
+          },
+          {
             "name": "state",
             "type": "string",
             "format": "default",
@@ -27,13 +34,6 @@
             "format": "uri",
             "title": "URL",
             "description": "Link para o boletim"
-          },
-          {
-            "name": "notes",
-            "type": "string",
-            "format": "default",
-            "title": "Observações",
-            "description": "Observações"
           }
         ]
       },
