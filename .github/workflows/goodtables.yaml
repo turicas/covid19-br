@@ -6,9 +6,11 @@ on:
   pull_request:
     paths:
       - 'schema/*.csv'
+      - 'datapackage.json'
   push:
     paths:
       - 'schema/*.csv'
+      - 'datapackage.json'
 
 jobs:
   build:
