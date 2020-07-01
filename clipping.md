@@ -148,6 +148,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [Algumas Análises e Explorações com dados da Covid-19 (Brasil e Mundo)](https://momenezes.github.io/covid19/), por [@momenezes](https://github.com/momenezes/covid19)
 - [ZEROBIAS](https://zerobias.info), por [@lorenzoridolfi](https://github.com/lorenzoridolfi)
 - https://www.covidbr.dev/ , por [@ThiagoDiasV](https://github.com/ThiagoDiasV)
+- [brcovid.api - Python](https://github.com/bessavagner/brcovid), por [@bessavagner](https://github.com/bessavagner)
 
 
 ## Publicações Científicas
