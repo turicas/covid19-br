@@ -146,7 +146,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [Painel de análise e monitoramento da COVID-19 - TCE-MT](https://covid.tce.mt.gov.br/extensions/covid/painel-brasil.html)
 - [Painel COVID19 - ICe/UFRN](https://neuro.ufrn.br/covid19)
 - [Algumas Análises e Explorações com dados da Covid-19 (Brasil e Mundo)](https://momenezes.github.io/covid19/), por [@momenezes](https://github.com/momenezes/covid19)
-- [ZEROBIAS by Lorenzo Ridolfi](https://zerobias.info)
+- [ZEROBIAS](https://zerobias.info), por [@lorenzoridolfi](https://github.com/lorenzoridolfi)
 
 
 ## Publicações Científicas
