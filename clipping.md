@@ -5,31 +5,49 @@ utilizado nossos dados. Se esses dados foram úteis de alguma forma, avise-nos -
 você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :)
 
 
-## Notícias
+## Notícias e Entrevistas
 
+- [2020-06-20 Estadão - Brasil supera 1 milhão de casos de covid-19](https://www.estadao.com.br/infograficos/saude,brasil-supera-1-milhao-de-casos-de-covid-19,1101828)
+- [2020-06-18 NEXO - A distribuição geográfica das mortes por covid-19 no Brasil](https://www.nexojornal.com.br/grafico/2020/06/18/A-distribuição-geográfica-das-mortes-por-covid-19-no-Brasil)
+- [2020-06-17 DATACTIVE - Liberating COVID-19 data with volunteers in Brazil](https://data-activism.net/2020/06/bigdatasur-covid-liberating-covid-19-data-with-volunteers-in-brazil/)
+- [2020-06-15 GloboNews - Interiorização da Covid-19 faz seis estados do país registrarem mais mortes em cidades interioranas](https://g1.globo.com/bemestar/coronavirus/noticia/2020/06/15/interiorizacao-da-covid-19-faz-seis-estados-do-pais-registrarem-mais-mortes-em-cidades-interioranas.ghtml)
+- [2020-06-14 The Brazilian Report - São Paulo Mayor Bruno Covas tested positive for Covid-19](https://brazilian.report/coronavirus-brazil-live-blog/2020/06/14/sao-paulo-mayor-bruno-covas-tested-positive-for-covid-19/)
+- [2020-06-14 Jornal Opção - Monitoramento paralelo do coronavírus é mais confiável que o oficial](https://www.jornalopcao.com.br/reportagens/monitoramento-paralelo-do-coronavirus-e-mais-confiavel-que-o-oficial-260914/)
+- [2020-06-10 CNN Brasil - A briga pelo número certo da Covid-19](https://www.cnnbrasil.com.br/saude/2020/06/10/coronavirus-fato-x-ficcao-a-briga-pelo-numero-certo-da-covid-19)
+- [2020-06-10 Band News FM Curitiba - Voluntários criam plataforma que atualiza casos de coronavírus em todas as regiões brasileiras](https://bandnewsfmcuritiba.com/voluntarios-criam-plataforma-que-atualiza-casos-de-coronavirus-em-todas-as-regioes-brasileiras/)
+- [2020-06-09 Pública - Na trincheira contra o apagão de dados da pandemia](https://apublica.org/2020/06/na-trincheira-contra-o-apagao-de-dados-da-pandemia/)
+- [2020-06-09 O Povo - A Importância de se disponibilizar dados para a Saúde](https://mais.opovo.com.br/jornal/reportagem/2020/06/09/a-importancia-de-se-disponibilizar-dados-para-a-saude.html)
+- [2020-06-09 Estadão - Governos e sociedade fazem contagem paralela de casos do novo coronavírus](https://saude.estadao.com.br/noticias/geral,governos-e-sociedade-fazem-contagem-paralela-de-casos,70003328908 (manchete - ver tweet no twitter.com/estadao pra linkar tweet da imagem ))
+- [2020-06-09 Correio Braziliense - Governos e sociedade fazem contagem paralela de casos de covid-19](https://www.correiobraziliense.com.br/app/noticia/brasil/2020/06/09/interna-brasil,862304/governos-e-sociedade-fazem-contagem-paralela-de-casos-de-covid-19.shtml)
+- [2020-06-08 TecMundo - Dados confiáveis sobre covid-19 estão em página especial do TecMundo](https://www.tecmundo.com.br/ciencia/153965-dados-confiaveis-covid-19-pagina-especial-tecmundo.htm)
+- [2020-06-08 O Combatente - Secretários de saúde do Brasil lançam site para divulgar dados sobre covid-19](https://www.ocombatente.com/2020/06/08/secretarios-de-saude-do-brasil-lancam-site-para-divulgar-dados-sobre-covid-19/)
+- [2020-06-07 The Brazilian Report -  Brazilians respond to government Covid-19 data tampering](https://brazilian.report/coronavirus-brazil-live-blog/2020/06/07/brazilians-responds-to-government-tampering-with-covid-19-data/)
+- [2020-06-05 Correio Braziliense - Covid-19: Bolsonaro ordenou atrasar boletins para não passar em telejornais](https://www.correiobraziliense.com.br/app/noticia/politica/2020/06/05/interna_politica,861307/covid-19-bolsonaro-ordenou-atrasar-boletins-nao-passar-em-telejornais.shtml)
+- [2020-06-02 Estadão - Covid avança pelo Brasil e 1/3 dos casos já ocorre fora de capitais e suas regiões metropolitanas](https://saude.estadao.com.br/noticias/geral,um-em-cada-tres-casos-de-covid-19-ja-ocorre-fora-das-capitais-e-do-seu-entorno,70003321678)
 - [2020-05-29 O Estado de São Paulo - Em SP, 86% das cidades que tiveram alta de casos poderão reabrir comércio](https://saude.estadao.com.br/noticias/geral,em-sp-86-das-cidades-que-tiveram-alta-de-casos-poderao-reabrir-comercio,70003318294)
 - [2020-05-29 IstoÉ - Plataforma facilita visualização do avanço da Covid-19 no Brasil](https://istoe.com.br/plataforma-facilita-visualizacao-do-avanco-da-covid-19-no-brasil/)
 - [2020-05-12 The New York Times - 71,000 Missing Deaths: Tracking the True Toll of the Coronavirus Outbreak](https://www.nytimes.com/interactive/2020/04/21/world/coronavirus-missing-deaths.html?action=click&module=RelatedLinks&pgtype=Article)
 - [2020-05-05 Jornal Nacional - Mortes naturais aumentam 30% nas cinco cidades mais atingidas por coronavírus no Brasil](https://globoplay.globo.com/v/8533526/programa/)
 - [2020-05-04 Revista Piauí - A pandemia no interior do país](https://piaui.folha.uol.com.br/pandemia-no-interior-do-pais/)
+- [2020-05-01 TecMundo - Respostas às principais perguntas sobre covid-19 em mapas e gráficos](https://www.tecmundo.com.br/ciencia/152503-respostas-principais-perguntas-covid-19-mapas-graficos.htm)
 - [2020-04-30 Nexo Jornal - A evolução dos casos de covid-19 nos municípios brasileiros](https://www.nexojornal.com.br/grafico/2020/04/30/A-evolu%C3%A7%C3%A3o-dos-casos-de-covid-19-nos-munic%C3%ADpios-brasileiros)
 - [2020-04-29 BBC News Brasil - Coronavírus: quantos casos e mortes por covid-19 há em sua cidade?](https://www.bbc.com/portuguese/brasil-52472202)
 - [2020-04-20 Congresso em Foco - Painel traz dados da pandemia em tempo real na sua cidade e no mundo](https://congressoemfoco.uol.com.br/congresso-em-foco/painel-traz-dados-da-pandemia-em-tempo-real-na-sua-cidade-e-no-mundo/)
 - [2020-04-18 Band News - Coronavírus: pesquisa mede o ritmo de infecção no Brasil](https://www.youtube.com/watch?v=kGzapwndJwE)
-- [2020-04-16 UFMG Notícias - Estudo acompanha evolução da transmissão do coronavírus nos estados](https://ufmg.br/comunicacao/noticias/estudo-de-professor-do-dcc-acompanha-evolucao-da-transmissao-do-coronavirus-nos-estados)
 - [2020-04-16 UOL Notícias - Coronavírus avança para o interior do Brasil; veja evolução em mapa](https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2020/04/16/coronavirus-avanca-para-o-interior-do-brasil-veja-evolucao-em-mapa.htm)
-- [2020-04-16 Projeto da UFRGS mapeia casos de coronavírus por unidades de saúde do RS]
-(https://g1.globo.com/rs/rio-grande-do-sul/noticia/2020/04/16/projeto-da-ufrgs-mapeia-casos-de-coronavirus-por-unidades-de-saude-em-porto-alegre.ghtml)
+- [2020-04-16 UFMG Notícias - Estudo acompanha evolução da transmissão do coronavírus nos estados](https://ufmg.br/comunicacao/noticias/estudo-de-professor-do-dcc-acompanha-evolucao-da-transmissao-do-coronavirus-nos-estados)
+- [2020-04-16 Projeto da UFRGS mapeia casos de coronavírus por unidades de saúde do RS](https://g1.globo.com/rs/rio-grande-do-sul/noticia/2020/04/16/projeto-da-ufrgs-mapeia-casos-de-coronavirus-por-unidades-de-saude-em-porto-alegre.ghtml)
 - [2020-04-16 O Estado de São Paulo - Veja a evolução do coronavírus por cidades e microrregiões do Brasil](https://www.estadao.com.br/infograficos/saude,veja-a-evolucao-do-corona-por-cidades-e-microrregioes-do-brasil,1089150)
 - [2020-04-13 CNN Brasil - Uma a cada quatro cidades do estado de São Paulo tem casos de coronavírus](https://www.cnnbrasil.com.br/nacional/2020/04/13/1-a-cada-4-cidades-do-estado-de-sao-paulo-tem-casos-de-coronavirus)
 - [2020-04-11 CoronaVírus MG - Registros em cartórios sugerem o triplo de mortes por Covid-19 em Minas Gerais](https://www.coronavirus-mg.com.br/post/registros-em-cart%C3%B3rios-sugerem-o-triplo-de-mortes-por-covid-19-em-minas-gerais)
-- [2020-04-08 Metrópoles - Covid-19 se interioriza e chega a 581 cidades. Veja quais](https://www.metropoles.com/saude/covid-19-se-interioriza-e-chega-a-581-cidades-veja-quais)
+- [2020-04-09 Bom Dia Pará - Ciência Pai D'égua: pesquisadores apontam impacto do isolamento no combate a Covid-19](https://globoplay.globo.com/v/8469247/)
 - [2020-04-08 The Intercept Brasil - Com coronavírus em disparada e UTIs lotadas, Manaus está à beira do colapso](https://theintercept.com/2020/04/08/coronavirus-manaus-uti-colapso/)
+- [2020-04-08 Metrópoles - Covid-19 se interioriza e chega a 581 cidades. Veja quais](https://www.metropoles.com/saude/covid-19-se-interioriza-e-chega-a-581-cidades-veja-quais)
 - [2020-04-07 GaúchaZH - Mortes por coronavírus se concentram em poucas cidades no mundo](https://gauchazh.clicrbs.com.br/geral/noticia/2020/04/mortes-por-coronavirus-se-concentram-em-poucas-cidades-no-mundo-ck8q30xev01d101ll3aoe8uw1.html)
 - [2020-04-06 O Globo - Rumo ao interior: coronavírus já circula em 397 municípios além das capitais e regiões metropolitanas](https://oglobo.globo.com/brasil/rumo-ao-interior-coronavirus-ja-circula-em-397-municipios-alem-das-capitais-regioes-metropolitanas-24353176) (manchete do impresso!)
 - [2020-04-06 Exame - Coronavírus avança no interior do Brasil e atinge 397 municípios](https://exame.abril.com.br/brasil/coronavirus-avanca-no-interior-do-brasil-e-atinge-397-municipios/)
-- [2020-04-02 IJNet - COVID-19 expõe falta de democracia da informação no Brasil](https://ijnet.org/pt-br/story/covid-19-exp%C3%B5e-falta-de-democracia-da-informa%C3%A7%C3%A3o-no-brasil)
 - [2020-04-02 UOL Notícias - Coronavírus chega ao interior e pequenas cidades viram foco de transmissão](https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2020/04/02/coronavirus-chega-ao-interior-e-pequenas-cidades-viram-foco-de-transmissao.htm)
+- [2020-04-02 IJNet - COVID-19 expõe falta de democracia da informação no Brasil](https://ijnet.org/pt-br/story/covid-19-exp%C3%B5e-falta-de-democracia-da-informa%C3%A7%C3%A3o-no-brasil)
 - [2020-04-01 O Estado de São Paulo - Metade da população brasileira vive em cidades que já registraram coronavírus](https://saude.estadao.com.br/noticias/geral,metade-da-populacao-brasileira-vive-em-cidades-que-ja-registraram-coronavirus,70003255810) (manchete do impresso!)
 - [2020-03-31 UOL Notícias - Capitais brasileiras concentram 80% dos casos de novo coronavírus no Brasil](https://noticias.uol.com.br/saude/ultimas-noticias/redacao/2020/03/31/capitais-brasileiras-concentram-80-dos-casos-de-novo-coronavirus-no-brasil.htm)
 - [2020-03-31 UFPA - Centro de Competência em Software Livre da UFPA disponibiliza página para acompanhar a evolução da pandemia da Covid-19 no Brasil](https://portal.ufpa.br/index.php/ultimas-noticias2/11475-centro-de-competencia-em-software-livre-da-ufpa-disponibiliza-pagina-para-acompanhar-a-evolucao-da-pandemia-da-covid-19-no-brasil)
@@ -45,10 +63,13 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [2020-03-23 CNN Brasil - Boletins estaduais indicam quase 40 casos de coronavírus a mais do que governo](https://www.cnnbrasil.com.br/saude/2020/03/23/boletins-estaduais-indicam-quase-40-casos-de-coronavirus-a-mais-do-que-governo)
 
 
-## Podcasts
+## Podcasts e Rádio
 
-- [Intervalo de Confiança](https://intervalodeconfianca.com.br/2020/04/01/ic-14-numeros-podem-explicar-uma-pandemia/)
-- [Podcast Rio Bravo](https://soundcloud.com/riobravoinvestimentos/podcast-590-alvaro-justen-o-brasilio-e-a-defesa-ao-acesso-aos-dados-publicos)
+- [2020-06-10 FM Cultura - Programa Cultura na Mesa](https://www.mixcloud.com/Cultura1077/10062020-cultura-na-mesa/)
+- [2020-06-08 CBN Tecnologia da Informação - Iniciativas utilizam a tecnologia para coletar e divulgar dados sobre a Covid-19](https://cbn.globoradio.globo.com/media/audio/304208/iniciativas-utilizam-tecnologia-para-coletar-e-div.htm)
+- [2020-06-06 Rádio Guaíba - Programa Redação Guaíba](https://www.youtube.com/watch?v=knBWg-H4wuc)
+- [2020-04-24 Podcast Rio Bravo](https://soundcloud.com/riobravoinvestimentos/podcast-590-alvaro-justen-o-brasilio-e-a-defesa-ao-acesso-aos-dados-publicos)
+- [2020-04-01 Intervalo de Confiança](https://intervalodeconfianca.com.br/2020/04/01/ic-14-numeros-podem-explicar-uma-pandemia/)
 
 
 ## Análises e Projetos
@@ -115,17 +136,31 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [Chicó - SINFO/UFRN](https://chico.ufrn.br/)
 - [Monitoramento do número de casos de COVID-19 no Brasil](https://covid19br.wcota.me/) – [repositório](https://github.com/wcota/covid19br), por [@wcota](https://github.com/wcota)
 - [Empacotador de dados da Covid-19 para o Kibana/ElasticSearch](https://github.com/dpereira/es-covid19-br), por [@dpereira](https://github.com/dpereira)
-- [Boletim resumido por cidade ou estado](https://github.com/bessavagner/brcovid)
+- https://www.facebook.com/Mapas-do-Brasil-Covid-19-Maps-of-Brazil-106294097779006/
+- https://covid19sc.github.io/
+- https://github.com/wendeldavid/covid-19-alexa-skill
+- https://sites.google.com/unesp.br/mapeamento-covid19
+- [Portal Censura Não - Painel Coronavírus](https://www.censuranao.com), por [@hugomn](https://github.com/hugomn)
+- [Dashboard Covid-19 – Gyro UTFPR](https://projetogyro.pythonanywhere.com/)
+- http://nis.org.br/monitoramento-covid-19/
+- [Painel de análise e monitoramento da COVID-19 - TCE-MT](https://covid.tce.mt.gov.br/extensions/covid/painel-brasil.html)
+- [Painel COVID19 - ICe/UFRN](https://neuro.ufrn.br/covid19)
+- [Algumas Análises e Explorações com dados da Covid-19 (Brasil e Mundo)](https://momenezes.github.io/covid19/), por [@momenezes](https://github.com/momenezes/covid19)
+- [ZEROBIAS](https://zerobias.info), por [@lorenzoridolfi](https://github.com/lorenzoridolfi)
+- https://www.covidbr.dev/ , por [@ThiagoDiasV](https://github.com/ThiagoDiasV)
+- [brcovid.api - Python](https://github.com/bessavagner/brcovid), por [@bessavagner](https://github.com/bessavagner)
 
 
 ## Publicações Científicas
 
 - [COVID-19 e hospitalizações por SRAG no Brasil: uma comparação até a 12a semana epidemiológica de 2020](https://www.scielo.br/pdf/csp/v36n4/1678-4464-csp-36-04-e00070120.pdf)
 - [Short-term forecasting COVID-19 cumulative confirmed cases: Perspectives for Brazil](https://www.researchgate.net/publication/341025731_Short-term_forecasting_COVID-19_cumulative_confirmed_cases_Perspectives_for_Brazil) ([Science Direct](https://www.sciencedirect.com/science/article/pii/S0960077920302538))
+- [Forecasting Brazilian and American COVID-19 cases based on artificial intelligence coupled with climatic exogenous variables](https://www.researchgate.net/publication/342247189_Forecasting_Brazilian_and_American_COVID-19_cases_based_on_artificial_intelligence_coupled_with_climatic_exogenous_variables) ([Science Direct](https://www.sciencedirect.com/science/article/pii/S0960077920304252))
 
 
 ## Outras Publicações
-
+- [2020-06-26 Estimativas para a curva de mortes confirmadas no Brasil](https://www.reflexpandemia.org/texto-40)
+- [2020-06-10 Webinar: Acesso aberto a dados de saúde na perspectiva da pandemia ICICT:FIOCRUZ](https://www.youtube.com/watch?v=gtcSrxcmniQ)
 - [2020-05-01 CWB Resiste - Entrevista com Álvaro Justen](https://medium.com/cwbresiste/n%C3%A3o-teremos-o-n%C3%BAmero-de-%C3%B3bitos-reais-enquanto-n%C3%A3o-tivermos-transpar%C3%AAncia-sobre-isso-afirma-f74fad5d673e)
 - [2020-04-12 Live do Átila Iamarino](https://www.youtube.com/watch?v=vEwDdXim8bQ)
 - [2020-03-25 Análise Descritiva do Coronavírus nos Estados Brasileiros](https://marcusnunes.me/posts/analise-descritiva-do-coronavirus/)

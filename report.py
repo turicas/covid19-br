@@ -8,7 +8,7 @@ from collections import Counter
 from itertools import groupby
 from pathlib import Path
 from urllib.parse import urlencode
-from urllib.request import urlopen
+from urllib.request import urlopen, Request
 
 from rows.fields import make_header
 from rows.utils import load_schema
@@ -42,14 +42,23 @@ class Schema:  # TODO: add this class to rows
 
 
 def get_brasilio_data(dataset, table, **filters):
-    url = f"https://brasil.io/api/dataset/{dataset}/{table}/data"
+    url = f"https://brasil.io/api/dataset/{dataset}/{table}/data/"
+    if "page_size" not in filters:
+        filters["page_size"] = 10_000
     if filters:
         url += "?" + urlencode(filters)
 
     finished = False
     data = []
     while not finished:
-        response = urlopen(url)
+        try:
+            request = Request(url, headers={"User-Agent": "brasilio-covid19-scraper"})
+            response = urlopen(request)
+        except Exception:
+            import traceback
+            print(f"ERROR while downloading {url}")
+            traceback.print_exc()
+            exit(1)
         response_data = json.loads(response.read())
         data.extend(response_data["results"])
         url = response_data["next"]
