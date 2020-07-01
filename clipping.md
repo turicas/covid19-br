@@ -147,6 +147,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [Painel COVID19 - ICe/UFRN](https://neuro.ufrn.br/covid19)
 - [Algumas Análises e Explorações com dados da Covid-19 (Brasil e Mundo)](https://momenezes.github.io/covid19/), por [@momenezes](https://github.com/momenezes/covid19)
 - [ZEROBIAS](https://zerobias.info), por [@lorenzoridolfi](https://github.com/lorenzoridolfi)
+- https://www.covidbr.dev/ , por [@ThiagoDiasV](https://github.com/ThiagoDiasV)
 
 
 ## Publicações Científicas
