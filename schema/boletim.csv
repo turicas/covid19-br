@@ -1,5 +1,5 @@
 field_name,field_type
 date,date
+notes,text
 state,text
 url,text
-notes,text

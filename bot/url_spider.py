@@ -69,8 +69,7 @@ class URLCheckerSpider(scrapy.Spider):
         self.output_filename = output_filename
         self.result = []
         self.chat = rocketchat.RocketChat(os.environ["ROCKETCHAT_BASE_URL"])
-        self.chat.user_id = os.environ["ROCKETCHAT_USER_ID"]
-        self.chat.auth_token = os.environ["ROCKETCHAT_AUTH_TOKEN"]
+        self.chat.login(os.environ["ROCKETCHAT_USERNAME"], os.environ["ROCKETCHAT_PASSWORD"])
 
     def parse(self, response):
         url_table = rows.import_from_csv(
