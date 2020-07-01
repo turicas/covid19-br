@@ -20,7 +20,6 @@ function update_table() {
 
 log "Cleaning data path and collecting data"
 ./run-obitos.sh
-./run-obitos-totais.sh
 ./run.sh
 
 source $SCRIPT_PATH/.env

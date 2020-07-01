@@ -2,7 +2,7 @@
 
 # covid19-br
 
-![pytest@docker](https://github.com/turicas/covid19-br/workflows/pytest@docker/badge.svg)
+![pytest@docker](https://github.com/turicas/covid19-br/workflows/pytest@docker/badge.svg) ![goodtables](https://github.com/turicas/covid19-br/workflows/goodtables/badge.svg)
 
 Esse repositório centraliza links e dados sobre boletins de número de casos das
 Secretarias Estaduais de Saúde (SES) sobre os casos de covid19 no Brasil (por

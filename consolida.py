@@ -1,4 +1,5 @@
 import io
+import json
 import os
 from collections import Counter, defaultdict
 from functools import lru_cache
@@ -17,7 +18,6 @@ ERROR_PATH = DATA_PATH / "error"
 SCHEMA_PATH = Path(__file__).parent / "schema"
 POPULATION_DATA_PATH = DATA_PATH / "populacao-estimada-2019.csv"
 POPULATION_SCHEMA_PATH = SCHEMA_PATH / "populacao-estimada-2019.csv"
-STATE_LINKS_SPREADSHEET_ID = "1S77CvorwQripFZjlWTOZeBhK42rh3u57aRL1XZGhSdI"
 
 
 @lru_cache()
@@ -52,20 +52,14 @@ def get_state_population(state):
     return sum(city.estimated_population for city in get_cities()[state].values())
 
 
-def spreadsheet_download_url(url_or_id, file_format):
-    parsed = urlparse(url_or_id)
-    if parsed.netloc == "brasil.io":
-        return url_or_id
-    elif url_or_id.startswith("http"):
-        spreadsheet_id = parse_qs(parsed.query)["id"][0]
-    else:
-        spreadsheet_id = url_or_id
-    return f"https://docs.google.com/spreadsheets/u/0/d/{spreadsheet_id}/export?format={file_format}&id={spreadsheet_id}"
+@lru_cache()
+def get_states():
+    return sorted(get_cities().keys())
 
 
 class ConsolidaSpider(scrapy.Spider):
     name = "consolida"
-    start_urls = [spreadsheet_download_url(STATE_LINKS_SPREADSHEET_ID, "csv")]
+    base_url = "https://brasil.io/covid19/import-data/{uf}/"
     custom_settings = {
         "CONCURRENT_REQUESTS_PER_DOMAIN": 4,
     }
@@ -76,25 +70,24 @@ class ConsolidaSpider(scrapy.Spider):
         self.caso_writer = rows.utils.CsvLazyDictWriter(caso_filename)
         self.errors = defaultdict(list)
 
-    def parse(self, response):
-        table = rows.import_from_csv(io.BytesIO(response.body), encoding="utf-8")
-        for row in table:
+    def start_requests(self):
+        for state in get_states():
             yield scrapy.Request(
-                spreadsheet_download_url(row.link_planilha_consolidada, "xlsx"),
-                meta={"state": row.uf, "handle_httpstatus_all": True},
+                self.base_url.format(uf=state),
+                meta={"state": state, "handle_httpstatus_all": True},
                 callback=self.parse_state_file,
             )
 
     def parse_boletim(self, state, data):
         self.logger.info(f"Parsing {state} boletim")
         try:
-            boletins = rows.import_from_xlsx(
-                io.BytesIO(data),
-                sheet_name="Boletins (FINAL)",
+            reports = rows.import_from_dicts(
+                data,
                 force_types={
                     "date": rows.fields.DateField,
-                    "url": rows.fields.TextField,
                     "notes": rows.fields.TextField,
+                    "state": rows.fields.TextField,
+                    "url": rows.fields.TextField,
                 },
             )
         except Exception as exp:
@@ -102,39 +95,15 @@ class ConsolidaSpider(scrapy.Spider):
                 ("boletim", state, f"{exp.__class__.__name__}: {exp}")
             )
             return
-        for boletim in boletins:
-            boletim = boletim._asdict()
-            boletim_data = [item for item in boletim.values() if item]
-            if not boletim_data:
-                continue
-            date = boletim["date"]
-            url = (boletim["url"] or "").strip()
-            if not url:
-                message = f"Boletim URL not found for {state} on {date}"
-                self.errors[state].append(("boletim", state, message))
-            else:
-                boletim = {
-                    "date": date,
-                    "state": state,
-                    "url": url,
-                    "notes": boletim["notes"],
-                }
-                self.logger.debug(boletim)
-                self.boletim_writer.writerow(boletim)
+        for report in reports:
+            report = report._asdict()
+            self.logger.debug(report)
+            self.boletim_writer.writerow(report)
 
     def parse_caso(self, state, data):
         self.logger.info(f"Parsing {state} caso")
-        casos = rows.import_from_xlsx(io.BytesIO(data), sheet_name="Casos (FINAL)")
         cities = defaultdict(dict)
-        for caso in casos:
-            caso = caso._asdict()
-            caso_data = [
-                value
-                for key, value in caso.items()
-                if key != "municipio" and value is not None
-            ]
-            if not caso_data:
-                continue
+        for caso in data:
             for key, value in caso.items():
                 if key == "municipio":
                     continue
@@ -256,14 +225,15 @@ class ConsolidaSpider(scrapy.Spider):
                 ("connection", state, f"HTTP status code: {response.status}")
             )
         else:
+            response_data = json.load(io.BytesIO(response.body))
             try:
-                self.parse_boletim(state, response.body)
+                self.parse_boletim(state, response_data["reports"])
             except Exception as exp:
                 self.errors[state].append(
                     ("boletim", state, f"{exp.__class__.__name__}: {exp}")
                 )
             try:
-                self.parse_caso(state, response.body)
+                self.parse_caso(state, response_data["cases"])
             except Exception as exp:
                 self.errors[state].append(
                     ("caso", state, f"{exp.__class__.__name__}: {exp}")
