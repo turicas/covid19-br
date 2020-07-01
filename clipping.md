@@ -136,6 +136,18 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [Chicó - SINFO/UFRN](https://chico.ufrn.br/)
 - [Monitoramento do número de casos de COVID-19 no Brasil](https://covid19br.wcota.me/) – [repositório](https://github.com/wcota/covid19br), por [@wcota](https://github.com/wcota)
 - [Empacotador de dados da Covid-19 para o Kibana/ElasticSearch](https://github.com/dpereira/es-covid19-br), por [@dpereira](https://github.com/dpereira)
+- [Chicó - SINFO/UFRN](https://chico.ufrn.br/)
+- [Monitoramento do número de casos de COVID-19 no Brasil](https://covid19br.wcota.me/) – [repositório](https://github.com/wcota/covid19br), por [@wcota](https://github.com/wcota)
+- [Empacotador de dados da Covid-19 para o Kibana/ElasticSearch](https://github.com/dpereira/es-covid19-br), por [@dpereira](https://github.com/dpereira)
+- https://www.facebook.com/Mapas-do-Brasil-Covid-19-Maps-of-Brazil-106294097779006/
+- https://covid19sc.github.io/
+- https://github.com/wendeldavid/covid-19-alexa-skill
+- https://sites.google.com/unesp.br/mapeamento-covid19
+- [Portal Censura Não - Painel Coronavírus](https://www.censuranao.com), por [@hugomn](https://github.com/hugomn)
+- [Dashboard Covid-19 – Gyro UTFPR](https://projetogyro.pythonanywhere.com/)
+- http://nis.org.br/monitoramento-covid-19/
+- [Painel de análise e monitoramento da COVID-19 - TCE-MT](https://covid.tce.mt.gov.br/extensions/covid/painel-brasil.html)
+- [Painel COVID19 - ICe/UFRN](https://neuro.ufrn.br/covid19)
 - [Algumas Análises e Explorações com dados da Covid-19 (Brasil e Mundo)](https://momenezes.github.io/covid19/), por [@momenezes](https://github.com/momenezes/covid19)
 
 
