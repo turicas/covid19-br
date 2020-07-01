@@ -1,16 +1,12 @@
 #!/bin/bash
 
 set -e
-if [[ $OSTYPE == "darwin"* ]]; then
-  SCRIPT_PATH=$(dirname $(pwd)/$(basename $0))
-else
-  SCRIPT_PATH=$(dirname $(readlink -f $0))
-fi
-
+SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
 DOWNLOAD_PATH="$SCRIPT_PATH/data/download"
 LOG_PATH="$SCRIPT_PATH/data/log"
 OUTPUT_PATH="$SCRIPT_PATH/data/output"
 ERROR_PATH="$SCRIPT_PATH/data/error"
+DATASET="covid19"
 
 function log() {
 	echo "[$(date +"%Y-%m-%d %H:%M:%S")] $@"

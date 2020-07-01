@@ -10,6 +10,8 @@ Para maiores detalhes, acesso o [documento com a metodologia](https://docs.googl
 
 Para participar do time de coleta de dados, acesse [este link](https://bit.ly/covid19-br-help) faça o cadastro e forneça as informações solicitadas no canal `#covid19-onboarding`.
 
+Serão solicitados alguns dados pessoais, para que possamos manter o controle dos voluntários ativos, e em seguida nossa equipe irá alocar você em um Estado que esteja com maior necessidade de ajuda.
+
 ### Canais de comunicação
 
 #### Gerais
@@ -23,7 +25,7 @@ O #covid19 serve para discussão de duvidas gerais entre todos os voluntários, 
 
 #### Regionais
 
-Para coordençao dos trabalhos de colete e checagem, você deve então acessar os canais correspondentes à região dos estados escolhidos, são eles :
+Para coordenação dos trabalhos de coleta e checagem, você deve então acessar os canais correspondentes às regiões dos estados onde você foi alocado, são eles :
 
 - #covid19-centro-oeste
 - #covid19-nordeste
@@ -31,21 +33,48 @@ Para coordençao dos trabalhos de colete e checagem, você deve então acessar o
 - #covid19-sudeste
 - #covid19-sul
 
-Haverá ao menos um coordenador por região, que deve ficar atento às atualizações dos estados, para manter as planilhas sempre atualizadas assim que os boletins forem divulgados, e cobrar as checagens dos dados.
+Poderá haver ao menos um coordenador por região, que deve ficar atento às atualizações dos estados, para manter as planilhas sempre atualizadas assim que os boletins forem divulgados, e cobrar as checagens dos dados.
 
-### Planilhas
+### Sistema
 
-Os voluntários receberão acesso às planilhas para lançamento e checagem dos dados.
+Para acesso ao sistema de envio de planilhas com os dados coletados, é necessário fazer o [cadastro no site do Brasil.IO](https://brasil.io/auth/entrar/).
 
-Existe uma planilha para cada estado, nesta planilha existem dois pares de abas, como segue :
+É necessário que você use o mesmo nome de usuário utilizado no cadastro feito em https://chat.brasil.io.
 
-- Boletins (RASCUNHO)
-- Casos (RASCUNHO)
-- Boletins (FINAL)
-- Casos (FINAL)
+Com o acesso ao sistema, você terá acesso ao Estado que foi designado, e assim poderá anexar a planilha com os dados coletados.
 
-Cada voluntário deve fazer o preenchido ou a checagem.
+O sistema fornece um modelo de planilha, para cada Estado, com todos os municípios, e as colunas `confirmado` e `mortes` em branco.
 
-O preenchimento deve sempre ser feito nas abas de sufixo `(RASCUNHO)`, na aba `Boletins (RASCUNHO)` devem ser informados, para cada boletim com informações atualizadas, uma linha com a data do boletim e o link para acesso àquele boletim. Com os dados daquele boletim, deve ser preenchida a aba `Casos (RASCUNHO)`, criando um par de colunas para a data correspondente com os valores de casos `confirmados` e `mortes`, detalhando por município.
+Sempre que houver atualização de dados para o Estado, você deve :
 
-No processo de checagem, o voluntário deve verificar nos links informados na planilha `Boletins (RASCUNHO)` se os dados informados no boletim correspondem aos dados preenchidos na planilha `Casos (RASCUNHO)`, caso esteja tudo OK, basta copiar os dados das planilhas de sufixo `(RASCUNHO)` para a planilha correspondente com sufixo `(FINAL)`.
+* informar a data de referência dos dados;
+* anexar a planilha preenchida;
+* informar o(s) link(s) onde as informações foram obtidas;
+* informar observações relevantes.
+
+[Veja aqui](https://drive.google.com/open?id=1pORD1BtOJsuQR-MqXcIAPwddx4WBe_mu) um vídeo explicando como deve ser usado o sistema.
+
+#### Planilha Modelo
+
+Segue um trecho da planilha de exemplo para o Estado de Alagoas :
+
+```csv
+municipio,confirmados,mortes
+TOTAL NO ESTADO,,
+Importados/Indefinidos,,
+Água Branca,,
+Anadia,,
+Arapiraca,,
+Atalaia,,
+Barra de Santo Antônio,,
+Barra de São Miguel,,
+Batalha,,
+Belém,,
+...
+```
+
+A linha `TOTAL NO ESTADO` deve ser preenchida sempre com o total informado pela SES (e não pela soma dos municípios).
+
+Casos e óbitos em que o município não estiver claro ou for de outros estados/ países devem ser inseridos na linha `Importados/Indefinidos`.
+
+Se a SES não divulgou os dados dos municípios, somente a linha `TOTAL NO ESTADO` deve ser preenchida (não preencher `Importados/Indefinidos`).

@@ -1,6 +1,8 @@
 #!/bin/bash
 
 set -e
+SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
+source $SCRIPT_PATH/base.sh
 
 function create_database() {
 	database_filename="$1"; shift
@@ -67,8 +69,8 @@ function execute_sql_files() {
 	done
 }
 
-DATABASE="data/covid19.sqlite"
-mkdir -p "data/analysis" "data/output"
+DATABASE="$SCRIPT_PATH/data/covid19.sqlite"
+mkdir -p "$SCRIPT_PATH/data/analysis" "$SCRIPT_PATH/data/output"
 create_database "$DATABASE" "$1"
 setup_database "$DATABASE"
-execute_sql_files "$DATABASE" sql/*.sql
+execute_sql_files "$DATABASE" $SCRIPT_PATH/sql/*.sql
