@@ -149,6 +149,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [ZEROBIAS](https://zerobias.info), por [@lorenzoridolfi](https://github.com/lorenzoridolfi)
 - https://www.covidbr.dev/ , por [@ThiagoDiasV](https://github.com/ThiagoDiasV)
 - [brcovid.api - Python](https://github.com/bessavagner/brcovid), por [@bessavagner](https://github.com/bessavagner)
+- [Brashboard: situação do coronavírus nas cidades](https://brashboard.herokuapp.com/), por [@leonardokume](https://github.com/leonardokume/brashboard)
 
 
 ## Publicações Científicas
