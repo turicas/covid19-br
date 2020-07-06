@@ -150,6 +150,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - https://www.covidbr.dev/ , por [@ThiagoDiasV](https://github.com/ThiagoDiasV)
 - [brcovid.api - Python](https://github.com/bessavagner/brcovid), por [@bessavagner](https://github.com/bessavagner)
 - [Brashboard: situação do coronavírus nas cidades](https://brashboard.herokuapp.com/), por [@leonardokume](https://github.com/leonardokume/brashboard)
+- https://app.powerbi.com/view?r=eyJrIjoiYzI5NDhkMjAtMTQ0Zi00M2M4LTg3ZjYtZTBiMjE4YjIxN2FkIiwidCI6IjA5MTA3NGQ0LTM2ZmEtNDMwZS1hYWJmLWVlMGMyYTY0ZDVlNyIsImMiOjl9&fbclid=IwAR29m-WahjM89A1v5AIYCnDOLE6V_WGZSiqRKRfdGH33w3b6d4zzqVamM6s
 
 
 ## Publicações Científicas
