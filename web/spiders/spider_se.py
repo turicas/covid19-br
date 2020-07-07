@@ -9,7 +9,7 @@ class Covid19SESpider(BaseCovid19Spider):
 
     def parse(self, response):
         last_updated = self._parse_last_updated(response)
-        table_rows = response.xpath("//div[@id='recipiente-distribuicao']//tr")
+        table_rows = response.xpath("//div[@id='recipiente-distribuicao']//table[@data-ninja_table_instance]//tr")
 
         cases = [
             self._parse_row(row.xpath("td/text()").extract())
