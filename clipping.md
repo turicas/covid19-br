@@ -151,7 +151,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [brcovid.api - Python](https://github.com/bessavagner/brcovid), por [@bessavagner](https://github.com/bessavagner)
 - [Brashboard: situação do coronavírus nas cidades](https://brashboard.herokuapp.com/), por [@leonardokume](https://github.com/leonardokume/brashboard)
 - [PowerBI Dashboard](https://app.powerbi.com/view?r=eyJrIjoiYzI5NDhkMjAtMTQ0Zi00M2M4LTg3ZjYtZTBiMjE4YjIxN2FkIiwidCI6IjA5MTA3NGQ0LTM2ZmEtNDMwZS1hYWJmLWVlMGMyYTY0ZDVlNyIsImMiOjl9&fbclid=IwAR29m-WahjM89A1v5AIYCnDOLE6V_WGZSiqRKRfdGH33w3b6d4zzqVamM6s), por [Daniel Nunes Veloso](https://www.linkedin.com/in/daniel-nunes-veloso-75b105a7/)
-
+- [Evolução do COVID-19 no Brasil](https://lucasrla.github.io/covid-19-brasil/), gráficos interativos por estado e por cidade em D3.js. Também disponíveis como [Observable notebooks](https://observablehq.com/collection/@lucasrla/covid-19).
 
 ## Publicações Científicas
 
