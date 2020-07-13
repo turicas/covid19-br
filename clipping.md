@@ -7,6 +7,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias e Entrevistas
 
+- [2020-07-13 Rest of World - Brazil's government hid the data for Covid-19. Then volunteer developers got to work.](https://restofworld.org/2020/brazil-data-transparency-covid19/)
 - [2020-06-20 Estadão - Brasil supera 1 milhão de casos de covid-19](https://www.estadao.com.br/infograficos/saude,brasil-supera-1-milhao-de-casos-de-covid-19,1101828)
 - [2020-06-18 NEXO - A distribuição geográfica das mortes por covid-19 no Brasil](https://www.nexojornal.com.br/grafico/2020/06/18/A-distribuição-geográfica-das-mortes-por-covid-19-no-Brasil)
 - [2020-06-17 DATACTIVE - Liberating COVID-19 data with volunteers in Brazil](https://data-activism.net/2020/06/bigdatasur-covid-liberating-covid-19-data-with-volunteers-in-brazil/)
