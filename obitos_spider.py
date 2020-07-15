@@ -93,17 +93,20 @@ class DeathsSpider(BaseRegistroCivilSpider):
                     dont_cache=True,
                 )
 
-    def make_registral_request(self, start_date, end_date, state, dont_cache=False):
+    def make_registral_request(self, start_date, end_date, state, ethnicity="I", dont_cache=False):
+        assert ethnicity in "I AMARELA BRANCA IGNORADA INDIGENA PARDA PRETA".split()
         data = [
-            ("chart", "chart5"),
-            ("city_id", "all"),
+            ("start_date", str(start_date)),
             ("end_date", str(end_date)),
+            ("city_id", "all"),
+            ("state", state),
             ("places[]", "HOSPITAL"),
             ("places[]", "DOMICILIO"),
             ("places[]", "VIA_PUBLICA"),
             ("places[]", "OUTROS"),
-            ("start_date", str(start_date)),
-            ("state", state),
+            ("cidade_id_tipo", "cityFalecimento"),
+            ("cor_pele", ethnicity),
+            ("chart", "chart5"),
         ]
         return self.make_request(
             url=urljoin(self.registral_url, "?" + urlencode(data)),
