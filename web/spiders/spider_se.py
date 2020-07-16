@@ -47,8 +47,8 @@ class Covid19SESpider(BaseCovid19Spider):
     def _parse_row(self, row):
         column_types = {
             "municipio": str,
-            "confirmado": int,
-            "obito": int,
+            "confirmado": _parse_int,
+            "obito": _parse_int,
             "letalidade": _parse_float,
             "incidencia_por_100000_habitantes": _parse_float,
             "mortalidade_por_100000_habitantes": _parse_float,
@@ -64,6 +64,10 @@ class Covid19SESpider(BaseCovid19Spider):
         text = response.xpath("//div[@id='texto-atualizacao']//strong/text()").extract()
         last_updated = datetime.datetime.strptime(text[0].split()[0], "%d/%m/%y")
         return last_updated.date()
+
+
+def _parse_int(num):
+    return int(num.replace(".", ""))
 
 
 def _parse_float(num):
