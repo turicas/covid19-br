@@ -7,6 +7,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias e Entrevistas
 
+- [2020-07-16 Folha de São Paulo - Folha passa a informar estágio da pandemia em cidades, estados e no geral do país](https://www1.folha.uol.com.br/equilibrioesaude/2020/07/folha-passa-a-informar-estagio-da-pandemia-em-cidades-estados-e-no-geral-do-pais.shtml)
 - [2020-07-13 Rest of World - Brazil's government hid the data for Covid-19. Then volunteer developers got to work.](https://restofworld.org/2020/brazil-data-transparency-covid19/)
 - [2020-06-20 Estadão - Brasil supera 1 milhão de casos de covid-19](https://www.estadao.com.br/infograficos/saude,brasil-supera-1-milhao-de-casos-de-covid-19,1101828)
 - [2020-06-18 NEXO - A distribuição geográfica das mortes por covid-19 no Brasil](https://www.nexojornal.com.br/grafico/2020/06/18/A-distribuição-geográfica-das-mortes-por-covid-19-no-Brasil)
@@ -153,12 +154,16 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [Brashboard: situação do coronavírus nas cidades](https://brashboard.herokuapp.com/), por [@leonardokume](https://github.com/leonardokume/brashboard)
 - [PowerBI Dashboard](https://app.powerbi.com/view?r=eyJrIjoiYzI5NDhkMjAtMTQ0Zi00M2M4LTg3ZjYtZTBiMjE4YjIxN2FkIiwidCI6IjA5MTA3NGQ0LTM2ZmEtNDMwZS1hYWJmLWVlMGMyYTY0ZDVlNyIsImMiOjl9&fbclid=IwAR29m-WahjM89A1v5AIYCnDOLE6V_WGZSiqRKRfdGH33w3b6d4zzqVamM6s), por [Daniel Nunes Veloso](https://www.linkedin.com/in/daniel-nunes-veloso-75b105a7/)
 - [Evolução do COVID-19 no Brasil](https://lucasrla.github.io/covid-19-brasil/), por [@lucasrla](https://github.com/lucasrla)
+- [Aceleração COVID no Brasil - Folha de São Paulo](https://arte.folha.uol.com.br/equilibrioesaude/2020/aceleracao-covid-no-brasil/)
+- https://medidas-covidbr-iptsp.shinyapps.io/painel/
+
 
 ## Publicações Científicas
 
 - [COVID-19 e hospitalizações por SRAG no Brasil: uma comparação até a 12a semana epidemiológica de 2020](https://www.scielo.br/pdf/csp/v36n4/1678-4464-csp-36-04-e00070120.pdf)
 - [Short-term forecasting COVID-19 cumulative confirmed cases: Perspectives for Brazil](https://www.researchgate.net/publication/341025731_Short-term_forecasting_COVID-19_cumulative_confirmed_cases_Perspectives_for_Brazil) ([Science Direct](https://www.sciencedirect.com/science/article/pii/S0960077920302538))
 - [Forecasting Brazilian and American COVID-19 cases based on artificial intelligence coupled with climatic exogenous variables](https://www.researchgate.net/publication/342247189_Forecasting_Brazilian_and_American_COVID-19_cases_based_on_artificial_intelligence_coupled_with_climatic_exogenous_variables) ([Science Direct](https://www.sciencedirect.com/science/article/pii/S0960077920304252))
+- [Medidas de distanciamento social e evolução da COVID-19 no Brasil - Toscano, Cristiana M.; Lima, Alex F. R.; Silva, Lara L. S.; Razia, Paulo F.S.; Pavão, Luis Felipe A.; Polli, Demerson A.; Moraes, Rodrigo F.; Cavalcanti, Marco A.F.H. (2020)](https://medidas-covidbr-iptsp.shinyapps.io/painel/)
 
 
 ## Outras Publicações
