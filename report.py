@@ -8,7 +8,7 @@ from collections import Counter
 from itertools import groupby
 from pathlib import Path
 from urllib.parse import urlencode
-from urllib.request import urlopen, Request
+from urllib.request import Request, urlopen
 
 from rows.fields import make_header
 from rows.utils import load_schema

@@ -2,8 +2,7 @@ import csv
 
 from flask import Flask, make_response
 
-from web.spiders import run_state_spider, STATE_SPIDERS
-
+from web.spiders import STATE_SPIDERS, run_state_spider
 
 app = Flask(__name__)
 
