@@ -71,25 +71,34 @@ class BaseRegistroCivilSpider(scrapy.Spider):
 class DeathsSpider(BaseRegistroCivilSpider):
     name = "obitos"
     causes_map = {
-        "avc": "AVC",
-        "cardiac_shock": "CHOQUE_CARD",
-        "cardiopathy": "CARDIOPATIA",
-        "covid19": "COVID",
-        "heart_attack": "INFARTO",
-        "indeterminate": "INDETERMINADA",
-        "others": "OUTRAS",
-        "pneumonia": "PNEUMONIA",
-        "respiratory_failure": "INSUFICIENCIA_RESPIRATORIA",
-        "sars": "SRAG",
-        "septicemia": "SEPTICEMIA",
-        "sudden": "SUBIT",
+        "AVC": "avc",
+        "CARDIOPATIA": "cardiopathy",
+        "CHOQUE_CARD": "cardiac_shock",
+        "COVID": "covid19",
+        "COVID_AVC": "covid19",  # TODO: check
+        "COVID_INFARTO": "covid19",  # TODO: check
+        "INDETERMINADA": "indeterminate",
+        "INFARTO": "heart_attack",
+        "INSUFICIENCIA_RESPIRATORIA": "respiratory_failure",
+        "OUTRAS": "others",
+        "PNEUMONIA": "pneumonia",
+        "SEPTICEMIA": "septicemia",
+        "SRAG": "sars",
+        "SUBITA": "sudden",
     }
 
     def start_requests_after_login(self):
         for state in STATES:
             for year in [2020, 2019]:
                 yield self.make_chart_request(
-                    "respiratory",  # TODO: yield for "cardiac" chart type also
+                    "respiratory",
+                    start_date=datetime.date(year, 1, 1),
+                    end_date=datetime.date(year, 12, 31),
+                    state=state,
+                    dont_cache=True,
+                )
+                yield self.make_chart_request(
+                    "cardiac",
                     start_date=datetime.date(year, 1, 1),
                     end_date=datetime.date(year, 12, 31),
                     state=state,
@@ -130,17 +139,17 @@ class DeathsSpider(BaseRegistroCivilSpider):
         return self.make_request(
             url=urljoin(base_url, "?" + urlencode(data)),
             headers={"X-XSRF-TOKEN": self.xsrf_token},
-            callback=self.parse_respiratory_request,
+            callback=self.parse_chart_response,
             meta={"row": qs_to_dict(data), "dont_cache": dont_cache},
         )
 
-    def parse_respiratory_request(self, response):
+    def parse_chart_response(self, response):
         state = response.meta["row"]["state"]
         data = json.loads(response.body)
 
         for date, chart in data["chart"].items():
             row = {"date": date, "state": state}
-            for cause, portuguese_name in self.causes_map.items():
-                row[cause] = chart[portuguese_name][0]["total"] if portuguese_name in chart else None
-
-            yield row
+            for cause, cause_data in chart.items():
+                row["cause"] = self.causes_map[cause]
+                row["total"] = cause_data[0]["total"]
+                yield row
