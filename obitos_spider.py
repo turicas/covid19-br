@@ -71,20 +71,24 @@ class BaseRegistroCivilSpider(scrapy.Spider):
 class DeathsSpider(BaseRegistroCivilSpider):
     name = "obitos"
     causes_map = {
-        "AVC": "avc",
-        "CARDIOPATIA": "cardiopathy",
-        "CHOQUE_CARD": "cardiac_shock",
-        "COVID": "covid19",
-        "COVID_AVC": "covid19",  # TODO: check
-        "COVID_INFARTO": "covid19",  # TODO: check
-        "INDETERMINADA": "indeterminate",
-        "INFARTO": "heart_attack",
-        "INSUFICIENCIA_RESPIRATORIA": "respiratory_failure",
-        "OUTRAS": "others",
-        "PNEUMONIA": "pneumonia",
-        "SEPTICEMIA": "septicemia",
-        "SRAG": "sars",
-        "SUBITA": "sudden",
+        "respiratory": {
+            "COVID": "covid19",
+            "INDETERMINADA": "indeterminate",
+            "INSUFICIENCIA_RESPIRATORIA": "respiratory_failure",
+            "OUTRAS": "others",
+            "PNEUMONIA": "pneumonia",
+            "SEPTICEMIA": "septicemia",
+            "SRAG": "sars",
+        },
+        "cardiac": {
+            "AVC": "avc",
+            "CARDIOPATIA": "cardiopathy",
+            "CHOQUE_CARD": "cardiac_shock",
+            "COVID_AVC": "covid19",
+            "COVID_INFARTO": "covid19",
+            "INFARTO": "heart_attack",
+            "SUBITA": "sudden",
+        },
     }
 
     def start_requests_after_login(self):
@@ -92,13 +96,6 @@ class DeathsSpider(BaseRegistroCivilSpider):
             for year in [2020, 2019]:
                 yield self.make_chart_request(
                     "respiratory",
-                    start_date=datetime.date(year, 1, 1),
-                    end_date=datetime.date(year, 12, 31),
-                    state=state,
-                    dont_cache=True,
-                )
-                yield self.make_chart_request(
-                    "cardiac",
                     start_date=datetime.date(year, 1, 1),
                     end_date=datetime.date(year, 12, 31),
                     state=state,
@@ -140,16 +137,19 @@ class DeathsSpider(BaseRegistroCivilSpider):
             url=urljoin(base_url, "?" + urlencode(data)),
             headers={"X-XSRF-TOKEN": self.xsrf_token},
             callback=self.parse_chart_response,
-            meta={"row": qs_to_dict(data), "dont_cache": dont_cache},
+            meta={"row": qs_to_dict(data), "dont_cache": dont_cache, "chart_type": chart_type},
         )
 
     def parse_chart_response(self, response):
-        state = response.meta["row"]["state"]
+        meta = response.meta
+        state = meta["row"]["state"]
+        chart_type = meta["chart_type"]
         data = json.loads(response.body)
+        causes_map = self.causes_map[chart_type]
 
         for date, chart in data["chart"].items():
             row = {"date": date, "state": state}
             for cause, cause_data in chart.items():
-                row["cause"] = self.causes_map[cause]
+                row["cause"] = causes_map[cause]
                 row["total"] = cause_data[0]["total"]
                 yield row
