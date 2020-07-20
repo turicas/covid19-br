@@ -126,7 +126,7 @@ class DeathsSpider(BaseRegistroCivilSpider):
             ("end_date", str(end_date)),
             ("city_id", "all"),
             ("state", state),
-            ("cidade_id_tipo", "cityFalecimento"),
+            ("cidade_id_tipo", "city"),
             ("cor_pele", ethnicity),
         ]
         for place in places:

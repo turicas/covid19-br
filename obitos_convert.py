@@ -7,7 +7,7 @@ from itertools import chain, groupby
 import rows
 from tqdm import tqdm
 
-from date_utils import brazilian_epidemiological_week, one_day
+from date_utils import brazilian_epidemiological_week, one_day, today
 from obitos_spider import DeathsSpider
 
 RESPIRATORY_DEATH_CAUSES = list(DeathsSpider.causes_map["respiratory"].values())
@@ -44,15 +44,13 @@ def year_causes_keys(prefix, years):
 def convert_file(filename):
     # There are some missing data on the registral, so default all to None
     # Multiple passes to keep the same column ordering
-    all_keys = chain(
-        year_causes_keys("new_deaths", YEAR_CHOICES),
-        year_causes_keys("deaths", YEAR_CHOICES),
-        [f"new_deaths_total_{year}" for year in YEAR_CHOICES],
-        [f"deaths_total_{year}" for year in YEAR_CHOICES],
-    )
+    all_keys = []
+    for prefix in PREFIX_CHOICES:
+        all_keys.extend(year_causes_keys(prefix, YEAR_CHOICES))
+        all_keys.extend([f"{prefix}_total_{year}" for year in YEAR_CHOICES])
     base_row = {}
     for key in all_keys:
-        base_row[key] = None
+        base_row[key] = 0 if key.startswith("deaths_") else None
 
     table_types = {
         "date": rows.fields.DateField,
@@ -64,6 +62,7 @@ def convert_file(filename):
     row_key = lambda row: (row.state, datetime.date(2020, row.date.month, row.date.day))
     table = sorted(table, key=row_key)
     accumulated = Counter()
+    last_day = today()
     for key, state_data in groupby(table, key=row_key):
         state, date = key
         row = {
@@ -86,28 +85,48 @@ def convert_file(filename):
             accumulated[(year, state, "new-total")] = 0
 
         # For each death cause in this date/state, fill `row` and accumulate
+        filled_causes = set()
         for item in state_data:
             cause = item.cause
             year = item.date.year
-            key = get_death_cause_key("new_deaths", cause, year)
+            key_new = get_death_cause_key("new_deaths", cause, year)
             new_deaths = item.total
-            if key is None:
+            if key_new is None:
                 if new_deaths > 0:
                     raise RuntimeError(f"Cannot have new_deaths > 0 when key for (new_deaths, {cause}, {year}) is None")
                 else:
                     continue
-            row[key] = new_deaths
             accumulated_key = (year, state, cause)
             accumulated_key_total = (year, state, "total")
             accumulated_key_new_total = (year, state, "new-total")
             accumulated[accumulated_key] += new_deaths
             accumulated[accumulated_key_total] += new_deaths
             accumulated[accumulated_key_new_total] += new_deaths
+            row[key_new] = new_deaths
             row[get_death_cause_key("deaths", cause, year)] = accumulated[accumulated_key]
+            filled_causes.add((year, cause))
 
+        # Fill other deaths_* (accumulated) values with the last available data
+        # if not filled by the state_data for this date.
+        for cause in RESPIRATORY_DEATH_CAUSES:
+            for year in YEAR_CHOICES:
+                if (year, cause) in filled_causes:
+                    continue
+                accumulated_key = (year, state, cause)
+                key_name = get_death_cause_key("deaths", cause, year)
+                if key_name is None:
+                    continue
+                row[key_name] = accumulated[accumulated_key]
+
+        # Fill year totals (new and accumulated) for state
         for year in YEAR_CHOICES:
-            row[get_death_cause_key("new_deaths", "total", year)] = accumulated[(year, state, "new-total")]
-            row[get_death_cause_key("deaths", "total", year)] = accumulated[(year, state, "total")]
+            if year == last_day.year and date > last_day:
+                new_total = None
+            else:
+                new_total = accumulated[(year, state, "new-total")]
+            total = accumulated[(year, state, "total")]
+            row[get_death_cause_key("new_deaths", "total", year)] = new_total
+            row[get_death_cause_key("deaths", "total", year)] = total
 
         yield row
 
