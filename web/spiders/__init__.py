@@ -10,7 +10,6 @@ from .spider_pr import Covid19PRSpider
 from .spider_rn import Covid19RNSpider
 from .spider_rr import Covid19RRSpider
 
-
 SPIDERS = [
     Covid19CESpider,
     Covid19ESSpider,
@@ -29,7 +28,7 @@ def execute_spider_worker(SpiderClass):
         process = CrawlerProcess(settings={})
         process.crawl(SpiderClass, report_fobj=report_fobj, case_fobj=case_fobj)
         process.start()
-    except Exception as exp:
+    except Exception:
         import traceback
         return "error", traceback.format_exc()
     else:

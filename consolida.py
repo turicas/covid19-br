@@ -6,7 +6,6 @@ from functools import lru_cache
 from itertools import groupby
 from pathlib import Path
 from signal import SIGINT
-from urllib.parse import parse_qs, urlparse
 
 import rows
 import scrapy

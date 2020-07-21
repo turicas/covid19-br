@@ -1,5 +1,3 @@
-import io
-import json
 import os
 from urllib.parse import urlencode
 

@@ -3,7 +3,7 @@ import json
 from urllib.parse import urlencode, urljoin
 
 import date_utils
-from obitos_spider import BaseRegistroCivilSpider, STATES, qs_to_dict
+from obitos_spider import STATES, BaseRegistroCivilSpider, qs_to_dict
 
 
 class TotalDeathsSpider(BaseRegistroCivilSpider):
