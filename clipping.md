@@ -156,6 +156,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [Evolução do COVID-19 no Brasil](https://lucasrla.github.io/covid-19-brasil/), por [@lucasrla](https://github.com/lucasrla)
 - [Aceleração COVID no Brasil - Folha de São Paulo](https://arte.folha.uol.com.br/equilibrioesaude/2020/aceleracao-covid-no-brasil/)
 - https://medidas-covidbr-iptsp.shinyapps.io/painel/
+- [No Epicentro - Agência Lupa](https://piaui.folha.uol.com.br/lupa/epicentro/)
 
 
 ## Publicações Científicas
