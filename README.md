@@ -168,7 +168,7 @@ BRASILIO_UPDATE_COMMAND
 
 Execute o script:
 
-`./deploy.sh`
+`./deploy.sh full`
 
 Ele irá coletar os dados das planilhas (que estão linkadas em
 `data/boletim_url.csv` e `data/caso_url.csv`), adicionar os dados ao
