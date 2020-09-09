@@ -31,6 +31,13 @@ function update_table() {
 	ssh $BRASILIO_SSH_USER@$BRASILIO_SSH_SERVER "$BRASILIO_UPDATE_COMMAND $DATASET $table"
 }
 
+function update_dataset_list() {
+	dataset=$1
+
+	log "[$dataset] Executing update file list"
+	ssh $BRASILIO_SSH_USER@$BRASILIO_SSH_SERVER "$BRASILIO_UPDATE_FILE_LIST_COMMAND $DATASET"
+}
+
 log "Cleaning data path and collecting data"
 if [ "$DEPLOY_TYPE" = "full" ]; then
 	./run-obitos.sh
@@ -50,10 +57,7 @@ else
 	done
 fi
 
-log "Generating file list page"
-python create_html.py dataset $DATASET $(date +"%Y-%m-%d") $SCRIPT_PATH/data/output/
-s3cmd put data/output/SHA512SUMS s3://dataset/$DATASET/SHA512SUMS
-s3cmd put data/output/_meta/list.html s3://dataset/$DATASET/_meta/list.html
+update_dataset_list "covid19"
 
 if [ "$DEPLOY_TYPE" = "full" ]; then
 	./report.sh
