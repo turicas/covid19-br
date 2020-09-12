@@ -7,6 +7,10 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias e Entrevistas
 
+
+- [2020-08-21 Revista Piauí - Sem leitos e de olho na eleição: a pandemia no interior](https://piaui.folha.uol.com.br/sem-leitos-e-de-olho-na-eleicao-pandemia-no-interior/)
+- [2020-08-17 Folha de São Paulo - Disputa de legado na saúde em meio à pandemia marca discurso de pré-candidatos](https://www1.folha.uol.com.br/amp/poder/2020/08/disputa-de-legado-na-saude-em-meio-a-pandemia-marca-discurso-de-pre-candidatos.shtml)
+- [2020-07-25 The New York Times - The Coronavirus Unleashed Along the Amazon River](https://www.nytimes.com/interactive/2020/07/25/world/americas/coronavirus-brazil-amazon.html)
 - [2020-07-16 Folha de São Paulo - Folha passa a informar estágio da pandemia em cidades, estados e no geral do país](https://www1.folha.uol.com.br/equilibrioesaude/2020/07/folha-passa-a-informar-estagio-da-pandemia-em-cidades-estados-e-no-geral-do-pais.shtml)
 - [2020-07-13 Rest of World - Brazil's government hid the data for Covid-19. Then volunteer developers got to work.](https://restofworld.org/2020/brazil-data-transparency-covid19/)
 - [2020-06-20 Estadão - Brasil supera 1 milhão de casos de covid-19](https://www.estadao.com.br/infograficos/saude,brasil-supera-1-milhao-de-casos-de-covid-19,1101828)
