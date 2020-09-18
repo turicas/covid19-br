@@ -7,7 +7,8 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias e Entrevistas
 
-
+- [2020-09-12 Metrópoles - Veja a cidade com a maior quantidade proporcional de mortes por Covid-19](https://www.metropoles.com/brasil/veja-a-cidade-com-a-maior-quantidade-proporcional-de-mortes-por-covid-19)
+- [2020-09-10 Folha de São Paulo - Cidade de São Paulo entra pela 1ª vez em desaceleração da Covid, mostra monitor da Folha](https://www1.folha.uol.com.br/equilibrioesaude/2020/09/cidade-de-sao-paulo-entra-pela-1a-vez-em-desaceleracao-da-covid-mostra-monitor-da-folha.shtml)
 - [2020-08-21 Revista Piauí - Sem leitos e de olho na eleição: a pandemia no interior](https://piaui.folha.uol.com.br/sem-leitos-e-de-olho-na-eleicao-pandemia-no-interior/)
 - [2020-08-17 Folha de São Paulo - Disputa de legado na saúde em meio à pandemia marca discurso de pré-candidatos](https://www1.folha.uol.com.br/amp/poder/2020/08/disputa-de-legado-na-saude-em-meio-a-pandemia-marca-discurso-de-pre-candidatos.shtml)
 - [2020-07-25 The New York Times - The Coronavirus Unleashed Along the Amazon River](https://www.nytimes.com/interactive/2020/07/25/world/americas/coronavirus-brazil-amazon.html)
@@ -25,13 +26,17 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [2020-06-09 O Povo - A Importância de se disponibilizar dados para a Saúde](https://mais.opovo.com.br/jornal/reportagem/2020/06/09/a-importancia-de-se-disponibilizar-dados-para-a-saude.html)
 - [2020-06-09 Estadão - Governos e sociedade fazem contagem paralela de casos do novo coronavírus](https://saude.estadao.com.br/noticias/geral,governos-e-sociedade-fazem-contagem-paralela-de-casos,70003328908 (manchete - ver tweet no twitter.com/estadao pra linkar tweet da imagem ))
 - [2020-06-09 Correio Braziliense - Governos e sociedade fazem contagem paralela de casos de covid-19](https://www.correiobraziliense.com.br/app/noticia/brasil/2020/06/09/interna-brasil,862304/governos-e-sociedade-fazem-contagem-paralela-de-casos-de-covid-19.shtml)
+- [2020-06-08 VEJA - Covid-19: sites paralelos divulgam dados oficiais apagados pelo governo](https://veja.abril.com.br/saude/covid-19-sites-paralelos-divulgam-dados-oficiais-apagados-pelo-governo/)
 - [2020-06-08 TecMundo - Dados confiáveis sobre covid-19 estão em página especial do TecMundo](https://www.tecmundo.com.br/ciencia/153965-dados-confiaveis-covid-19-pagina-especial-tecmundo.htm)
 - [2020-06-08 O Combatente - Secretários de saúde do Brasil lançam site para divulgar dados sobre covid-19](https://www.ocombatente.com/2020/06/08/secretarios-de-saude-do-brasil-lancam-site-para-divulgar-dados-sobre-covid-19/)
+- [2020-06-08 Deutsche Welle - Iniciativas tentam contornar apagão de dados da covid-19](https://www.dw.com/pt-br/iniciativas-tentam-contornar-apag%C3%A3o-de-dados-da-covid-19/a-53735171)
+- [2020-06-08 BBC News Brasil - Coronavírus: onde acompanhar os números da pandemia no Brasil após apagão de dados do governo](https://www.bbc.com/portuguese/brasil-52974181)
 - [2020-06-07 The Brazilian Report -  Brazilians respond to government Covid-19 data tampering](https://brazilian.report/coronavirus-brazil-live-blog/2020/06/07/brazilians-responds-to-government-tampering-with-covid-19-data/)
 - [2020-06-05 Correio Braziliense - Covid-19: Bolsonaro ordenou atrasar boletins para não passar em telejornais](https://www.correiobraziliense.com.br/app/noticia/politica/2020/06/05/interna_politica,861307/covid-19-bolsonaro-ordenou-atrasar-boletins-nao-passar-em-telejornais.shtml)
 - [2020-06-02 Estadão - Covid avança pelo Brasil e 1/3 dos casos já ocorre fora de capitais e suas regiões metropolitanas](https://saude.estadao.com.br/noticias/geral,um-em-cada-tres-casos-de-covid-19-ja-ocorre-fora-das-capitais-e-do-seu-entorno,70003321678)
 - [2020-05-29 O Estado de São Paulo - Em SP, 86% das cidades que tiveram alta de casos poderão reabrir comércio](https://saude.estadao.com.br/noticias/geral,em-sp-86-das-cidades-que-tiveram-alta-de-casos-poderao-reabrir-comercio,70003318294)
 - [2020-05-29 IstoÉ - Plataforma facilita visualização do avanço da Covid-19 no Brasil](https://istoe.com.br/plataforma-facilita-visualizacao-do-avanco-da-covid-19-no-brasil/)
+- [2020-05-13 Aos Fatos - Número de registros de óbitos no Brasil em abril não foi menor que em 2019 e 2018](https://www.aosfatos.org/noticias/numero-de-registros-de-obitos-no-brasil-em-abril-nao-foi-menor-que-em-2019-e-2018/)
 - [2020-05-12 The New York Times - 71,000 Missing Deaths: Tracking the True Toll of the Coronavirus Outbreak](https://www.nytimes.com/interactive/2020/04/21/world/coronavirus-missing-deaths.html?action=click&module=RelatedLinks&pgtype=Article)
 - [2020-05-05 Jornal Nacional - Mortes naturais aumentam 30% nas cinco cidades mais atingidas por coronavírus no Brasil](https://globoplay.globo.com/v/8533526/programa/)
 - [2020-05-04 Revista Piauí - A pandemia no interior do país](https://piaui.folha.uol.com.br/pandemia-no-interior-do-pais/)
@@ -67,6 +72,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [2020-03-23 Gazeta do Povo - Mapa do coronavírus por cidades no Brasil](https://especiais.gazetadopovo.com.br/coronavirus/casos-no-brasil-por-cidades/)
 - [2020-03-23 Gazeta do Povo - Evolução do coronavírus no Brasil](https://especiais.gazetadopovo.com.br/coronavirus/evolucao-de-casos-no-brasil/)
 - [2020-03-23 CNN Brasil - Boletins estaduais indicam quase 40 casos de coronavírus a mais do que governo](https://www.cnnbrasil.com.br/saude/2020/03/23/boletins-estaduais-indicam-quase-40-casos-de-coronavirus-a-mais-do-que-governo)
+- [2020-03-20 O Globo - Números do coronavírus no Brasil e no mundo](https://infograficos.oglobo.globo.com/sociedade/numeros-do-coronavirus-no-brasil-e-no-mundo.html)
 
 
 ## Podcasts e Rádio
