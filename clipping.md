@@ -7,6 +7,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias e Entrevistas
 
+- [2020-09-21 Agência IBGE Notícias - IBGE lança painel interativo para apoiar municípios no combate à pandemia](https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/28918-ibge-lanca-painel-interativo-para-apoiar-municipios-no-combate-a-pandemia)
 - [2020-09-12 Metrópoles - Veja a cidade com a maior quantidade proporcional de mortes por Covid-19](https://www.metropoles.com/brasil/veja-a-cidade-com-a-maior-quantidade-proporcional-de-mortes-por-covid-19)
 - [2020-09-10 Folha de São Paulo - Cidade de São Paulo entra pela 1ª vez em desaceleração da Covid, mostra monitor da Folha](https://www1.folha.uol.com.br/equilibrioesaude/2020/09/cidade-de-sao-paulo-entra-pela-1a-vez-em-desaceleracao-da-covid-mostra-monitor-da-folha.shtml)
 - [2020-08-21 Revista Piauí - Sem leitos e de olho na eleição: a pandemia no interior](https://piaui.folha.uol.com.br/sem-leitos-e-de-olho-na-eleicao-pandemia-no-interior/)
@@ -86,6 +87,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Análises e Projetos
 
+- [Painel IBGE COVID-19 por município](https://covid19.ibge.gov.br/paineis-sintese/)
 - [App COVID-19 no Brasil e no Mundo](https://github.com/Gabplay/flutter_covid19_brasil) - [Download](https://bit.ly/downloadAppCovidBR)
 - [Corona Cidades - Simulador](https://coronacidades.org/simulacovid/)
 - [Onde tem Coronavírus](https://ondetemcoronavirus.com.br/)
