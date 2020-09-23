@@ -351,36 +351,37 @@ Colunas:
 - 🔍 `state`: Sigla da unidade federativa com dois dígitos, exemplo: SP
 - 🔍 `epidemiological_week_2019`: Número da semana epidemiológica para essa data em 2019.
 - 🔍 `epidemiological_week_2020`: Número da semana epidemiológica para essa data em 2020.
+- `new_deaths_sars_2019`: Quantidade de óbitos em decorrência de SRAG para o estado `state` ocorridos no dia/mês de `date`, porém em 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
+- `new_deaths_pneumonia_2019`: Quantidade de óbitos em decorrência de pneumonia para o estado `state` ocorridos no dia/mês de `date`, porém em 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
+- `new_deaths_respiratory_failure_2019`: Quantidade de óbitos em decorrência de insuficiência respiratória para o estado `state` ocorridos no dia/mês de `date`, porém em 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
+- `new_deaths_septicemia_2019`: Quantidade de óbitos em decorrência de septicemia para o estado `state` ocorridos no dia/mês de `date`, porém em 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
+- `new_deaths_indeterminate_2019`: Quantidade de óbitos de motivo indeterminado para o estado `state` ocorridos no dia/mês de `date`, porém em 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
+- `new_deaths_others_2019`: Quantidade de óbitos em decorrência de outros motivos para o estado `state` ocorridos no dia/mês de `date`, porém em 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
+- `new_deaths_sars_2020`: Quantidade de óbitos em decorrência de SRAG para o estado `state` ocorridos na data `date` (em 2020).
+- `new_deaths_pneumonia_2020`: Quantidade de óbitos em decorrência de pneumonia para o estado `state` ocorridos na data `date` (em 2020).
+- `new_deaths_respiratory_failure_2020`: Quantidade de óbitos em decorrência de insuficiência respiratória para o estado `state` ocorridos na data `date` (em 2020).
+- `new_deaths_septicemia_2020`: Quantidade de óbitos em decorrência de septicemia para o estado `state` ocorridos na data `date` (em 2020).
+- `new_deaths_indeterminate_2020`: Quantidade de óbitos de motivo indeterminado para o estado `state` ocorridos na data `date` (em 2020).
+- `new_deaths_others_2020`: Quantidade de óbitos em decorrência de outros motivos para o estado `state` ocorridos na data `date` (em 2020).
+- `new_deaths_covid19`: Quantidade de óbitos em decorrência de suspeita ou confirmação de covid19 para o estado `state` ocorridos na data `date` (em 2020).
+- `deaths_sars_2019`: Quantidade de óbitos em decorrência de SRAG para o estado `state` acumulados no ano de 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
+- `deaths_pneumonia_2019`: Quantidade de óbitos em decorrência de pneumonia para o estado `state` acumulados no ano de 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
+- `deaths_respiratory_failure_2019`: Quantidade de óbitos em decorrência de insuficiência respiratória para o estado `state` acumulados no ano de 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
+- `deaths_septicemia_2019`: Quantidade de óbitos em decorrência de septicemia para o estado `state` acumulados no ano de 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
+- `deaths_indeterminate_2019`: Quantidade de óbitos de motivo indeterminado para o estado `state` acumulados no ano de 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
+- `deaths_others_2019`: Quantidade de óbitos em decorrência de outros motivos para o estado `state` acumulados no ano de 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
+- `deaths_sars_2020`: Quantidade de óbitos em decorrência de SRAG para o estado `state` acumulados no ano de 2020 (de 1 de janeiro de 2020 a `date`).
+- `deaths_pneumonia_2020`: Quantidade de óbitos em decorrência de pneumonia para o estado `state` acumulados no ano de 2020 (de 1 de janeiro de 2020 a `date`).
+- `deaths_respiratory_failure_2020`: Quantidade de óbitos em decorrência de insuficiência respiratória para o estado `state` acumulados no ano de 2020 (de 1 de janeiro de 2020 a `date`).
+- `deaths_septicemia_2020`: Quantidade de óbitos em decorrência de septicemia para o estado `state` acumulados no ano de 2020 (de 1 de janeiro de 2020 a `date`).
+- `deaths_indeterminate_2020`: Quantidade de óbitos de motivo indeterminado para o estado `state` acumulados no ano de 2020 (de 1 de janeiro de 2020 a `date`).
+- `deaths_others_2020`: Quantidade de óbitos em decorrência de outros motivos para o estado `state` acumulados no ano de 2020 (de 1 de janeiro de 2020 a `date`).
+- `deaths_covid19`: Quantidade de óbitos em decorrência de suspeita ou confirmação de covid19 para o estado `state` acumulados no ano de 2020 (de 1 de janeiro de 2020 a `date`).
+- `new_deaths_total_2019`: Quantidade de óbitos totais para o estado `state` ocorridos no dia/mês de `date`, porém em 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
+- `new_deaths_total_2020`: Quantidade de óbitos totais para o estado `state` ocorridos na data `date` (em 2020).
 - `deaths_total_2019`: Quantidade de óbitos totais para o estado `state` acumulados no ano de 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
 - `deaths_total_2020`: Quantidade de óbitos totais para o estado `state` acumulados no ano de 2020 (de 1 de janeiro de 2020 a `date`).
-- `new_deaths_total_2019`: Quantidade de óbitos totais para o estado `state` ocorridos no dia/mês de `date`, porém em 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
-- `deaths_covid19`: Quantidade de óbitos em decorrência de suspeita ou confirmação de covid19 para o estado `state` acumulados no ano de 2020 (de 1 de janeiro de 2020 a `date`).
-- `new_deaths_total_2020`: Quantidade de óbitos totais para o estado `state` ocorridos na data `date` (em 2020).
-- `deaths_indeterminate_2019`: Quantidade de óbitos de motivo indeterminado para o estado `state` acumulados no ano de 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
-- `deaths_indeterminate_2020`: Quantidade de óbitos de motivo indeterminado para o estado `state` acumulados no ano de 2020 (de 1 de janeiro de 2020 a `date`).
-- `deaths_others_2019`: Quantidade de óbitos em decorrência de outros motivos para o estado `state` acumulados no ano de 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
-- `deaths_others_2020`: Quantidade de óbitos em decorrência de outros motivos para o estado `state` acumulados no ano de 2020 (de 1 de janeiro de 2020 a `date`).
-- `deaths_pneumonia_2019`: Quantidade de óbitos em decorrência de pneumonia para o estado `state` acumulados no ano de 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
-- `deaths_pneumonia_2020`: Quantidade de óbitos em decorrência de pneumonia para o estado `state` acumulados no ano de 2020 (de 1 de janeiro de 2020 a `date`).
-- `deaths_respiratory_failure_2019`: Quantidade de óbitos em decorrência de insuficiência respiratória para o estado `state` acumulados no ano de 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
-- `deaths_respiratory_failure_2020`: Quantidade de óbitos em decorrência de insuficiência respiratória para o estado `state` acumulados no ano de 2020 (de 1 de janeiro de 2020 a `date`).
-- `deaths_sars_2019`: Quantidade de óbitos em decorrência de SRAG para o estado `state` acumulados no ano de 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
-- `deaths_sars_2020`: Quantidade de óbitos em decorrência de SRAG para o estado `state` acumulados no ano de 2020 (de 1 de janeiro de 2020 a `date`).
-- `deaths_septicemia_2019`: Quantidade de óbitos em decorrência de septicemia para o estado `state` acumulados no ano de 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
-- `deaths_septicemia_2020`: Quantidade de óbitos em decorrência de septicemia para o estado `state` acumulados no ano de 2020 (de 1 de janeiro de 2020 a `date`).
-- `new_deaths_covid19`: Quantidade de óbitos em decorrência de suspeita ou confirmação de covid19 para o estado `state` ocorridos na data `date` (em 2020).
-- `new_deaths_indeterminate_2019`: Quantidade de óbitos de motivo indeterminado para o estado `state` ocorridos no dia/mês de `date`, porém em 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
-- `new_deaths_indeterminate_2020`: Quantidade de óbitos de motivo indeterminado para o estado `state` ocorridos na data `date` (em 2020).
-- `new_deaths_others_2019`: Quantidade de óbitos em decorrência de outros motivos para o estado `state` ocorridos no dia/mês de `date`, porém em 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
-- `new_deaths_others_2020`: Quantidade de óbitos em decorrência de outros motivos para o estado `state` ocorridos na data `date` (em 2020).
-- `new_deaths_pneumonia_2019`: Quantidade de óbitos em decorrência de pneumonia para o estado `state` ocorridos no dia/mês de `date`, porém em 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
-- `new_deaths_pneumonia_2020`: Quantidade de óbitos em decorrência de pneumonia para o estado `state` ocorridos na data `date` (em 2020).
-- `new_deaths_respiratory_failure_2019`: Quantidade de óbitos em decorrência de insuficiência respiratória para o estado `state` ocorridos no dia/mês de `date`, porém em 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
-- `new_deaths_respiratory_failure_2020`: Quantidade de óbitos em decorrência de insuficiência respiratória para o estado `state` ocorridos na data `date` (em 2020).
-- `new_deaths_sars_2019`: Quantidade de óbitos em decorrência de SRAG para o estado `state` ocorridos no dia/mês de `date`, porém em 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
-- `new_deaths_sars_2020`: Quantidade de óbitos em decorrência de SRAG para o estado `state` ocorridos na data `date` (em 2020).
-- `new_deaths_septicemia_2019`: Quantidade de óbitos em decorrência de septicemia para o estado `state` ocorridos no dia/mês de `date`, porém em 2019 (de 1 de janeiro de 2019 a dia/mês de `date` em 2019).
-- `new_deaths_septicemia_2020`: Quantidade de óbitos em decorrência de septicemia para o estado `state` ocorridos na data `date` (em 2020).
+  
 
 🔍 = colunas que podem ser filtrados via query string na API e na interface.
 
