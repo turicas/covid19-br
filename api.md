@@ -68,20 +68,20 @@ Colunas:
   também).
 - 🔍 `place_type`: tipo de local que esse registro descreve, pode ser `city` ou
   `state`.
+- `confirmed`: número de casos confirmados.
+- `deaths`: número de mortes.
 - 🔍 `order_for_place`: número que identifica a ordem do registro para este
   local. O registro referente ao primeiro boletim em que esse local aparecer
   será contabilizado como `1` e os demais boletins incrementarão esse valor.
 - 🔍 `is_last`: campo pré-computado que diz se esse registro é o mais novo para
   esse local, pode ser `True` ou `False` (caso filtre por esse campo, use
   `is_last=True` ou `is_last=False`, **não use o valor em minúsculas**).
-- 🔍 `city_ibge_code`: código IBGE do local.
-- `confirmed`: número de casos confirmados.
-- `deaths`: número de mortes.
 - `estimated_population_2019`: população estimada para esse município/estado em
   2019, [segundo o
   IBGE](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=resultados)
   ([acesse o script que faz o download e conversão dos dados de
   população](https://github.com/turicas/censo-ibge)).
+- 🔍 `city_ibge_code`: código IBGE do local.
 - `confirmed_per_100k_inhabitants`: número de casos confirmados por 100.000
   habitantes.
 - `death_rate`: taxa de mortalidade (mortes / confirmados).
@@ -273,7 +273,6 @@ curl -X GET https://brasil.io/api/dataset/covid19/boletim/data?state=SP
 ...
 ```
 
-
 ### `caso_full`
 
 Tabela gerada a partir da tabela [`caso`](#caso), que possui um registro por
@@ -331,7 +330,6 @@ Colunas:
 
 🔍 = colunas que podem ser filtrados via query string na API e na interface.
 
-
 ### `obito_cartorio`
 
 Essa tabela contém dados de óbitos registrados nos cartórios e disponíveis no
@@ -385,7 +383,6 @@ Colunas:
 - `new_deaths_septicemia_2020`: Quantidade de óbitos em decorrência de septicemia para o estado `state` ocorridos na data `date` (em 2020).
 
 🔍 = colunas que podem ser filtrados via query string na API e na interface.
-
 
 ### Dicas de uso
 
