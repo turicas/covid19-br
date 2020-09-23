@@ -235,9 +235,9 @@ Colunas:
 - 🔍 `search`: passe algum valor para executar a busca por texto completo, que
   compreende algumas das colunas da tabela.
 - 🔍 `date`: data do boletim no formato YYYY-MM-DD.
+- `notes`: observações sobre esse boletim
 - 🔍 `state`: sigla da unidade federativa, exemplo: SP.
 - `url`: link para o boletim
-- `notes`: observações sobre esse boletim
 
 🔍 = colunas que podem ser filtrados via query string na API e na interface.
 

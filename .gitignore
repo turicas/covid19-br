@@ -17,10 +17,14 @@
 .tox
 MANIFEST
 build/*
-data/
+data/*
 dist/*
 docs-build/
 docs/man/
 docs/reference/
 reg_settings.py
 .scrapy/
+env/*
+venv/*
+settings.json
+
