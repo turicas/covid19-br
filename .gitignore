@@ -24,3 +24,5 @@ docs/man/
 docs/reference/
 reg_settings.py
 .scrapy/
+venv/*
+settings.json
