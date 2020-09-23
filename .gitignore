@@ -17,6 +17,7 @@
 .tox
 MANIFEST
 build/*
+data/*
 dist/*
 docs-build/
 docs/man/
@@ -24,5 +25,4 @@ docs/reference/
 reg_settings.py
 .scrapy/
 venv/*
-data/log
 settings.json
