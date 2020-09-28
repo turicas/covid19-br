@@ -62,5 +62,3 @@ update_dataset_list "covid19"
 if [ "$DEPLOY_TYPE" = "full" ]; then
 	./report.sh
 fi
-
-time python ocupacao.py
