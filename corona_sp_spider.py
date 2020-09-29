@@ -14,7 +14,7 @@ class SPSpider(scrapy.Spider):
     def parse(self, response):
         self.cities = {
             row.city_ibge_code: row
-            for row in rows.import_from_csv("data/populacao-estimada-2019.csv")
+            for row in rows.import_from_csv("data/populacao-por-municipio-2020.csv")
             if row.state == "SP"
         }
         csv_url = response.xpath(

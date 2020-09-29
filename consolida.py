@@ -15,14 +15,18 @@ from scrapy.exceptions import CloseSpider
 DATA_PATH = Path(__file__).parent / "data"
 ERROR_PATH = DATA_PATH / "error"
 SCHEMA_PATH = Path(__file__).parent / "schema"
-POPULATION_DATA_PATH = DATA_PATH / "populacao-estimada-2019.csv"
-POPULATION_SCHEMA_PATH = SCHEMA_PATH / "populacao-estimada-2019.csv"
+POPULATION_DATA_PATH = {
+    2019: DATA_PATH / "populacao-por-municipio-2019.csv",
+    2020: DATA_PATH / "populacao-por-municipio-2020.csv",
+}
+POPULATION_SCHEMA_PATH = SCHEMA_PATH / "populacao-por-municipio.csv"
 
 
-@lru_cache()
-def get_cities():
+@lru_cache(maxsize=2)
+def get_cities(year):
     table = rows.import_from_csv(
-        POPULATION_DATA_PATH, force_types=load_schema(str(POPULATION_SCHEMA_PATH)),
+        POPULATION_DATA_PATH[year],
+        force_types=load_schema(str(POPULATION_SCHEMA_PATH)),
     )
     cities = defaultdict(dict)
     for row in table:

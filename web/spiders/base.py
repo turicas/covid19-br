@@ -7,7 +7,7 @@ import scrapy
 from cached_property import cached_property
 
 BASE_PATH = Path(__file__).parent.parent.parent
-POPULATION_PATH = BASE_PATH / "data" / "populacao-estimada-2019.csv"
+POPULATION_PATH = BASE_PATH / "data" / "populacao-por-municipio-2020.csv"
 
 
 def normalize_city_name(city):

@@ -2,7 +2,7 @@ import argparse
 
 import rows
 
-cities = rows.import_from_csv("data/populacao-estimada-2019.csv")
+cities = rows.import_from_csv("data/populacao-por-municipio-2020.csv")
 
 
 def convert(state, input_filename, output_filename):
