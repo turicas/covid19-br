@@ -96,6 +96,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [Instituto de Comunicação e Informação Científica e Tecnológica em Saúde (Icict/Fiocruz)](https://bigdata-covid19.icict.fiocruz.br/)
 - [Mapa do Covid-19 no Brasil](https://covid19.hitalos.com) por [@hitalos](https://github.com/hitalos)
 - [Observatório de Dados :: COVID-19 no Brasil CCSL-UFPA](http://ccsl.ufpa.br/covid-19/)
+- [Covid Municipal](https://github.com/covidmunicipal) e [Radar Coronavírus](https://irara.covidmunicipal.live/)
 - [Visualização em Mapa Interativo](https://endoedgar.github.io/covid19-monitorbr/) por [@endoedgar](https://github.com/endoedgar)
 - [liibre/coronabr (pacote R)](https://liibre.github.io/coronabr/index.html)
 - http://geesc.cedeplar.ufmg.br/wp-content/uploads/2020/03/Nota-tecnica-final-COVID-19-revisado2.pdf
