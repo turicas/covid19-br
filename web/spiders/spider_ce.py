@@ -9,14 +9,13 @@ from .base import BaseCovid19Spider
 
 class Covid19CESpider(BaseCovid19Spider):
     name = "CE"
-    start_urls = ["https://indicadores.integrasus.saude.ce.gov.br/api/coronavirus/qtd-por-municipio?tipo=Óbito,Confirmado"]
+    start_urls = [
+        "https://indicadores.integrasus.saude.ce.gov.br/api/coronavirus/qtd-por-municipio?tipo=Óbito,Confirmado"
+    ]
 
     def parse(self, response):
         encoding = "utf-8"
-        table = rows.import_from_json(
-            io.BytesIO(response.body),
-            encoding=encoding
-        )
+        table = rows.import_from_json(io.BytesIO(response.body), encoding=encoding)
 
         # TODO - get last_date from another source at *.saude.ce.gov.br
         last_date = datetime.now().date()
@@ -28,9 +27,9 @@ class Covid19CESpider(BaseCovid19Spider):
         cases = defaultdict(dict)
         for row in table:
 
-            if row.tipo == 'Confirmado':
+            if row.tipo == "Confirmado":
                 cases[row.municipio]["confirmed"] = row.quantidade
-            elif row.tipo == 'Óbito':
+            elif row.tipo == "Óbito":
                 cases[row.municipio]["deaths"] = row.quantidade
             else:
                 raise ValueError(f'Unknown case type : "{row.tipo}"')
@@ -54,9 +53,7 @@ class Covid19CESpider(BaseCovid19Spider):
             imported_confirmed = imported_deaths = None
 
         self.add_city_case(
-            city="Importados/Indefinidos",
-            confirmed=imported_confirmed,
-            deaths=imported_deaths,
+            city="Importados/Indefinidos", confirmed=imported_confirmed, deaths=imported_deaths,
         )
 
         self.add_state_case(confirmed=total_confirmed, deaths=total_deaths)

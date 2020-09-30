@@ -30,13 +30,11 @@ class Covid19PESpider(BaseCovid19Spider):
         case_data = None
         for json_data in page_jsons.extract():
             data = json.loads(json_data)["x"]
-            if data['options'].get('buttons'):
+            if data["options"].get("buttons"):
                 continue
             case_data = data["data"]
             break
-        header = rows.import_from_html(
-            io.BytesIO(data["container"].encode("utf-8"))
-        ).field_names
+        header = rows.import_from_html(io.BytesIO(data["container"].encode("utf-8"))).field_names
         result = []
         for row in zip(*case_data):
             row = dict(zip(header, row))
@@ -60,9 +58,7 @@ class Covid19PESpider(BaseCovid19Spider):
             confirmed = len(city_data)
             deaths = sum(1 for row in city_data if row["evolucao"] == "ÓBITO")
             self.add_city_case(
-                city=self.get_city_name_from_id(city_ibge_code),
-                confirmed=confirmed,
-                deaths=deaths,
+                city=self.get_city_name_from_id(city_ibge_code), confirmed=confirmed, deaths=deaths,
             )
             total_confirmed += confirmed
             total_deaths += deaths
@@ -71,7 +67,7 @@ class Covid19PESpider(BaseCovid19Spider):
     def fix_row(self, row):
         new = row.copy()
         cd_municipio = new["cd_municipio"]
-        if cd_municipio == '-':
+        if cd_municipio == "-":
             cd_municipio = 0
 
         if int(cd_municipio) == 0 or not new["cd_municipio"]:

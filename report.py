@@ -25,20 +25,13 @@ class Schema:  # TODO: add this class to rows
     def from_file(cls, filename):
         obj = cls()
         obj.filename = filename
-        obj.fields = load_schema(
-            str(filename)
-        )  # TODO: load_schema must support Path objects
+        obj.fields = load_schema(str(filename))  # TODO: load_schema must support Path objects
         return obj
 
     def deserialize(self, row):
         field_names = list(row.keys())
-        field_mapping = {
-            old: self.fields[new]
-            for old, new in zip(field_names, make_header(field_names))
-        }
-        return {
-            key: field_mapping[key].deserialize(value) for key, value in row.items()
-        }
+        field_mapping = {old: self.fields[new] for old, new in zip(field_names, make_header(field_names))}
+        return {key: field_mapping[key].deserialize(value) for key, value in row.items()}
 
 
 def get_brasilio_data(dataset, table, **filters):
@@ -56,6 +49,7 @@ def get_brasilio_data(dataset, table, **filters):
             response = urlopen(request)
         except Exception:
             import traceback
+
             print(f"ERROR while downloading {url}")
             traceback.print_exc()
             exit(1)
@@ -148,24 +142,17 @@ def main():
             for date, _ in date_count.most_common():
                 if date != state_date:
                     wrong_cities.extend(list(filter_rows(city_rows, date=date)))
-            wrong_str = " - municípios: " + ", ".join(
-                sorted(f"{row['city']} ({row['date']})" for row in wrong_cities)
-            )
+            wrong_str = " - municípios: " + ", ".join(sorted(f"{row['city']} ({row['date']})" for row in wrong_cities))
         else:
             wrong_str = ""
         if confirmed_differs:
-            confirmed_diff.append(
-                f"{state} ({confirmed_cities}/{confirmed_state}){wrong_str}"
-            )
+            confirmed_diff.append(f"{state} ({confirmed_cities}/{confirmed_state}){wrong_str}")
         elif wrong_str:
             confirmed_diff.append(f"{state} {wrong_str}")
         if deaths_differs:
             deaths_diff.append(f"{state} ({deaths_cities}/{deaths_state})")
         if state_date != last_date:
-            dias = abs(
-                datetime.date.fromisoformat(str(state_date))
-                - datetime.date.fromisoformat(str(last_date))
-            ).days
+            dias = abs(datetime.date.fromisoformat(str(state_date)) - datetime.date.fromisoformat(str(last_date))).days
             msg_atraso = f" - *{dias} dias de atraso*" if dias >= 2 else ""
             updated_diff.append(f"{state} ({state_date}){msg_atraso}")
     print_stats("desatualizados", updated_diff)

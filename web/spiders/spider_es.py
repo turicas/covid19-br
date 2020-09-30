@@ -16,11 +16,7 @@ class Covid19ESSpider(BaseCovid19Spider):
 
     def parse(self, response):
         encoding = "utf-8"
-        table = rows.import_from_csv(
-            io.BytesIO(response.body),
-            encoding=encoding,
-            force_types={"data": PtBrDateField},
-        )
+        table = rows.import_from_csv(io.BytesIO(response.body), encoding=encoding, force_types={"data": PtBrDateField},)
         table = [row for row in table if row.classificacao == "Confirmados"]
 
         last_date = max(row.data for row in table)
@@ -44,8 +40,6 @@ class Covid19ESSpider(BaseCovid19Spider):
             total_confirmed += confirmed
             total_deaths += deaths
         self.add_city_case(
-            city="Importados/Indefinidos",
-            confirmed=imported_confirmed,
-            deaths=imported_deaths,
+            city="Importados/Indefinidos", confirmed=imported_confirmed, deaths=imported_deaths,
         )
         self.add_state_case(confirmed=total_confirmed, deaths=total_deaths)

@@ -23,9 +23,7 @@ class SPSpider(scrapy.Spider):
         yield scrapy.Request(csv_url, callback=self.parse_csv)
 
     def parse_csv(self, response):
-        reader = csv.DictReader(
-            io.StringIO(response.body.decode("iso-8859-1")), delimiter=";"
-        )
+        reader = csv.DictReader(io.StringIO(response.body.decode("iso-8859-1")), delimiter=";")
         city_name_key = "Município"
         city_code_key = "Cód IBGE"
         confirmed_key = "Mun_Total de casos"

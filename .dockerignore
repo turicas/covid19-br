@@ -1,4 +1,6 @@
 ./data/output/*
+./data/download/*
+./data/log/*
 **/.dockerignore
 **/.env
 **/.git

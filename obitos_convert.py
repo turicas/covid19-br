@@ -2,7 +2,7 @@ import argparse
 import datetime
 from collections import Counter
 from functools import lru_cache
-from itertools import chain, groupby
+from itertools import groupby
 
 import rows
 from tqdm import tqdm
@@ -74,9 +74,7 @@ def convert_file(filename):
         except ValueError:  # This day does not exist in 2019 (29 February)
             yesterday = date - one_day
             this_day_in_2019 = datetime.date(2019, yesterday.month, yesterday.day)
-        row["epidemiological_week_2019"] = brazilian_epidemiological_week(
-            this_day_in_2019
-        )[1]
+        row["epidemiological_week_2019"] = brazilian_epidemiological_week(this_day_in_2019)[1]
         row["epidemiological_week_2020"] = brazilian_epidemiological_week(date)[1]
         row.update(base_row)
 

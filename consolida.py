@@ -2,14 +2,12 @@ import io
 import json
 import os
 from collections import Counter, defaultdict
-from functools import lru_cache
 from itertools import groupby
 from pathlib import Path
 from signal import SIGINT
 
 import rows
 import scrapy
-from rows.utils import load_schema
 from scrapy.exceptions import CloseSpider
 
 import demographics
@@ -52,9 +50,7 @@ class ConsolidaSpider(scrapy.Spider):
                 },
             )
         except Exception as exp:
-            self.errors[state].append(
-                ("boletim", state, f"{exp.__class__.__name__}: {exp}")
-            )
+            self.errors[state].append(("boletim", state, f"{exp.__class__.__name__}: {exp}"))
             return
         for report in reports:
             report = report._asdict()
@@ -121,12 +117,8 @@ class ConsolidaSpider(scrapy.Spider):
                 confirmed = row["confirmed"]
                 deaths = row["deaths"]
                 NULL = (None, "")
-                if (confirmed in NULL and deaths not in NULL) or (
-                    deaths in NULL and confirmed not in NULL
-                ):
-                    message = (
-                        f"ERROR: only one field is filled for {date}, {state}, {city}"
-                    )
+                if (confirmed in NULL and deaths not in NULL) or (deaths in NULL and confirmed not in NULL):
+                    message = f"ERROR: only one field is filled for {date}, {state}, {city}"
                     self.errors[state].append(("caso", state, message))
                 result.append(row)
 
@@ -177,36 +169,24 @@ class ConsolidaSpider(scrapy.Spider):
     def parse_state_file(self, response):
         state = response.meta["state"]
         if response.status >= 400:
-            self.errors[state].append(
-                ("connection", state, f"HTTP status code: {response.status}")
-            )
+            self.errors[state].append(("connection", state, f"HTTP status code: {response.status}"))
         else:
             response_data = json.load(io.BytesIO(response.body))
             try:
                 self.parse_boletim(state, response_data["reports"])
             except Exception as exp:
-                self.errors[state].append(
-                    ("boletim", state, f"{exp.__class__.__name__}: {exp}")
-                )
+                self.errors[state].append(("boletim", state, f"{exp.__class__.__name__}: {exp}"))
             try:
                 self.parse_caso(state, response_data["cases"])
             except Exception as exp:
-                self.errors[state].append(
-                    ("caso", state, f"{exp.__class__.__name__}: {exp}")
-                )
+                self.errors[state].append(("caso", state, f"{exp.__class__.__name__}: {exp}"))
 
         if self.errors[state]:
             error_counter = Counter(error[0] for error in self.errors[state])
-            error_counter_str = ", ".join(
-                f"{error_type}: {count}" for error_type, count in error_counter.items()
-            )
-            self.logger.error(
-                f"{len(self.errors[state])} errors found when parsing {state} ({error_counter_str})"
-            )
+            error_counter_str = ", ".join(f"{error_type}: {count}" for error_type, count in error_counter.items())
+            self.logger.error(f"{len(self.errors[state])} errors found when parsing {state} ({error_counter_str})")
             error_header = ("sheet", "state", "message")
-            errors = rows.import_from_dicts(
-                [dict(zip(error_header, row)) for row in self.errors[state]]
-            )
+            errors = rows.import_from_dicts([dict(zip(error_header, row)) for row in self.errors[state]])
             filename = ERROR_PATH / f"errors-{state}.csv"
             if not filename.parent.exists():
                 filename.parent.mkdir(parents=True)

@@ -1,5 +1,6 @@
 from collections import Counter, defaultdict
 from functools import lru_cache
+from operator import attrgetter
 from pathlib import Path
 
 import rows
@@ -12,9 +13,7 @@ SCHEMA_PATH = Path(__file__).parent / "schema"
 
 
 def read_cases(input_filename, order_by=None):
-    cases = rows.import_from_csv(
-        input_filename, force_types=load_schema(str(SCHEMA_PATH / "caso.csv"))
-    )
+    cases = rows.import_from_csv(input_filename, force_types=load_schema(str(SCHEMA_PATH / "caso.csv")))
     if order_by:
         cases.order_by(order_by)
     return cases
@@ -32,17 +31,20 @@ def epidemiological_week(date):
     return read_epidemiological_week()[date]
 
 
+def row_key(row):
+    return (row.place_type, row.state, row.city or None)
+
+
 def get_data(input_filename):
     casos = read_cases(input_filename, order_by="date")
     dates = sorted(set(c.date for c in casos))
-    row_key = lambda row: (row.place_type, row.state, row.city or None)
     caso_by_key = defaultdict(list)
     for caso in casos:
         caso_by_key[row_key(caso)].append(caso)
     for place_cases in caso_by_key.values():
         place_cases.sort(key=lambda row: row.date, reverse=True)
 
-    order_key = lambda row: row.order_for_place
+    order_key = attrgetter("order_for_place")
     last_case_for_place = {}
     order_for_place = Counter()
     for date in dates:
@@ -50,9 +52,7 @@ def get_data(input_filename):
             place_type, state, city = place_key
             place_cases = caso_by_key[place_key]
             valid_place_cases = sorted(
-                [item for item in place_cases if item.date <= date],
-                key=order_key,
-                reverse=True,
+                [item for item in place_cases if item.date <= date], key=order_key, reverse=True,
             )
             if not valid_place_cases:
                 # There are no cases for this city for this date - skip
@@ -88,14 +88,8 @@ def get_data(input_filename):
                 new_confirmed = new_case["last_available_confirmed"]
                 new_deaths = new_case["last_available_deaths"]
             else:
-                new_confirmed = (
-                    new_case["last_available_confirmed"]
-                    - last_case["last_available_confirmed"]
-                )
-                new_deaths = (
-                    new_case["last_available_deaths"]
-                    - last_case["last_available_deaths"]
-                )
+                new_confirmed = new_case["last_available_confirmed"] - last_case["last_available_confirmed"]
+                new_deaths = new_case["last_available_deaths"] - last_case["last_available_deaths"]
             new_case["new_confirmed"] = new_confirmed
             new_case["new_deaths"] = new_deaths
             last_case_for_place[place_key] = new_case
