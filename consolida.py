@@ -12,52 +12,10 @@ import scrapy
 from rows.utils import load_schema
 from scrapy.exceptions import CloseSpider
 
+import demographics
+
 DATA_PATH = Path(__file__).parent / "data"
 ERROR_PATH = DATA_PATH / "error"
-SCHEMA_PATH = Path(__file__).parent / "schema"
-POPULATION_DATA_PATH = {
-    2019: DATA_PATH / "populacao-por-municipio-2019.csv",
-    2020: DATA_PATH / "populacao-por-municipio-2020.csv",
-}
-POPULATION_SCHEMA_PATH = SCHEMA_PATH / "populacao-por-municipio.csv"
-
-
-@lru_cache(maxsize=2)
-def get_cities(year):
-    table = rows.import_from_csv(
-        POPULATION_DATA_PATH[year],
-        force_types=load_schema(str(POPULATION_SCHEMA_PATH)),
-    )
-    cities = defaultdict(dict)
-    for row in table:
-        cities[row.state][row.city] = row
-    return cities
-
-
-@lru_cache()
-def get_city_code(state, city):
-    return get_cities()[state][city].city_ibge_code
-
-
-@lru_cache()
-def get_city_population(state, city):
-    return get_cities()[state][city].estimated_population
-
-
-@lru_cache()
-def get_state_code(state):
-    for city in get_cities()[state].values():
-        return city.state_ibge_code
-
-
-@lru_cache()
-def get_state_population(state):
-    return sum(city.estimated_population for city in get_cities()[state].values())
-
-
-@lru_cache()
-def get_states():
-    return sorted(get_cities().keys())
 
 
 class ConsolidaSpider(scrapy.Spider):
@@ -74,7 +32,7 @@ class ConsolidaSpider(scrapy.Spider):
         self.errors = defaultdict(list)
 
     def start_requests(self):
-        for state in get_states():
+        for state in demographics.states():
             yield scrapy.Request(
                 self.base_url.format(uf=state),
                 meta={"state": state, "handle_httpstatus_all": True},
@@ -187,14 +145,16 @@ class ConsolidaSpider(scrapy.Spider):
         for row in result:
             if row["place_type"] == "city":
                 if row["city"] == "Importados/Indefinidos":
-                    row_population = None
+                    row_population_2020 = row_population_2019 = None
                     row_city_code = None
                 else:
-                    row_city_code = get_city_code(row["state"], row["city"])
-                    row_population = get_city_population(row["state"], row["city"])
+                    row_city_code = demographics.city_code(row["state"], row["city"])
+                    row_population_2019 = demographics.city_population(row["state"], row["city"], year=2019)
+                    row_population_2020 = demographics.city_population(row["state"], row["city"], year=2020)
             elif row["place_type"] == "state":
-                row_city_code = get_state_code(row["state"])
-                row_population = get_state_population(row["state"])
+                row_city_code = demographics.state_code(row["state"])
+                row_population_2019 = demographics.state_population(row["state"], year=2019)
+                row_population_2020 = demographics.state_population(row["state"], year=2020)
             else:
                 message = f"Invalid row: {row}"
                 self.errors[state].append(("caso", state, message))
@@ -203,20 +163,13 @@ class ConsolidaSpider(scrapy.Spider):
             row_deaths = row["deaths"]
             row_confirmed = row["confirmed"]
             confirmed_per_100k = (
-                100_000 * (row_confirmed / row_population)
-                if row_confirmed and row_population
-                else None
+                100_000 * (row_confirmed / row_population_2020) if row_confirmed and row_population_2020 else None
             )
-            death_rate = (
-                row_deaths / row_confirmed
-                if row_deaths is not None and row_confirmed not in (None, 0)
-                else 0
-            )
-            row["estimated_population_2019"] = row_population
+            death_rate = row_deaths / row_confirmed if row_deaths is not None and row_confirmed not in (None, 0) else 0
+            row["estimated_population_2019"] = row_population_2019
+            row["estimated_population"] = row_population_2020
             row["city_ibge_code"] = row_city_code
-            row["confirmed_per_100k_inhabitants"] = (
-                f"{confirmed_per_100k:.5f}" if confirmed_per_100k else None
-            )
+            row["confirmed_per_100k_inhabitants"] = f"{confirmed_per_100k:.5f}" if confirmed_per_100k else None
             row["death_rate"] = f"{death_rate:.4f}"
             self.logger.debug(row)
             self.caso_writer.writerow(row)
