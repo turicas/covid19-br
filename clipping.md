@@ -169,6 +169,8 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [Aceleração COVID no Brasil - Folha de São Paulo](https://arte.folha.uol.com.br/equilibrioesaude/2020/aceleracao-covid-no-brasil/)
 - https://medidas-covidbr-iptsp.shinyapps.io/painel/
 - [No Epicentro - Agência Lupa](https://piaui.folha.uol.com.br/lupa/epicentro/)
+- [Covid Municipal](https://github.com/covidmunicipal)
+- [Radar Coronavírus](https://irara.covidmunicipal.live/)
 
 
 ## Publicações Científicas
