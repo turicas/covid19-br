@@ -77,13 +77,18 @@ Colunas:
 - 🔍 `city_ibge_code`: código IBGE do local.
 - `confirmed`: número de casos confirmados.
 - `deaths`: número de mortes.
-- `estimated_population_2019`: população estimada para esse município/estado em
-  2019, [segundo o
-  IBGE](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=resultados)
+- `estimated_population`: população estimada para esse município/estado em
+  2020, [segundo o
+  IBGE](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=resultados).
   ([acesse o script que faz o download e conversão dos dados de
   população](https://github.com/turicas/censo-ibge)).
+- `estimated_population_2019`: população estimada para esse município/estado em
+  2019, [segundo o
+  IBGE](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=resultados).
+  **ATENÇÃO**: essa coluna possui valores desatualizados, prefira usar a coluna
+  `estimated_population`.
 - `confirmed_per_100k_inhabitants`: número de casos confirmados por 100.000
-  habitantes.
+  habitantes (baseado em `estimated_population`).
 - `death_rate`: taxa de mortalidade (mortes / confirmados).
 
 🔍 = colunas que podem ser filtrados via query string na API e na interface.
@@ -107,7 +112,8 @@ curl -X GET https://brasil.io/api/dataset/covid19/caso/data
       "date": "2020-03-27",
       "death_rate": null,
       "deaths": 0,
-      "estimated_population_2019": 407319,
+      "estimated_population": 407319,
+      "estimated_population_2019": 413418,
       "is_last": true,
       "place_type": "city",
       "state": "AC"
@@ -120,7 +126,8 @@ curl -X GET https://brasil.io/api/dataset/covid19/caso/data
       "date": "2020-03-27",
       "death_rate": null,
       "deaths": 0,
-      "estimated_population_2019": 881935,
+      "estimated_population": 881935,
+      "estimated_population_2019": 894470,
       "is_last": true,
       "place_type": "state",
       "state": "AC"
@@ -145,6 +152,8 @@ curl -X GET https://brasil.io/api/dataset/covid19/caso/data?is_last=True&state=A
       "date": "2020-03-26",
       "death_rate": null,
       "deaths": 0,
+      "deaths": 0,
+      "estimated_population": 1025360,
       "estimated_population_2019": 1018948,
       "is_last": true,
       "place_type": "city",
@@ -158,6 +167,7 @@ curl -X GET https://brasil.io/api/dataset/covid19/caso/data?is_last=True&state=A
       "date": "2020-03-26",
       "death_rate": null,
       "deaths": 0,
+      "estimated_population": 20112,
       "estimated_population_2019": 20066,
       "is_last": true,
       "place_type": "city",
@@ -171,6 +181,7 @@ curl -X GET https://brasil.io/api/dataset/covid19/caso/data?is_last=True&state=A
       "date": "2020-03-26",
       "death_rate": null,
       "deaths": 0,
+      "estimated_population": 3351543,
       "estimated_population_2019": 3337357,
       "is_last": true,
       "place_type": "state",
@@ -197,6 +208,7 @@ curl -X GET https://brasil.io/api/dataset/covid19/caso/data?is_last=True&place_t
       "date": "2020-03-27",
       "death_rate": null,
       "deaths": 0,
+      "estimated_population": 894470,
       "estimated_population_2019": 881935,
       "is_last": true,
       "place_type": "state",
@@ -210,6 +222,7 @@ curl -X GET https://brasil.io/api/dataset/covid19/caso/data?is_last=True&place_t
       "date": "2020-03-27",
       "death_rate": 0.0123,
       "deaths": 1,
+      "estimated_population": 4207714,
       "estimated_population_2019": 4144597,
       "is_last": true,
       "place_type": "state",
@@ -292,11 +305,16 @@ Colunas:
 - 🔍 `city_ibge_code`: código IBGE do local.
 - 🔍 `date`: data de coleta dos dados no formato YYYY-MM-DD.
 - 🔍 `epidemiological_week`: número da semana epidemiológica.
-- `estimated_population_2019`: população estimada para esse município/estado em
-  2019, [segundo o
-  IBGE](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=resultados)
+- `estimated_population`: população estimada para esse município/estado em
+  2020, [segundo o
+  IBGE](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=resultados).
   ([acesse o script que faz o download e conversão dos dados de
   população](https://github.com/turicas/censo-ibge)).
+- `estimated_population_2019`: população estimada para esse município/estado em
+  2019, [segundo o
+  IBGE](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=resultados).
+  **ATENÇÃO**: essa coluna possui valores desatualizados, prefira usar a coluna
+  `estimated_population`.
 - 🔍 `is_last`: campo pré-computado que diz se esse registro é o mais novo para
   esse local, pode ser `True` ou `False` (caso filtre por esse campo, use
   `is_last=True` ou `is_last=False`, **não use o valor em minúsculas**).
@@ -308,8 +326,8 @@ Colunas:
 - `last_available_confirmed`: número de casos confirmados do último dia
   disponível igual ou anterior à data `date`.
 - `last_available_confirmed_per_100k_inhabitants`: número de casos confirmados
-  por 100.000 habitantes do último dia disponível igual ou anterior à data
-  `date`.
+  por 100.000 habitantes (baseado em `estimated_population`) do último dia
+  disponível igual ou anterior à data `date`.
 - 🔍 `last_available_date`: data da qual o dado se refere.
 - `last_available_death_rate`: taxa de mortalidade (mortes / confirmados) do
   último dia disponível igual ou anterior à data `date`.

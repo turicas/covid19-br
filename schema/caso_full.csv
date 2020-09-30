@@ -3,6 +3,7 @@ city,text
 city_ibge_code,integer
 date,date
 epidemiological_week,integer
+estimated_population,integer
 estimated_population_2019,integer
 is_last,bool
 is_repeated,bool

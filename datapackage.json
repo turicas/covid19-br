@@ -105,11 +105,18 @@
             "description": "É a última atualização?"
           },
           {
+            "name": "estimated_population",
+            "type": "integer",
+            "format": "default",
+            "title": "População estimada do município",
+            "description": "População estimada para 2020, segundo o IBGE"
+          },
+          {
             "name": "estimated_population_2019",
             "type": "integer",
             "format": "default",
             "title": "População estimada 2019",
-            "description": "População estimada 2019, segundo IBGE"
+            "description": "População estimada para 2019, segundo o IBGE (esse campo possui valores desatualizados, prefira usar `estimated_population`)"
           },
           {
             "name": "city_ibge_code",
@@ -173,8 +180,15 @@
             "name": "estimated_population",
             "type": "integer",
             "format": "default",
-            "title": "população estimada",
-            "description": "População estimada para o ano de 2019, segundo a PNAD contínua do IBGE"
+            "title": "População estimada do município",
+            "description": "População estimada para 2020, segundo o IBGE"
+          },
+          {
+            "name": "estimated_population_2019",
+            "type": "integer",
+            "format": "default",
+            "title": "População estimada 2019",
+            "description": "População estimada para 2019, segundo o IBGE (esse campo possui valores desatualizados, prefira usar `estimated_population`)"
           }
         ]
       }
