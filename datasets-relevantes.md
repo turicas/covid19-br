@@ -20,7 +20,7 @@ vez de FTP).
 > baixar para outros meses/anos, troque `202002` pelo `YYYYMM` desejado.
 
 
-## Estimativa de População 2019
+## Estimativa de População 2020
 
 O IBGE disponibiliza [a estimativa de população por município em
 2020](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?edicao=28674&t=resultados).
