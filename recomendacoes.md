@@ -70,7 +70,7 @@ por dia, com os valores agregados para aquela data. As colunas são:
   importado de outro estado, pode ser usado um outro estado ou deixar a célula
   vazia, caso não se saiba).
 - `municipio`: nome do município [segundo essa
-  planilha](https://raw.githubusercontent.com/turicas/covid19-br/master/data/populacao-estimada-2019.csv);
+  planilha](https://raw.githubusercontent.com/turicas/covid19-br/master/data/populacao-por-municipio-2020.csv);
   pode ser também "Importado", "Indefinido" ou "TOTAL NO ESTADO" (esse último
   para nessa linha divulgar o número total oficial para aquela data).
 - `codigo_ibge`: código IBGE do município com 7 dígitos (retirar da planilha
@@ -110,7 +110,7 @@ Ainda não temos uma recomendação de microdados, por enquanto sugerimos utiliz
 Knowledge Foundation
 Brasil](https://transparenciacovid19.ok.org.br/files/Toolkit_1_microdados_basicos.pdf).
 
-Veja [aqui](https://docs.google.com/spreadsheets/d/1mgZe2GjKz_7zH5w4cEVfTh4LfvqDlUs3lxFSD6NJFjw/edit) 
+Veja [aqui](https://docs.google.com/spreadsheets/d/1mgZe2GjKz_7zH5w4cEVfTh4LfvqDlUs3lxFSD6NJFjw/edit)
 um modelo de planilha proposto pela OKBR.
 
 

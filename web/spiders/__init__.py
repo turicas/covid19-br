@@ -30,6 +30,7 @@ def execute_spider_worker(SpiderClass):
         process.start()
     except Exception:
         import traceback
+
         return "error", traceback.format_exc()
     else:
         report_fobj.seek(0)

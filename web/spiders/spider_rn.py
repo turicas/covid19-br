@@ -23,14 +23,11 @@ def convert_city(city):
 class Covid19RNSpider(BaseCovid19Spider):
     http_proxy = os.environ.get("HTTP_PROXY", None)
     name = "RN"
-    start_urls = [
-        "http://www.saude.rn.gov.br/Conteudo.asp?TRAN=ITEM&TARG=223456&ACT=&PAGE=&PARM=&LBL=MAT%C9RIA"
-    ]
+    start_urls = ["http://www.saude.rn.gov.br/Conteudo.asp?TRAN=ITEM&TARG=223456&ACT=&PAGE=&PARM=&LBL=MAT%C9RIA"]
 
     def parse(self, response):
         yield scrapy.Request(
-            url=response.xpath("//a[contains(@href, 'PDF')]/@href")[0].extract(),
-            callback=self.parse_pdf,
+            url=response.xpath("//a[contains(@href, 'PDF')]/@href")[0].extract(), callback=self.parse_pdf,
         )
 
     def parse_pdf(self, response):
@@ -40,9 +37,7 @@ class Covid19RNSpider(BaseCovid19Spider):
         for page in pages:
             for obj in page:
                 if "Dados extraídos" in obj.text:
-                    day, month, year = re.compile(
-                        "([0-9]{2})/([0-9]{2})/([0-9]{4})"
-                    ).findall(obj.text)[0]
+                    day, month, year = re.compile("([0-9]{2})/([0-9]{2})/([0-9]{4})").findall(obj.text)[0]
                     date = datetime.date(int(year), int(month), int(day))
                     found = True
                     break
@@ -60,9 +55,7 @@ class Covid19RNSpider(BaseCovid19Spider):
             city = convert_city(row.municipio_de_residencia)
             if city is None:
                 continue
-            confirmed = row.casos_confirmados_incidencia_por_n_100_ooo_hab.splitlines()[
-                0
-            ]
+            confirmed = row.casos_confirmados_incidencia_por_n_100_ooo_hab.splitlines()[0]
             if confirmed in ("-", ""):
                 confirmed = None
             else:
@@ -70,9 +63,7 @@ class Covid19RNSpider(BaseCovid19Spider):
             confirmed_cases[city] = confirmed
 
         table = rows.import_from_pdf(
-            io.BytesIO(response.body),
-            starts_after=re.compile("EM INVESTIGAÇÃO.*"),
-            ends_before=re.compile("Fonte:"),
+            io.BytesIO(response.body), starts_after=re.compile("EM INVESTIGAÇÃO.*"), ends_before=re.compile("Fonte:"),
         )
         deaths_cases = {}
         for row in table:

@@ -7,7 +7,7 @@ import scrapy
 from cached_property import cached_property
 
 BASE_PATH = Path(__file__).parent.parent.parent
-POPULATION_PATH = BASE_PATH / "data" / "populacao-estimada-2019.csv"
+POPULATION_PATH = BASE_PATH / "data" / "populacao-por-municipio-2020.csv"
 
 
 def normalize_city_name(city):
@@ -35,14 +35,10 @@ class BaseCovid19Spider(scrapy.Spider):
         except KeyError:
             raise ValueError(f"Unknown city '{city}' for state {self.name}")
 
-        self.case_data.append(
-            {"municipio": city_name, "confirmados": confirmed, "mortes": deaths}
-        )
+        self.case_data.append({"municipio": city_name, "confirmados": confirmed, "mortes": deaths})
 
     def add_state_case(self, confirmed, deaths):
-        self.case_data.append(
-            {"municipio": "TOTAL NO ESTADO", "confirmados": confirmed, "mortes": deaths}
-        )
+        self.case_data.append({"municipio": "TOTAL NO ESTADO", "confirmados": confirmed, "mortes": deaths})
 
     @cached_property
     def brazilian_population(self):
@@ -64,10 +60,7 @@ class BaseCovid19Spider(scrapy.Spider):
 
     @lru_cache(maxsize=900)
     def get_city_id_from_name(self, name):
-        normalized_cities = {
-            normalize_city_name(key): value
-            for key, value in self.city_id_from_name.items()
-        }
+        normalized_cities = {normalize_city_name(key): value for key, value in self.city_id_from_name.items()}
         return normalized_cities[normalize_city_name(name)]
 
     @cached_property
@@ -106,9 +99,7 @@ class BaseCovid19Spider(scrapy.Spider):
     @classmethod
     def from_crawler(cls, crawler, *args, **kwargs):
         spider = super().from_crawler(crawler, *args, **kwargs)
-        crawler.signals.connect(
-            spider.spider_closed, signal=scrapy.signals.spider_closed
-        )
+        crawler.signals.connect(spider.spider_closed, signal=scrapy.signals.spider_closed)
         return spider
 
     def spider_closed(self, spider):

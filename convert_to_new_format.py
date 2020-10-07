@@ -2,16 +2,12 @@ import argparse
 
 import rows
 
-cities = rows.import_from_csv("data/populacao-estimada-2019.csv")
+cities = rows.import_from_csv("data/populacao-por-municipio-2020.csv")
 
 
 def convert(state, input_filename, output_filename):
     table = rows.import_from_csv(
-        input_filename,
-        force_types={
-            "confirmed": rows.fields.IntegerField,
-            "deaths": rows.fields.IntegerField,
-        },
+        input_filename, force_types={"confirmed": rows.fields.IntegerField, "deaths": rows.fields.IntegerField,},
     )
     state_cities = ["TOTAL NO ESTADO", "Importados/Indefinidos"] + sorted(
         row.municipio for row in cities if row.uf == state

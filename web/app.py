@@ -9,9 +9,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    spider_links = "\n".join(
-        f'<li> <a href="/{state}">{state}</a> </li>' for state in STATE_SPIDERS
-    )
+    spider_links = "\n".join(f'<li> <a href="/{state}">{state}</a> </li>' for state in STATE_SPIDERS)
     return f"""
     <!DOCTYPE html>
     <html>
@@ -41,9 +39,7 @@ def get_spider_response(state):
     # TODO: do something with reports
 
     response = make_response(case_fobj.getvalue())
-    response.headers[
-        "Content-Disposition"
-    ] = f"attachment; filename=caso-{state}-{date}.csv"
+    response.headers["Content-Disposition"] = f"attachment; filename=caso-{state}-{date}.csv"
     response.headers["Content-type"] = "text/csv"
     return response
 

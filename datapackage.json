@@ -105,11 +105,18 @@
             "description": "É a última atualização?"
           },
           {
+            "name": "estimated_population",
+            "type": "integer",
+            "format": "default",
+            "title": "População estimada do município",
+            "description": "População estimada para 2020, segundo o IBGE"
+          },
+          {
             "name": "estimated_population_2019",
             "type": "integer",
             "format": "default",
             "title": "População estimada 2019",
-            "description": "População estimada 2019, segundo IBGE"
+            "description": "População estimada para 2019, segundo o IBGE (esse campo possui valores desatualizados, prefira usar `estimated_population`)"
           },
           {
             "name": "city_ibge_code",
@@ -136,8 +143,59 @@
       }
     },
     {
-      "name": "populacao-estimada",
-      "path": "data/populacao-estimada-2019.csv",
+      "name": "populacao-por-municipio-2019",
+      "path": "data/populacao-por-municipio-2019.csv",
+      "profile": "tabular-data-resource",
+      "schema": {
+        "fields": [
+          {
+            "name": "state",
+            "type": "string",
+            "format": "default",
+            "title": "UF",
+            "description": "Unidade federativa (código de 2 letras)"
+          },
+          {
+            "name": "state_ibge_code",
+            "type": "integer",
+            "format": "default",
+            "title": "código da UF",
+            "description": "Código numérico da Unidade Federativa"
+          },
+          {
+            "name": "city_ibge_code",
+            "type": "integer",
+            "format": "default",
+            "title": "código município",
+            "description": "Código numérico do IBGE para o municipio"
+          },
+          {
+            "name": "city",
+            "type": "string",
+            "format": "default",
+            "title": "município",
+            "description": "Nome do município"
+          },
+          {
+            "name": "estimated_population",
+            "type": "integer",
+            "format": "default",
+            "title": "População estimada do município",
+            "description": "População estimada para 2020, segundo o IBGE"
+          },
+          {
+            "name": "estimated_population_2019",
+            "type": "integer",
+            "format": "default",
+            "title": "População estimada 2019",
+            "description": "População estimada para 2019, segundo o IBGE (esse campo possui valores desatualizados, prefira usar `estimated_population`)"
+          }
+        ]
+      }
+    },
+    {
+      "name": "populacao-por-municipio-2020",
+      "path": "data/populacao-por-municipio-2020.csv",
       "profile": "tabular-data-resource",
       "schema": {
         "fields": [
@@ -174,7 +232,7 @@
             "type": "integer",
             "format": "default",
             "title": "população estimada",
-            "description": "População estimada no ano de 2019, segundo a PNAD contínua do IBGE"
+            "description": "População estimada para o ano de 2020, segundo a PNAD contínua do IBGE"
           }
         ]
       }
@@ -222,8 +280,8 @@
       }
     },
     {
-      "name": "schema-populacao-estimada",
-      "path": "schema/populacao-estimada-2019.csv",
+      "name": "schema-populacao-por-municipio",
+      "path": "schema/populacao-por-municipio.csv",
       "profile": "tabular-data-resource",
       "schema": {
         "fields": [

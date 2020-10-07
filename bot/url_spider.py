@@ -72,9 +72,7 @@ class URLCheckerSpider(scrapy.Spider):
         self.chat.login(os.environ["ROCKETCHAT_USERNAME"], os.environ["ROCKETCHAT_PASSWORD"])
 
     def parse(self, response):
-        url_table = rows.import_from_csv(
-            io.BytesIO(response.body), encoding="utf-8", force_types=HASH_FIELDS,
-        )
+        url_table = rows.import_from_csv(io.BytesIO(response.body), encoding="utf-8", force_types=HASH_FIELDS,)
         self.URLInfo = url_table.Row
         self.url_hashes = {row.url: row for row in url_table}
         yield scrapy.Request(URL_LIST_URL, callback=self.parse_url_list)
@@ -95,23 +93,14 @@ class URLCheckerSpider(scrapy.Spider):
                     "voluntarios": row.voluntarios,
                 }
                 yield scrapy.Request(
-                    url,
-                    callback=self.parse_url,
-                    meta={"row": meta},
-                    errback=self.handle_failure,
-                    dont_filter=True,
+                    url, callback=self.parse_url, meta={"row": meta}, errback=self.handle_failure, dont_filter=True,
                 )
 
     def notify(self, channel, message):
         self.chat.send_message(channel, message)
 
     def url_info(self, url):
-        return self.url_hashes.get(
-            url,
-            self.URLInfo(
-                url=url, last_check_datetime=None, text=None, min_distance=None
-            ),
-        )
+        return self.url_hashes.get(url, self.URLInfo(url=url, last_check_datetime=None, text=None, min_distance=None),)
 
     def handle_failure(self, failure):
         meta = failure.request.meta["row"]
@@ -121,9 +110,7 @@ class URLCheckerSpider(scrapy.Spider):
         url_info["text"] = "ERROR"
         url_info["last_check_datetime"] = now_in_brazil()
         self.result.append(url_info)
-        if hasattr(failure.value, "response") and hasattr(
-            failure.value.response, "status"
-        ):
+        if hasattr(failure.value, "response") and hasattr(failure.value.response, "status"):
             failure_str = f"(HTTP {failure.value.response.status}) {failure.value}"
         else:
             failure_str = str(failure.value)
@@ -165,17 +152,12 @@ class URLCheckerSpider(scrapy.Spider):
     @classmethod
     def from_crawler(cls, crawler, *args, **kwargs):
         spider = super().from_crawler(crawler, *args, **kwargs)
-        crawler.signals.connect(
-            spider.spider_closed, signal=scrapy.signals.spider_closed
-        )
+        crawler.signals.connect(spider.spider_closed, signal=scrapy.signals.spider_closed)
         return spider
 
     def spider_closed(self, spider):
         writer = rows.utils.CsvLazyDictWriter(self.output_filename)
         result = rows.import_from_dicts(self.result, force_types=HASH_FIELDS)
         for row in result:
-            row = {
-                key: result.fields[key].serialize(value)
-                for key, value in row._asdict().items()
-            }
+            row = {key: result.fields[key].serialize(value) for key, value in row._asdict().items()}
             writer.writerow(row)

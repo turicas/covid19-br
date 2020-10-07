@@ -10,33 +10,21 @@ from .base import BaseCovid19Spider
 
 class Covid19PRSpider(BaseCovid19Spider):
     name = "PR"
-    start_urls = [
-        "http://www.saude.pr.gov.br/modules/conteudo/conteudo.php?conteudo=3507"
-    ]
+    start_urls = ["http://www.saude.pr.gov.br/modules/conteudo/conteudo.php?conteudo=3507"]
 
     def parse(self, response):
         url = response.xpath("//a[contains(@href, '.csv')]/@href")[0].extract()
         full_url = urljoin(response.url, url)
-        day, month, year = (
-            rows.fields.slug(full_url)
-            .split("epidemiologico_")[1]
-            .split("_csv")[0]
-            .split("_")
-        )
+        day, month, year = rows.fields.slug(full_url).split("epidemiologico_")[1].split("_csv")[0].split("_")
         date = datetime.date(int(year), int(month), int(day))
         self.add_report(date=date, url=full_url)
-        yield scrapy.Request(
-            url=full_url, meta={"row": {"date": date}}, callback=self.parse_csv
-        )
+        yield scrapy.Request(url=full_url, meta={"row": {"date": date}}, callback=self.parse_csv)
 
     def parse_csv(self, response):
         table = rows.import_from_csv(
             io.BytesIO(response.body),
             encoding=response.encoding,
-            force_types={
-                "confirmados": rows.fields.IntegerField,
-                "obitos": rows.fields.IntegerField,
-            },
+            force_types={"confirmados": rows.fields.IntegerField, "obitos": rows.fields.IntegerField,},
         )
         total_confirmed = total_deaths = 0
         for row in table:

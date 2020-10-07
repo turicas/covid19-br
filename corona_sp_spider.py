@@ -14,7 +14,7 @@ class SPSpider(scrapy.Spider):
     def parse(self, response):
         self.cities = {
             row.city_ibge_code: row
-            for row in rows.import_from_csv("data/populacao-estimada-2019.csv")
+            for row in rows.import_from_csv("data/populacao-por-municipio-2020.csv")
             if row.state == "SP"
         }
         csv_url = response.xpath(
@@ -23,9 +23,7 @@ class SPSpider(scrapy.Spider):
         yield scrapy.Request(csv_url, callback=self.parse_csv)
 
     def parse_csv(self, response):
-        reader = csv.DictReader(
-            io.StringIO(response.body.decode("iso-8859-1")), delimiter=";"
-        )
+        reader = csv.DictReader(io.StringIO(response.body.decode("iso-8859-1")), delimiter=";")
         city_name_key = "Município"
         city_code_key = "Cód IBGE"
         confirmed_key = "Mun_Total de casos"

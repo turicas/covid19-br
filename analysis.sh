@@ -24,9 +24,10 @@ function create_database() {
 		fi
 		rows csv2sqlite --schemas=schema/${table}.csv "$filename" "$database_filename"
 	done
-	for table in populacao-estimada-2019 epidemiological-week; do
-		rows csv2sqlite --schemas=schema/${table}.csv data/${table}.csv $database_filename
-	done
+	rows csv2sqlite \
+		--schemas=schema/{populacao-por-municipio,epidemiological-week}.csv \
+		data/{epidemiological-week,populacao-por-municipio-2020}.csv \
+		$database_filename
 }
 
 function execute_sql_file_no_output() {
