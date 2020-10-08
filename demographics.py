@@ -23,14 +23,41 @@ def cities(year):
     return cities
 
 
+@lru_cache(maxsize=11140)
+def normalize_city_name(name):
+    # Simple normalization
+    name = rows.fields.slug(name)
+    for value in ("_de_", "_da_", "_do_", "_das_", "_dos_"):
+        name = name.replace(value, "_")
+
+    # Exceptions
+    name = name.replace("_thome_", "_tome_")  # São Tomé das Letras
+    if name == "florinia":
+        name = "florinea"
+
+    return name
+
+
+def is_same_city(state, city_a, city_b):
+    return normalize_city_name(city_a) == normalize_city_name(city_b)
+
+
+@lru_cache(maxsize=11140)
+def get_city(state, name, year=2020):
+    state_cities = cities(year)[state].values()
+    for city in state_cities:
+        if is_same_city(state, city.city, name):
+            return city
+
+
 @lru_cache(maxsize=5570)
 def city_code(state, city, year=2020):
-    return cities(year)[state][city].city_ibge_code
+    return get_city(state, city, year).city_ibge_code
 
 
 @lru_cache(maxsize=11140)
 def city_population(state, city, year):
-    return cities(year)[state][city].estimated_population
+    return get_city(state, city, year).estimated_population
 
 
 @lru_cache(maxsize=27)
