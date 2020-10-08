@@ -79,7 +79,7 @@ def states(year=2020):
 @lru_cache(maxsize=2)
 def place_keys(year=2020):
     """Cria chave única para cada tipo de local em que são contabilizados casos"""
-    keys = Counter()
+    keys = []
     for state, state_cities in cities(year).items():
         keys.append(("state", state, None))
         keys.append(("city", state, "Importados/Indefinidos"))
