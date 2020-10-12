@@ -63,6 +63,9 @@ class ConsolidaSpider(scrapy.Spider):
         for caso in data:
             for key, value in caso.items():
                 if key == "municipio":
+                    city_info = demographics.get_city(state, value)
+                    if city_info:
+                        caso["municipio"] = city_info.city
                     continue
                 elif key.startswith("confirmados_") or key.startswith("mortes_"):
                     try:
