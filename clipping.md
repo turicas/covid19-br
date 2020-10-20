@@ -120,6 +120,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - http://covid19.riogrande.ifrs.edu.br/
 - https://mapcovid.com.br/
 - https://mapadocovid19.com.br/
+- https://dionatan.com.br/coronavirus
 - https://dashboard-covid.now.sh/ https://github.com/mathcunha/dashboard-covid
 - https://dadoscoronavirus.com/brasil/
 - https://public.tableau.com/profile/thiago.ficagna#!/vizhome/Coronavirus_15851416584640/PainelCOVID19
