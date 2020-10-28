@@ -90,7 +90,7 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 - [Painel IBGE COVID-19 por município](https://covid19.ibge.gov.br/paineis-sintese/)
 - [App COVID-19 no Brasil e no Mundo](https://github.com/Gabplay/flutter_covid19_brasil) - [Download](https://bit.ly/downloadAppCovidBR)
-- [Corona Cidades - Simulador](https://coronacidades.org/simulacovid/)
+- [Farol COVID - Corona Cidades](https://farolcovid.coronacidades.org/)
 - [Onde tem Coronavírus](https://ondetemcoronavirus.com.br/)
 - [Dashboard do Brasil sobre Covid-19](https://gabrielcesar.github.io/covid-br/) por [@gabrielcesar](https://github.com/gabrielcesar)
 - [Estimativas de R0 por Estados do Brasil](https://flaviovdf.github.io/covid19/) por [@flaviovdf](https://github.com/flaviovdf)
