@@ -46,12 +46,9 @@ Toda comunicação deve ser feita através do [https://chat.brasil.io](https://c
   
 
 1.  Acesse o link [https://chat.brasil.io](https://chat.brasil.io);
-    
 2.  Faça seu cadastro;
-    
 3.  Entre nos canais #covid19, #covid19-anuncios e #covid19-<regiao>;
-    
-4.  Atualize a planilha de voluntário informando seu apelido na coluna rocket.chat;
+4.  Atualize a planilha de voluntário informando seu apelido na coluna rocket.chat.
     
 
   
