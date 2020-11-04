@@ -75,15 +75,11 @@ Seguem os canais regionais :
 
   
 
-#covid19-nordeste
-
-#covid19-norte
-
-#covid19-sudeste
-
-#covid19-sul
-
-#covid19-centro-oeste
+- #covid19-nordeste
+- #covid19-norte
+- #covid19-sudeste
+- #covid19-sul
+- #covid19-centro-oeste
 
 ## Planilhas
 
