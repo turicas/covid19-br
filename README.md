@@ -1,27 +1,119 @@
+
 [🇺🇸 English?](README.en.md)
 
 # covid19-br
 
 ![pytest@docker](https://github.com/turicas/covid19-br/workflows/pytest@docker/badge.svg) ![goodtables](https://github.com/turicas/covid19-br/workflows/goodtables/badge.svg)
 
+<!-- TABLE OF CONTENTS -->
+## Tabela de Conteúdo
+
+* [Sobre este Projeto](#sobre-este-projeto)
+  * [Feito com](#feito-com)
+* [Iniciando](#iniciando)
+  * [Pre-requisitos](#pre-requisitos)
+  * [Instalação](#instalação)
+* [Utilização](#utilização)
+* [Roadmap](#roadmap)
+* [Contribuindo](#contribuindo)
+* [Licença e Citação](#licença-e-citação)
+* [Contato](#contato)
+* [Agradecimentos](#agradecimentos)
+
+
+
+<!-- ABOUT THE PROJECT -->
+## Sobre este Projeto
+
 Esse repositório centraliza links e dados sobre boletins de número de casos das
 Secretarias Estaduais de Saúde (SES) sobre os casos de covid19 no Brasil (por
 município por dia), além de outros dados relevantes para a análise, como óbitos
 registrados em cartório (por estado por dia).
 
-## Licença e Citação
+### Feito com
 
-A licença do código é [LGPL3](https://www.gnu.org/licenses/lgpl-3.0.en.html) e
-dos dados convertidos [Creative Commons Attribution
-ShareAlike](https://creativecommons.org/licenses/by-sa/4.0/). Caso utilize os
-dados, **cite a fonte original e quem tratou os dados** e caso compartilhe os
-dados, **utilize a mesma licença**.
-Exemplos de como os dados podem ser citados:
-- **Fonte: Secretarias de Saúde das Unidades Federativas, dados tratados por Álvaro Justen e equipe de voluntários [Brasil.IO](https://brasil.io/)**
-- **Brasil.IO: boletins epidemiológicos da COVID-19 por município por dia, disponível em: https://brasil.io/dataset/covid19/ (última atualização: XX de XX de XXXX, acesso em XX de XX de XXXX).**
+* [Python](https://www.python.org/)
+* [Bash](https://www.gnu.org/software/bash/)
 
 
-## Dados
+<!-- GETTING STARTED -->
+## Iniciando
+
+TODO
+
+### Pre-requisitos
+
+Instale o Python 3.8.2
+
+### Instalação
+
+1. Download, crie &. ative um virtualenv
+  - `git clone https://github.com/turicas/covid19-br.git`
+  - `virtualenv venv`
+  - `source venv/bin/activate`
+2. Instale as dependências:
+  - Script de consolidação e robô: `pip install -r requirements.txt`
+  - Extratores de dados estaduais: `pip install -r requirements-collect.txt`
+3. Rode o script de coleta: 
+  - `./collect.sh`
+  - O objetivo desse script é # TODO: adicionar o objetivo desse arquivo, ex pq so tem 3 estados
+4. Rode o script de consolidação: 
+  - `./run.sh`
+  - O objetivo desse script é # TODO: adicionar o objetivo desse arquivo...
+5. Verifique o resultado em `data/output`.
+```
+data
+│   epidemiological-week.csv
+│   populacao-estimada-2019.csv   
+│
+└───download
+    │   ...
+|
+└───error
+    │   ...
+|
+└───log
+    │   ...
+|
+└───output
+    │   boletim.csv.gz
+    │   caso-ce.csv  
+    │   caso-pr.csv  
+    │   caso-sp.csv  
+    │   caso.csv.gz
+````
+
+<!-- USAGE EXAMPLES -->
+## Utilização
+
+TODO
+
+
+<!-- ROADMAP -->
+## Roadmap
+
+TODO, o que precisa ser feito, prioridades etc
+
+
+<!-- CONTRIBUTING -->
+## Contribuindo
+
+Você pode contribuir de diversas formas:
+
+- Criando programas (crawlers/scrapers/spiders) para extrair os dados automaticamente ([LEIA ISSO ANTES](#criando-scrapers));
+- Coletando links para os boletins de seu estado;
+- Coletando dados sobre os casos por município por dia;
+- Entrando em contato com a secretaria estadual de seu estado, sugerindo as
+  [recomendações de liberação dos dados](recomendacoes.md);
+- Evitando contato com humanos, lavando as mãos várias vezes ao dia, sendo solidário aos mais vulneráveis;
+
+Para se voluntariar, [siga estes passos](CONTRIBUTING.md).
+
+Procure o seu estado [nas issues desse
+repositório](https://github.com/turicas/covid19-br/issues) e vamos conversar
+por lá.
+
+## Dados TODO: melhorar descricao & talvez subdividr
 
 Depois de coletados e checados os dados ficam disponíveis de 3 formas no
 [Brasil.IO](https://brasil.io/):
@@ -77,25 +169,6 @@ O relatório da ferramenta
 se houver alguma inconsistência. A validação também pode ser feita *online*
 pelo site [Goodtables.io](http://goodtables.io/).
 
-## Contribuindo
-
-Você pode contribuir de diversas formas:
-
-- Criando programas (crawlers/scrapers/spiders) para extrair os dados automaticamente ([LEIA ISSO ANTES](#criando-scrapers));
-- Coletando links para os boletins de seu estado;
-- Coletando dados sobre os casos por município por dia;
-- Entrando em contato com a secretaria estadual de seu estado, sugerindo as
-  [recomendações de liberação dos dados](recomendacoes.md);
-- Evitando contato com humanos;
-- Lavando as mãos várias vezes ao dia;
-- Sendo solidário aos mais vulneráveis;
-
-Para se voluntariar, [siga estes passos](CONTRIBUTING.md).
-
-Procure o seu estado [nas issues desse
-repositório](https://github.com/turicas/covid19-br/issues) e vamos conversar
-por lá.
-
 ### Criando Scrapers
 
 Estamos mudando a forma de subida dos dados para facilitar o trabalho dos voluntários e deixar o processo mais robusto e confiável e, com isso, será mais fácil que robôs possam subir também os dados; dessa forma, os scrapers ajudarão *bastante* no processo. Porém, ao criar um scraper é importante que você siga algumas regras:
@@ -115,43 +188,11 @@ Estamos mudando a forma de subida dos dados para facilitar o trabalho dos volunt
 
 Nesse momento não temos muito tempo disponível para revisão, então **por favor**, só crie um *pull request* com código de um novo scraper caso você possa cumprir os requisitos acima.
 
-## Instalando
-
-### Padrão
-
-Necessita de Python 3 (testado em 3.8.2). Para montar seu ambiente:
-
-- Instale o Python 3.8.2
-- Crie um virtualenv
-- Instale as dependências:
-  - Script de consolidação e robô: `pip install -r requirements.txt`
-  - Extratores de dados estaduais: `pip install -r requirements-collect.txt`
-- Rode o script de coleta: `./collect.sh`
-- Rode o script de consolidação: `./run.sh`
-
-Verifique o resultado em `data/output`.
-
-### Docker
-
-Se você preferir utilizar o Docker para executar, basta usar os comandos a seguir :
-
-```shell
-make docker-build   # para construir a imagem
-make docker-collect # para coletar os dados
-make docker-run     # para consolidar os dados
-```
-
 ## VEJA TAMBÉM
 
 - [Outros datasets relevantes](datasets-relevantes.md)
 - [Recomendações para secretarias de saúde na disponibilização de
   dados](recomendacoes.md)
-
-
-## Clipping
-
-Quer saber quais projetos e notícias estão usando nossos dados? [Veja o
-clipping](clipping.md).
 
 
 ## Atualização dos Dados no Brasil.IO
@@ -177,3 +218,35 @@ atualização de dataset.
 
 > Nota: o script que baixa e converte os dados automaticamente deve ser
 > executado separadamente, com o comando `./collect.sh`.
+
+
+<!-- LICENSE -->
+## Licença e Citação
+
+A licença do código é [LGPL3](https://www.gnu.org/licenses/lgpl-3.0.en.html) e
+dos dados convertidos [Creative Commons Attribution
+ShareAlike](https://creativecommons.org/licenses/by-sa/4.0/). Caso utilize os
+dados, **cite a fonte original e quem tratou os dados** e caso compartilhe os
+dados, **utilize a mesma licença**.
+Exemplos de como os dados podem ser citados:
+- **Fonte: Secretarias de Saúde das Unidades Federativas, dados tratados por Álvaro Justen e equipe de voluntários [Brasil.IO](https://brasil.io/)**
+- **Brasil.IO: boletins epidemiológicos da COVID-19 por município por dia, disponível em: https://brasil.io/dataset/covid19/ (última atualização: XX de XX de XXXX, acesso em XX de XX de XXXX).**
+
+
+
+<!-- CONTACT -->
+## Contato
+
+TODO
+
+
+## Clipping
+
+Quer saber quais projetos e notícias estão usando nossos dados? [Veja o
+clipping](clipping.md).
+
+
+<!-- ACKNOWLEDGEMENTS -->
+## Agradecimentos
+
+TODO
