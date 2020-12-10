@@ -91,7 +91,9 @@ def convert_file(filename):
             new_deaths = item.total
             if key_new is None:
                 if new_deaths > 0:
-                    raise RuntimeError(f"Cannot have new_deaths > 0 when key for (new_deaths, {cause}, {year}) is None")
+                    #raise RuntimeError(f"Cannot have new_deaths > 0 when key for (new_deaths, {cause}, {year}) is None")
+                    print(f"ERROR converting {item}: new_deaths > 0 but key is None")
+                    continue
                 else:
                     continue
             accumulated_key = (year, state, cause)
