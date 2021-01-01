@@ -75,7 +75,12 @@ class ConsolidaSpider(scrapy.Spider):
                         self.errors[state].append(("caso", state, message))
                         self.logger.error(message)
                         continue
-                    date = f"2020-{int(month):02d}-{int(day):02d}"
+                    # TODO: fix this
+                    if f"{int(month):02d}-{int(day):02d}" < "01-31":
+                        year = 2021
+                    else:
+                        year = 2020
+                    date = f"{year}-{int(month):02d}-{int(day):02d}"
                     if key.startswith("confirmados_"):
                         number_type = "confirmed"
                     elif key.startswith("mortes_"):

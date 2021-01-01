@@ -58,6 +58,10 @@ def brazilian_epidemiological_week(date):
     (2020, 53)
     >>> brazilian_epidemiological_week(datetime.date(2021, 1, 2))
     (2020, 53)
+    >>> brazilian_epidemiological_week(datetime.date(2021, 1, 3))
+    (2021, 1)
+    >>> brazilian_epidemiological_week(datetime.date(2021, 1, 10))
+    (2021, 2)
     """
     dates = {
         2012: {"start_date": datetime.date(2012, 1, 1), "end_date": datetime.date(2012, 12, 29),},
@@ -69,6 +73,7 @@ def brazilian_epidemiological_week(date):
         2018: {"start_date": datetime.date(2017, 12, 31), "end_date": datetime.date(2018, 12, 29),},
         2019: {"start_date": datetime.date(2018, 12, 30), "end_date": datetime.date(2019, 12, 28),},
         2020: {"start_date": datetime.date(2019, 12, 29), "end_date": datetime.date(2021, 1, 2),},
+        2021: {"start_date": datetime.date(2021, 1, 3), "end_date": datetime.date(2022, 1, 1),},
     }
     year = None
     for possible_year, year_data in dates.items():
