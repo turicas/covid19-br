@@ -17,7 +17,7 @@ docker-build-dev:
 	docker image build -t covid19-br-dev --build-arg PYTHON_REQUIREMENTS=development .
 
 docker-test: docker-build-dev
-	docker container run --rm covid19-br-dev pytest tests/
+	docker container run -e PYTHONPATH=. --rm covid19-br-dev pytest tests/
 
 docker-flake8: docker-build-dev
 	docker container run --rm covid19-br-dev flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
