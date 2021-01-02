@@ -62,7 +62,7 @@ class Covid19SESpider(BaseCovid19Spider):
 
     def _parse_last_updated(self, response):
         text = response.xpath("//div[@id='texto-atualizacao']//strong/text()").extract()
-        last_updated = datetime.datetime.strptime(text[0].split()[0], "%d/%m/%y")
+        last_updated = datetime.datetime.strptime(text[0].split()[0], "%d/%m/%Y")
         return last_updated.date()
 
 
