@@ -6,15 +6,20 @@ source $SCRIPT_PATH/base.sh
 
 DEPLOY_TYPE="$1"
 
-if [[ -z "$DEPLOY_TYPE" ]] || [[ "$DEPLOY_TYPE" != "simple" && "$DEPLOY_TYPE" != "full" ]]; then
+if [[ -z "$DEPLOY_TYPE" ]] || [[ "$DEPLOY_TYPE" != "simple"  && "$DEPLOY_TYPE" != "simple-report"  && "$DEPLOY_TYPE" != "full" ]]; then
 	echo "ERROR - Usage: $0 <simple|full>"
 	exit 1
 fi
 
 if [ "$DEPLOY_TYPE" = "simple" ]; then
 	COMPLETE=0
+	REPORT=0
+elif [ "$DEPLOY_TYPE" = "simple-report" ]; then
+	COMPLETE=0
+	REPORT=1
 elif [ "$DEPLOY_TYPE" = "full" ]; then
 	COMPLETE=1
+	REPORT=1
 fi
 
 function upload_table_file() {
@@ -39,13 +44,13 @@ function update_dataset_list() {
 }
 
 log "Cleaning data path and collecting data"
-if [ "$DEPLOY_TYPE" = "full" ]; then
+if [ "$COMPLETE" = "1" ]; then
 	./run-obitos.sh
 fi
 ./run.sh
 
 source $SCRIPT_PATH/.env
-if [ "$DEPLOY_TYPE" = "full" ]; then
+if [ "$COMPLETE" = "1" ]; then
 	for table in boletim caso caso_full obito_cartorio; do
 		upload_table_file $table
 		update_table $table
@@ -59,7 +64,7 @@ fi
 
 update_dataset_list "covid19"
 
-if [ "$DEPLOY_TYPE" = "full" ]; then
+if [ "$REPORT" = "1" ]; then
 	./report.sh
 fi
 
