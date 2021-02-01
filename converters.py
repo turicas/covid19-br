@@ -32,24 +32,18 @@ def extract_caso(state, data):
                 continue
             elif key.startswith("confirmados_") or key.startswith("mortes_"):
                 try:
-                    _, day, month = key.split("_")
+                    _, date_str = key.split("_")
                 except ValueError:
                     message = f"ERROR PARSING {repr(key)} - {repr(value)} - {caso}"
                     raise ValueError(message)
-                # TODO: fix this
-                if f"{int(month):02d}-{int(day):02d}" < "01-31":
-                    year = 2021
-                else:
-                    year = 2020
-                date = f"{year}-{int(month):02d}-{int(day):02d}"
                 if key.startswith("confirmados_"):
                     number_type = "confirmed"
                 elif key.startswith("mortes_"):
                     number_type = "deaths"
             else:
                 continue
-            if date not in cities[caso["municipio"]]:
-                cities[caso["municipio"]][date] = {}
+            if date_str not in cities[caso["municipio"]]:
+                cities[caso["municipio"]][date_str] = {}
             if value in (None, ""):
                 value = None
             else:
@@ -61,12 +55,12 @@ def extract_caso(state, data):
                 try:
                     value = int(value)
                 except ValueError:
-                    message = f"ERROR converting to int: {date} {number_type} {value} {caso}"
+                    message = f"ERROR converting to int: {date_str} {number_type} {value} {caso}"
                     raise ValueError(message)
-            cities[caso["municipio"]][date][number_type] = value
+            cities[caso["municipio"]][date_str][number_type] = value
     result = []
     for city, city_data in cities.items():
-        for date, date_data in city_data.items():
+        for date_str, date_data in city_data.items():
             confirmed = date_data["confirmed"]
             deaths = date_data["deaths"]
             if confirmed is None and deaths is None:
@@ -74,7 +68,7 @@ def extract_caso(state, data):
             confirmed = int(confirmed) if confirmed is not None else None
             deaths = int(deaths) if deaths is not None else None
             row = {
-                "date": date,
+                "date": date_str,
                 "state": state,
                 "city": city if city != "TOTAL NO ESTADO" else "",
                 "place_type": "city" if city != "TOTAL NO ESTADO" else "state",
@@ -85,7 +79,7 @@ def extract_caso(state, data):
             deaths = row["deaths"]
             NULL = (None, "")
             if (confirmed in NULL and deaths not in NULL) or (deaths in NULL and confirmed not in NULL):
-                message = f"ERROR: only one field is filled for {date}, {state}, {city}"
+                message = f"ERROR: only one field is filled for {date_str}, {state}, {city}"
                 raise ValueError(message)
             result.append(row)
 
