@@ -303,8 +303,8 @@ Colunas:
   referente ao estado, pode ser preenchido com `Importados/Indefinidos`
   também).
 - 🔍 `city_ibge_code`: código IBGE do local.
-- 🔍 `date`: data de coleta dos dados no formato YYYY-MM-DD.
-- 🔍 `epidemiological_week`: número da semana epidemiológica.
+- 🔍 `date`: data de coleta dos dados no formato `YYYY-MM-DD`.
+- 🔍 `epidemiological_week`: número da semana epidemiológica no formato `YYYYWW`.
 - `estimated_population`: população estimada para esse município/estado em
   2020, [segundo o
   IBGE](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=resultados).

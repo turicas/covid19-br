@@ -23,7 +23,10 @@ def read_cases(input_filename, order_by=None):
 def read_epidemiological_week():
     filename = "data/epidemiological-week.csv"
     table = rows.import_from_csv(filename)
-    return {row.date: row.epidemiological_week for row in table}
+    return {
+        row.date: int(f"{row.epidemiological_year}{row.epidemiological_week:02d}")
+        for row in table
+    }
 
 
 @lru_cache(maxsize=6000)
