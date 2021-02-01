@@ -1,10 +1,15 @@
+import argparse
+import datetime
 from collections import Counter, defaultdict
 from functools import lru_cache
 from operator import attrgetter
 from pathlib import Path
 
 import rows
+from rows.utils.date import date_range
+from async_process_executor import AsyncProcessExecutor, Task
 from rows.utils import load_schema
+from tqdm import tqdm
 
 import demographics
 
@@ -41,6 +46,7 @@ def row_key(row):
 def get_data(input_filename):
     casos = read_cases(input_filename, order_by="date")
     dates = sorted(set(c.date for c in casos))
+    start_date, end_date = dates[0], dates[-1]
     caso_by_key = defaultdict(list)
     for caso in casos:
         caso_by_key[row_key(caso)].append(caso)
@@ -50,7 +56,7 @@ def get_data(input_filename):
     order_key = attrgetter("order_for_place")
     last_case_for_place = {}
     order_for_place = Counter()
-    for date in dates:
+    for date in date_range(start_date, end_date + datetime.timedelta(days=1), "daily"):
         for place_key in demographics.place_keys():
             place_type, state, city = place_key
             place_cases = caso_by_key[place_key]
@@ -100,16 +106,46 @@ def get_data(input_filename):
             yield new_case
 
 
-if __name__ == "__main__":
-    import argparse
+def get_data_greedy(input_filename):
+    return list(get_data(input_filename))
 
-    from tqdm import tqdm
 
+class CasoFullTaskExecutor(AsyncProcessExecutor):
+    def __init__(self, input_filenames, output_filename, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.input_filenames = input_filenames
+        self.writer = rows.utils.CsvLazyDictWriter(output_filename)
+        self.progress = tqdm()
+
+    async def tasks(self):
+        for filename in self.input_filenames:
+            yield Task(function=get_data_greedy, args=(filename,))
+
+    async def process(self, result):
+        write_row = self.writer.writerow
+        progress_update = self.progress.update
+        for row in result:
+            write_row(row)
+            progress_update()
+
+    async def finished(self, task):
+        self.writer.close()
+        self.progress.close()
+
+
+def main():
+    workers = 4
     parser = argparse.ArgumentParser()
-    parser.add_argument("input_filename")
+    parser.add_argument("input_filenames", nargs="+")
     parser.add_argument("output_filename")
     args = parser.parse_args()
 
-    writer = rows.utils.CsvLazyDictWriter(args.output_filename)
-    for row in tqdm(get_data(args.input_filename)):
-        writer.writerow(row)
+    CasoFullTaskExecutor(
+        input_filenames=args.input_filenames,
+        output_filename=args.output_filename,
+        workers=workers,
+    ).run()
+
+
+if __name__ == "__main__":
+    main()

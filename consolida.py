@@ -26,14 +26,19 @@ class ConsolidaSpider(scrapy.Spider):
     def __init__(self, boletim_filename, caso_filename, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.boletim_writer = rows.utils.CsvLazyDictWriter(boletim_filename)
-        self.caso_writer = rows.utils.CsvLazyDictWriter(caso_filename)
+        self.caso_filename = caso_filename
+        self.caso_writer = rows.utils.CsvLazyDictWriter(self.caso_filename)
         self.errors = defaultdict(list)
 
     def start_requests(self):
         for state in demographics.states():
             yield scrapy.Request(
                 self.base_url.format(uf=state),
-                meta={"state": state, "handle_httpstatus_all": True},
+                meta={
+                    "state": state,
+                    "handle_httpstatus_all": True,
+                    "caso_filename": self.caso_filename.replace(".csv", f"-state-{state}.csv"),
+                },
                 callback=self.parse_state_file,
             )
 
@@ -49,22 +54,28 @@ class ConsolidaSpider(scrapy.Spider):
             self.logger.debug(report)
             self.boletim_writer.writerow(report)
 
-    def parse_caso(self, state, data):
+    def parse_caso(self, state, filename, data):
         self.logger.info(f"Parsing {state} caso")
 
+        writer = rows.utils.CsvLazyDictWriter(filename)
         try:
             cases = converters.extract_caso(state, data)
             for row in cases:
                 self.logger.debug(row)
-                self.caso_writer.writerow(row)
+                writer.writerow(row)  # state CSV, used in full.py
+                self.caso_writer.writerow(row)  # final CSV, used to import data
         except Exception as exp:
             message = f"ERROR PARSING caso for {state}: {exp.args}"
             self.errors[state].append(("caso", state, message))
             self.logger.error(message)
+            writer.close()
             return
+        writer.close()
 
     def parse_state_file(self, response):
-        state = response.meta["state"]
+        meta = response.meta
+        state = meta["state"]
+        caso_filename = meta["caso_filename"]
         if response.status >= 400:
             self.errors[state].append(("connection", state, f"HTTP status code: {response.status}"))
         else:
@@ -74,7 +85,7 @@ class ConsolidaSpider(scrapy.Spider):
             except Exception as exp:
                 self.errors[state].append(("boletim", state, f"{exp.__class__.__name__}: {exp}"))
             try:
-                self.parse_caso(state, response_data["cases"])
+                self.parse_caso(state, caso_filename, response_data["cases"])
             except Exception as exp:
                 self.errors[state].append(("caso", state, f"{exp.__class__.__name__}: {exp}"))
 

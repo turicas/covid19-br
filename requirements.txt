@@ -1,10 +1,11 @@
 --only-binary pymupdf
 
+async_process_executor
 cached_property
 click
 defusedxml>=0.6.0
 html2text
-https://github.com/turicas/rows/archive/develop.zip#egg=rows
+https://github.com/turicas/rows/archive/develop.zip
 jinja2
 openpyxl
 python-Levenshtein
