@@ -4,3 +4,6 @@
 cached-property
 pymupdf
 scrapy
+Pillow==7.2.0
+selenium==3.141.0
+splinter==0.14.0

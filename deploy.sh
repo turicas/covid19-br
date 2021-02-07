@@ -67,5 +67,3 @@ update_dataset_list "covid19"
 if [ "$REPORT" = "1" ]; then
 	./report.sh
 fi
-
-time python ocupacao.py

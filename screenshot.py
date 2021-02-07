@@ -30,7 +30,7 @@ def take_element_screenshot(url, element_xpath, lang=None, wait=None, width=None
     if wait:
         time.sleep(wait)
     element = browser.find_by_xpath(element_xpath).first
-    filename = element.screenshot(full=True)
+    filename = element.screenshot()
     browser.quit()
     return filename
 
