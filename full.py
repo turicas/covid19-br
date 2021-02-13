@@ -2,6 +2,7 @@ import argparse
 import datetime
 from collections import Counter, defaultdict
 from functools import lru_cache
+from multiprocessing import cpu_count
 from operator import attrgetter
 from pathlib import Path
 
@@ -135,7 +136,7 @@ class CasoFullTaskExecutor(AsyncProcessExecutor):
 
 
 def main():
-    workers = 4
+    workers = cpu_count() - 1
     parser = argparse.ArgumentParser()
     parser.add_argument("input_filenames", nargs="+")
     parser.add_argument("output_filename")

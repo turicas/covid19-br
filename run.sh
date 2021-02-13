@@ -19,4 +19,4 @@ if [ $(ls $ERROR_PATH/errors-*.csv 2>/dev/null | wc -l) -gt 0 ]; then
 	# Some error happened
 	exit 255
 fi
-time python full.py "$caso_filename" "$full_filename"
+time python full.py $OUTPUT_PATH/caso-state-*.csv.gz "$full_filename"
