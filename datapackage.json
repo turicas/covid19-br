@@ -144,7 +144,7 @@
     },
     {
       "name": "populacao-por-municipio-2019",
-      "path": "data/populacao-por-municipio-2019.csv",
+      "path": "covid19br/data/populacao-por-municipio-2019.csv",
       "profile": "tabular-data-resource",
       "schema": {
         "fields": [
@@ -195,7 +195,7 @@
     },
     {
       "name": "populacao-por-municipio-2020",
-      "path": "data/populacao-por-municipio-2020.csv",
+      "path": "covid19br/data/populacao-por-municipio-2020.csv",
       "profile": "tabular-data-resource",
       "schema": {
         "fields": [
@@ -344,7 +344,7 @@
     },
     {
       "name": "epidemiological-week",
-      "path": "data/epidemiological-week.csv",
+      "path": "covid19br/data/epidemiological-week.csv",
       "profile": "tabular-data-resource",
       "schema": {
         "fields": [

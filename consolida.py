@@ -9,8 +9,8 @@ import rows
 import scrapy
 from scrapy.exceptions import CloseSpider
 
-import converters
-import demographics
+from covid19br import converters
+from covid19br import demographics
 
 DATA_PATH = Path(__file__).absolute().parent / "data"
 ERROR_PATH = DATA_PATH / "error"

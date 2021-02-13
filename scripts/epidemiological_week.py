@@ -1,8 +1,9 @@
 import datetime
 
 import rows
+from rows.utils.date import date_range
 
-from date_utils import brazilian_epidemiological_week, date_range, one_day
+from covid19br.utils import brazilian_epidemiological_week, one_day
 
 
 def generate_epidemiological_week_file(start_date, end_date, filename):

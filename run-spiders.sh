@@ -13,5 +13,5 @@ for state in ce pr sp; do
 		--loglevel=INFO \
 		--logfile="$log_filename" \
 		-o "$csv_filename" \
-		corona_${state}_spider.py
+		covid19br/spiders/corona_${state}_spider.py
 done

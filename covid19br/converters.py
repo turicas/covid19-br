@@ -3,7 +3,7 @@ from itertools import groupby
 
 import rows
 
-import demographics
+from . import demographics
 
 
 def extract_boletim(state, data):

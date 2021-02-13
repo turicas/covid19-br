@@ -5,6 +5,8 @@ import io
 import rows
 import scrapy
 
+from rows.utils.date import today
+
 
 class SPSpider(scrapy.Spider):
     name = "SP"
@@ -12,9 +14,10 @@ class SPSpider(scrapy.Spider):
     start_urls = ["https://www.seade.gov.br/coronavirus/"]
 
     def parse(self, response):
+        # TODO: use covid19br.demographics instead
         self.cities = {
             row.city_ibge_code: row
-            for row in rows.import_from_csv("data/populacao-por-municipio-2020.csv")
+            for row in rows.import_from_csv("covid19br/data/populacao-por-municipio-2020.csv")
             if row.state == "SP"
         }
         csv_url = response.xpath(
@@ -29,7 +32,7 @@ class SPSpider(scrapy.Spider):
         confirmed_key = "Mun_Total de casos"
         deaths_key = "Mun_Total de óbitos"
         now = datetime.datetime.now()
-        today = datetime.date(now.year, now.month, now.day)
+        capture_date = today()
         total_confirmed = total_deaths = 0
         for row in reader:
             city = row[city_name_key]
@@ -56,7 +59,7 @@ class SPSpider(scrapy.Spider):
                     "city": city.city,
                     "city_ibge_code": city_ibge_code,
                     "confirmed": confirmed,
-                    "date": today,
+                    "date": capture_date,
                     "deaths": deaths,
                     "place_type": "city",
                     "state": self.name,
@@ -70,7 +73,7 @@ class SPSpider(scrapy.Spider):
             "city": "Importados/Indefinidos",
             "city_ibge_code": None,
             "confirmed": confirmed,
-            "date": today,
+            "date": capture_date,
             "deaths": deaths,
             "place_type": "city",
             "state": self.name,
@@ -79,7 +82,7 @@ class SPSpider(scrapy.Spider):
             "city": None,
             "city_ibge_code": self.state_ibge_code,
             "confirmed": total_confirmed,
-            "date": today,
+            "date": capture_date,
             "deaths": total_deaths,
             "place_type": "state",
             "state": self.name,

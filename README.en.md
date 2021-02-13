@@ -98,22 +98,20 @@ Requires Python 3 (tested in 3.8.2). To set up your environment:
 
 - Install Python 3.8.2
 - Create a virtualenv
-- Install the dependencies:
-  - Consolidation script and bot: `pip install -r requirements.txt`
-  - States data extractors: `pip install -r requirements-collect.txt`
-- Run the collect script: `./collect.sh`
+- Install the dependencies: `pip install -r requirements.txt`
+- Run the collect script: `./run-spiders.sh`
 - Run the consolidation script: `./run.sh`
 
 Check the output in `data/output`.
 
 ### Docker
 
-If you'd rather use Docker to execute, you just need to follow these steps: 
- 
+If you'd rather use Docker to execute, you just need to follow these steps:
+
 ```shell
-make docker-build   # to build the image
-make docker-collect # to collect the data
-make docker-run     # to consolidate the data
+make docker-build       # to build the image
+make docker-run-spiders # to collect the data
+make docker-run         # to consolidate the data
 ```
 
 ## SEE ALSO
@@ -129,7 +127,7 @@ Wanna see which projects and news are using our data? [See the clipping](clippin
 
 ## Data Update on Brasil.IO
 
-Create a `.env` file with the correct values to the following environment variables: 
+Create a `.env` file with the correct values to the following environment variables:
 
 ```shell
 BRASILIO_SSH_USER
@@ -146,4 +144,4 @@ It will collect the data from the sheets (that are linked in
 `data/boletim_url.csv` and `data/caso_url.csv`), add the data to the repository, compact them, send them to the server, and execute the dataset update command.
 
 > Note: the script that automatically downloads and converts data must
-> be executed separately, with the command `./collect.sh`.
+> be executed separately, with the command `./run-spiders.sh`.

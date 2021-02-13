@@ -1,42 +1,10 @@
 import datetime
 from functools import lru_cache
 
+from rows.utils.date import date_range
+
+
 one_day = datetime.timedelta(days=1)
-
-
-def today():
-    date = datetime.datetime.now()
-    return datetime.date(date.year, date.month, date.day)
-
-
-def next_day(date):
-    return date + datetime.timedelta(days=1)
-
-
-def next_week(date):
-    return date + datetime.timedelta(days=7)
-
-
-def next_month(date):
-    return datetime.date(year=date.year + (date.month // 12), month=(date.month % 12) + 1, day=date.day)
-
-
-def next_date(date, interval="daily"):
-    from_interval = {"daily": next_day, "weekly": next_week, "monthly": next_month}
-
-    return from_interval[interval](date)
-
-
-def date_range(start, stop, interval="daily"):
-    current = start
-    while current < stop:
-        yield current
-        current = next_date(date=current, interval=interval)
-
-
-def date_to_dict(date):
-    return {"year": date.year, "month": date.month, "day": date.day}
-
 
 @lru_cache(4096)
 def brazilian_epidemiological_week(date):

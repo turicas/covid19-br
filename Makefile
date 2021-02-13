@@ -6,8 +6,8 @@ lint:
 docker-build:
 	docker image build -t covid19-br .
 
-docker-collect:
-	docker container run --rm --name covid19-br --volume $(PWD)/data/output:/app/data/output covid19-br ./collect.sh
+docker-run-spiders:
+	docker container run --rm --name covid19-br --volume $(PWD)/data/output:/app/data/output covid19-br ./run-spiders.sh
 
 docker-run: docker-build
 	docker container run --rm --name covid19-br --volume $(PWD)/data/output:/app/data/output covid19-br ./run.sh

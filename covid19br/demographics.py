@@ -5,6 +5,7 @@ from pathlib import Path
 import rows
 from rows.utils import load_schema
 
+# TODO: use pkg_resources to discover path
 DATA_PATH = Path(__file__).parent / "data"
 SCHEMA_PATH = Path(__file__).parent / "schema"
 POPULATION_DATA_PATH = {

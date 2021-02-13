@@ -3,8 +3,9 @@ from urllib.parse import urlencode, urljoin
 
 import scrapy
 from epiweeks import Week
+# TODO: epiweeks is not needed anymore
 
-import date_utils
+from rows.date.utils import today
 
 
 class DeathsSpider(scrapy.Spider):
@@ -35,6 +36,8 @@ class DeathsSpider(scrapy.Spider):
     def make_registral_request(
         self, city, ep_week, callback, dont_cache=False,
     ):
+        # TODO: get start/end date from ep_week
+        # TODO: rename ep_week to epiweek
         data = {
             "city_id": city["city_id"],
             "state": city["uf"],
@@ -53,8 +56,7 @@ class DeathsSpider(scrapy.Spider):
     def parse_cities_request(self, response):
         cities = json.loads(response.body)
 
-        today = date_utils.today()
-        current_week = Week.fromdate(today)
+        current_week = Week.fromdate(today())
 
         # We have to do different passes for 2019 and 2020, since the specific days of
         # the epidemiological week differs.
@@ -65,7 +67,7 @@ class DeathsSpider(scrapy.Spider):
         for city in cities:
             for year in [2020, 2019]:
                 for weeknum in range(1, current_week.week):
-                    ep_week = Week(year, weeknum)
+                    ep_week = Week(year, weeknum)  # TODO: change to (year, week)
 
                     # Cache more than 4 weeks ago
                     should_cache = (current_week.week - weeknum) > 4
@@ -82,8 +84,7 @@ class DeathsSpider(scrapy.Spider):
 
         row = response.meta["row"].copy()
         row["city_name"] = response.meta["city_name"]
-        row["epidemiological_year"] = ep_week.year
-        row["epidemiological_week"] = ep_week.week
+        row["epidemiological_year"], row["epidemiological_week"] = ep_week
 
         data = json.loads(response.body)
 

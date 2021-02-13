@@ -4,7 +4,7 @@ from urllib.parse import urlencode, urljoin
 
 import scrapy
 
-import date_utils
+from rows.utils.date import date_range, today
 
 
 class CearaSpider(scrapy.Spider):
@@ -31,7 +31,7 @@ class CearaSpider(scrapy.Spider):
         return scrapy.Request(url, callback=callback, meta=meta)
 
     def start_requests(self):
-        for date in date_utils.date_range(self.start_date, date_utils.today()):
+        for date in date_range(self.start_date, today()):
             yield self.make_state_confirmed_request(
                 date, callback=self.parse_state_confirmed, meta={"row": {"date": date}},
             )

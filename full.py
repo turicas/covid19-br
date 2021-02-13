@@ -11,7 +11,7 @@ from async_process_executor import AsyncProcessExecutor, Task
 from rows.utils import load_schema
 from tqdm import tqdm
 
-import demographics
+from covid19br import demographics
 
 DATA_PATH = Path(__file__).parent / "data"
 SCHEMA_PATH = Path(__file__).parent / "schema"
@@ -26,7 +26,8 @@ def read_cases(input_filename, order_by=None):
 
 @lru_cache()
 def read_epidemiological_week():
-    filename = "data/epidemiological-week.csv"
+    # TODO: use pkg_resources to get correct path
+    filename = "covid19br/data/epidemiological-week.csv"
     table = rows.import_from_csv(filename)
     return {
         row.date: int(f"{row.epidemiological_year}{row.epidemiological_week:02d}")

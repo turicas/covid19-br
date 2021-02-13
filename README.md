@@ -123,10 +123,8 @@ Necessita de Python 3 (testado em 3.8.2). Para montar seu ambiente:
 
 - Instale o Python 3.8.2
 - Crie um virtualenv
-- Instale as dependências:
-  - Script de consolidação e robô: `pip install -r requirements.txt`
-  - Extratores de dados estaduais: `pip install -r requirements-collect.txt`
-- Rode o script de coleta: `./collect.sh`
+- Instale as dependências: `pip install -r requirements.txt`
+- Rode o script de coleta: `./run-spiders.sh`
 - Rode o script de consolidação: `./run.sh`
 
 Verifique o resultado em `data/output`.
@@ -136,9 +134,9 @@ Verifique o resultado em `data/output`.
 Se você preferir utilizar o Docker para executar, basta usar os comandos a seguir :
 
 ```shell
-make docker-build   # para construir a imagem
-make docker-collect # para coletar os dados
-make docker-run     # para consolidar os dados
+make docker-build       # para construir a imagem
+make docker-run-spiders # para coletar os dados
+make docker-run         # para consolidar os dados
 ```
 
 ## VEJA TAMBÉM
@@ -176,4 +174,4 @@ repositório, compactá-los, enviá-los ao servidor e executar o comando de
 atualização de dataset.
 
 > Nota: o script que baixa e converte os dados automaticamente deve ser
-> executado separadamente, com o comando `./collect.sh`.
+> executado separadamente, com o comando `./run-spiders.sh`.

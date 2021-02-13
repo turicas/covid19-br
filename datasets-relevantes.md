@@ -26,6 +26,22 @@ O IBGE disponibiliza [a estimativa de população por município em
 2020](https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?edicao=28674&t=resultados).
 
 Os dados também estão convertidos nesse CSV:
-[data/populacao-por-municipio-2020.csv](data/populacao-por-municipio-2020.csv) ([acesse o
+[covid19br/data/populacao-por-municipio-2020.csv](covid19br/data/populacao-por-municipio-2020.csv) ([acesse o
 script que faz download e conversão desses
 dados](https://github.com/turicas/censo-ibge)).
+
+
+## Estimativa de População 2019
+
+Os dados estão convertidos nesse CSV:
+[covid19br/data/populacao-por-municipio-2019.csv](covid19br/data/populacao-por-municipio-2019.csv) ([acesse o
+script que faz download e conversão desses
+dados](https://github.com/turicas/censo-ibge)).
+
+
+## Semana epidemiológica
+
+Os dados estão convertidos nesse CSV:
+[covid19br/data/epidemiological-week.csv](covid19br/data/epidemiological-week.csv) ([acesse o
+script que faz download e conversão desses
+dados](scripts/epidemiological_week.py)).

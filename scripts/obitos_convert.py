@@ -6,9 +6,11 @@ from itertools import groupby
 
 import rows
 from tqdm import tqdm
+from rows.utils.date import today
 
-from date_utils import brazilian_epidemiological_week, one_day, today
+from covid19br.utils import brazilian_epidemiological_week, one_day
 from obitos_spider import DeathsSpider
+
 
 RESPIRATORY_DEATH_CAUSES = list(DeathsSpider.causes_map["respiratory"].values())
 YEAR_CHOICES = (2019, 2020)

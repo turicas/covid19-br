@@ -1,9 +1,9 @@
---only-binary pymupdf
-
+# Main
 async_process_executor
 cached_property
 click
 defusedxml>=0.6.0
+goodtables==2.4.9
 html2text
 https://github.com/turicas/rows/archive/develop.zip
 jinja2
@@ -14,8 +14,10 @@ requests
 s3cmd
 scrapy
 tqdm
-goodtables==2.4.9
 
-gunicorn
+# Spiders
+--only-binary pymupdf
+
+# Web server
 flask
-epiweeks
+gunicorn

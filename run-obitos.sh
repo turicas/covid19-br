@@ -8,7 +8,7 @@ OUTPUT_FILENAME="$DOWNLOAD_PATH/obitos.csv"
 FINAL_FILENAME="$OUTPUT_PATH/obito_cartorio.csv.gz"
 rm -rf "$OUTPUT_FILENAME" "$FINAL_FILENAME"
 mkdir -p "$DOWNLOAD_PATH" "$OUTPUT_PATH" "$LOG_PATH"
-time scrapy runspider obitos_spider.py \
+time scrapy runspider covid19br/spiders/obitos_spider.py \
 	-s HTTPCACHE_ENABLED=True \
 	-s HTTPCACHE_ALWAYS_STORE=True \
 	-s HTTPCACHE_IGNORE_HTTP_CODES=500,504 \
@@ -17,4 +17,4 @@ time scrapy runspider obitos_spider.py \
 	--loglevel=INFO \
 	--logfile="$LOG_PATH/obitos.log" \
 	-o "$OUTPUT_FILENAME"
-time python obitos_convert.py "$OUTPUT_FILENAME" "$FINAL_FILENAME"
+time python scripts/obitos_convert.py "$OUTPUT_FILENAME" "$FINAL_FILENAME"
