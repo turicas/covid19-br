@@ -1,0 +1,31 @@
+field_name,field_type,description,title
+codigo_vacina,integer,Código da vacina,Código vacina
+data_aplicacao,date,Data da aplicação dessa dose,Data
+documento_uuid,uuid,Identificador do documento (alterado pelo Brasil.IO para maior privacidade e otimização de tamanho),Documento
+estabelecimento,text,Nome do estabelecimento de saúde onde foi aplicada a dose,Estabelecimento
+estabelecimento_codigo_cnes,integer,Código CNES do estabelecimento de saúde onde foi aplicada a dose,Código CNES
+estabelecimento_codigo_ibge_municipio,text,Código IBGE do município do estabelecimento de saúde onde foi aplicada a dose,Código IBGE ES
+estabelecimento_municipio,text,Município do estabelecimento de saúde onde foi aplicada a dose,Município ES
+estabelecimento_razao_social,text,Razão social do estabelecimento de saúde onde foi aplicada a dose,Razão social ES
+estabelecimento_unidade_federativa,text,Unidade federativa do estabelecimento de saúde onde foi aplicada a dose,UF ES
+numero_dose,integer,Número da dose aplicada,Número dose
+paciente_cep,text,CEP da pessoa vacinada,CEP paciente
+paciente_codigo_etnia,integer,Código da etnia da pessoa vacinada,Código etnia paciente
+paciente_codigo_grupo,integer,Código do grupo da pessoa vacinada,Código grupo paciente
+paciente_codigo_ibge_municipio,text,Código IBGE do município de residência da pessoa vacinada,Código IBGE residência paciente
+paciente_codigo_pais,integer,Código do país de residência da pessoa vacinada,Código país residência paciente
+paciente_codigo_subgrupo,integer,Código do subgrupo da pessoa vacinada,Código subgrupo paciente
+paciente_data_nascimento,date,Data de nascimento da pessoa vacinada,Data nasc. Paciente
+paciente_etnia,text,Etnia da pessoa vacinada,Etnia paciente
+paciente_grupo,text,Grupo da pessoa vacinada,Grupo paciente
+paciente_idade,integer,Idade da pessoa vacinada,Idade paciente
+paciente_municipio,text,Município de residência da pessoa vacinada,Município residência paciente
+paciente_nacionalidade,text,Nacionalidade da pessoa vacinada,Nacionalidade paciente
+paciente_pais,text,País de residência da pessoa vacinada,País residência paciente
+paciente_sexo_biologico,text,Sexo biológico da pessoa vacinada,Sexo paciente
+paciente_subgrupo,text,Subgrupo da pessoa vacinada,Subgrupo paciente
+paciente_unidade_federativa,text,UF de residência da pessoa vacinada,UF paciente
+paciente_uuid,uuid,Identificador da pessoa vacinada (alterado pelo Brasil.IO para maior privacidade e otimização de tamanho),Paciente
+sistema_origem,text,Sistema de origem da informação,Sistema
+vacina,text,Nome da vacina aplicada,Vacina
+vacina_lote,text,Número do lote da vacina aplicada,Lote
