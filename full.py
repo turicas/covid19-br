@@ -7,9 +7,9 @@ from operator import attrgetter
 from pathlib import Path
 
 import rows
-from rows.utils.date import date_range
 from async_process_executor import AsyncProcessExecutor, Task
 from rows.utils import load_schema
+from rows.utils.date import date_range
 from tqdm import tqdm
 
 from covid19br import demographics
@@ -30,10 +30,7 @@ def read_epidemiological_week():
     # TODO: use pkg_resources to get correct path
     filename = "covid19br/data/epidemiological-week.csv"
     table = rows.import_from_csv(filename)
-    return {
-        row.date: int(f"{row.epidemiological_year}{row.epidemiological_week:02d}")
-        for row in table
-    }
+    return {row.date: int(f"{row.epidemiological_year}{row.epidemiological_week:02d}") for row in table}
 
 
 @lru_cache(maxsize=6000)
@@ -143,9 +140,7 @@ def main():
     args = parser.parse_args()
 
     CasoFullTaskExecutor(
-        input_filenames=args.input_filenames,
-        output_filename=args.output_filename,
-        workers=workers,
+        input_filenames=args.input_filenames, output_filename=args.output_filename, workers=workers,
     ).run()
 
 

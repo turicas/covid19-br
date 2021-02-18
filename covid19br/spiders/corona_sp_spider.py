@@ -4,7 +4,6 @@ import io
 
 import rows
 import scrapy
-
 from rows.utils.date import today
 
 
@@ -31,7 +30,6 @@ class SPSpider(scrapy.Spider):
         city_code_key = "Cód IBGE"
         confirmed_key = "Mun_Total de casos"
         deaths_key = "Mun_Total de óbitos"
-        now = datetime.datetime.now()
         capture_date = today()
         total_confirmed = total_deaths = 0
         for row in reader:

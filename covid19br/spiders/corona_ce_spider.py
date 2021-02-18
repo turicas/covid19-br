@@ -3,7 +3,6 @@ import json
 from urllib.parse import urlencode, urljoin
 
 import scrapy
-
 from rows.utils.date import date_range, today
 
 

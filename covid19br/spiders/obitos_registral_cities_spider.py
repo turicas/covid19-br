@@ -3,9 +3,9 @@ from urllib.parse import urlencode, urljoin
 
 import scrapy
 from epiweeks import Week
-# TODO: epiweeks is not needed anymore
-
 from rows.date.utils import today
+
+# TODO: epiweeks is not needed anymore
 
 
 class DeathsSpider(scrapy.Spider):

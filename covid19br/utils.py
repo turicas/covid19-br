@@ -3,8 +3,8 @@ from functools import lru_cache
 
 from rows.utils.date import date_range
 
-
 one_day = datetime.timedelta(days=1)
+
 
 @lru_cache(4096)
 def brazilian_epidemiological_week(date):
