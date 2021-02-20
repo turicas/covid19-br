@@ -136,7 +136,7 @@ being said, scrapers will help *a lot* in this process. However, when
 creating a scraper it is important that you follow a few rules:
 
 - It's **required** that you create it using `scrapy`;
-- **Do Not** use `pandas`, `BeautifulSoup`, `requests` or other
+- **Do Not** use `pandas`, `BeautifulSoup` or other
   unnecessary libraries (the standard Python lib already has lots of
   useful libs, `scrapy` with XPath is already capable of handling most
   of the scraping and `rows` is already a dependency of this

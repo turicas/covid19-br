@@ -142,7 +142,7 @@ forma, os scrapers ajudarão *bastante* no processo. Porém, ao criar um
 scraper é importante que você siga algumas regras:
 
 - **Necessário** fazer o scraper usando o `scrapy`;
-- **Não usar** `pandas`, `BeautifulSoup`, `requests` ou outras bibliotecas
+- **Não usar** `pandas`, `BeautifulSoup` ou outras bibliotecas
   desnecessárias (a std lib do Python já tem muita biblioteca útil, o `scrapy`
   com XPath já dá conta de boa parte das raspagens e `rows` já é uma
   dependência desse repositório);
