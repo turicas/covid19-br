@@ -9,7 +9,7 @@ from pathlib import Path
 import rows
 from async_process_executor import AsyncProcessExecutor, Task
 from rows.utils import load_schema
-from rows.utils.date import date_range
+from rows.utils.date import date_range, today
 from tqdm import tqdm
 
 from covid19br import demographics
@@ -42,10 +42,11 @@ def row_key(row):
     return (row.place_type, row.state, row.city or None)
 
 
-def get_data(input_filename):
+def get_data(input_filename, start_date=None, end_date=None):
     casos = read_cases(input_filename, order_by="date")
     dates = sorted(set(c.date for c in casos))
-    start_date, end_date = dates[0], dates[-1]
+    start_date = start_date or dates[0]
+    end_date = end_date or dates[-1]
     caso_by_key = defaultdict(list)
     for caso in casos:
         caso_by_key[row_key(caso)].append(caso)
@@ -105,8 +106,8 @@ def get_data(input_filename):
             yield new_case
 
 
-def get_data_greedy(input_filename):
-    return list(get_data(input_filename))
+def get_data_greedy(input_filename, start_date=None, end_date=None):
+    return list(get_data(input_filename, start_date=start_date, end_date=end_date))
 
 
 class CasoFullTaskExecutor(AsyncProcessExecutor):
@@ -117,8 +118,10 @@ class CasoFullTaskExecutor(AsyncProcessExecutor):
         self.progress = tqdm()
 
     async def tasks(self):
+        start_date = None
+        end_date = today()
         for filename in self.input_filenames:
-            yield Task(function=get_data_greedy, args=(filename,))
+            yield Task(function=get_data_greedy, args=(filename, start_date, end_date))
 
     async def process(self, result):
         write_row = self.writer.writerow

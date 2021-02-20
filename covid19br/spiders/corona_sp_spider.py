@@ -1,5 +1,4 @@
 import csv
-import datetime
 import io
 
 import rows
