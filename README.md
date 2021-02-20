@@ -27,8 +27,12 @@ ShareAlike](https://creativecommons.org/licenses/by-sa/4.0/). Caso utilize os
 dados, **cite a fonte original e quem tratou os dados** e caso compartilhe os
 dados, **utilize a mesma licença**.
 Exemplos de como os dados podem ser citados:
-- **Fonte: Secretarias de Saúde das Unidades Federativas, dados tratados por Álvaro Justen e equipe de voluntários [Brasil.IO](https://brasil.io/)**
-- **Brasil.IO: boletins epidemiológicos da COVID-19 por município por dia, disponível em: https://brasil.io/dataset/covid19/ (última atualização pode ser conferida no site).**
+- **Fonte: Secretarias de Saúde das Unidades Federativas, dados tratados
+  por Álvaro Justen e equipe de voluntários
+  [Brasil.IO](https://brasil.io/)**
+- **Brasil.IO: boletins epidemiológicos da COVID-19 por município por
+  dia, disponível em: https://brasil.io/dataset/covid19/ (última
+  atualização pode ser conferida no site).**
 
 
 ## Dados
@@ -37,7 +41,8 @@ Depois de coletados e checados os dados ficam disponíveis de 3 formas no
 [Brasil.IO](https://brasil.io/):
 
 - [Interface Web](https://brasil.io/dataset/covid19) (feita para humanos)
-- [API](https://brasil.io/api/dataset/covid19) (feita para humanos que desenvolvem programas) - [veja a documentação da API](api.md)
+- [API](https://brasil.io/api/dataset/covid19) (feita para humanos que
+  desenvolvem programas) - [veja a documentação da API](api.md)
 - [Download do dataset completo](https://data.brasil.io/dataset/covid19/_meta/list.html)
 
 Caso queira acessar os dados antes de serem publicados (ATENÇÃO: pode ser que
@@ -112,7 +117,8 @@ Você pode ter interesse em ver também:
 
 Você pode contribuir de diversas formas:
 
-- Criando programas (crawlers/scrapers/spiders) para extrair os dados automaticamente ([LEIA ESSE GUIA ANTES](#criando-novos-scrapers));
+- Criando programas (crawlers/scrapers/spiders) para extrair os dados
+  automaticamente ([LEIA ESSE GUIA ANTES](#criando-novos-scrapers));
 - Coletando links para os boletins de seu estado;
 - Coletando dados sobre os casos por município por dia;
 - Entrando em contato com a secretaria estadual de seu estado, sugerindo as
@@ -129,7 +135,11 @@ por lá.
 
 ### Criando Scrapers
 
-Estamos mudando a forma de subida dos dados para facilitar o trabalho dos voluntários e deixar o processo mais robusto e confiável e, com isso, será mais fácil que robôs possam subir também os dados; dessa forma, os scrapers ajudarão *bastante* no processo. Porém, ao criar um scraper é importante que você siga algumas regras:
+Estamos mudando a forma de subida dos dados para facilitar o trabalho
+dos voluntários e deixar o processo mais robusto e confiável e, com
+isso, será mais fácil que robôs possam subir também os dados; dessa
+forma, os scrapers ajudarão *bastante* no processo. Porém, ao criar um
+scraper é importante que você siga algumas regras:
 
 - **Necessário** fazer o scraper usando o `scrapy`;
 - **Não usar** `pandas`, `BeautifulSoup`, `requests` ou outras bibliotecas
@@ -162,7 +172,9 @@ Estamos mudando a forma de subida dos dados para facilitar o trabalho dos volunt
   município, exceto pela omissão do parâmetro `city`;
 - Quando possível, use testes automatizados.
 
-Nesse momento não temos muito tempo disponível para revisão, então **por favor**, só crie um *pull request* com código de um novo scraper caso você possa cumprir os requisitos acima.
+Nesse momento não temos muito tempo disponível para revisão, então **por
+favor**, só crie um *pull request* com código de um novo scraper caso
+você possa cumprir os requisitos acima.
 
 ## Instalando
 
@@ -184,7 +196,8 @@ Você pode montar seu ambiente de desenvolvimento utilizando o
 
 ### Setup com Docker
 
-Se você preferir utilizar o Docker para executar, basta usar os comandos a seguir :
+Se você preferir utilizar o Docker para executar, basta usar os comandos
+a seguir:
 
 ```shell
 make docker-build       # para construir a imagem
