@@ -1,6 +1,7 @@
 field_name,field_type
 codigo_vacina,integer
 data_aplicacao,date
+data_importacao,date
 documento_uuid,text
 estabelecimento,text
 estabelecimento_codigo_cnes,integer

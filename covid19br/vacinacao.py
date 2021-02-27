@@ -1,3 +1,4 @@
+import datetime
 import re
 from functools import lru_cache, partial
 from uuid import NAMESPACE_URL, uuid5
@@ -131,6 +132,14 @@ def parse_date(value):
     return match.group()
 
 
+@lru_cache(maxsize=99999)
+def parse_datetime(value):
+    value = value.strip()
+    if not value:
+        return None
+    return datetime.datetime.strptime(value, "%Y-%m-%d %H:%M:%S").isoformat()
+
+
 @lru_cache(maxsize=999)
 def parse_application_date(value):
     value = parse_date(value)
@@ -166,6 +175,7 @@ def get_field_converters():
             "name": "estabelecimento_codigo_ibge_municipio",
             "converter": parse_codigo_ibge_municipio,
         },
+        "data_importacao_rnds": {"name": "data_importacao", "converter": parse_datetime,},
         "estabelecimento_municipio_nome": {"name": "estabelecimento_municipio", "converter": parse_municipio,},
         "estabelecimento_razaoSocial": {"name": "estabelecimento_razao_social", "converter": parse_str,},
         "estabelecimento_uf": {"name": "estabelecimento_unidade_federativa", "converter": parse_unidade_federativa,},

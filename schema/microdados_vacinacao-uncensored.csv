@@ -2,6 +2,7 @@ field_name,field_type,description,title
 codigo_fabricante,text,Código do fabricante da vacina,Código fabricante
 codigo_vacina,integer,Código da vacina,Código vacina
 data_aplicacao,date,Data da aplicação dessa dose,Data
+data_importacao,date,Data da importação desse registro no RNDS
 documento_uuid,uuid,Identificador do documento (alterado pelo Brasil.IO para maior privacidade e otimização de tamanho),Documento
 estabelecimento,text,Nome do estabelecimento de saúde onde foi aplicada a dose,Estabelecimento
 estabelecimento_codigo_cnes,integer,Código CNES do estabelecimento de saúde onde foi aplicada a dose,Código CNES
