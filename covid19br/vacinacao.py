@@ -116,7 +116,7 @@ def parse_etnia(value):
 
 @lru_cache(maxsize=9)
 def parse_dose(value):
-    return {"1ª dose": 1, "única": 1, "2ª dose": 2}[parse_str(value).lower().replace("ªdose", "ª dose")]
+    return {"1ª dose": 1, "única": 1, "2ª dose": 2, "dose": None,}[parse_str(value).lower().replace("ªdose", "ª dose")]
 
 
 @lru_cache(maxsize=99999)
