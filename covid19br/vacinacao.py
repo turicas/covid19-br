@@ -33,12 +33,32 @@ def parse_str_capitalize(value):
 @lru_cache(maxsize=9)
 def parse_sistema_origem(value):
     value = parse_str(value)
-    if (
-        value
-        == "O sistema RN+Vacina auxilia o Governo do Estado em todo o processo logístico da cadeia de frio do Rio Grande do Norte e da aplicação de vacinas nos usuários do Sistema ínico de Saúde, permitindo o controle e transparência de ponta-a-ponta."
-    ):
+    v = value.lower()
+
+    if v.startswith("o sistema rn+vacina"):
+        # 'O sistema RN+Vacina ...'
         value = "RN+Vacina"
-    # TODO: "Sistema utilizado pela secretaria para registro de imunizações e controle de prontuário eletrônico."
+
+    elif v.startswith("g-mus - gestão municipal de saúde"):
+        # 'G-MUS - Gestão Municipal de Saúde usado para evoluções do prontuário e aplicações de vacinas e demais modulos.'
+        value = "G-MUS"
+
+    elif v == "sistema próprio de prontuário eletrônico":
+        # 'Sistema próprio de prontuário eletrônico'
+        value = "Sistema próprio"
+
+    elif v.startswith("sistema de prontuário eletrônico integrado com os"):
+        # 'Sistema de Prontuário Eletrônico integrado com os demais serviços de saude, como imunizações, laboratorio,farmacia,transporte e outros.Também atende todos os serviços de baixa ,média e alta complexidade que a secretaria municipal de saúde fornece e conta com ferramentas de integração ao ministério da saude seguindo as portarias e manuais disponíveis.'
+        value = "Sistema de prontuário integrado"
+
+    elif v.startswith("sistema de gestão municipal de saúde, com controle"):
+        # 'Sistema de Gestão Municipal de Saúde, com controle de prontuário eletrônico de paciente, dispensação de medicamentos, vacinas, geração de produção BPA, RAAS e fichas do e-SUS.'
+        value = "Sistema de gestão municipal"
+
+    elif v.startswith("sistema utilizado pela secretaria para registro de"):
+        # 'Sistema utilizado pela secretaria para registro de imunizações e controle de prontuário eletrônico.'
+        value = "Sistema de imunização e prontuário"
+
     return value
 
 
