@@ -7,7 +7,6 @@ from tqdm import tqdm
 
 from covid19br.elasticsearch import ElasticSearch
 
-
 DOWNLOAD_PATH = Path(__file__).parent / "data" / "ocupacao"
 if not DOWNLOAD_PATH.exists():
     DOWNLOAD_PATH.mkdir(parents=True)

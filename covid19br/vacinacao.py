@@ -7,7 +7,6 @@ from rows.utils.date import today
 
 from covid19br import demographics
 
-
 BRASILIO_URLID_PATTERN = "https://id.brasil.io/v1/{entity}/{internal_id}"
 REGEXP_DATE = re.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}")
 CITY_BY_CODE = {}
@@ -16,8 +15,8 @@ for state in cities.keys():
     for city in cities[state].values():
         CITY_BY_CODE[str(city.city_ibge_code)[:-1]] = city
 AGE_RANGES = (
-    ( 0,  4),
-    ( 5, 14),
+    (0, 4),
+    (5, 14),
     (15, 19),
     (20, 29),
     (30, 39),
@@ -27,6 +26,7 @@ AGE_RANGES = (
     (70, 79),
     (80, float("inf")),
 )
+
 
 @lru_cache(maxsize=999)
 def calculate_age_range(value):
@@ -333,12 +333,12 @@ def convert_row(field_converters, row):
         new["estabelecimento_codigo_ibge_municipio"],
     )
     new["paciente_idade_calculada"] = calculate_age(
-        row.get("paciente_dataNascimento", None),
-        row.get("vacina_dataAplicacao", None),
+        row.get("paciente_dataNascimento", None), row.get("vacina_dataAplicacao", None),
     )
     new["paciente_faixa_etaria"] = calculate_age_range(new["paciente_idade_calculada"])
 
     return new
+
 
 convert_row_censored = partial(convert_row, get_censored_field_converters())
 convert_row_uncensored = partial(convert_row, get_field_converters())
