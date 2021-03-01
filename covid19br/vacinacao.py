@@ -7,6 +7,7 @@ from rows.utils.date import today
 
 from covid19br import demographics
 
+
 BRASILIO_URLID_PATTERN = "https://id.brasil.io/v1/{entity}/{internal_id}"
 REGEXP_DATE = re.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}")
 CITY_BY_CODE = {}
@@ -14,6 +15,44 @@ cities = demographics.cities(2020)
 for state in cities.keys():
     for city in cities[state].values():
         CITY_BY_CODE[str(city.city_ibge_code)[:-1]] = city
+AGE_RANGES = (
+    ( 0,  4),
+    ( 5, 14),
+    (15, 19),
+    (20, 29),
+    (30, 39),
+    (40, 49),
+    (50, 59),
+    (60, 69),
+    (70, 79),
+    (80, float("inf")),
+)
+
+@lru_cache(maxsize=999)
+def calculate_age_range(value):
+    """
+    >>> calculate_age_range('10/2020')
+    '00 a 04'
+    >>> calculate_age_range('15')
+    '15 a 19'
+    >>> calculate_age_range('80')
+    '80+'
+    """
+
+    if isinstance(value, str) and "/" in value:
+        # TODO: deveria devolver "00 a 04"?
+        return None
+
+    value = parse_int(value)
+    if not value:
+        return None
+
+    for start, end in AGE_RANGES:
+        if start <= value <= end:
+            if end == float("inf"):
+                return f"{start:02d}+"
+            else:
+                return f"{start:02d} a {end:02d}"
 
 
 def generate_uuid(entity, internal_id):
@@ -21,7 +60,7 @@ def generate_uuid(entity, internal_id):
 
 
 def parse_str(value):
-    value = value.replace("\xa0", "").strip()
+    value = (value or "").replace("\xa0", "").strip()
     return value if value and value not in ('\\\\""', "\\\\") else None
 
 
@@ -122,7 +161,7 @@ def parse_dose(value):
 
 @lru_cache(maxsize=99999)
 def parse_date(value):
-    value = value.strip()
+    value = (value or "").strip()
     if not value:
         return None
 
@@ -130,6 +169,35 @@ def parse_date(value):
     if match is None:
         raise ValueError(f"Invalid date: {repr(value)}")
     return match.group()
+
+
+@lru_cache(maxsize=99999)
+def calculate_age(start_date, end_date):
+    """
+    >>> calculate_age('1990-05-01', '2021-01-01')
+    30
+    >>> calculate_age('1990-05-01', '2021-05-01')
+    31
+    >>> calculate_age('1990-05-01', '2021-07-01')
+    31
+    >>> calculate_age('2020-02-29', '2021-02-28')
+    0
+    >>> calculate_age('2020-02-29', '2021-03-01')
+    1
+
+    """
+    start_date, end_date = parse_date(start_date), parse_date(end_date)
+    if not start_date or not end_date:
+        return
+
+    start = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+    end = datetime.datetime.strptime(end_date, "%Y-%m-%d")
+
+    age = end.year - start.year
+    if start_date[5:] > end_date[5:]:
+        age -= 1
+
+    return age
 
 
 @lru_cache(maxsize=99999)
@@ -150,6 +218,7 @@ def parse_application_date(value):
 
 @lru_cache(maxsize=9999)
 def clean_municipio(state, name, code):
+    # TODO: move to demographics
     if state is None or name is None:
         return state, name, code
     elif name.startswith("MUNICIPIO IGNORADO"):
@@ -229,14 +298,14 @@ def get_censored_field_converters():
 
 
 def convert_row(field_converters, row):
-    new = {}
     # First, convert fields already in `row`
+    new = {}
     for key, value in row.items():
         field_meta = field_converters[key]
-        new_key, converter = field_meta["name"], field_meta["converter"]
-        if converter is None:
-            continue
-        new[new_key] = converter(value)
+        converter = field_meta["converter"]
+        if converter is not None:
+            new[field_meta["name"]] = converter(value)
+
     # Then, add `None` to fields not in `row`
     new.update(
         {
@@ -246,6 +315,7 @@ def convert_row(field_converters, row):
         }
     )
 
+    # Run transformation on fields which need other field values
     (
         new["paciente_unidade_federativa"],
         new["paciente_municipio"],
@@ -262,9 +332,13 @@ def convert_row(field_converters, row):
         new["estabelecimento_municipio"],
         new["estabelecimento_codigo_ibge_municipio"],
     )
+    new["paciente_idade_calculada"] = calculate_age(
+        row.get("paciente_dataNascimento", None),
+        row.get("vacina_dataAplicacao", None),
+    )
+    new["paciente_faixa_etaria"] = calculate_age_range(new["paciente_idade_calculada"])
 
     return new
-
 
 convert_row_censored = partial(convert_row, get_censored_field_converters())
 convert_row_uncensored = partial(convert_row, get_field_converters())

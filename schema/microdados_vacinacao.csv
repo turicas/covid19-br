@@ -17,8 +17,10 @@ paciente_codigo_ibge_municipio,integer
 paciente_codigo_pais,integer
 paciente_codigo_subgrupo,integer
 paciente_etnia,text
+paciente_faixa_etaria,text
 paciente_grupo,text
 paciente_idade,integer
+paciente_idade_calculada,integer
 paciente_municipio,text
 paciente_nacionalidade,text
 paciente_pais,text
