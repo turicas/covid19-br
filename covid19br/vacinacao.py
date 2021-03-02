@@ -1,12 +1,15 @@
 import datetime
+import logging
 import re
 from functools import lru_cache, partial
 from uuid import NAMESPACE_URL, uuid5
 
 from rows.utils.date import today
 
-from covid19br import demographics
+from . import demographics
 
+
+logger = logging.getLogger(__name__)
 BRASILIO_URLID_PATTERN = "https://id.brasil.io/v1/{entity}/{internal_id}"
 REGEXP_DATE = re.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}")
 CITY_BY_CODE = {}
@@ -224,15 +227,18 @@ def clean_municipio(state, name, code):
     elif name.startswith("MUNICIPIO IGNORADO"):
         return state, None, code
 
-    city_obj = demographics.get_city(state, city) or CITY_BY_CODE.get(code, None)
+    city_obj = demographics.get_city(state, name) or CITY_BY_CODE.get(code, None)
 
     if city_obj is None:
         if state == "DF":
             city_obj = demographics.get_city("DF", "Brasília")
         else:
-            raise ValueError(f"Incorrect city name/state for: {state}, {name}, {code}")
+            raise ValueError(f"Incorrect city name/state for: {repr(state)}, {repr(name)}, {repr(code)}")
     elif str(city_obj.city_ibge_code)[:-1] != str(code):
-        raise ValueError(f"Incorrect city code for: {state}, {name}, {code} (expected: {city_obj.city_ibge_code})")
+        if code not in CITY_BY_CODE:
+            logger.warning(f"Incorrect city code for: {repr(state)}, {repr(name)}, {repr(code)} (expected: {repr(city_obj.city_ibge_code)})")
+        else:
+            raise ValueError(f"Conflict in city name/code for: {repr(state)}, {repr(name)}, {repr(code)} (the city with this name has another code: {repr(city_obj.city_ibge_code)})")
 
     return city_obj.state, city_obj.city, f"{city_obj.city_ibge_code:07d}"
 

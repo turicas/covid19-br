@@ -15,7 +15,7 @@ ocuphospcli,float
 ocuphosputi,float
 ocupsragcli,float
 ocupsraguti,float
-altas,integer
-obitos,integer
+altas,float
+obitos,float
 ocupacaoinformada,bool
 algumaocupacaoinformada,bool
