@@ -1,6 +1,9 @@
 from urllib.parse import urljoin
 
 import requests
+from async_process_executor import AsyncProcessExecutor, Task
+from rows.utils import CsvLazyDictWriter
+from tqdm import tqdm
 
 
 class ElasticSearch:
@@ -39,3 +42,51 @@ class ElasticSearch:
             finished = (
                 "hits" not in response_data.get("hits", {}) or len(response_data.get("hits", {}).get("hits", [])) == 0
             )
+
+
+class ElasticSearchConsumer(AsyncProcessExecutor):
+    def __init__(
+        self,
+        api_url,
+        index_name,
+        sort_by,
+        convert_function,
+        output_filename,
+        username=None,
+        password=None,
+        ttl="10m",
+        progress=True,
+        *args,
+        **kwargs,
+    ):
+        super().__init__(*args, **kwargs)
+
+        self.convert_function = convert_function
+        self.es = ElasticSearch(api_url)
+        self.iterator = self.es.paginate(index=index_name, sort_by=sort_by, user=username, password=password, ttl=ttl,)
+        self.writer = CsvLazyDictWriter(output_filename)
+        self.show_progress = progress
+        if self.show_progress:
+            self.progress = tqdm(unit_scale=True)
+
+    async def tasks(self):
+        if self.show_progress:
+            self.progress.desc = f"Downloading page 001"
+            self.progress.refresh()
+
+        for page_number, page in enumerate(self.iterator, start=1):
+            if self.show_progress:
+                self.progress.desc = f"Downloaded page {page_number:03d}"
+                self.progress.refresh()
+
+            yield Task(function=self.convert_function, args=(page,))
+
+    async def process(self, result):
+        for row in result:
+            self.writer.writerow(row)
+            if self.show_progress:
+                self.progress.update()
+
+    async def finsihed(self):
+        if self.show_progress:
+            self.progress.close()

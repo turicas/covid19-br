@@ -8,7 +8,6 @@ from rows.utils.date import today
 
 from . import demographics
 
-
 logger = logging.getLogger(__name__)
 BRASILIO_URLID_PATTERN = "https://id.brasil.io/v1/{entity}/{internal_id}"
 REGEXP_DATE = re.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}")
@@ -236,9 +235,13 @@ def clean_municipio(state, name, code):
             raise ValueError(f"Incorrect city name/state for: {repr(state)}, {repr(name)}, {repr(code)}")
     elif str(city_obj.city_ibge_code)[:-1] != str(code):
         if code not in CITY_BY_CODE:
-            logger.warning(f"Incorrect city code for: {repr(state)}, {repr(name)}, {repr(code)} (expected: {repr(city_obj.city_ibge_code)})")
+            logger.warning(
+                f"Incorrect city code for: {repr(state)}, {repr(name)}, {repr(code)} (expected: {repr(city_obj.city_ibge_code)})"
+            )
         else:
-            raise ValueError(f"Conflict in city name/code for: {repr(state)}, {repr(name)}, {repr(code)} (the city with this name has another code: {repr(city_obj.city_ibge_code)})")
+            raise ValueError(
+                f"Conflict in city name/code for: {repr(state)}, {repr(name)}, {repr(code)} (the city with this name has another code: {repr(city_obj.city_ibge_code)})"
+            )
 
     return city_obj.state, city_obj.city, f"{city_obj.city_ibge_code:07d}"
 

@@ -1,11 +1,16 @@
 import argparse
 import csv
+from functools import partial
 
 from rows.utils import CsvLazyDictWriter, open_compressed
 from tqdm import tqdm
 
-from covid19br.elasticsearch import ElasticSearch
+from covid19br.elasticsearch import ElasticSearchConsumer
 from covid19br.vacinacao import convert_row_censored, convert_row_uncensored
+
+
+def convert_rows(func, page):
+    return [func(row["_source"]) for row in page["hits"]["hits"]]
 
 
 def main():
@@ -27,27 +32,25 @@ def main():
     elif args.no_censorship:
         convert_row = convert_row_uncensored
 
-    writer = CsvLazyDictWriter(args.output_filename)
-
     if args.input_filename:  # Use local CSV
+        writer = CsvLazyDictWriter(args.output_filename)
         with open_compressed(args.input_filename) as in_fobj:
             reader = csv.DictReader(in_fobj)
             for row in tqdm(reader, unit_scale=True):
                 writer.writerow(convert_row(row))
+        writer.close()
 
     else:  # Get data from ElasticSearch API
-        es = ElasticSearch(args.api_url)
-        iterator = es.paginate(
-            index=args.index, sort_by="@timestamp", user=args.username, password=args.password, ttl=args.ttl,
-        )
-        progress = tqdm(unit_scale=True)
-        for page_number, page in enumerate(iterator, start=1):
-            progress.desc = f"Downloading page {page_number}"
-            for row in page["hits"]["hits"]:
-                writer.writerow(convert_row(row["_source"]))
-                progress.update()
 
-    writer.close()
+        ElasticSearchConsumer(
+            api_url=args.api_url,
+            index_name=args.index,
+            sort_by="@timestamp",
+            username=args.username,
+            password=args.password,
+            convert_function=partial(convert_rows, convert_row),
+            output_filename=args.output_filename,
+        ).run()
 
 
 if __name__ == "__main__":
