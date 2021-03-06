@@ -14,7 +14,7 @@ docker-run: docker-build
 	docker container run --rm --name covid19-br --volume $(PWD)/data/output:/app/data/output covid19-br ./run-obitos.sh
 
 docker-build-dev:
-	docker image build -t covid19-br-dev --build-arg PYTHON_REQUIREMENTS=development .
+	docker image build -t covid19-br-dev --build-arg PYTHON_REQUIREMENTS=requirements-development.txt .
 
 docker-test: docker-build-dev
 	docker container run -e PYTHONPATH=. --rm covid19-br-dev pytest tests/

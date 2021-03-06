@@ -2,7 +2,7 @@ import datetime
 import json
 from pathlib import Path
 
-import converters
+from covid19br import converters
 
 DATA_PATH = Path(__file__).absolute().parent / "data"
 
@@ -31,7 +31,7 @@ def test_expected_boletim():
 
 
 def test_expected_caso():
-    state_data = get_sample_data()
+    state_data = get_sample_data()  # TODO: change sample data to new format
     converted = list(converters.extract_caso("AC", state_data["cases"]))
     # Convert back and forth JSON so it parses date/datetime correctly
     converted = json.loads(json.dumps(converted, default=date_to_json))
