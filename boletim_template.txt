@@ -1,0 +1,27 @@
+BOLETIM @brasil_io #COVID19 nº $number ($date)
+
+CASOS: $total_confirmed (+ $new_confirmed)*
+ÓBITOS: $total_deaths (+ $new_deaths)*
+
+Painel: https://brasil.io/covid19/
+Boletins: https://brasil.io/covid19/boletins/
+Doe: https://apoia.se/brasilio 💳
+
+#BoletimCOVIDreal #opendata #crowdfunding
+---
+⚠️  Maiores aumentos com relação aos dados acumulados:
+
+Maiores aumentos % em óbitos:
+$top_increase_deaths
+
+Maiores aumentos % em casos:
+$top_increase_confirmed
+---
+$missing_bulletins
+
+* Os novos casos/óbitos são relativos ao nosso boletim de ontem (e não à meia noite).
+---
+Por questões de viabilidade e metodologia, coletamos apenas das Secretarias Estaduais de Saúde e, por isso, podem ocorrer divergências com relação às Secretarias Municipais. Não pretendemos mudar essa prática (por favor, não insista).
+---
+Esse trabalho só é possível por conta de pessoas voluntárias (https://brasil.io/covid19/voluntarios) que trabalham diariamente na coleta dos dados! 💗 Em especial @jessfranca @flamenani @dneumann28 @bmenani @turicas
+Para + novidades, acompanhe nosso canal no @Telegram: https://t.me/brasil_io

@@ -4,9 +4,11 @@ cached_property
 click
 defusedxml>=0.6.0
 goodtables==2.4.9
+gspread
 html2text
 https://github.com/turicas/rows/archive/develop.zip
 jinja2
+oauth2client
 openpyxl
 python-Levenshtein
 pytz
