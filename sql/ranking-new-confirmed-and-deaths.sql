@@ -51,3 +51,7 @@ SELECT
 FROM caso_total AS t
 GROUP BY day_of_week
 ORDER BY day_of_week;
+
+
+SELECT * FROM caso_total ORDER BY new_confirmed DESC LIMIT 10;
+SELECT * FROM caso_total ORDER BY new_deaths DESC LIMIT 10;
