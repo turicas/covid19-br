@@ -190,6 +190,7 @@ def main():
         diff_states = spreadsheet.diff_states
         new_confirmed = sum(row["novos_casos"] for row in diff_states)
         new_deaths = sum(row["novas_mortes"] for row in diff_states)
+        # TODO: check if diff_dias > 1
         top_increase_deaths = []
         diff_states.sort(key=lambda row: row["novas_mortes_percent"], reverse=True)
         for state in diff_states[:5]:
@@ -198,6 +199,7 @@ def main():
             top_increase_deaths.append(
                 f"- {state['today_state']}: +{state_new_deaths.rjust(3)} ({format_number_br(state_new_deaths_percent)}%)"
             )
+        # TODO: check if diff_dias > 1
         top_increase_confirmed = []
         diff_states.sort(key=lambda row: row["novos_casos_percent"], reverse=True)
         for state in diff_states[:5]:
@@ -224,7 +226,7 @@ def main():
     elif args.tweet_type == "vacinacao":
         filename = "data/output/microdados_vacinacao.csv.gz"
         sha1, lines, total_bytes, uncompressed_bytes = file_metadata(filename)
-        file_size = abbreviate_number(total_bytes, suffix="B", divider=1_024)
+        file_size = abbreviate_number(total_bytes, suffix="B")
         url = "https://data.brasil.io/dataset/covid19/microdados_vacinacao.csv.gz"
         print(
             "🎲 Acabamos de atualizar o CSV com microdados de vacinados, "

@@ -7,7 +7,7 @@ from operator import attrgetter
 from pathlib import Path
 
 import rows
-from async_process_executor import AsyncProcessExecutor, Task
+from async_process_executor import pipeline
 from rows.utils import load_schema
 from rows.utils.date import date_range, today
 from tqdm import tqdm
@@ -110,41 +110,37 @@ def get_data_greedy(input_filename, start_date=None, end_date=None):
     return list(get_data(input_filename, start_date=start_date, end_date=end_date))
 
 
-class CasoFullTaskExecutor(AsyncProcessExecutor):
-    def __init__(self, input_filenames, output_filename, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.input_filenames = input_filenames
-        self.writer = rows.utils.CsvLazyDictWriter(output_filename)
-        self.progress = tqdm()
+def read_files(input_filenames):
+    start_date = None
+    end_date = today()
+    for filename in input_filenames:
+        yield get_data_greedy(filename, start_date, end_date)
 
-    async def tasks(self):
-        start_date = None
-        end_date = today()
-        for filename in self.input_filenames:
-            yield Task(function=get_data_greedy, args=(filename, start_date, end_date))
 
-    async def process(self, result):
-        write_row = self.writer.writerow
-        progress_update = self.progress.update
-        for row in result:
+def write_csv(filename, iterator):
+    writer = rows.utils.CsvLazyDictWriter(filename)
+    write_row = writer.writerow
+    progress = tqdm()
+    progress_update = progress.update
+    for state_data in iterator:
+        for row in state_data:
             write_row(row)
             progress_update()
-
-    async def finished(self, task):
-        self.writer.close()
-        self.progress.close()
+    writer.close()
+    progress.close()
 
 
 def main():
-    workers = cpu_count() - 1
     parser = argparse.ArgumentParser()
     parser.add_argument("input_filenames", nargs="+")
     parser.add_argument("output_filename")
     args = parser.parse_args()
 
-    CasoFullTaskExecutor(
-        input_filenames=args.input_filenames, output_filename=args.output_filename, workers=workers,
-    ).run()
+    process_pipeline = [
+        (read_files, (args.input_filenames,)),
+        (write_csv, (args.output_filename,)),
+    ]
+    pipeline.execute(process_pipeline)
 
 
 if __name__ == "__main__":

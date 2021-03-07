@@ -226,6 +226,12 @@ def clean_municipio(state, name, code):
     elif name.startswith("MUNICIPIO IGNORADO"):
         return state, None, code
 
+    if state == "GO" and name.endswith("(TRANSF. P/TO)"):
+        logger.warning(
+            f"Incorrect city code for: {repr(state)}, {repr(name)}, {repr(code)}. Fixing to state = TO"
+        )
+        state, name = "TO", name.replace("(TRANSF. P/TO)", "").strip()
+
     city_obj = demographics.get_city(state, name) or CITY_BY_CODE.get(code, None)
 
     if city_obj is None:

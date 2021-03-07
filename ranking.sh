@@ -8,6 +8,7 @@ rows pgimport \
 	--dialect=excel \
 	--input-encoding=utf8 \
 	--schema=schema/caso_full.csv \
+	--unlogged \
 	data/output/caso_full.csv.gz \
 	$PGURI \
 	caso_full
