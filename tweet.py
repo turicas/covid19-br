@@ -177,36 +177,44 @@ def main():
         if all_bulletins_published_today:
             pass
         else:
-            missing_bulletins = [state for state in state_data if state["data_boletim"] != str(today)]
+            missing_bulletins = [
+                state
+                for state in state_data
+                if state["data_boletim"] != str(today) or (state["MS"] or "").strip()
+            ]
             missing_bulletins_text = [
                 f"* Nem todos os estados liberaram boletins hoje, falta{'m' if len(missing_bulletins) > 1 else ''}:"
             ]
             for state in missing_bulletins:
-                ms = state["MS"] in ("sim", "parcial")
-                missing_bulletins_text.append(
-                    f"- {state['state']}: {'usamos dados do @minsaude' if ms else 'sem dados hoje'}"
-                )
+                ms = (state["MS"] or "").strip().lower()
+                if ms == "sim":
+                    status = "usamos dados do @minsaude"
+                elif ms == "parcial":
+                    status = "apenas atualização parcial"
+                else:
+                    status = "sem dados hoje"
+                missing_bulletins_text.append(f"- {state['state']}: {status}")
 
         diff_states = spreadsheet.diff_states
         new_confirmed = sum(row["novos_casos"] for row in diff_states)
         new_deaths = sum(row["novas_mortes"] for row in diff_states)
-        # TODO: check if diff_dias > 1
         top_increase_deaths = []
         diff_states.sort(key=lambda row: row["novas_mortes_percent"], reverse=True)
         for state in diff_states[:5]:
             state_new_deaths = format_number_br(state["novas_mortes"])
             state_new_deaths_percent = (state["novas_mortes_percent"] * 100).quantize(Decimal("0.01"))
-            top_increase_deaths.append(
-                f"- {state['today_state']}: +{state_new_deaths.rjust(3)} ({format_number_br(state_new_deaths_percent)}%)"
-            )
-        # TODO: check if diff_dias > 1
+            line = f"- {state['today_state']}: +{state_new_deaths.rjust(3)} ({format_number_br(state_new_deaths_percent)}%)"
+            if state["diff_dias"] > 1:
+                line += f" -- dif. p/ {state['diff_dias']} dias"
+            top_increase_deaths.append(line)
         top_increase_confirmed = []
         diff_states.sort(key=lambda row: row["novos_casos_percent"], reverse=True)
         for state in diff_states[:5]:
             state_new_confirmed_percent = (state["novos_casos_percent"] * 100).quantize(Decimal("0.01"))
-            top_increase_confirmed.append(
-                f"- {state['today_state']}: +{format_number_br(state_new_confirmed_percent)}%"
-            )
+            line = f"- {state['today_state']}: +{format_number_br(state_new_confirmed_percent)}%"
+            if state["diff_dias"] > 1:
+                line += f" -- dif. p/ {state['diff_dias']} dias"
+            top_increase_confirmed.append(line)
 
         with open("boletim_template.txt") as fobj:
             template = Template(fobj.read())
