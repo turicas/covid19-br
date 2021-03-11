@@ -18,15 +18,24 @@ for state in cities.keys():
         CITY_BY_CODE[str(city.city_ibge_code)[:-1]] = city
 AGE_RANGES = (
     (0, 4),
-    (5, 14),
+    (5, 9),
+    (10, 14),
     (15, 19),
-    (20, 29),
-    (30, 39),
-    (40, 49),
-    (50, 59),
-    (60, 69),
-    (70, 79),
-    (80, float("inf")),
+    (20, 24),
+    (25, 29),
+    (30, 34),
+    (35, 39),
+    (40, 44),
+    (45, 49),
+    (50, 54),
+    (55, 59),
+    (60, 64),
+    (65, 69),
+    (70, 74),
+    (75, 79),
+    (80, 84),
+    (85, 89),
+    (90, float("inf")),
 )
 
 
@@ -37,8 +46,14 @@ def calculate_age_range(value):
     '00 a 04'
     >>> calculate_age_range('15')
     '15 a 19'
+    >>> calculate_age_range('36')
+    '35 a 39'
     >>> calculate_age_range('80')
-    '80+'
+    '80 a 84'
+    >>> calculate_age_range('88')
+    '85 a 89'
+    >>> calculate_age_range('90')
+    '90+'
     """
 
     if isinstance(value, str) and "/" in value:
