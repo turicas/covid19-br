@@ -1,5 +1,6 @@
 # Main
 cached_property
+ckanapi
 click
 defusedxml>=0.6.0
 goodtables==2.4.9
