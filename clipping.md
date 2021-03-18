@@ -7,6 +7,10 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Notícias e Entrevistas
 
+- [2021-03-14 O Estado de São Paulo - Internações de idosos com 90 anos ou mais caem 20% após início da vacinação](https://saude.estadao.com.br/noticias/geral,internacoes-de-idosos-com-90-anos-ou-mais-caem-20-apos-inicio-da-vacinacao,70003647085)
+- [2021-03-03 SND Society for News Design - World’s Best-Designed™, World’s Best Designer, Best in Show announced for Digital News Design competition](https://www.snd.org/2021/03/best-in-show-winners-announced-for-digital-news-design-competition/)
+- [2021-03-02 Towards Data Science - Covid-19 and Brazil: A Data Exploration](https://towardsdatascience.com/covid-19-and-brazil-a-tragedy-of-5570-cities-in-maps-and-graphs-84886c2154c6)
+- [2021-02-26 O Estado de São Paulo - País vacina só 48% dos idosos acima de 90 enquanto imuniza 142 mil entre os menos prioritários](https://saude.estadao.com.br/noticias/geral,pais-vacina-so-48-dos-idosos-acima-de-90-mas-tem-119-6-mil-pessoas-com-menos-de-75-imunizadas,70003629525)
 - [2020-12-28 Correio do Lavrado - Menos populoso, Roraima tem mais casos de covid-19 do que Acre e Amapá](https://correiodolavrado.com.br/2020/12/28/menos-populoso-roraima-tem-mais-casos-de-covid-19-do-que-acre-e-amapa/)
 - [2020-12-15 Metrópoles - Segunda onda de Covid-19 tem mais casos em cidades com menos de 200 mil habitantes](https://www.metropoles.com/brasil/segunda-onda-de-covid-19-tem-mais-casos-em-cidades-com-menos-de-200-mil-habitantes)
 - [2020-11-03 Covid Action Network - The data issue in Brazil and why it is key to combat the pandemic](https://www.covid-action.net/raphael-tsavkko-garcia/the-data-issue-in-brazil-and-why-tackling-it-is-key-to-combat-the-pandemic)
@@ -91,6 +95,15 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Análises e Projetos
 
+- [covid19_vacinacao](https://github.com/adolfoguimaraes/covid19_vacinacao/blob/main/Microdados_SUS/Vacinacao_Microdados_Brasilio.ipynb)
+- [covid19_vacinacao](https://public.tableau.com/profile/adolfoguimaraes#!/vizhome/MicrodadosSUS/PainelGeralMicrodados)
+- [Globo, Bem Estar - Mortes e casos de coronavírus nos municípios brasileiros] (https://especiais.g1.globo.com/bemestar/coronavirus/2021/mapa-cidades-brasil-mortes-covid/)
+- [Dados COVID-19](https://curta.cc/covid.html)
+- [Vacinados](https://curta.cc/vacinados/vacinados.html)
+- [Painel da vacinação COVID-19](https://apps.kauebraga.dev/shiny/painel_vacinacao_covid/)
+- [2021-03-13 Twitter - Com dados tratados da @brasil_io e @turicas temos um dash para divulgar o ritmo da vacinação e de evolução da pandemia. Atualizado diariamente. A melhor vacina contra a fakenews é a informação!](https://twitter.com/FerreiraBruno7/status/1370811878209900544)
+- [Vacinas COVID-19](https://app.powerbi.com/view?r=eyJrIjoiMDk5MjI5NDQtZTQ4Ni00NzA1LWE2YTQtYWEwMzg3NDAyNDVmIiwidCI6IjE4MzNkNDljLTQzZGItNGRmYy1hNDE3LWJjMDk4YjE0OGQ2MSJ9&pageName=ReportSection4281f6ab24deead4b02c)
+- [COVID-19 confirmed cases and deaths in Brazil](https://github.com/ramongss/COVID19-AutoReports)
 - [Painel IBGE COVID-19 por município](https://covid19.ibge.gov.br/paineis-sintese/)
 - [App COVID-19 no Brasil e no Mundo](https://github.com/Gabplay/flutter_covid19_brasil) - [Download](https://bit.ly/downloadAppCovidBR)
 - [Farol COVID - Corona Cidades](https://farolcovid.coronacidades.org/)
