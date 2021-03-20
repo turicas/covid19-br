@@ -21,6 +21,15 @@ for path in (DOWNLOAD_PATH, OUTPUT_PATH):
 class PtBrDateField(rows.fields.DateField):
     INPUT_FORMAT = "%d/%m/%Y"
 
+    @classmethod
+    def deserialize(cls, value):
+        if not (value or "").strip():
+            return None
+        elif value.count("/") == 2 and len(value.split("/")[-1]) == 2:
+            parts = value.split("/")
+            value = f"{parts[0]}/{parts[1]}/20{parts[2]}"
+        return super().deserialize(value)
+
 
 def get_csv_resources(dataset_name):
     api = ckanapi.RemoteCKAN(CKAN_URL)
