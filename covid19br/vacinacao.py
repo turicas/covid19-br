@@ -246,6 +246,8 @@ def clean_municipio(state, name, code):
             f"Incorrect city code for: {repr(state)}, {repr(name)}, {repr(code)}. Fixing to state = TO"
         )
         state, name = "TO", name.replace("(TRANSF. P/TO)", "").strip()
+    elif state == "CE" and code == "230395":
+        name = "CHOROZINHO"
 
     city_obj = demographics.get_city(state, name) or CITY_BY_CODE.get(code, None)
 
