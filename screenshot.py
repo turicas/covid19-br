@@ -45,5 +45,5 @@ if __name__ == "__main__":
     width = 1600
     height = 1600
 
-    filename = take_element_screenshot(url, element_xpath, lang="pt-BR", wait=3, width=width, height=height,)
+    filename = take_element_screenshot(url, element_xpath, lang="pt-BR", wait=5, width=width, height=height,)
     shutil.move(filename, args.filename)
