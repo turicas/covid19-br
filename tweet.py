@@ -54,7 +54,7 @@ class COVID19Spreadsheet:
             row = dict(zip(header, row))
             for key, value in row.items():
                 if "_percent" in key:
-                    row[key] = rows.fields.PercentField.deserialize(value)
+                    row[key] = rows.fields.PercentField.deserialize(value.replace(",", "."))
                 elif key.endswith("_date") or "_data_" in key:
                     row[key] = rows.fields.DateField.deserialize(value)
                 elif (
