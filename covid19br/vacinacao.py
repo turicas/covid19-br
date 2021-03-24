@@ -241,21 +241,23 @@ def clean_municipio(state, name, code):
     elif name.startswith("MUNICIPIO IGNORADO"):
         return state, None, code
 
-    if state == "GO" and name.endswith("(TRANSF. P/TO)"):
+    # Fix city names/codes (inconsistent input)
+    if state == "CE" and code == "230395":
+        name = "CHOROZINHO"
+    elif state == "DF":
+        name = "Brasília"
+    elif state == "GO" and name.endswith("(TRANSF. P/TO)"):
         logger.warning(
             f"Incorrect city code for: {repr(state)}, {repr(name)}, {repr(code)}. Fixing to state = TO"
         )
         state, name = "TO", name.replace("(TRANSF. P/TO)", "").strip()
-    elif state == "CE" and code == "230395":
-        name = "CHOROZINHO"
+    elif state == "SP" and name.upper() in ("PEDRO TOLEDO", "PEDRO DE TOLEDO"):
+        code = demographics.get_city(state, name).city_ibge_code
 
     city_obj = demographics.get_city(state, name) or CITY_BY_CODE.get(code, None)
 
     if city_obj is None:
-        if state == "DF":
-            city_obj = demographics.get_city("DF", "Brasília")
-        else:
-            raise ValueError(f"Incorrect city name/state for: {repr(state)}, {repr(name)}, {repr(code)}")
+        raise ValueError(f"Incorrect city name/state for: {repr(state)}, {repr(name)}, {repr(code)}")
     elif str(city_obj.city_ibge_code)[:-1] != str(code):
         if code not in CITY_BY_CODE:
             logger.warning(
