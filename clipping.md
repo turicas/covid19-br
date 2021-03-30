@@ -94,14 +94,6 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 ## Análises e Projetos
 
-- [covid19_vacinacao](https://github.com/adolfoguimaraes/covid19_vacinacao/blob/main/Microdados_SUS/Vacinacao_Microdados_Brasilio.ipynb)
-- [covid19_vacinacao](https://public.tableau.com/profile/adolfoguimaraes#!/vizhome/MicrodadosSUS/PainelGeralMicrodados)
-- [Globo, Bem Estar - Mortes e casos de coronavírus nos municípios brasileiros](https://especiais.g1.globo.com/bemestar/coronavirus/2021/mapa-cidades-brasil-mortes-covid/)
-- [Dados COVID-19](https://curta.cc/covid.html)
-- [Vacinados](https://curta.cc/vacinados/vacinados.html)
-- [Painel da vacinação COVID-19](https://apps.kauebraga.dev/shiny/painel_vacinacao_covid/)
-- [Vacinas COVID-19](https://app.powerbi.com/view?r=eyJrIjoiMDk5MjI5NDQtZTQ4Ni00NzA1LWE2YTQtYWEwMzg3NDAyNDVmIiwidCI6IjE4MzNkNDljLTQzZGItNGRmYy1hNDE3LWJjMDk4YjE0OGQ2MSJ9&pageName=ReportSection4281f6ab24deead4b02c)
-- [COVID-19 confirmed cases and deaths in Brazil](https://github.com/ramongss/COVID19-AutoReports)
 - [Painel IBGE COVID-19 por município](https://covid19.ibge.gov.br/paineis-sintese/)
 - [App COVID-19 no Brasil e no Mundo](https://github.com/Gabplay/flutter_covid19_brasil) - [Download](https://bit.ly/downloadAppCovidBR)
 - [Farol COVID - Corona Cidades](https://farolcovid.coronacidades.org/)
@@ -183,9 +175,15 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 - [Evolução do COVID-19 no Brasil](https://lucasrla.github.io/covid-19-brasil/), por [@lucasrla](https://github.com/lucasrla)
 - [Aceleração COVID no Brasil - Folha de São Paulo](https://arte.folha.uol.com.br/equilibrioesaude/2020/aceleracao-covid-no-brasil/)
 - https://medidas-covidbr-iptsp.shinyapps.io/painel/
-- [No Epicentro - Agência Lupa](https://piaui.folha.uol.com.br/lupa/epicentro/)
+- [No Epicentro - Agência Lupa](https://piaui.folha.uol.com.br/lupa/epicentro/) - vencedor do prêmio [SND Society for News Design - World’s Best-Designed™, World’s Best Designer, Best in Show announced for Digital News Design competition](https://www.snd.org/2021/03/best-in-show-winners-announced-for-digital-news-design-competition/)
 - [Covid Municipal](https://github.com/covidmunicipal)
 - [Radar Coronavírus](https://irara.covidmunicipal.live/)
+- [covid19_vacinacao](https://public.tableau.com/profile/adolfoguimaraes#!/vizhome/MicrodadosSUS/PainelGeralMicrodados) - [código](https://github.com/adolfoguimaraes/covid19_vacinacao/blob/main/Microdados_SUS/Vacinacao_Microdados_Brasilio.ipynb)
+- [Globo, Bem Estar - Mortes e casos de coronavírus nos municípios brasileiros](https://especiais.g1.globo.com/bemestar/coronavirus/2021/mapa-cidades-brasil-mortes-covid/)
+- [Dados COVID-19](https://curta.cc/covid.html)
+- [Painel da vacinação COVID-19](https://apps.kauebraga.dev/shiny/painel_vacinacao_covid/)
+- [Vacinas COVID-19](https://app.powerbi.com/view?r=eyJrIjoiMDk5MjI5NDQtZTQ4Ni00NzA1LWE2YTQtYWEwMzg3NDAyNDVmIiwidCI6IjE4MzNkNDljLTQzZGItNGRmYy1hNDE3LWJjMDk4YjE0OGQ2MSJ9&pageName=ReportSection4281f6ab24deead4b02c)
+- [COVID-19 confirmed cases and deaths in Brazil](https://github.com/ramongss/COVID19-AutoReports)
 
 
 ## Publicações Científicas
