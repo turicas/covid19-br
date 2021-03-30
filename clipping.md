@@ -96,11 +96,10 @@ você pode propor uma mudança nesse arquivo diretamente pelo botão "editar". :
 
 - [covid19_vacinacao](https://github.com/adolfoguimaraes/covid19_vacinacao/blob/main/Microdados_SUS/Vacinacao_Microdados_Brasilio.ipynb)
 - [covid19_vacinacao](https://public.tableau.com/profile/adolfoguimaraes#!/vizhome/MicrodadosSUS/PainelGeralMicrodados)
-- [Globo, Bem Estar - Mortes e casos de coronavírus nos municípios brasileiros] (https://especiais.g1.globo.com/bemestar/coronavirus/2021/mapa-cidades-brasil-mortes-covid/)
+- [Globo, Bem Estar - Mortes e casos de coronavírus nos municípios brasileiros](https://especiais.g1.globo.com/bemestar/coronavirus/2021/mapa-cidades-brasil-mortes-covid/)
 - [Dados COVID-19](https://curta.cc/covid.html)
 - [Vacinados](https://curta.cc/vacinados/vacinados.html)
 - [Painel da vacinação COVID-19](https://apps.kauebraga.dev/shiny/painel_vacinacao_covid/)
-- [2021-03-13 Twitter - Com dados tratados da @brasil_io e @turicas temos um dash para divulgar o ritmo da vacinação e de evolução da pandemia. Atualizado diariamente. A melhor vacina contra a fakenews é a informação!](https://twitter.com/FerreiraBruno7/status/1370811878209900544)
 - [Vacinas COVID-19](https://app.powerbi.com/view?r=eyJrIjoiMDk5MjI5NDQtZTQ4Ni00NzA1LWE2YTQtYWEwMzg3NDAyNDVmIiwidCI6IjE4MzNkNDljLTQzZGItNGRmYy1hNDE3LWJjMDk4YjE0OGQ2MSJ9&pageName=ReportSection4281f6ab24deead4b02c)
 - [COVID-19 confirmed cases and deaths in Brazil](https://github.com/ramongss/COVID19-AutoReports)
 - [Painel IBGE COVID-19 por município](https://covid19.ibge.gov.br/paineis-sintese/)
