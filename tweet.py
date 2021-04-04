@@ -192,7 +192,8 @@ def main():
                 elif ms == "parcial":
                     status = "apenas atualização parcial"
                 else:
-                    status = "sem dados hoje"
+                    last_date = datetime.datetime.strptime(state["data_boletim"], "%Y-%m-%d").strftime("%d/%m")
+                    status = f"sem dados hoje (último: {last_date})"
                 missing_bulletins_text.append(f"- {state['state']}: {status}")
 
         diff_states = spreadsheet.diff_states
