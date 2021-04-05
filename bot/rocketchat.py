@@ -54,6 +54,21 @@ class RocketChat:
             "POST", self.make_url("chat.postMessage"), json={"channel": channel, "text": message,},
         )
 
+    def user_list(self, items_per_page=100):
+        finished = False
+        offset = 0
+        while not finished:
+            response = self.make_request(
+                "GET",
+                self.make_url("users.list"),
+                params={"offset": offset, "count": items_per_page},
+            )
+            data = response.json()
+            for user in data["users"]:
+                yield user
+            offset = data["offset"] + data["count"]
+            finished = offset == data["total"]
+
 
 if __name__ == "__main__":
     import argparse
