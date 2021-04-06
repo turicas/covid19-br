@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import json
 from urllib.parse import urljoin
 
 import requests
@@ -20,6 +21,7 @@ class RocketChat:
         kwargs["headers"] = kwargs.get("headers", {})
         kwargs["headers"]["X-Auth-Token"] = self.auth_token
         kwargs["headers"]["X-User-Id"] = self.user_id
+        kwargs["headers"]["Content-type"] = kwargs.pop("content_type", "")
         return getattr(requests, method)(*args, **kwargs)
 
     def login(self, username, password):
@@ -68,6 +70,16 @@ class RocketChat:
                 yield user
             offset = data["offset"] + data["count"]
             finished = offset == data["total"]
+
+    def user_update(self, user_id: str, data: dict):
+        payload = json.dumps({"userId": user_id, "data": data})
+        response = self.make_request(
+            "POST",
+            self.make_url("users.update"),
+            data=payload,
+            content_type="application/json",
+        )
+        return response.json()
 
 
 if __name__ == "__main__":
