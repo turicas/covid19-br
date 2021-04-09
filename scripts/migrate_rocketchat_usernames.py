@@ -72,6 +72,9 @@ def migrate(output_filename, commit):
                         )
                     writer.writerow(create_row(invalid_user, suggestion))
                     break
+        else:
+                import sys
+                print(f"Cannot change user (suggestions already used): {invalid_user}", file=sys.stderr)
 
 
 if __name__ == "__main__":
