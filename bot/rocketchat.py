@@ -69,6 +69,14 @@ class RocketChat:
             offset = data["offset"] + data["count"]
             finished = offset == data["total"]
 
+    def user_update(self, user_id: str, data: dict):
+        response = self.make_request(
+            "POST",
+            self.make_url("users.update"),
+            json={"userId": user_id, "data": data},
+        )
+        return response.json()
+
 
 if __name__ == "__main__":
     import argparse
