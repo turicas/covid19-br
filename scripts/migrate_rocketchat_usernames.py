@@ -58,11 +58,7 @@ def migrate(output_filename, commit):
         existing_usernames.add(data["username"])
 
     with open(output_filename, "w") as csvfile:
-        writer = csv.DictWriter(
-            csvfile,
-            fieldnames=["user_id", "old_username", "new_username", "email"]
-        )
-        writer.writeheader()
+        writer = rows.utils.CsvLazyDictWriter(csvfile)
 
         invalid_users = [u for u in users_data if not u["is_valid"]]
         for invalid_user in tqdm(invalid_users, desc="Atulizando usernames inválidos"):
