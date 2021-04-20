@@ -246,6 +246,9 @@ def clean_municipio(state, name, code):
         name = "CHOROZINHO"
     elif state == "DF":
         name = "Brasília"
+    elif state == "RS" and name == "CERRO LARGO":
+        code = 4305207
+
     elif state == "GO" and name.endswith("(TRANSF. P/TO)"):
         logger.warning(
             f"Incorrect city code for: {repr(state)}, {repr(name)}, {repr(code)}. Fixing to state = TO"
