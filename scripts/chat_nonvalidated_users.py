@@ -18,15 +18,15 @@ def run(output_filename):
         writer = rows.utils.CsvLazyDictWriter(csvfile)
 
         for user in tqdm.tqdm(all_users, desc="Buscando usuários não verificados..."):
-            email = user.get("emails")
-            if email:
-                verified = email[0]["verified"]
+            emails = user.get("emails", [])
+            for email in emails:
+                verified = email["verified"]
                 if verified is False:
                     writer.writerow(
                         {
                             "username": user.get("username"),
                             "name": user.get("name"),
-                            "email": email[0].get("address"),
+                            "email": email.get("address"),
                         }
                     )
 
