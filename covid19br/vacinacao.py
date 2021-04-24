@@ -303,6 +303,7 @@ def get_field_converters():
         "paciente_nacionalidade_enumNacionalidade": {"name": "paciente_nacionalidade", "converter": parse_str,},
         "paciente_racaCor_codigo": {"name": "paciente_codigo_etnia", "converter": parse_int,},
         "paciente_racaCor_valor": {"name": "paciente_etnia", "converter": parse_etnia,},
+        "id_sistema_origem": {"name": "sistema_origem_id", "converter": parse_int,},
         "sistema_origem": {"name": "sistema_origem", "converter": parse_sistema_origem,},
         "vacina_categoria_codigo": {"name": "paciente_codigo_grupo", "converter": parse_int,},
         "vacina_categoria_nome": {"name": "paciente_grupo", "converter": parse_str,},
