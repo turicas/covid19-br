@@ -175,7 +175,9 @@ def main():
         total_deaths = sum(row["deaths"] for row in state_data)
         all_bulletins_published_today = set(row["data_boletim"] for row in state_data) == {str(today)}
         if all_bulletins_published_today:
-            pass
+            missing_bulletins_text = [
+                "* Hoje todas as secretarias estaduais publicaram boletins!  o/",
+            ]
         else:
             missing_bulletins = [
                 state
