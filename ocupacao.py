@@ -75,18 +75,20 @@ def main():
     parser.add_argument("--output-filename", default=DOWNLOAD_PATH / f"ocupacao-{dt}.csv")
     args = parser.parse_args()
 
-    es = ElasticSearch(args.api_url)
-    iterator = es.paginate(
-        index=args.index, sort_by="dataNotificacaoOcupacao", user=args.username, password=args.password, ttl=args.ttl,
+    es = ElasticSearch(
+        args.api_url,
+        username=args.username,
+        password=args.password,
+    )
+    iterator = es.search(
+        index=args.index,
+        sort_by="dataNotificacaoOcupacao",
+        ttl=args.ttl,
     )
 
     writer = CsvLazyDictWriter(args.output_filename)
-    progress = tqdm(unit_scale=True)
-    for page_number, page in enumerate(iterator, start=1):
-        progress.desc = f"Downloading page {page_number}"
-        for row in page["hits"]["hits"]:
-            writer.writerow(convert_row(row["_source"]))
-            progress.update()
+    for row in tqdm(iterator, unit_scale=True):
+        writer.writerow(convert_row(row))
     writer.close()
 
 

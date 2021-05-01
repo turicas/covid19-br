@@ -9,20 +9,28 @@ from rows.utils import CsvLazyDictWriter, open_compressed
 from tqdm import tqdm
 
 from covid19br.elasticsearch import ElasticSearch
-from covid19br.vacinacao import convert_row_censored, convert_row_uncensored
+from covid19br.vacinacao import (
+    convert_row_censored,
+    convert_row_uncensored,
+    get_field_converters,
+)
 
 
-def get_data_from_elasticsearch(api_url, index_name, sort_by, username, password, page_size):
-    es = ElasticSearch(api_url)
-    iterator = es.paginate(index=index_name, sort_by=sort_by, user=username, password=password, page_size=page_size)
-    progress = tqdm(unit_scale=True)
-    progress.desc = f"Downloading page 001"
-    progress.refresh()
-    for page_number, page in enumerate(iterator, start=1):
-        progress.desc = f"Downloaded page {page_number:03d}"
-        progress.refresh()
-        yield page
-    progress.close()
+RAW_KEYS = list(get_field_converters().keys())
+
+def get_data_from_elasticsearch(
+    api_url,
+    username,
+    password,
+    index_name,
+    query,
+    sort_by,
+    page_size,
+    ttl,
+):
+    es = ElasticSearch(api_url, username=username, password=password)
+    iterator = es.search(index_name, sort_by=sort_by, page_size=page_size, ttl=ttl, query=query)
+    yield from tqdm(iterator, desc="Consuming ElasticSearch", unit_scale=True)
 
 
 def get_data_from_csv(filename, page_size):
@@ -33,13 +41,30 @@ def get_data_from_csv(filename, page_size):
             yield page
 
 
-def convert_rows(func, iterator):
+def convert_row_raw(row):
+    new = {key: row.pop(key, None) for key in RAW_KEYS}
+    if row:
+        raise ValueError(f"Unknown keys: {row.keys()}")
+    return new
+
+def convert_rows_page(func, iterator):
     func = func if func is not None else lambda row: row
     for page in iterator:
-        yield [func(row["_source"]) for row in page["hits"]["hits"]]
+        yield [func(row) for row in page]
+
+
+def convert_rows(func, iterator):
+    for row in iterator:
+        yield func(row)
 
 
 def write_csv(filename, iterator):
+    writer = CsvLazyDictWriter(filename)
+    for row in iterator:
+        writer.writerow(row)
+
+
+def write_csv_page(filename, iterator):
     writer = CsvLazyDictWriter(filename)
     for page in iterator:
         for row in page:
@@ -58,6 +83,8 @@ def main():
     parser.add_argument("--ttl", default="10m")
     parser.add_argument("--page-size", default=10_000)
     parser.add_argument("--input-filename")
+    parser.add_argument("start_datetime")
+    parser.add_argument("end_datetime")
     parser.add_argument("output_filename")
     args = parser.parse_args()
 
@@ -72,7 +99,7 @@ def main():
 
     convert_row = convert_row_censored
     if args.raw:
-        convert_row = None
+        convert_row = convert_row_raw
     elif args.no_censorship:
         convert_row = convert_row_uncensored
 
@@ -83,20 +110,41 @@ def main():
                 (args.input_filename, args.page_size),
             ),
             (
-                partial(convert_rows, convert_row),
+                partial(convert_rows_page, convert_row),
                 tuple(),
             ),
             (
-                write_csv,
+                write_csv_page,
                 (args.output_filename,),
             ),
         ]
 
     else:  # Get data from ElasticSearch API
+        timestamp_key = "vacina_dataAplicacao"
+        query = {
+            "range": {
+                timestamp_key: {
+                    "gte": args.start_datetime,
+                    "lt": args.end_datetime,
+                },
+            },
+        }
+        if args.start_datetime == "None":
+            del query["range"][timestamp_key]["gte"]
+
         process_pipeline = [
             (
                 get_data_from_elasticsearch,
-                (args.api_url, args.index, "@timestamp", args.username, args.password, args.page_size),
+                (
+                    args.api_url,
+                    args.username,
+                    args.password,
+                    args.index,
+                    query,
+                    timestamp_key,
+                    args.page_size,
+                    args.ttl,
+                ),
             ),
             (
                 partial(convert_rows, convert_row),
