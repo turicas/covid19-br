@@ -173,7 +173,16 @@ def parse_etnia(value):
 
 @lru_cache(maxsize=9)
 def parse_dose(value):
-    return {"1ª dose": 1, "única": 1, "2ª dose": 2, "dose": None,}[parse_str(value).lower().replace("ªdose", "ª dose")]
+    mapping = {
+        "1ª dose": 1,
+        "única": 1,
+        "2ª dose": 2,
+        "dose": None,
+    }
+    converted = parse_str(value).lower().replace("ªdose", "ª dose")
+    if converted not in mapping:
+        logger.warning(f"Incorrect dose number: {repr(value)} (converted to `None`)")
+    return mapping.get(converted, None)
 
 
 @lru_cache(maxsize=99999)
@@ -218,11 +227,8 @@ def calculate_age(start_date, end_date):
 
 
 @lru_cache(maxsize=99999)
-def parse_datetime(value):
-    value = value.strip()
-    if not value:
-        return None
-    return datetime.datetime.strptime(value, "%Y-%m-%d %H:%M:%S").isoformat()
+def parse_date_str(value):
+    return value[:10] if value else None
 
 
 @lru_cache(maxsize=999)
@@ -248,7 +254,6 @@ def clean_municipio(state, name, code):
         name = "Brasília"
     elif state == "RS" and name == "CERRO LARGO":
         code = 4305207
-
     elif state == "GO" and name.endswith("(TRANSF. P/TO)"):
         logger.warning(
             f"Incorrect city code for: {repr(state)}, {repr(name)}, {repr(code)}. Fixing to state = TO"
@@ -275,13 +280,13 @@ def clean_municipio(state, name, code):
 
 
 def get_field_converters():
-    return {
+    mapping = {
         "document_id": {"name": "documento_uuid", "converter": partial(generate_uuid, "covid19-documento-vacinacao"),},
         "estabelecimento_municipio_codigo": {
             "name": "estabelecimento_codigo_ibge_municipio",
             "converter": parse_codigo_ibge_municipio,
         },
-        "data_importacao_rnds": {"name": "data_importacao", "converter": parse_datetime,},
+        "data_importacao_rnds": {"name": "data_importacao", "converter": parse_date_str,},
         "estabelecimento_municipio_nome": {"name": "estabelecimento_municipio", "converter": parse_municipio,},
         "estabelecimento_razaoSocial": {"name": "estabelecimento_razao_social", "converter": parse_str,},
         "estabelecimento_uf": {"name": "estabelecimento_unidade_federativa", "converter": parse_unidade_federativa,},
@@ -319,6 +324,7 @@ def get_field_converters():
         "@timestamp": {"name": "timestamp", "converter": None,},
         "@version": {"name": "version", "converter": None,},
     }
+    return {key.lower(): value for key, value in mapping.items()}
 
 
 def get_censored_field_converters():
@@ -330,7 +336,7 @@ def get_censored_field_converters():
     converters["vacina_fabricante_nome"]["converter"] = None
     converters["vacina_fabricante_referencia"]["converter"] = None
 
-    converters["paciente_dataNascimento"]["converter"] = None
+    converters["paciente_datanascimento"]["converter"] = None
 
     return converters
 
