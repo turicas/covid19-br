@@ -1,3 +1,5 @@
+import json
+import time
 from urllib.parse import urljoin
 
 import requests
@@ -23,11 +25,12 @@ class GeneratorWithLength:
 
 class ElasticSearch:
 
-    def __init__(self, base_url, username=None, password=None, user_agent=None):
+    def __init__(self, base_url, username=None, password=None, user_agent=None, timeout=10):
         self.base_url = base_url
         self.__username = username
         self.__password = password
         self.search_url = urljoin(self.base_url, "_search")
+        self.timeout = timeout
 
         self.session = requests.Session()
         if user_agent is not None:
@@ -53,21 +56,30 @@ class ElasticSearch:
         total_hits = next(result)
         return GeneratorWithLength(result, total_hits)
 
-    def consume_scroll(self, index, sort, page_size, ttl, query):
+    def consume_scroll(self, index, sort, page_size, ttl, query, max_retries=5, wait_time=3):
         body = {
             "query": query,
             "size": page_size,
             "sort": sort,
             "track_total_hits": True,
         }
-        if query is None:
+        if not query:
             del body["query"]
         url = self.index_url(index) + "/_search"
         params = {"scroll": ttl}
         first_page = True
         while True:
-            response = self.session.post(url, params=params, json=body)
-            response_data = response.json()
+            retries = 0
+            while retries < max_retries:
+                try:
+                    response = self.session.post(url, params=params, json=body, timeout=self.timeout)
+                    response_data = response.json()
+                except json.decoder.JSONDecodeError:
+                    print(f"\nERROR: cannot parse response as JSON: {response.content}")
+                    retries += 1
+                    time.sleep(wait_time)
+                else:
+                    break
 
             if first_page:
                 yield response_data["hits"]["total"]["value"]
