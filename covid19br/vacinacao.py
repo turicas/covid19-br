@@ -411,7 +411,8 @@ def convert_row(field_converters, row):
         new["estabelecimento_codigo_ibge_municipio"],
     )
     new["paciente_idade"] = calculate_age(
-        row.get("paciente_dataNascimento", None), row.get("vacina_dataAplicacao", None),
+        row.get("paciente_datanascimento", None),
+        row.get("vacina_dataaplicacao", None),
     )
     new["paciente_faixa_etaria"] = calculate_age_range(new["paciente_idade"])
 
