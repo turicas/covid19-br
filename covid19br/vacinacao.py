@@ -339,7 +339,7 @@ def get_field_converters():
         "paciente_endereco_uf": {"name": "paciente_unidade_federativa", "converter": parse_unidade_federativa,},
         "paciente_enumSexoBiologico": {"name": "paciente_sexo_biologico", "converter": parse_str,},
         "paciente_id": {"name": "paciente_uuid", "converter": partial(generate_uuid, "covid19-documento-vacinado"),},
-        "paciente_idade": {"name": "paciente_idade", "converter": parse_int,},
+        "paciente_idade": {"name": "paciente_idade", "converter": None,},
         "paciente_nacionalidade_enumNacionalidade": {"name": "paciente_nacionalidade", "converter": parse_str,},
         "paciente_racaCor_codigo": {"name": "paciente_codigo_etnia", "converter": parse_int,},
         "paciente_racaCor_valor": {"name": "paciente_etnia", "converter": parse_etnia,},
@@ -410,10 +410,10 @@ def convert_row(field_converters, row):
         new["estabelecimento_municipio"],
         new["estabelecimento_codigo_ibge_municipio"],
     )
-    new["paciente_idade_calculada"] = calculate_age(
+    new["paciente_idade"] = calculate_age(
         row.get("paciente_dataNascimento", None), row.get("vacina_dataAplicacao", None),
     )
-    new["paciente_faixa_etaria"] = calculate_age_range(new["paciente_idade_calculada"])
+    new["paciente_faixa_etaria"] = calculate_age_range(new["paciente_idade"])
 
     return new
 

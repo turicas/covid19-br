@@ -22,8 +22,7 @@ paciente_data_nascimento,date,Data de nascimento da pessoa vacinada,Data nasc. P
 paciente_etnia,text,Etnia da pessoa vacinada,Etnia paciente
 paciente_faixa_etaria,text,Faixa etária do paciente (baseada na idade calculada),Faixa etária paciente
 paciente_grupo,text,Grupo da pessoa vacinada,Grupo paciente
-paciente_idade,integer,Idade da pessoa vacinada,Idade paciente
-paciente_idade_calculada,integer,Idade da pessoa vacinada calculada pelo Brasil.IO com base na data de nascimento reportada,Idade paciente
+paciente_idade,integer,Idade da pessoa vacinada calculada pelo Brasil.IO com base na data de nascimento reportada,Idade paciente
 paciente_municipio,text,Município de residência da pessoa vacinada,Município residência paciente
 paciente_nacionalidade,text,Nacionalidade da pessoa vacinada,Nacionalidade paciente
 paciente_pais,text,País de residência da pessoa vacinada,País residência paciente

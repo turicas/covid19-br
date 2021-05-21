@@ -20,7 +20,6 @@ paciente_etnia,text
 paciente_faixa_etaria,text
 paciente_grupo,text
 paciente_idade,integer
-paciente_idade_calculada,integer
 paciente_municipio,text
 paciente_nacionalidade,text
 paciente_pais,text
