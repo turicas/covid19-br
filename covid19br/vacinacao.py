@@ -80,6 +80,23 @@ def parse_str(value):
     value = (value or "").replace("\xa0", "").strip()
     return value if value and value not in ('\\\\""', "\\\\") else None
 
+@lru_cache(maxsize=16)
+def parse_vacina(value):
+    mapping = {
+        "Covid-19-AstraZeneca": "covishield",
+        "Covid-19-Coronavac-Sinovac/Butantan": "coronavac",
+        "Pendente Identificação": None,
+        "Vacina Covid-19 - Covishield": "covishield",
+        "Vacina covid-19 - Ad26.COV2.S - Janssen-Cilag": "ad26cov2s",
+        "Vacina covid-19 - BNT162b2 - BioNTech/Fosun Pharma/Pfizer": "bnt162b2",
+    }
+    result = mapping.get(value, "***NOT FOUND***")
+    if result == "***NOT FOUND***":
+        logger.warning(f"Vaccine not found: {repr(value)}")
+        return parse_str(value)
+    else:
+        return result
+
 
 @lru_cache(maxsize=9)
 def parse_str_capitalize(value):
@@ -87,36 +104,53 @@ def parse_str_capitalize(value):
     return value.capitalize() if value is not None else None
 
 
-@lru_cache(maxsize=9)
+@lru_cache(maxsize=64)
 def parse_sistema_origem(value):
-    value = parse_str(value)
-    v = value.lower()
-
-    if v.startswith("o sistema rn+vacina"):
-        # 'O sistema RN+Vacina ...'
-        value = "RN+Vacina"
-
-    elif v.startswith("g-mus - gestão municipal de saúde"):
-        # 'G-MUS - Gestão Municipal de Saúde usado para evoluções do prontuário e aplicações de vacinas e demais modulos.'
-        value = "G-MUS"
-
-    elif v == "sistema próprio de prontuário eletrônico":
-        # 'Sistema próprio de prontuário eletrônico'
-        value = "Sistema próprio"
-
-    elif v.startswith("sistema de prontuário eletrônico integrado com os"):
-        # 'Sistema de Prontuário Eletrônico integrado com os demais serviços de saude, como imunizações, laboratorio,farmacia,transporte e outros.Também atende todos os serviços de baixa ,média e alta complexidade que a secretaria municipal de saúde fornece e conta com ferramentas de integração ao ministério da saude seguindo as portarias e manuais disponíveis.'
-        value = "Sistema de prontuário integrado"
-
-    elif v.startswith("sistema de gestão municipal de saúde, com controle"):
-        # 'Sistema de Gestão Municipal de Saúde, com controle de prontuário eletrônico de paciente, dispensação de medicamentos, vacinas, geração de produção BPA, RAAS e fichas do e-SUS.'
-        value = "Sistema de gestão municipal"
-
-    elif v.startswith("sistema utilizado pela secretaria para registro de"):
-        # 'Sistema utilizado pela secretaria para registro de imunizações e controle de prontuário eletrônico.'
-        value = "Sistema de imunização e prontuário"
-
-    return value
+    mapping = {
+        "E-saúde Curitiba": "E-Saúde",
+        "E-saúde": "E-Saúde",
+        "ESUS APS - NACIONAL (OFFLINE)": "e-SUS APS",
+        "FAST MEDIC - FAST SAUDE": "FastMedic",
+        "Fastmedic - FastSaude": "FastMedic",
+        "G-MUS - Gestão Municipal de Saude": "G-MUS",
+        "G-MUS - Gestão Municipal de Saúde": "G-MUS",
+        "G-MUS": "G-MUS",
+        "GMUS": "G-MUS",
+        "IDS SAUDE": "IDS Saúde",
+        "IDS Saúde": "IDS Saúde",
+        "IPM Sistemas Ltda": "IPM Saúde",
+        "IPM Sistemas Ltda.": "IPM Saúde",
+        "IPM Sistemas": "IPM Saúde",
+        "IPM istemas LTDA": "IPM Saúde",
+        "IntegraSUS": "IntegraSUS",
+        "Novo PNI": "Novo PNI",
+        "Prontuário Sobral": "Prontuário Sobral",
+        "RN + Vacina": "RN + Vacina",
+        "RP SAÚDE": "RP Saúde",
+        "RP Saúde": "RP Saúde",
+        "SIGRAH": "SIGRAPH",
+        "SIGSS - Sistema de Gestão de Saúde Social": "SIGSS",
+        "SIGSS MV": "SIGSS MV",
+        "SIGSS ¿ Sistema Integrado de Gestão da Saúde e Social": "SIGSS",
+        "SIMUS": "SIMUS",
+        "SMV": "SMV",
+        "Sanitas - Sistema Integrado de Saúde": "Sanitas",
+        "Saudetech": "SaúdeTech",
+        "Saúde Digital MG": "Saúde Digital MG",
+        "Sistema Gestor de Saúde": "SGS",
+        "VACINOMENTRO COVID-19": "Vacinômetro COVID-19",
+        "VACIVIDA": "VaciVida",
+        "VIDA+": "Vida+",
+        "Vacina Campo Grande": "Vacina Campo Grande",
+        "Vacina João Pessoa": "Vacina João Pessoa",
+        "saudetech": "SaúdeTech",
+    }
+    result = mapping.get(value, "***NOT FOUND***")
+    if result == "***NOT FOUND***":
+        logger.warning(f"Health system not found: {repr(value)}")
+        return parse_str(value)
+    else:
+        return result
 
 
 @lru_cache(maxsize=99999)
@@ -298,6 +332,7 @@ def get_field_converters():
             "name": "paciente_codigo_ibge_municipio",
             "converter": parse_codigo_ibge_municipio,
         },
+        "id_sistema_origem": {"name": "sistema_origem_id", "converter": parse_int,},
         "paciente_endereco_coPais": {"name": "paciente_codigo_pais", "converter": parse_int,},
         "paciente_endereco_nmMunicipio": {"name": "paciente_municipio", "converter": parse_municipio,},
         "paciente_endereco_nmPais": {"name": "paciente_pais", "converter": parse_str_capitalize,},
@@ -308,7 +343,6 @@ def get_field_converters():
         "paciente_nacionalidade_enumNacionalidade": {"name": "paciente_nacionalidade", "converter": parse_str,},
         "paciente_racaCor_codigo": {"name": "paciente_codigo_etnia", "converter": parse_int,},
         "paciente_racaCor_valor": {"name": "paciente_etnia", "converter": parse_etnia,},
-        "id_sistema_origem": {"name": "sistema_origem_id", "converter": parse_int,},
         "sistema_origem": {"name": "sistema_origem", "converter": parse_sistema_origem,},
         "vacina_categoria_codigo": {"name": "paciente_codigo_grupo", "converter": parse_int,},
         "vacina_categoria_nome": {"name": "paciente_grupo", "converter": parse_str,},
@@ -320,7 +354,7 @@ def get_field_converters():
         "vacina_grupoAtendimento_codigo": {"name": "paciente_codigo_subgrupo", "converter": parse_int,},
         "vacina_grupoAtendimento_nome": {"name": "paciente_subgrupo", "converter": parse_subgrupo,},
         "vacina_lote": {"name": "vacina_lote", "converter": parse_str,},
-        "vacina_nome": {"name": "vacina", "converter": parse_str,},
+        "vacina_nome": {"name": "vacina", "converter": parse_vacina,},
         "@timestamp": {"name": "timestamp", "converter": None,},
         "@version": {"name": "version", "converter": None,},
     }

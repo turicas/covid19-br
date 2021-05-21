@@ -46,6 +46,8 @@ def main():
     filename_raw = output_path / "microdados_vacinacao-raw.csv.gz"
     filename_censored = output_path / "microdados_vacinacao.csv.gz"
     filename_uncensored = output_path / "microdados_vacinacao-uncensored.csv.gz"
+    if not output_path.exists():
+        output_path.mkdir(parents=True)
 
     with closing(requests.get(url, stream=True)) as response:
         writer_raw = CsvLazyDictWriter(filename_raw)
