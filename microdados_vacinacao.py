@@ -13,7 +13,7 @@ from lxml.html import document_fromstring
 from rows.utils import CsvLazyDictWriter, open_compressed
 from tqdm import tqdm
 
-from covid19br.vacinacao import convert_row_censored, convert_row_uncensored
+from covid19br.vacinacao import convert_row_uncensored, censor
 
 
 REGEXP_DATE = re.compile("([0-9]{4}-[0-9]{2}-[0-9]{2})")
@@ -80,8 +80,10 @@ def main():
         refresh_count = args.refresh_count
         reader = csv.DictReader(fobj, delimiter=";")
         for counter, row in tqdm(enumerate(reader), unit_scale=True, unit="row"):
-            censored_writerow(convert_row_censored(row))
-            uncensored_writerow(convert_row_uncensored(row))
+            row = convert_row_uncensored(row)
+            uncensored_writerow(row)
+            censor(row)
+            censored_writerow(row)
         writer_censored.close()
         writer_uncensored.close()
 
