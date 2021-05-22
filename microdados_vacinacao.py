@@ -1,6 +1,8 @@
 import argparse
 import csv
 import re
+import shlex
+import subprocess
 import sys
 from contextlib import closing
 from pathlib import Path
@@ -8,7 +10,7 @@ from urllib.request import urlopen
 
 import requests
 from lxml.html import document_fromstring
-from rows.utils import CsvLazyDictWriter
+from rows.utils import CsvLazyDictWriter, open_compressed
 from tqdm import tqdm
 
 from covid19br.vacinacao import convert_row_censored, convert_row_uncensored
@@ -29,11 +31,26 @@ def get_latest_url_and_date():
     return download_url, date
 
 
+def download_file(url, filename, connections=4):
+    command = f"""
+        aria2c \
+            --dir "{filename.parent.absolute()}" \
+            -s "{connections}" \
+            -x "{connections}" \
+            -o "{filename.name}" \
+            "{url}"
+    """.strip()
+    subprocess.run(shlex.split(command))
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--chunk-size", type=int, default=1_024 * 1_024)
     parser.add_argument("--refresh-count", type=int, default=10_000)
     parser.add_argument("--input-encoding", type=str, default="utf-8")
+    parser.add_argument("--connections", type=int, default=8)
+    parser.add_argument("--preserve-raw", action="store_true")
+    parser.add_argument("--buffering", type=int, default=8 * 1024 * 1024)
     args = parser.parse_args()
 
     # TODO: adicionar opção para selecionar qual dos 3 possíveis CSVs o script
@@ -43,42 +60,33 @@ def main():
 
     url, date = get_latest_url_and_date()
     output_path = Path(__file__).parent / "data" / "output"
-    filename_raw = output_path / "microdados_vacinacao-raw.csv.gz"
+    filename_raw = output_path / f"microdados_vacinacao-raw-{date}.csv"
     filename_censored = output_path / "microdados_vacinacao.csv.gz"
     filename_uncensored = output_path / "microdados_vacinacao-uncensored.csv.gz"
     if not output_path.exists():
         output_path.mkdir(parents=True)
 
-    with closing(requests.get(url, stream=True)) as response:
-        writer_raw = CsvLazyDictWriter(filename_raw)
-        raw_writerow = writer_raw.writerow
-        writer_censored = CsvLazyDictWriter(filename_censored)
+    download_file(url, filename_raw, connections=args.connections)
+
+    with filename_raw.open() as fobj:
+        fobj_censored = open_compressed(filename_censored, mode="w", buffering=args.buffering)
+        writer_censored = CsvLazyDictWriter(fobj_censored)
         censored_writerow = writer_censored.writerow
-        writer_uncensored = CsvLazyDictWriter(filename_uncensored)
+
+        fobj_uncensored = open_compressed(filename_uncensored, mode="w", buffering=args.buffering)
+        writer_uncensored = CsvLazyDictWriter(fobj_uncensored)
         uncensored_writerow = writer_uncensored.writerow
 
-        file_size = response.headers.get("content-length")
-        if file_size is not None:
-            file_size = int(file_size)
-
         refresh_count = args.refresh_count
-        fobj = (
-            line.decode(args.input_encoding)
-            for line in response.iter_lines(chunk_size=args.chunk_size)
-        )
         reader = csv.DictReader(fobj, delimiter=";")
-        progress = tqdm(reader, total=file_size, unit_scale=True, unit="B")
-        for counter, row in enumerate(reader):
-            raw_writerow(row)
+        for counter, row in tqdm(enumerate(reader), unit_scale=True, unit="row"):
             censored_writerow(convert_row_censored(row))
             uncensored_writerow(convert_row_uncensored(row))
-            if counter % refresh_count == 0:
-                progress.n = response.raw.tell()
-                progress.refresh()
-        progress.n = response.raw.tell()
-        progress.close()
         writer_censored.close()
         writer_uncensored.close()
+
+    if not args.preserve_raw:
+        filename_raw.unlink()
 
 
 if __name__ == "__main__":
