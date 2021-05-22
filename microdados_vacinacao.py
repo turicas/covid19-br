@@ -44,7 +44,7 @@ def download_file_aria2c(url, filename, connections=4):
 
 
 def download_file_curl(url, filename):
-    with open(output_filename, mode="wb") as fobj:
+    with open(filename, mode="wb") as fobj:
         p1 = subprocess.Popen(
             shlex.split(f'curl "{url}"'),
             stdout=subprocess.PIPE,
