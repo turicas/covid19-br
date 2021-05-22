@@ -31,7 +31,7 @@ def get_latest_url_and_date():
     return download_url, date
 
 
-def download_file(url, filename, connections=4):
+def download_file_aria2c(url, filename, connections=4):
     command = f"""
         aria2c \
             --dir "{filename.parent.absolute()}" \
@@ -41,6 +41,24 @@ def download_file(url, filename, connections=4):
             "{url}"
     """.strip()
     subprocess.run(shlex.split(command))
+
+
+def download_file_curl(url, filename):
+    with open(output_filename, mode="wb") as fobj:
+        p1 = subprocess.Popen(
+            shlex.split(f'curl "{url}"'),
+            stdout=subprocess.PIPE,
+            stderr=sys.stdout,
+        )
+        p2 = subprocess.Popen(
+            shlex.split("xz -0 -"),
+            stdin=p1.stdout,
+            stdout=fobj,
+        )
+        stdout, stderr = p2.communicate()
+        p2.wait()
+        p1.wait()
+    return stdout, stderr
 
 
 def main():
@@ -60,15 +78,15 @@ def main():
 
     url, date = get_latest_url_and_date()
     output_path = Path(__file__).parent / "data" / "output"
-    filename_raw = output_path / f"microdados_vacinacao-raw-{date}.csv"
+    filename_raw = output_path / f"microdados_vacinacao-raw-{date}.csv.xz"
     filename_censored = output_path / "microdados_vacinacao.csv.gz"
     filename_uncensored = output_path / "microdados_vacinacao-uncensored.csv.gz"
     if not output_path.exists():
         output_path.mkdir(parents=True)
 
-    download_file(url, filename_raw, connections=args.connections)
+    download_file_curl(url, filename_raw)
 
-    with filename_raw.open() as fobj:
+    with open_compressed(filename_raw) as fobj:
         fobj_censored = open_compressed(filename_censored, mode="w", buffering=args.buffering)
         writer_censored = CsvLazyDictWriter(fobj_censored)
         censored_writerow = writer_censored.writerow

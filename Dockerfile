@@ -10,6 +10,7 @@ RUN apt-get update && apt-get upgrade -y \
     && apt-get install -y \
         aria2 \
         build-essential \
+        curl \
         wget \
     && python -m pip install --upgrade pip \
     && pip install -r ${PYTHON_REQUIREMENTS} \
