@@ -271,7 +271,7 @@ def parse_date_str(value):
 @lru_cache(maxsize=999)
 def parse_application_date(value):
     value = parse_date(value)
-    if value <= "2020-01-01" or value >= str(today()):  # Invalid value
+    if value is None or value <= "2020-01-01" or value >= str(today()):  # Invalid value
         value = None
     return value
 
