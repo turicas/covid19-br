@@ -10,7 +10,7 @@ estabelecimento_municipio,text
 estabelecimento_razao_social,text
 estabelecimento_unidade_federativa,text
 numero_dose,integer
-paciente_cep,float
+paciente_cep,integer
 paciente_codigo_etnia,integer
 paciente_codigo_grupo,integer
 paciente_codigo_ibge_municipio,integer
