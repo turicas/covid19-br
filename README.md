@@ -57,6 +57,10 @@ arquivos na pasta [`sql/`](sql/). Por padrão o script reutiliza os arquivos
 caso já tenha baixado; para sempre baixar a versão mais atual dos dados,
 execute `./analysis.sh --clean`.
 
+Leia também nossa [análise dos microdados de vacinação disponíveis no
+OpenDataSUS](analises/microdados-vacinacao/README.md).
+
+
 ### Validando os dados
 
 Os metadados estão descritos conforme os padrões *Data Package* e

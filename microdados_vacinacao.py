@@ -1,114 +1,112 @@
 import argparse
 import csv
-import logging
+import re
+import shlex
+import subprocess
 import sys
-from functools import partial
+from contextlib import closing
+from pathlib import Path
+from urllib.request import urlopen
 
-from async_process_executor import pipeline
+import requests
+from lxml.html import document_fromstring
 from rows.utils import CsvLazyDictWriter, open_compressed
 from tqdm import tqdm
 
-from covid19br.elasticsearch import ElasticSearch
-from covid19br.vacinacao import convert_row_censored, convert_row_uncensored
+from covid19br.vacinacao import convert_row_uncensored, censor
 
 
-def get_data_from_elasticsearch(api_url, index_name, sort_by, username, password, page_size):
-    es = ElasticSearch(api_url)
-    iterator = es.paginate(index=index_name, sort_by=sort_by, user=username, password=password, page_size=page_size)
-    progress = tqdm(unit_scale=True)
-    progress.desc = f"Downloading page 001"
-    progress.refresh()
-    for page_number, page in enumerate(iterator, start=1):
-        progress.desc = f"Downloaded page {page_number:03d}"
-        progress.refresh()
-        yield page
-    progress.close()
+REGEXP_DATE = re.compile("([0-9]{4}-[0-9]{2}-[0-9]{2})")
 
 
-def get_data_from_csv(filename, page_size):
-    with open_compressed(filename) as fobj:
-        reader = csv.DictReader(fobj)
-        iterator = rows.utils.ipartition(reader, page_size)
-        for page in tqdm(iterator, unit_scale=True):
-            yield page
+def get_latest_url_and_date():
+    """Scrapes CKAN in order to find the last available CSV for Brazil"""
+
+    repository_url = "https://opendatasus.saude.gov.br/dataset/covid-19-vacinacao/resource/ef3bd0b8-b605-474b-9ae5-c97390c197a8"
+    response = urlopen(repository_url)
+    html = response.read()
+    tree = document_fromstring(html)
+    download_url = tree.xpath("//a[contains(translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'dados completos')]/@href")[0]
+    date = REGEXP_DATE.findall(download_url)[0]
+    return download_url, date
 
 
-def convert_rows(func, iterator):
-    func = func if func is not None else lambda row: row
-    for page in iterator:
-        yield [func(row["_source"]) for row in page["hits"]["hits"]]
+def download_file_aria2c(url, filename, connections=4):
+    command = f"""
+        aria2c \
+            --dir "{filename.parent.absolute()}" \
+            -s "{connections}" \
+            -x "{connections}" \
+            -o "{filename.name}" \
+            "{url}"
+    """.strip()
+    subprocess.run(shlex.split(command))
 
 
-def write_csv(filename, iterator):
-    writer = CsvLazyDictWriter(filename)
-    for page in iterator:
-        for row in page:
-            writer.writerow(row)
+def download_file_curl(url, filename):
+    with open(filename, mode="wb") as fobj:
+        p1 = subprocess.Popen(
+            shlex.split(f'curl "{url}"'),
+            stdout=subprocess.PIPE,
+            stderr=sys.stdout,
+        )
+        p2 = subprocess.Popen(
+            shlex.split("xz -0 -"),
+            stdin=p1.stdout,
+            stdout=fobj,
+        )
+        stdout, stderr = p2.communicate()
+        p2.wait()
+        p1.wait()
+    return stdout, stderr
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--log-level", default="ERROR")
-    parser.add_argument("--raw", action="store_true")
-    parser.add_argument("--no-censorship", action="store_true")
-    parser.add_argument("--api-url", default="https://imunizacao-es.saude.gov.br/")
-    parser.add_argument("--username", default="imunizacao_public")
-    parser.add_argument("--password", default="qlto5t&7r_@+#Tlstigi")
-    parser.add_argument("--index", default="desc-imunizacao")
-    parser.add_argument("--ttl", default="10m")
-    parser.add_argument("--page-size", default=10_000)
-    parser.add_argument("--input-filename")
-    parser.add_argument("output_filename")
+    parser.add_argument("--chunk-size", type=int, default=1_024 * 1_024)
+    parser.add_argument("--refresh-count", type=int, default=10_000)
+    parser.add_argument("--input-encoding", type=str, default="utf-8")
+    parser.add_argument("--connections", type=int, default=8)
+    parser.add_argument("--preserve-raw", action="store_true")
+    parser.add_argument("--buffering", type=int, default=8 * 1024 * 1024)
     args = parser.parse_args()
 
-    log_level = getattr(logging, args.log_level)
-    handler = logging.StreamHandler(sys.stdout)
-    handler.setLevel(log_level)
-    handler.setFormatter(
-        logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-    )
-    pipeline.logger.addHandler(handler)
-    pipeline.logger.setLevel(log_level)
+    # TODO: adicionar opção para selecionar qual dos 3 possíveis CSVs o script
+    # irá gerar.
+    # TODO: configurar saída do logger para arquivo e não stdout/stderr
+    # TODO: adicionar opção para salvar ou não CSV original (compactado)
 
-    convert_row = convert_row_censored
-    if args.raw:
-        convert_row = None
-    elif args.no_censorship:
-        convert_row = convert_row_uncensored
+    url, date = get_latest_url_and_date()
+    output_path = Path(__file__).parent / "data" / "output"
+    filename_raw = output_path / f"microdados_vacinacao-raw-{date}.csv.xz"
+    filename_censored = output_path / "microdados_vacinacao.csv.gz"
+    filename_uncensored = output_path / "microdados_vacinacao-uncensored.csv.gz"
+    if not output_path.exists():
+        output_path.mkdir(parents=True)
 
-    if args.input_filename:  # Use local CSV
-        process_pipeline = [
-            (
-                get_data_from_csv,
-                (args.input_filename, args.page_size),
-            ),
-            (
-                partial(convert_rows, convert_row),
-                tuple(),
-            ),
-            (
-                write_csv,
-                (args.output_filename,),
-            ),
-        ]
+    download_file_curl(url, filename_raw)
 
-    else:  # Get data from ElasticSearch API
-        process_pipeline = [
-            (
-                get_data_from_elasticsearch,
-                (args.api_url, args.index, "@timestamp", args.username, args.password, args.page_size),
-            ),
-            (
-                partial(convert_rows, convert_row),
-                tuple(),
-            ),
-            (
-                write_csv,
-                (args.output_filename,),
-            ),
-        ]
+    with open_compressed(filename_raw) as fobj:
+        fobj_censored = open_compressed(filename_censored, mode="w", buffering=args.buffering)
+        writer_censored = CsvLazyDictWriter(fobj_censored)
+        censored_writerow = writer_censored.writerow
 
-    pipeline.execute(process_pipeline)
+        fobj_uncensored = open_compressed(filename_uncensored, mode="w", buffering=args.buffering)
+        writer_uncensored = CsvLazyDictWriter(fobj_uncensored)
+        uncensored_writerow = writer_uncensored.writerow
+
+        refresh_count = args.refresh_count
+        reader = csv.DictReader(fobj, delimiter=";")
+        for counter, row in tqdm(enumerate(reader), unit_scale=True, unit="row"):
+            row = convert_row_uncensored(row)
+            uncensored_writerow(row)
+            censor(row)
+            censored_writerow(row)
+        writer_censored.close()
+        writer_uncensored.close()
+
+    if not args.preserve_raw:
+        filename_raw.unlink()
 
 
 if __name__ == "__main__":

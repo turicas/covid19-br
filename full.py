@@ -136,11 +136,17 @@ def main():
     parser.add_argument("output_filename")
     args = parser.parse_args()
 
-    process_pipeline = [
-        (read_files, (args.input_filenames,)),
-        (write_csv, (args.output_filename,)),
-    ]
-    pipeline.execute(process_pipeline)
+    writer = rows.utils.CsvLazyDictWriter(args.output_filename)
+    progress = tqdm()
+    write_row = writer.writerow
+    progress_update = progress.update
+    start_date, end_date = None, today()
+    for filename in args.input_filenames:
+        for row in get_data_greedy(filename, start_date, end_date):
+            write_row(row)
+            progress_update()
+    writer.close()
+    progress.close()
 
 
 if __name__ == "__main__":

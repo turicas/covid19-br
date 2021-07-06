@@ -9,7 +9,7 @@ from rows.utils.date import today
 from . import demographics
 
 logger = logging.getLogger(__name__)
-BRASILIO_URLID_PATTERN = "https://id.brasil.io/v1/{entity}/{internal_id}"
+BRASILIO_URLID = "https://id.brasil.io/v1/"
 REGEXP_DATE = re.compile("[0-9]{4}-[0-9]{2}-[0-9]{2}")
 CITY_BY_CODE = {}
 cities = demographics.cities(2020)
@@ -72,13 +72,33 @@ def calculate_age_range(value):
                 return f"{start:02d} a {end:02d}"
 
 
-def generate_uuid(entity, internal_id):
-    return uuid5(NAMESPACE_URL, BRASILIO_URLID_PATTERN.format(entity=entity, internal_id=internal_id))
+def generate_uuid(entity):
+    url = BRASILIO_URLID + entity + "/"
+    def gen(internal_id):
+        return str(uuid5(NAMESPACE_URL, url + internal_id))
+    return gen
 
 
 def parse_str(value):
     value = (value or "").replace("\xa0", "").strip()
     return value if value and value not in ('\\\\""', "\\\\") else None
+
+@lru_cache(maxsize=16)
+def parse_vacina(value):
+    mapping = {
+        "Covid-19-AstraZeneca": "covishield",
+        "Covid-19-Coronavac-Sinovac/Butantan": "coronavac",
+        "Pendente Identificação": None,
+        "Vacina Covid-19 - Covishield": "covishield",
+        "Vacina covid-19 - Ad26.COV2.S - Janssen-Cilag": "ad26cov2s",
+        "Vacina covid-19 - BNT162b2 - BioNTech/Fosun Pharma/Pfizer": "bnt162b2",
+    }
+    result = mapping.get(value, "***NOT FOUND***")
+    if result == "***NOT FOUND***":
+        logger.warning(f"Vaccine not found: {repr(value)}")
+        return parse_str(value)
+    else:
+        return result
 
 
 @lru_cache(maxsize=9)
@@ -87,36 +107,53 @@ def parse_str_capitalize(value):
     return value.capitalize() if value is not None else None
 
 
-@lru_cache(maxsize=9)
+@lru_cache(maxsize=64)
 def parse_sistema_origem(value):
-    value = parse_str(value)
-    v = value.lower()
-
-    if v.startswith("o sistema rn+vacina"):
-        # 'O sistema RN+Vacina ...'
-        value = "RN+Vacina"
-
-    elif v.startswith("g-mus - gestão municipal de saúde"):
-        # 'G-MUS - Gestão Municipal de Saúde usado para evoluções do prontuário e aplicações de vacinas e demais modulos.'
-        value = "G-MUS"
-
-    elif v == "sistema próprio de prontuário eletrônico":
-        # 'Sistema próprio de prontuário eletrônico'
-        value = "Sistema próprio"
-
-    elif v.startswith("sistema de prontuário eletrônico integrado com os"):
-        # 'Sistema de Prontuário Eletrônico integrado com os demais serviços de saude, como imunizações, laboratorio,farmacia,transporte e outros.Também atende todos os serviços de baixa ,média e alta complexidade que a secretaria municipal de saúde fornece e conta com ferramentas de integração ao ministério da saude seguindo as portarias e manuais disponíveis.'
-        value = "Sistema de prontuário integrado"
-
-    elif v.startswith("sistema de gestão municipal de saúde, com controle"):
-        # 'Sistema de Gestão Municipal de Saúde, com controle de prontuário eletrônico de paciente, dispensação de medicamentos, vacinas, geração de produção BPA, RAAS e fichas do e-SUS.'
-        value = "Sistema de gestão municipal"
-
-    elif v.startswith("sistema utilizado pela secretaria para registro de"):
-        # 'Sistema utilizado pela secretaria para registro de imunizações e controle de prontuário eletrônico.'
-        value = "Sistema de imunização e prontuário"
-
-    return value
+    mapping = {
+        "E-saúde Curitiba": "E-Saúde",
+        "E-saúde": "E-Saúde",
+        "ESUS APS - NACIONAL (OFFLINE)": "e-SUS APS",
+        "FAST MEDIC - FAST SAUDE": "FastMedic",
+        "Fastmedic - FastSaude": "FastMedic",
+        "G-MUS - Gestão Municipal de Saude": "G-MUS",
+        "G-MUS - Gestão Municipal de Saúde": "G-MUS",
+        "G-MUS": "G-MUS",
+        "GMUS": "G-MUS",
+        "IDS SAUDE": "IDS Saúde",
+        "IDS Saúde": "IDS Saúde",
+        "IPM Sistemas Ltda": "IPM Saúde",
+        "IPM Sistemas Ltda.": "IPM Saúde",
+        "IPM Sistemas": "IPM Saúde",
+        "IPM istemas LTDA": "IPM Saúde",
+        "IntegraSUS": "IntegraSUS",
+        "Novo PNI": "Novo PNI",
+        "Prontuário Sobral": "Prontuário Sobral",
+        "RN + Vacina": "RN + Vacina",
+        "RP SAÚDE": "RP Saúde",
+        "RP Saúde": "RP Saúde",
+        "SIGRAH": "SIGRAPH",
+        "SIGSS - Sistema de Gestão de Saúde Social": "SIGSS",
+        "SIGSS MV": "SIGSS MV",
+        "SIGSS ¿ Sistema Integrado de Gestão da Saúde e Social": "SIGSS",
+        "SIMUS": "SIMUS",
+        "SMV": "SMV",
+        "Sanitas - Sistema Integrado de Saúde": "Sanitas",
+        "Saudetech": "SaúdeTech",
+        "Saúde Digital MG": "Saúde Digital MG",
+        "Sistema Gestor de Saúde": "SGS",
+        "VACINOMENTRO COVID-19": "Vacinômetro COVID-19",
+        "VACIVIDA": "VaciVida",
+        "VIDA+": "Vida+",
+        "Vacina Campo Grande": "Vacina Campo Grande",
+        "Vacina João Pessoa": "Vacina João Pessoa",
+        "saudetech": "SaúdeTech",
+    }
+    result = mapping.get(value, "***NOT FOUND***")
+    if result == "***NOT FOUND***":
+        logger.warning(f"Health system not found: {repr(value)}")
+        return parse_str(value)
+    else:
+        return result
 
 
 @lru_cache(maxsize=99999)
@@ -173,7 +210,16 @@ def parse_etnia(value):
 
 @lru_cache(maxsize=9)
 def parse_dose(value):
-    return {"1ª dose": 1, "única": 1, "2ª dose": 2, "dose": None,}[parse_str(value).lower().replace("ªdose", "ª dose")]
+    mapping = {
+        "1ª dose": 1,
+        "única": 1,
+        "2ª dose": 2,
+        "dose": None,
+    }
+    converted = parse_str(value).lower().replace("ªdose", "ª dose")
+    if converted not in mapping:
+        logger.warning(f"Incorrect dose number: {repr(value)} (converted to `None`)")
+    return mapping.get(converted, None)
 
 
 @lru_cache(maxsize=99999)
@@ -214,28 +260,25 @@ def calculate_age(start_date, end_date):
     if start_date[5:] > end_date[5:]:
         age -= 1
 
-    return age
+    return str(age)
 
 
 @lru_cache(maxsize=99999)
-def parse_datetime(value):
-    value = value.strip()
-    if not value:
-        return None
-    return datetime.datetime.strptime(value, "%Y-%m-%d %H:%M:%S").isoformat()
+def parse_date_str(value):
+    return value[:10] if value else None
 
 
 @lru_cache(maxsize=999)
 def parse_application_date(value):
     value = parse_date(value)
-    if value <= "2020-01-01" or value >= str(today()):  # Invalid value
+    if value is None or value <= "2020-01-01" or value >= str(today()):  # Invalid value
         value = None
     return value
 
 
 @lru_cache(maxsize=9999)
 def clean_municipio(state, name, code):
-    # TODO: move to demographics
+    # TODO: parse 'JUIZ DE FORA - MG' (city name)
     if state is None or name is None:
         return state, name, code
     elif name.startswith("MUNICIPIO IGNORADO"):
@@ -248,7 +291,6 @@ def clean_municipio(state, name, code):
         name = "Brasília"
     elif state == "RS" and name == "CERRO LARGO":
         code = 4305207
-
     elif state == "GO" and name.endswith("(TRANSF. P/TO)"):
         logger.warning(
             f"Incorrect city code for: {repr(state)}, {repr(name)}, {repr(code)}. Fixing to state = TO"
@@ -275,35 +317,31 @@ def clean_municipio(state, name, code):
 
 
 def get_field_converters():
-    return {
-        "document_id": {"name": "documento_uuid", "converter": partial(generate_uuid, "covid19-documento-vacinacao"),},
-        "estabelecimento_municipio_codigo": {
-            "name": "estabelecimento_codigo_ibge_municipio",
-            "converter": parse_codigo_ibge_municipio,
-        },
-        "data_importacao_rnds": {"name": "data_importacao", "converter": parse_datetime,},
+    mapping = {
+        "@timestamp": {"name": "timestamp", "converter": None,},
+        "@version": {"name": "version", "converter": None,},
+        "data_importacao_rnds": {"name": "data_importacao", "converter": parse_date_str,},
+        "document_id": {"name": "documento_uuid", "converter": generate_uuid("covid19-documento-vacinacao"),},
+        "estabelecimento_municipio_codigo": { "name": "estabelecimento_codigo_ibge_municipio", "converter": parse_codigo_ibge_municipio, },
         "estabelecimento_municipio_nome": {"name": "estabelecimento_municipio", "converter": parse_municipio,},
         "estabelecimento_razaoSocial": {"name": "estabelecimento_razao_social", "converter": parse_str,},
         "estabelecimento_uf": {"name": "estabelecimento_unidade_federativa", "converter": parse_unidade_federativa,},
         "estabelecimento_valor": {"name": "estabelecimento_codigo_cnes", "converter": parse_int,},
         "estalecimento_noFantasia": {"name": "estabelecimento", "converter": parse_str,},
+        "id_sistema_origem": {"name": "sistema_origem_id", "converter": parse_int,},
         "paciente_dataNascimento": {"name": "paciente_data_nascimento", "converter": parse_date,},
         "paciente_endereco_cep": {"name": "paciente_cep", "converter": parse_codigo_5_digitos,},
-        "paciente_endereco_coIbgeMunicipio": {
-            "name": "paciente_codigo_ibge_municipio",
-            "converter": parse_codigo_ibge_municipio,
-        },
+        "paciente_endereco_coIbgeMunicipio": { "name": "paciente_codigo_ibge_municipio", "converter": parse_codigo_ibge_municipio, },
         "paciente_endereco_coPais": {"name": "paciente_codigo_pais", "converter": parse_int,},
         "paciente_endereco_nmMunicipio": {"name": "paciente_municipio", "converter": parse_municipio,},
         "paciente_endereco_nmPais": {"name": "paciente_pais", "converter": parse_str_capitalize,},
         "paciente_endereco_uf": {"name": "paciente_unidade_federativa", "converter": parse_unidade_federativa,},
         "paciente_enumSexoBiologico": {"name": "paciente_sexo_biologico", "converter": parse_str,},
-        "paciente_id": {"name": "paciente_uuid", "converter": partial(generate_uuid, "covid19-documento-vacinado"),},
-        "paciente_idade": {"name": "paciente_idade", "converter": parse_int,},
+        "paciente_id": {"name": "paciente_uuid", "converter": generate_uuid("covid19-documento-vacinado"),},
+        "paciente_idade": {"name": "paciente_idade", "converter": None,},
         "paciente_nacionalidade_enumNacionalidade": {"name": "paciente_nacionalidade", "converter": parse_str,},
         "paciente_racaCor_codigo": {"name": "paciente_codigo_etnia", "converter": parse_int,},
         "paciente_racaCor_valor": {"name": "paciente_etnia", "converter": parse_etnia,},
-        "id_sistema_origem": {"name": "sistema_origem_id", "converter": parse_int,},
         "sistema_origem": {"name": "sistema_origem", "converter": parse_sistema_origem,},
         "vacina_categoria_codigo": {"name": "paciente_codigo_grupo", "converter": parse_int,},
         "vacina_categoria_nome": {"name": "paciente_grupo", "converter": parse_str,},
@@ -315,68 +353,67 @@ def get_field_converters():
         "vacina_grupoAtendimento_codigo": {"name": "paciente_codigo_subgrupo", "converter": parse_int,},
         "vacina_grupoAtendimento_nome": {"name": "paciente_subgrupo", "converter": parse_subgrupo,},
         "vacina_lote": {"name": "vacina_lote", "converter": parse_str,},
-        "vacina_nome": {"name": "vacina", "converter": parse_str,},
-        "@timestamp": {"name": "timestamp", "converter": None,},
-        "@version": {"name": "version", "converter": None,},
+        "vacina_nome": {"name": "vacina", "converter": parse_vacina,},
     }
+    return {key.lower(): value for key, value in mapping.items()}
 
 
-def get_censored_field_converters():
-    converters = get_field_converters()
-
+def censor(row):
     # TODO: verificar se as colunas referentes ao fabricante estão consistentes
     # e, caso estejam, não deletá-las (em 2021-02-12 estavam totalmente
     # inconsistentes, comparadas com vacina e codigo_vacina).
-    converters["vacina_fabricante_nome"]["converter"] = None
-    converters["vacina_fabricante_referencia"]["converter"] = None
 
-    converters["paciente_dataNascimento"]["converter"] = None
-
-    return converters
+    del row["fabricante"]
+    del row["codigo_fabricante"]
+    del row["paciente_data_nascimento"]
 
 
-def convert_row(field_converters, row):
-    # First, convert fields already in `row`
-    new = {}
-    for key, value in row.items():
-        field_meta = field_converters[key]
-        converter = field_meta["converter"]
-        if converter is not None:
-            new[field_meta["name"]] = converter(value)
+def convert_row(field_converters):
 
-    # Then, add `None` to fields not in `row`
-    new.update(
-        {
-            meta["name"]: None
-            for meta in field_converters.values()
-            if meta["name"] not in new.keys() and meta["converter"] is not None
-        }
-    )
+    def convert(row):
+        # First, convert fields already in `row`
+        new = {}
+        for key, value in row.items():
+            field_meta = field_converters[key]
+            converter = field_meta["converter"]
+            if converter is not None:
+                new[field_meta["name"]] = converter(value)
 
-    # Run transformation on fields which need other field values
-    (
-        new["paciente_unidade_federativa"],
-        new["paciente_municipio"],
-        new["paciente_codigo_ibge_municipio"],
-    ) = clean_municipio(
-        new["paciente_unidade_federativa"], new["paciente_municipio"], new["paciente_codigo_ibge_municipio"],
-    )
-    (
-        new["estabelecimento_unidade_federativa"],
-        new["estabelecimento_municipio"],
-        new["estabelecimento_codigo_ibge_municipio"],
-    ) = clean_municipio(
-        new["estabelecimento_unidade_federativa"],
-        new["estabelecimento_municipio"],
-        new["estabelecimento_codigo_ibge_municipio"],
-    )
-    new["paciente_idade_calculada"] = calculate_age(
-        row.get("paciente_dataNascimento", None), row.get("vacina_dataAplicacao", None),
-    )
-    new["paciente_faixa_etaria"] = calculate_age_range(new["paciente_idade_calculada"])
+        # Then, add `None` to fields not in `row`
+        new.update(
+            {
+                meta["name"]: None
+                for meta in field_converters.values()
+                if meta["name"] not in new.keys() and meta["converter"] is not None
+            }
+        )
 
-    return new
+        # Run transformation on fields which need other field values
+        (
+            new["paciente_unidade_federativa"],
+            new["paciente_municipio"],
+            new["paciente_codigo_ibge_municipio"],
+        ) = clean_municipio(
+            new["paciente_unidade_federativa"], new["paciente_municipio"], new["paciente_codigo_ibge_municipio"],
+        )
+        (
+            new["estabelecimento_unidade_federativa"],
+            new["estabelecimento_municipio"],
+            new["estabelecimento_codigo_ibge_municipio"],
+        ) = clean_municipio(
+            new["estabelecimento_unidade_federativa"],
+            new["estabelecimento_municipio"],
+            new["estabelecimento_codigo_ibge_municipio"],
+        )
+        new["paciente_idade"] = calculate_age(
+            row.get("paciente_datanascimento", None),
+            row.get("vacina_dataaplicacao", None),
+        )
+        new["paciente_faixa_etaria"] = calculate_age_range(new["paciente_idade"])
+
+        return new
+
+    return convert
 
 
-convert_row_censored = partial(convert_row, get_censored_field_converters())
-convert_row_uncensored = partial(convert_row, get_field_converters())
+convert_row_uncensored = convert_row(get_field_converters())

@@ -1,3 +1,5 @@
+import json
+import time
 from urllib.parse import urljoin
 
 import requests
@@ -6,42 +8,95 @@ from rows.utils import CsvLazyDictWriter
 from tqdm import tqdm
 
 
+class GeneratorWithLength:
+    def __init__(self, generator, length):
+        self.__len = length
+        self.__gen = generator
+
+    def __len__(self):
+        return self.__len
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        return next(self.__gen)
+
+
 class ElasticSearch:
-    def __init__(self, base_url, user_agent=None):
+
+    def __init__(self, base_url, username=None, password=None, user_agent=None, timeout=10):
         self.base_url = base_url
-        self.user_agent = user_agent
+        self.__username = username
+        self.__password = password
+        self.search_url = urljoin(self.base_url, "_search")
+        self.timeout = timeout
 
-    def paginate(self, index, sort_by, user=None, password=None, page_size=10_000, ttl="10m"):
-        session = requests.Session()
-        if self.user_agent is not None:
-            session.headers["User-Agent"] = self.user_agent
-        if user is not None and password is not None:
-            session.auth = (user, password)
+        self.session = requests.Session()
+        if user_agent is not None:
+            self.session.headers["User-Agent"] = user_agent
+        if username is not None and password is not None:
+            self.session.auth = (username, password)
 
-        index_url = urljoin(self.base_url, index)
-        url = urljoin(index_url, "_search")
-        params = {
-            "sort": sort_by,
+    def index_url(self, index):
+        return urljoin(self.base_url, index)
+
+    def search(self, index, sort_by, page_size=10_000, ttl="10m", query=None):
+        """Search using scroll API"""
+
+        if isinstance(sort_by, str):
+            sort = [{sort_by: "asc"}]
+        elif isinstance(sort_by, (list, tuple)):
+            # expected format: [("field1", "asc"), ("field2", "desc"), ...]
+            sort = list(sort_by)
+        else:
+            raise ValueError(f"Invalid type '{type(sort_by)}' for 'sort_by'")
+
+        result = self.consume_scroll(index, sort, page_size, ttl, query)
+        total_hits = next(result)
+        return GeneratorWithLength(result, total_hits)
+
+    def consume_scroll(self, index, sort, page_size, ttl, query, max_retries=5, wait_time=3):
+        body = {
+            "query": query,
             "size": page_size,
-            "scroll": ttl,
+            "sort": sort,
+            "track_total_hits": True,
         }
+        if not query:
+            del body["query"]
+        url = self.index_url(index) + "/_search"
+        params = {"scroll": ttl}
+        first_page = True
+        while True:
+            retries = 0
+            while retries < max_retries:
+                try:
+                    response = self.session.post(url, params=params, json=body, timeout=self.timeout)
+                    response_data = response.json()
+                except json.decoder.JSONDecodeError:
+                    print(f"\nERROR: cannot parse response as JSON: {response.content}")
+                    retries += 1
+                    time.sleep(wait_time)
+                else:
+                    break
 
-        # Get first page
-        response = session.get(url, params=params)
-        response_data = response.json()
-        yield response_data
+            if first_page:
+                yield response_data["hits"]["total"]["value"]
+                url = self.base_url + "_search/scroll"
+                params = {}
+                body = {
+                    "scroll": ttl,
+                    "scroll_id": response_data["_scroll_id"],
+                }
+                first_page = False
 
-        # Then, paginate
-        finished = False
-        while not finished:
-            url = urljoin(self.base_url, "_search/scroll")
-            params = {"scroll": ttl, "scroll_id": response_data["_scroll_id"]}
-            response = session.get(url, params=params)
-            response_data = response.json()
-            yield response_data
-            finished = (
-                "hits" not in response_data.get("hits", {}) or len(response_data.get("hits", {}).get("hits", [])) == 0
-            )
+            hits = response_data["hits"].pop("hits", [])
+            if hits:
+                for hit in hits:
+                    yield hit["_source"]
+            else:
+                break
 
 
 class ElasticSearchConsumer(AsyncProcessExecutor):
@@ -62,8 +117,15 @@ class ElasticSearchConsumer(AsyncProcessExecutor):
         super().__init__(*args, **kwargs)
 
         self.convert_function = convert_function
-        self.es = ElasticSearch(api_url)
-        self.iterator = self.es.paginate(index=index_name, sort_by=sort_by, user=username, password=password, ttl=ttl,)
+        self.es = ElasticSearch(api_url,
+            username=username,
+            password=password,
+        )
+        self.iterator = self.es.search(
+            index=index_name,
+            sort_by=sort_by,
+            ttl=ttl,
+        )
         self.writer = CsvLazyDictWriter(output_filename)
         self.show_progress = progress
         if self.show_progress:
