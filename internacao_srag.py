@@ -10,7 +10,10 @@ from covid19br.vacinacao import calculate_age_range
 
 
 CKAN_URL = "https://opendatasus.saude.gov.br/"
-SRAG_DATASETS = ("bd-srag-2020", "bd-srag-2021")
+SRAG_DATASETS = (
+    "bd-srag-2021",  # Primeiro porque possui mais colunas
+    "bd-srag-2020",
+)
 DOWNLOAD_PATH = Path(__file__).parent / "data" / "download"
 OUTPUT_PATH = Path(__file__).parent / "data" / "output"
 for path in (DOWNLOAD_PATH, OUTPUT_PATH):
@@ -62,7 +65,7 @@ def convert_row(row):
             value = value[: value.rfind("/")] + "/2020"
         if not value:
             value = None
-        elif key.startswith("dt_"):
+        elif key.startswith("dt_") or key in ("dose_1_cov", "dose_2_cov"):
             value = PtBrDateField.deserialize(value)
         new[key] = value
 
@@ -83,11 +86,15 @@ def convert_row(row):
         diff_days = (new["dt_evoluca"] - new["dt_interna"]).days
     new["dias_internacao_a_alta"] = diff_days
 
+    diff_days = None
+    if new["classi_fin"] == "5" and None not in (new.get("dose_2_cov"), new["dt_sin_pri"]):
+        diff_days = (new["dt_sin_pri"] - new["dose_2_cov"]).days
+    new["dias_primeiros_sintomas_a_2a_dose"] = diff_days
+
     new["faixa_etaria"] = calculate_age_range(new["nu_idade_n"])
 
     # TODO: adicionar coluna ano e semana epidemiológica
-    # TODO: corrigir RuntimeError: ERROR:  invalid input syntax for integer: "20-1"
-    #                CONTEXT:  COPY srag, line 151650, column cod_idade: "20-1"
+    # TODO: corrigir ERROR: cod_idade: invalid input syntax for integer: "20-1"
     # TODO: data nascimento (censurar?)
     # TODO: dt_interna: corrigir valores de anos inexistentes
 
