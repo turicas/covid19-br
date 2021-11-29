@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    depends_on:
+      - selenium
+    volumes:
+      - .:/app
+
+  selenium:
+    image: selenium/standalone-chrome:4.1.0-20211123
+    shm_size: "2g"
+    restart: unless-stopped
+    env_file: .env

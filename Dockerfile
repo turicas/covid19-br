@@ -1,26 +1,16 @@
-FROM python:3.8-slim
+FROM python:3.8-slim-buster
 
+ENV PYTHONUNBUFFERED 1
 WORKDIR /app
 
-ARG PYTHON_REQUIREMENTS=requirements.txt
+RUN apt update \
+  && apt install -y build-essential libz-dev python3-dev aria2 curl wget vim \
+  && apt purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+  && rm -rf /var/lib/apt/lists/*
 
-COPY ${PYTHON_REQUIREMENTS} .
+COPY requirements.txt .
+COPY requirements-development.txt .
+RUN pip install --no-cache-dir -U pip \
+    && pip install --no-cache-dir -r requirements-development.txt
 
-RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y \
-        aria2 \
-        build-essential \
-        curl \
-        wget \
-    && python -m pip install --upgrade pip \
-    && pip install -r ${PYTHON_REQUIREMENTS} \
-    && apt-get remove -y build-essential \
-    && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN mkdir -p /app
-COPY ./ /app
-
-VOLUME [ "/app/data/output" ]
-
-CMD [ "/app/web.sh" ]
+VOLUME [ "/app" ]

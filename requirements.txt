@@ -14,8 +14,8 @@ openpyxl
 python-Levenshtein
 pytz
 requests
-selenium
-splinter
+selenium==3.141.0
+splinter==0.15.0
 Pillow
 s3cmd
 scrapy

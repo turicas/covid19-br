@@ -2,7 +2,6 @@
 
 set -e
 
-virtual_display=":99"
 output_path="boletim"
 today="$(date +'%Y-%m-%d')"
 remote_filename="dataset/covid19/boletim/${today}.png"
@@ -11,10 +10,7 @@ image_url="https://data.brasil.io/$remote_filename"
 mkdir -p $output_path
 
 # Take dashboard screenshot
-Xvfb $virtual_display -screen 0 1600x1600x24 &
-xvfb_pid=$!
-DISPLAY=$virtual_display python screenshot.py $local_filename
-kill $xvfb_pid
+docker-compose run worker python /app/screenshot.py /app/$local_filename
 
 # Upload file and create DailyBulletin entry
 s3cmd put $local_filename s3://$remote_filename

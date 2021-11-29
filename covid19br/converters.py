@@ -6,6 +6,8 @@ import rows
 from . import demographics
 
 
+NULL = (None, "")
+
 def extract_boletim(state, data):
     table = rows.import_from_dicts(
         data,
@@ -44,7 +46,7 @@ def extract_caso(state, data):
                 continue
             if date_str not in cities[caso["municipio"]]:
                 cities[caso["municipio"]][date_str] = {}
-            if value in (None, ""):
+            if value in NULL:
                 value = None
             else:
                 value = str(value)
@@ -77,7 +79,6 @@ def extract_caso(state, data):
             }
             confirmed = row["confirmed"]
             deaths = row["deaths"]
-            NULL = (None, "")
             if (confirmed in NULL and deaths not in NULL) or (deaths in NULL and confirmed not in NULL):
                 message = f"ERROR: only one field is filled for {date_str}, {state}, {city}"
                 raise ValueError(message)
