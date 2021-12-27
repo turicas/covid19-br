@@ -1,0 +1,3 @@
+$missing_bulletins
+
+* Os novos casos/óbitos são relativos ao nosso boletim de ontem (e não à meia noite).

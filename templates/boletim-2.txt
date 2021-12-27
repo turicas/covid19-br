@@ -1,0 +1,7 @@
+⚠️  Maiores aumentos com relação aos dados acumulados:
+
+Maiores aumentos % em óbitos:
+$top_increase_deaths
+
+Maiores aumentos % em casos:
+$top_increase_confirmed

@@ -1,0 +1,10 @@
+BOLETIM @brasil_io #COVID19 nº $number ($date)
+
+CASOS: $total_confirmed (+ $new_confirmed)*
+ÓBITOS: $total_deaths (+ $new_deaths)*
+
+Painel: https://brasil.io/covid19/
+Boletins: https://brasil.io/covid19/boletins/
+Doe: https://apoia.se/brasilio 💳
+
+#BoletimCOVIDreal #opendata #crowdfunding

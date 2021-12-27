@@ -2,7 +2,9 @@ import datetime
 import hashlib
 import json
 import os
+from collections import defaultdict
 from decimal import Decimal
+from pathlib import Path
 from string import Template
 
 import gspread
@@ -184,19 +186,27 @@ def main():
                 for state in state_data
                 if state["data_boletim"] != str(today) or (state["MS"] or "").strip()
             ]
-            missing_bulletins_text = [
-                f"* Nem todos os estados liberaram boletins hoje, falta{'m' if len(missing_bulletins) > 1 else ''}:"
-            ]
+            missing_state_data = defaultdict(list)
             for state in missing_bulletins:
                 ms = (state["MS"] or "").strip().lower()
                 if ms == "sim":
-                    status = "usamos dados do @minsaude"
+                    status = "dados do @minsaude"
                 elif ms == "parcial":
-                    status = "apenas atualização parcial"
+                    status = "atualização parcial"
                 else:
                     last_date = datetime.datetime.strptime(state["data_boletim"], "%Y-%m-%d").strftime("%d/%m")
                     status = f"sem dados hoje (último: {last_date})"
-                missing_bulletins_text.append(f"- {state['state']}: {status}")
+                missing_state_data[status].append(state["state"])
+            total_missing = sum([len(item) for item in missing_state_data.values()])
+            missing_bulletins_text = [
+                f"* Nem todos os estados liberaram boletins hoje, falta{'m' if total_missing > 1 else ''}:"
+            ]
+            missing_bulletins_text.extend(
+                [
+                    f"- {', '.join(states)}: {status}"
+                    for status, states in missing_state_data.items()
+                ]
+            )
 
         diff_states = spreadsheet.diff_states
         new_confirmed = sum(row["novos_casos"] for row in diff_states)
@@ -219,20 +229,33 @@ def main():
                 line += f" -- dif. p/ {state['diff_dias']} dias"
             top_increase_confirmed.append(line)
 
-        with open("boletim_template.txt") as fobj:
-            template = Template(fobj.read())
-        text = template.substitute(
-            number=number,
-            date=f"{today.day:02d}/{today.month:02d}",
-            total_confirmed=format_number_br(total_confirmed),
-            new_confirmed=format_number_br(new_confirmed),
-            total_deaths=format_number_br(total_deaths),
-            new_deaths=format_number_br(new_deaths),
-            top_increase_deaths="\n".join(top_increase_deaths),
-            top_increase_confirmed="\n".join(top_increase_confirmed),
-            missing_bulletins="\n".join(missing_bulletins_text),
-        )
-        print(text)
+        context = {
+            "number": number,
+            "date": f"{today.day:02d}/{today.month:02d}",
+            "total_confirmed": format_number_br(total_confirmed),
+            "new_confirmed": format_number_br(new_confirmed),
+            "total_deaths": format_number_br(total_deaths),
+            "new_deaths": format_number_br(new_deaths),
+            "top_increase_deaths": "\n".join(top_increase_deaths),
+            "top_increase_confirmed": "\n".join(top_increase_confirmed),
+            "missing_bulletins": "\n".join(missing_bulletins_text),
+        }
+        context_smaller = context.copy()
+        context_smaller.update({
+            "top_increase_deaths": "\n".join(top_increase_deaths[:3]),
+            "top_increase_confirmed": "\n".join(top_increase_confirmed[:3]),
+            "missing_bulletins": "\n".join(missing_bulletins_text),
+        })
+        path = Path(__file__).parent / "templates"
+        result = []
+        for filename in sorted(path.glob("boletim-*.txt")):
+            with filename.open() as fobj:
+                template = Template(fobj.read())
+                text = template.substitute(context).strip()
+                if len(text) > 280:
+                    text = template.substitute(context_smaller).strip()
+                result.append(text)
+        print("\n---\n".join(result))
 
     elif args.tweet_type == "vacinacao":
         filename = "data/output/microdados_vacinacao.csv.gz"
