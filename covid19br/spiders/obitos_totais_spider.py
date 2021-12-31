@@ -32,7 +32,7 @@ class TotalDeathsSpider(BaseRegistroCivilSpider):
         non_cache_period = datetime.timedelta(days=30)
         # `date_range` excludes the last, so we need to add one day to
         # `end_date`.
-        for date in date_range(self.start_date, self.end_date + one_day, interval="monthly"):
+        for date in date_range(self.start_date, self.end_date + one_day, step="monthly"):
             # Won't cache dates from 30 days ago until today (only historical
             # ones which are unlikely to change).
             should_cache = today() - date > non_cache_period

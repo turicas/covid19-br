@@ -42,6 +42,7 @@ def brazilian_epidemiological_week(date):
         2019: {"start_date": datetime.date(2018, 12, 30), "end_date": datetime.date(2019, 12, 28),},
         2020: {"start_date": datetime.date(2019, 12, 29), "end_date": datetime.date(2021, 1, 2),},
         2021: {"start_date": datetime.date(2021, 1, 3), "end_date": datetime.date(2022, 1, 1),},
+        2022: {"start_date": datetime.date(2022, 1, 2), "end_date": datetime.date(2023, 1, 1),},
     }
     year = None
     for possible_year, year_data in dates.items():
@@ -53,7 +54,7 @@ def brazilian_epidemiological_week(date):
 
     start_date = dates[year]["start_date"]
     end_date = dates[year]["end_date"]
-    week_range = date_range(start_date, end_date + one_day, interval="weekly")
+    week_range = date_range(start_date, end_date + one_day, step="weekly")
     for count, start in enumerate(week_range, start=1):
         end = start + 6 * one_day
         if start <= date <= end:

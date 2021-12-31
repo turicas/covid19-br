@@ -44,6 +44,8 @@ def calculate_age_range(value):
     """
     >>> calculate_age_range('10/2020')
     '00 a 04'
+    >>> calculate_age_range('0')
+    '00 a 04'
     >>> calculate_age_range('15')
     '15 a 19'
     >>> calculate_age_range('36')

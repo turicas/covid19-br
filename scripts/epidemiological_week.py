@@ -16,7 +16,7 @@ def generate_epidemiological_week_file(start_date, end_date, filename):
 
 if __name__ == "__main__":
     start_date = datetime.date(2012, 1, 1)
-    end_date = datetime.date(2021, 12, 31)
+    end_date = datetime.date(2022, 12, 31)
     filename = "data/epidemiological-week.csv"
 
     generate_epidemiological_week_file(start_date, end_date, filename)
