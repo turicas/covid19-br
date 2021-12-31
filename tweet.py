@@ -2,6 +2,7 @@ import datetime
 import hashlib
 import json
 import os
+import re
 from collections import defaultdict
 from decimal import Decimal
 from pathlib import Path
@@ -14,6 +15,10 @@ from rows.utils import open_compressed
 from tqdm import tqdm
 
 
+REGEXP_DATE_1 = re.compile("^([0-9]{1,2})/([0-9]{1,2})/([0-9]{4})")
+REGEXP_DATE_2 = re.compile("^([0-9]{4})-([0-9]{2})-([0-9]{2})")
+
+
 class COVID19Spreadsheet:
     def __init__(self, credentials_filename, spreadsheet_id):
         with open(credentials_filename) as fobj:
@@ -24,7 +29,17 @@ class COVID19Spreadsheet:
 
     @property
     def state_data(self):
-        return self.spreadsheet.worksheet("Sheet1").get_all_records()
+        records = self.spreadsheet.worksheet("Sheet1").get_all_records()
+        for row in records:
+            date = row["data_boletim"]
+            if REGEXP_DATE_1.match(date):
+                day, month, year = REGEXP_DATE_1.findall(date)[0]
+                date = f"{int(year)}-{int(month):02d}-{int(day):02d}"
+            elif REGEXP_DATE_2.match(date):
+                year, month, day = REGEXP_DATE_2.findall(date)[0]
+                date = f"{int(year)}-{int(month):02d}-{int(day):02d}"
+            row["data_boletim"] = date
+        return records
 
     @property
     def diff_states(self):
@@ -178,7 +193,7 @@ def main():
         all_bulletins_published_today = set(row["data_boletim"] for row in state_data) == {str(today)}
         if all_bulletins_published_today:
             missing_bulletins_text = [
-                "* Hoje todas as secretarias estaduais publicaram boletins!  o/",
+                "* Hoje todas as secretarias estaduais publicaram boletins! o/",
             ]
         else:
             missing_bulletins = [
