@@ -106,9 +106,15 @@ class StateTotalBulletinModel(BulletinModel):
         )
 
     def increase_deaths(self, value: int):
+        if self.deaths == NOT_INFORMED_CODE:
+            self.deaths = value
+            return
         self.deaths += value
 
     def increase_confirmed_cases(self, value: int):
+        if self.confirmed_cases == NOT_INFORMED_CODE:
+            self.confirmed_cases = value
+            return
         self.confirmed_cases += value
 
     def to_csv_row(self):
