@@ -33,22 +33,25 @@ class FullReportModel:
         self.total_bulletin = StateTotalBulletinModel(date=date, state=state, source_url='auto computed')
 
     def __repr__(self):
-        has_undefined_or_imported_cases = (
-            bool(self.undefined_or_imported_cases_bulletin)
-            and self.undefined_or_imported_cases_bulletin.has_confirmed_cases_or_deaths
-        )
         return (
             f"FullReportModel("
             f"state={self.state.value}, "
             f"date={self.date.strftime('%d/%m/%Y')}, "
             f"qtd_county_bulletins={len(self.county_bulletins)}, "
-            f"has_undefined_or_imported_cases={has_undefined_or_imported_cases}, "
+            f"has_undefined_or_imported_cases={self.has_undefined_or_imported_cases}, "
             f"total_deaths={self.total_bulletin.deaths}, "
             f"total_confirmed_cases={self.total_bulletin.confirmed_cases}"
             f")"
         )
 
-    def add_new_bulletin(self, bulletin: BulletinModel, auto_increase_cases:bool = True):
+    @property
+    def has_undefined_or_imported_cases(self):
+        return (
+                bool(self.undefined_or_imported_cases_bulletin)
+                and self.undefined_or_imported_cases_bulletin.has_confirmed_cases_or_deaths
+        )
+
+    def add_new_bulletin(self, bulletin: BulletinModel, auto_increase_cases: bool = True):
         if isinstance(bulletin, CountyBulletinModel):
             self.county_bulletins.append(bulletin)
         elif isinstance(bulletin, ImportedUndefinedBulletinModel):
@@ -63,9 +66,9 @@ class FullReportModel:
 
         if auto_increase_cases:
             if bulletin.confirmed_cases and bulletin.confirmed_cases != NOT_INFORMED_CODE:
-                self.total_bulletin.increase_deaths(bulletin.confirmed_cases)
+                self.total_bulletin.increase_deaths(bulletin.deaths)
             if bulletin.deaths and bulletin.deaths != NOT_INFORMED_CODE:
-                self.total_bulletin.increase_confirmed_cases(bulletin.deaths)
+                self.total_bulletin.increase_confirmed_cases(bulletin.confirmed_cases)
 
     def check_total_death_cases(self, expected_amount, raise_error=True) -> bool:
         cases_match = self.total_bulletin.deaths == expected_amount
@@ -78,3 +81,13 @@ class FullReportModel:
         if not cases_match and raise_error:
             raise BadReportError(f'Expected {expected_amount} confirmed cases, but got {self.total_bulletin} instead.')
         return cases_match
+
+    def to_csv_rows(self):
+        rows = []
+        for bulletin in sorted(self.county_bulletins, key=lambda x: x.city):
+            if bulletin.has_confirmed_cases_or_deaths:
+                rows.append(bulletin.to_csv_row())
+        if self.has_undefined_or_imported_cases:
+            rows.append(self.undefined_or_imported_cases_bulletin.to_csv_row())
+        rows.append(self.total_bulletin.to_csv_row())
+        return rows

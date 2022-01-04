@@ -55,6 +55,9 @@ class BulletinModel(ABC):
     def has_confirmed_cases_or_deaths(self) -> bool:
         return self.confirmed_cases != NOT_INFORMED_CODE and self.deaths != NOT_INFORMED_CODE
 
+    def to_csv_row(self):
+        raise NotImplementedError()
+
 
 class StateTotalBulletinModel(BulletinModel):
     def __init__(self, date, source_url, state, *args, **kwargs):
@@ -75,6 +78,9 @@ class StateTotalBulletinModel(BulletinModel):
 
     def increase_confirmed_cases(self, value: int):
         self.confirmed_cases += value
+
+    def to_csv_row(self):
+        return {"municipio": "TOTAL NO ESTADO", "confirmados": self.confirmed_cases, "mortes": self.deaths}
 
 
 class CountyBulletinModel(BulletinModel):
@@ -102,6 +108,9 @@ class CountyBulletinModel(BulletinModel):
             f")"
         )
 
+    def to_csv_row(self):
+        return {"municipio": self.city, "confirmados": self.confirmed_cases, "mortes": self.deaths}
+
 
 class ImportedUndefinedBulletinModel(BulletinModel):
     def __init__(self, date, source_url, state, *args, **kwargs):
@@ -123,3 +132,6 @@ class ImportedUndefinedBulletinModel(BulletinModel):
             f"qtd_deaths={self.deaths}"
             f")"
         )
+
+    def to_csv_row(self):
+        return {"municipio": "Importados/Indefinidos", "confirmados": self.confirmed_cases, "mortes": self.deaths}
