@@ -25,7 +25,9 @@ class SpiderBA(BaseCovid19Spider):
         for div in news_divs:
             titulo = div.xpath(".//h2//text()").get()
             if self.is_covid_report_news(titulo):
-                datahora = self.normalizer.extract_datetime(div.xpath(".//p[@class = 'data-hora']/text()").get())
+                datahora = self.normalizer.extract_datetime(
+                    div.xpath(".//p[@class = 'data-hora']/text()").get()
+                )
                 url = div.xpath(".//h2/a/@href").get()
                 news_per_date[datahora.date()] = url
 
@@ -33,27 +35,22 @@ class SpiderBA(BaseCovid19Spider):
             if date in self.dates_range:
                 link = news_per_date[date]
                 yield scrapy.Request(
-                    link,
-                    callback=self.parse_bulletin_text,
-                    cb_kwargs={"date": date},
+                    link, callback=self.parse_bulletin_text, cb_kwargs={"date": date}
                 )
 
         if self.start_date < min(news_per_date):
             last_page_number = 1
             last_page_url = response.request.url
-            if 'page' in last_page_url:
-                url, *_query_params = last_page_url.split('?')
-                if url[-1] == '/':
+            if "page" in last_page_url:
+                url, *_query_params = last_page_url.split("?")
+                if url[-1] == "/":
                     url = url[:-1]
-                *_url_path, last_page_number = url.split('/')
+                *_url_path, last_page_number = url.split("/")
                 last_page_number = self.normalizer.ensure_integer(last_page_number)
 
             next_page_number = last_page_number + 1
-            next_page_url = f'{self.base_url}page/{next_page_number}/'
-            yield scrapy.Request(
-                next_page_url,
-                callback=self.parse,
-            )
+            next_page_url = f"{self.base_url}page/{next_page_number}/"
+            yield scrapy.Request(next_page_url, callback=self.parse)
 
     def parse_bulletin_text(self, response, date):
         html = response.text

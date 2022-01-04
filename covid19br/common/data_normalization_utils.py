@@ -4,7 +4,6 @@ import rows
 
 
 class NormalizationUtils:
-
     @staticmethod
     def ensure_integer(value, allow_null: bool = True) -> Optional[int]:
         if value is None and allow_null:

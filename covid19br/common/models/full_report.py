@@ -30,7 +30,9 @@ class FullReportModel:
         self.state = state
         self.county_bulletins = []
         self.undefined_or_imported_cases_bulletin = None
-        self.total_bulletin = StateTotalBulletinModel(date=date, state=state, source_url='auto computed')
+        self.total_bulletin = StateTotalBulletinModel(
+            date=date, state=state, source_url="auto computed"
+        )
 
     def __repr__(self):
         return (
@@ -47,16 +49,20 @@ class FullReportModel:
     @property
     def has_undefined_or_imported_cases(self):
         return (
-                bool(self.undefined_or_imported_cases_bulletin)
-                and self.undefined_or_imported_cases_bulletin.has_confirmed_cases_or_deaths
+            bool(self.undefined_or_imported_cases_bulletin)
+            and self.undefined_or_imported_cases_bulletin.has_confirmed_cases_or_deaths
         )
 
-    def add_new_bulletin(self, bulletin: BulletinModel, auto_increase_cases: bool = True):
+    def add_new_bulletin(
+        self, bulletin: BulletinModel, auto_increase_cases: bool = True
+    ):
         if isinstance(bulletin, CountyBulletinModel):
             self.county_bulletins.append(bulletin)
         elif isinstance(bulletin, ImportedUndefinedBulletinModel):
             if self.undefined_or_imported_cases_bulletin:
-                raise ValueError("undefined_or_imported_cases_bulletin was already set in this report.")
+                raise ValueError(
+                    "undefined_or_imported_cases_bulletin was already set in this report."
+                )
             self.undefined_or_imported_cases_bulletin = bulletin
         elif isinstance(bulletin, StateTotalBulletinModel):
             self.total_bulletin = bulletin
@@ -65,7 +71,10 @@ class FullReportModel:
             return
 
         if auto_increase_cases:
-            if bulletin.confirmed_cases and bulletin.confirmed_cases != NOT_INFORMED_CODE:
+            if (
+                bulletin.confirmed_cases
+                and bulletin.confirmed_cases != NOT_INFORMED_CODE
+            ):
                 self.total_bulletin.increase_deaths(bulletin.deaths)
             if bulletin.deaths and bulletin.deaths != NOT_INFORMED_CODE:
                 self.total_bulletin.increase_confirmed_cases(bulletin.confirmed_cases)
@@ -73,13 +82,17 @@ class FullReportModel:
     def check_total_death_cases(self, expected_amount, raise_error=True) -> bool:
         cases_match = self.total_bulletin.deaths == expected_amount
         if not cases_match and raise_error:
-            raise BadReportError(f'Expected {expected_amount} death cases, but got {self.total_bulletin} instead.')
+            raise BadReportError(
+                f"Expected {expected_amount} death cases, but got {self.total_bulletin} instead."
+            )
         return cases_match
 
     def check_total_confirmed_cases(self, expected_amount, raise_error=True) -> bool:
         cases_match = self.total_bulletin.confirmed_cases == expected_amount
         if not cases_match and raise_error:
-            raise BadReportError(f'Expected {expected_amount} confirmed cases, but got {self.total_bulletin} instead.')
+            raise BadReportError(
+                f"Expected {expected_amount} confirmed cases, but got {self.total_bulletin} instead."
+            )
         return cases_match
 
     def to_csv_rows(self):

@@ -24,8 +24,15 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
     # Your spider should override this value
     state: State = None
 
-    def __init__(self, reports: Dict[datetime.date, FullReportModel], start_date: datetime.date = None,
-                 end_date: datetime.date = None, dates_range: List[datetime.date] = None, *args, **kwargs):
+    def __init__(
+        self,
+        reports: Dict[datetime.date, FullReportModel],
+        start_date: datetime.date = None,
+        end_date: datetime.date = None,
+        dates_range: List[datetime.date] = None,
+        *args,
+        **kwargs
+    ):
         super().__init__(*args, **kwargs)
 
         if dates_range and (start_date or end_date):

@@ -6,7 +6,10 @@ from collections import defaultdict
 from covid19br.common.base_spider import BaseCovid19Spider
 from covid19br.common.constants import State
 from covid19br.common.data_normalization_utils import RowsPtBrIntegerField
-from covid19br.common.models.bulletin_models import CountyBulletinModel, ImportedUndefinedBulletinModel
+from covid19br.common.models.bulletin_models import (
+    CountyBulletinModel,
+    ImportedUndefinedBulletinModel,
+)
 
 
 class SpiderPR(BaseCovid19Spider):
@@ -18,8 +21,12 @@ class SpiderPR(BaseCovid19Spider):
     def parse(self, response, **kwargs):
         bulletins_per_date = defaultdict(dict)
         filetype_divs = {
-            "csv": response.xpath("//div[contains(@class, 'row row-') and contains(.//a//text(), 'Casos e Óbitos') and contains(.//a/@href, '.csv')]"),
-            "pdf": response.xpath("//div[contains(@class, 'row row-') and contains(.//a//text(), 'Informe Completo') and contains(.//a/@href, '.pdf')]"),
+            "csv": response.xpath(
+                "//div[contains(@class, 'row row-') and contains(.//a//text(), 'Casos e Óbitos') and contains(.//a/@href, '.csv')]"
+            ),
+            "pdf": response.xpath(
+                "//div[contains(@class, 'row row-') and contains(.//a//text(), 'Informe Completo') and contains(.//a/@href, '.pdf')]"
+            ),
         }
         for filetype, divs in filetype_divs.items():
             for div in divs:
@@ -31,12 +38,12 @@ class SpiderPR(BaseCovid19Spider):
             if date in bulletins_per_date:
                 urls = bulletins_per_date[date]
                 yield scrapy.Request(
-                    urls['csv'],
+                    urls["csv"],
                     callback=self.parse_reports_csv,
                     cb_kwargs={"date": date},
                 )
                 yield scrapy.Request(
-                    urls['pdf'],
+                    urls["pdf"],
                     callback=self.parse_report_pdf,
                     cb_kwargs={"date": date},
                 )
@@ -72,10 +79,7 @@ class SpiderPR(BaseCovid19Spider):
             io.BytesIO(response.body),
             page_numbers=(last_page,),
             starts_after="RESIDENTES FORA DO PARANÁ",
-            force_types={
-                "casos": RowsPtBrIntegerField,
-                "obitos": RowsPtBrIntegerField,
-            },
+            force_types={"casos": RowsPtBrIntegerField, "obitos": RowsPtBrIntegerField},
         )
         for row in table:
             if row.fora_do_pr == "TOTAL":
