@@ -53,7 +53,7 @@ class FullReportModel:
             self.county_bulletins.append(bulletin)
         elif isinstance(bulletin, ImportedUndefinedBulletinModel):
             if self.undefined_or_imported_cases_bulletin:
-                raise Exception  # todo -> criar exception avisando que já foi informado (pode causar erros na contagem automática)
+                raise ValueError("undefined_or_imported_cases_bulletin was already set in this report.")
             self.undefined_or_imported_cases_bulletin = bulletin
         elif isinstance(bulletin, StateTotalBulletinModel):
             self.total_bulletin = bulletin

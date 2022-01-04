@@ -29,7 +29,9 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
         super().__init__(*args, **kwargs)
 
         if dates_range and (start_date or end_date):
-            pass  # todo -> raise exception - not supported
+            raise ValueError(
+                "The parameter 'date_range' is not simultaneously supported with 'start_date' or 'end_date'."
+            )
 
         if dates_range:
             self.dates_range = dates_range
@@ -45,6 +47,8 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
         # The following variable is used to store the results of the scraping
         # so they can be used outside the spider - it will have one report per
         # date unless that report doesn't exist
+        if reports is None:
+            raise ValueError("'reports' must not be None")
         self.reports = reports
 
         self.pre_init()
