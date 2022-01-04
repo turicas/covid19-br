@@ -13,10 +13,10 @@ from covid19br.common.models.bulletin_models import (
 
 class FullReportModel:
     """"
-    Representa um report completo para uma dada data (com os dados dos município
-    do estado + casos importados/indefinidos e consolidado total do estado).
-    Possui o domínio de como validar esses dados e padronizá-los para serem
-    consumidos em outros lugares da aplicação.
+    Represents a complete report for a given date (with city data
+    + imported/undefined cases and the state's total consolidated).
+    It has the domain of how to validate this data and standardize
+    it to be consumed elsewhere in the application.
     """
 
     date: datetime.date

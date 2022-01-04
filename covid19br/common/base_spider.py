@@ -14,10 +14,9 @@ logger = logging.getLogger(__name__)
 
 class BaseCovid19Spider(scrapy.Spider, ABC):
     """
-    Responsável por definir a interface com o motor do crawler (scrapy)
-    e o backend do brasil.io
-    Possui o domínio de quais informações conseguimos pegar em um
-    estado (e como pegá-las).
+    Responsible for defining the interface with the crawler engine (scrapy)
+    and the brasil.io backend.
+    Knows how to gather the covid19 data for a state on any date.
     """
 
     normalizer = NormalizationUtils

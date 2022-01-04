@@ -8,9 +8,9 @@ from covid19br.common.exceptions import BadReportError
 
 class BulletinModel(ABC):
     """
-    Representa uma linha do csv gerado no report de um estado.
-    Possui o número de casos/mortes reportados para um único
-    município ou total no estado.
+    Represents a line of the csv generated in a status report.
+    It has the number of cases/deaths reported for a single city
+    or total in the state.
     """
     date: datetime.date
     source_url: str
