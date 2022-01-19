@@ -8,6 +8,7 @@ RUN apt update \
   && apt purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
 
+COPY . .
 COPY requirements.txt .
 COPY requirements-development.txt .
 RUN pip install --no-cache-dir -U pip \
