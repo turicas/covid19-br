@@ -20,6 +20,12 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
     """
 
     normalizer = NormalizationUtils
+    custom_settings = {
+        'USER_AGENT': (
+            'Brasil.IO - Scraping para libertacao de dados da Covid 19 | '
+            'Mais infos em: https://brasil.io/dataset/covid19/'
+        ),
+    }
 
     # Your spider should override this value
     state: State = None

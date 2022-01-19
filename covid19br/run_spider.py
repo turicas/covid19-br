@@ -53,6 +53,9 @@ def display_results(results):
     )
     for state, reports_by_date in results.items():
         print(f'{state}:')
+        if not reports_by_date:
+            print("- No report found")
+            continue
         for date in sorted(reports_by_date):
             print(f'- ({date}) {reports_by_date[date]}')
 
@@ -69,8 +72,16 @@ def create_folder_if_doesnt_exist(filename):
 
 
 def save_results_in_csv(results, filename_pattern):
-    print()
+    print(
+        '\n'
+        '\n---------------'
+        '\nSAVING REPORTS'
+        '\n---------------'
+    )
     for state, reports_by_date in results.items():
+        if not reports_by_date:
+            print(f'No report found for {state} - skipping...')
+            continue
         for date, report in reports_by_date.items():
             filename = filename_pattern.format(date=date, state=report.state.value)
             create_folder_if_doesnt_exist(filename)
@@ -135,12 +146,7 @@ else:
     spiders = get_spiders_to_run(args.states)
     date_params = build_date_parameters(args.start_date, args.end_date, args.dates_range)
 
-    process = CrawlerProcess(settings={
-        'USER_AGENT': (
-            'Brasil.IO - Scraping para libertacao de dados da Covid 19 | '
-            'Mais infos em: https://brasil.io/dataset/covid19/'
-        ),
-    })
+    process = CrawlerProcess()
 
     all_reports = {}
     for spider in spiders:
