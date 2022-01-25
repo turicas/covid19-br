@@ -8,11 +8,13 @@ sys.path[0] = '/'.join(sys.path[0].split('/')[:-1])
 
 from covid19br.common.data_normalization_utils import NormalizationUtils
 from covid19br.spiders.spider_ba import SpiderBA
+from covid19br.spiders.spider_ce import SpiderCE
 from covid19br.spiders.spider_pr import SpiderPR
 
 # Todo -> Automatically retrieve spiders that extend the Base Class
 AVAILABLE_SPIDERS = [
     SpiderBA,
+    SpiderCE,
     SpiderPR,
 ]
 
