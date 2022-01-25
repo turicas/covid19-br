@@ -72,11 +72,11 @@ class FullReportModel:
 
         if auto_increase_cases:
             if (
-                bulletin.confirmed_cases
+                bulletin.confirmed_cases is not None
                 and bulletin.confirmed_cases != NOT_INFORMED_CODE
             ):
                 self.total_bulletin.increase_deaths(bulletin.deaths)
-            if bulletin.deaths and bulletin.deaths != NOT_INFORMED_CODE:
+            if bulletin.deaths is not None and bulletin.deaths != NOT_INFORMED_CODE:
                 self.total_bulletin.increase_confirmed_cases(bulletin.confirmed_cases)
 
     def check_total_death_cases(self, expected_amount, raise_error=True) -> bool:
