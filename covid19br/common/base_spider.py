@@ -46,15 +46,15 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
                 "The parameter 'date_range' is not simultaneously supported with 'start_date' or 'end_date'."
             )
 
+        self.today = datetime.date.today()
         if dates_range:
             self.dates_range = dates_range
             self.end_date = max(dates_range)
             self.start_date = min(dates_range)
         else:
-            today = datetime.date.today()
-            tomorrow = today + datetime.timedelta(days=1)
-            self.end_date = tomorrow if not end_date or end_date > tomorrow else today
-            self.start_date = start_date if start_date else today
+            tomorrow = self.today + datetime.timedelta(days=1)
+            self.end_date = tomorrow if not end_date or end_date > tomorrow else self.today
+            self.start_date = start_date if start_date else self.today
             self.dates_range = date_range(self.start_date, self.end_date)
 
         # The following variable is used to store the results of the scraping
