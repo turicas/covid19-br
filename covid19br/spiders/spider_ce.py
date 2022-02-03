@@ -25,7 +25,7 @@ class SpiderCE(BaseCovid19Spider):
     def start_requests(self):
         for date in self.dates_range:
             date_str = date.strftime("%Y-%m-%d")
-            link = f"{self.base_url}?dataInicio={date_str}&dataFim={date_str}"
+            link = f"{self.base_url}?dataFim={date_str}"
             yield scrapy.Request(link, callback=self.parse, cb_kwargs={"date": date})
 
     def parse(self, response, **kwargs):
