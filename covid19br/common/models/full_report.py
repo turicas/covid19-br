@@ -75,9 +75,9 @@ class FullReportModel:
                 bulletin.confirmed_cases is not None
                 and bulletin.confirmed_cases != NOT_INFORMED_CODE
             ):
-                self.total_bulletin.increase_deaths(bulletin.deaths)
-            if bulletin.deaths is not None and bulletin.deaths != NOT_INFORMED_CODE:
                 self.total_bulletin.increase_confirmed_cases(bulletin.confirmed_cases)
+            if bulletin.deaths is not None and bulletin.deaths != NOT_INFORMED_CODE:
+                self.total_bulletin.increase_deaths(bulletin.deaths)
 
     def check_total_death_cases(self, expected_amount, raise_error=True) -> bool:
         cases_match = self.total_bulletin.deaths == expected_amount
