@@ -270,7 +270,7 @@ def main():
                 if len(text) > 280:
                     text = template.substitute(context_smaller).strip()
                 result.append(text)
-        print("\n---\n".join(result))
+        print("<pre>\n" + "\n---\n".join(result) + "\n</pre>")
 
     elif args.tweet_type == "vacinacao":
         filename = "data/output/microdados_vacinacao.csv.gz"
@@ -278,11 +278,13 @@ def main():
         file_size = abbreviate_number(total_bytes, suffix="B")
         url = "https://data.brasil.io/dataset/covid19/microdados_vacinacao.csv.gz"
         print(
+            "<pre>\n"
             "🎲 Acabamos de atualizar o CSV com microdados de vacinados, "
             f"agora com {format_number_br(lines - 1)} registros! "
             f"Baixe em: {url}\n"
             f"({file_size}, SHA1: {sha1})\n"
             f"#covid19 #OpenData"
+            "\n</pre>"
         )
 
 
