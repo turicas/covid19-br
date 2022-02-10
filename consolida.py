@@ -36,7 +36,9 @@ class ConsolidaSpider(scrapy.Spider):
                 meta={
                     "state": state,
                     "handle_httpstatus_all": True,
-                    "caso_filename": self.caso_filename.replace(".csv", f"-state-{state}.csv"),
+                    "caso_filename": self.caso_filename.replace(
+                        ".csv", f"-state-{state}.csv"
+                    ),
                 },
                 callback=self.parse_state_file,
             )
@@ -47,7 +49,9 @@ class ConsolidaSpider(scrapy.Spider):
         try:
             reports = converters.extract_boletim(state, data)
         except Exception as exp:
-            self.errors[state].append(("boletim", state, f"{exp.__class__.__name__}: {exp}"))
+            self.errors[state].append(
+                ("boletim", state, f"{exp.__class__.__name__}: {exp}")
+            )
             return
         for report in reports:
             self.logger.debug(report)
@@ -76,24 +80,36 @@ class ConsolidaSpider(scrapy.Spider):
         state = meta["state"]
         caso_filename = meta["caso_filename"]
         if response.status >= 400:
-            self.errors[state].append(("connection", state, f"HTTP status code: {response.status}"))
+            self.errors[state].append(
+                ("connection", state, f"HTTP status code: {response.status}")
+            )
         else:
             response_data = json.load(io.BytesIO(response.body))
             try:
                 self.parse_boletim(state, response_data["reports"])
             except Exception as exp:
-                self.errors[state].append(("boletim", state, f"{exp.__class__.__name__}: {exp}"))
+                self.errors[state].append(
+                    ("boletim", state, f"{exp.__class__.__name__}: {exp}")
+                )
             try:
                 self.parse_caso(state, caso_filename, response_data["cases"])
             except Exception as exp:
-                self.errors[state].append(("caso", state, f"{exp.__class__.__name__}: {exp}"))
+                self.errors[state].append(
+                    ("caso", state, f"{exp.__class__.__name__}: {exp}")
+                )
 
         if self.errors[state]:
             error_counter = Counter(error[0] for error in self.errors[state])
-            error_counter_str = ", ".join(f"{error_type}: {count}" for error_type, count in error_counter.items())
-            self.logger.error(f"{len(self.errors[state])} errors found when parsing {state} ({error_counter_str})")
+            error_counter_str = ", ".join(
+                f"{error_type}: {count}" for error_type, count in error_counter.items()
+            )
+            self.logger.error(
+                f"{len(self.errors[state])} errors found when parsing {state} ({error_counter_str})"
+            )
             error_header = ("sheet", "state", "message")
-            errors = rows.import_from_dicts([dict(zip(error_header, row)) for row in self.errors[state]])
+            errors = rows.import_from_dicts(
+                [dict(zip(error_header, row)) for row in self.errors[state]]
+            )
             filename = ERROR_PATH / f"errors-{state}.csv"
             if not filename.parent.exists():
                 filename.parent.mkdir(parents=True)

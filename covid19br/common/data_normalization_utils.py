@@ -1,6 +1,7 @@
-from datetime import datetime, date
-from typing import Optional
 import unicodedata
+from datetime import date, datetime
+from typing import Optional
+
 import rows
 
 
@@ -25,8 +26,7 @@ class NormalizationUtils:
     @staticmethod
     def remove_accentuation(original_text):
         return (
-            unicodedata
-            .normalize("NFKD", original_text)
+            unicodedata.normalize("NFKD", original_text)
             .encode("ascii", errors="ignore")
             .decode("ascii")
         )
@@ -34,29 +34,29 @@ class NormalizationUtils:
     @staticmethod
     def month_name_to_number(month_name):
         month = month_name.lower()
-        if month in ['janeiro', 'jan']:
+        if month in ["janeiro", "jan"]:
             return 1
-        if month in ['fevereiro', 'fev']:
+        if month in ["fevereiro", "fev"]:
             return 2
-        if month in ['março', 'marco', 'mar']:
+        if month in ["março", "marco", "mar"]:
             return 3
-        if month in ['abril', 'abr']:
+        if month in ["abril", "abr"]:
             return 4
-        if month in ['maio', 'mai']:
+        if month in ["maio", "mai"]:
             return 5
-        if month in ['junho', 'jun']:
+        if month in ["junho", "jun"]:
             return 6
-        if month in ['julho', 'jul']:
+        if month in ["julho", "jul"]:
             return 7
-        if month in ['agosto', 'ago']:
+        if month in ["agosto", "ago"]:
             return 8
-        if month in ['setembro', 'set']:
+        if month in ["setembro", "set"]:
             return 9
-        if month in ['outubro', 'out']:
+        if month in ["outubro", "out"]:
             return 10
-        if month in ['novembro', 'nov']:
+        if month in ["novembro", "nov"]:
             return 11
-        if month in ['dezembro', 'dez']:
+        if month in ["dezembro", "dez"]:
             return 12
         raise ValueError(f'"{month_name}" is not a valid month name.')
 

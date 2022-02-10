@@ -1,14 +1,16 @@
-from datetime import datetime
 import io
-import scrapy
+from datetime import datetime
+
 import rows
+import scrapy
 
 from covid19br.common.base_spider import BaseCovid19Spider
 from covid19br.common.constants import State
 from covid19br.common.models.bulletin_models import CountyBulletinModel
 
-
-EXPRESSION_FOR_DEATH_PLUS_CONFIRMED_CASES = "Distribuição dos casos e óbitos confirmados acumulados"
+EXPRESSION_FOR_DEATH_PLUS_CONFIRMED_CASES = (
+    "Distribuição dos casos e óbitos confirmados acumulados"
+)
 
 
 class SpiderTO(BaseCovid19Spider):
@@ -37,13 +39,19 @@ class SpiderTO(BaseCovid19Spider):
     def parse_pdf(self, response, date):
         """Converte PDF do boletim COVID-19 do Tocantins em CSV"""
         doc = rows.plugins.pdf.PyMuPDFBackend(io.BytesIO(response.body))
-        all_pages_numbers = range(1, rows.plugins.pdf.number_of_pages(io.BytesIO(response.body)) + 1)
+        all_pages_numbers = range(
+            1, rows.plugins.pdf.number_of_pages(io.BytesIO(response.body)) + 1
+        )
         for page_number in all_pages_numbers:
             page_content = list(next(doc.text_objects(page_numbers=(page_number,))))
             page_text = "\n".join(obj.text for obj in page_content)
 
             if EXPRESSION_FOR_DEATH_PLUS_CONFIRMED_CASES in page_text:
-                for city, cases, deaths in self._extract_table_data_with_cases_and_deaths(page_content):
+                for (
+                    city,
+                    cases,
+                    deaths,
+                ) in self._extract_table_data_with_cases_and_deaths(page_content):
                     bulletin = CountyBulletinModel(
                         date=date,
                         state=self.state,
@@ -123,10 +131,11 @@ class SpiderTO(BaseCovid19Spider):
             yield (city, cases, deaths)
 
     def _extract_date(self, bulletin):
-        raw_date_text = bulletin.xpath(".//span//text()").get() or "".join(bulletin.xpath(".//text()").extract())
+        raw_date_text = bulletin.xpath(".//span//text()").get() or "".join(
+            bulletin.xpath(".//text()").extract()
+        )
         cleaned_date_text = (
-            raw_date_text
-            .replace("  ", " ")
+            raw_date_text.replace("  ", " ")
             .replace("-", " ")
             .replace(".", "")
             .replace("de ", "")

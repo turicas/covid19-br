@@ -7,7 +7,9 @@ from tqdm import tqdm
 
 
 def merge_files(filenames, output_filename):
-    groups = groupby(filenames, key=lambda row: row.name.split("T")[0].replace("ocupacao-", ""))
+    groups = groupby(
+        filenames, key=lambda row: row.name.split("T")[0].replace("ocupacao-", "")
+    )
     progress = tqdm()
     writer = CsvLazyDictWriter(output_filename)
     for index, (date, group) in enumerate(groups, start=1):
@@ -31,5 +33,6 @@ if __name__ == "__main__":
     DOWNLOAD_PATH = Path("data/ocupacao")
 
     merge_files(
-        filenames=sorted(DOWNLOAD_PATH.glob("ocupacao-*.csv")), output_filename=DOWNLOAD_PATH / "ocupacao.csv.gz",
+        filenames=sorted(DOWNLOAD_PATH.glob("ocupacao-*.csv")),
+        output_filename=DOWNLOAD_PATH / "ocupacao.csv.gz",
     )

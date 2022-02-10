@@ -53,7 +53,9 @@ class Covid19CESpider(BaseCovid19Spider):
             imported_confirmed = imported_deaths = None
 
         self.add_city_case(
-            city="Importados/Indefinidos", confirmed=imported_confirmed, deaths=imported_deaths,
+            city="Importados/Indefinidos",
+            confirmed=imported_confirmed,
+            deaths=imported_deaths,
         )
 
         self.add_state_case(confirmed=total_confirmed, deaths=total_deaths)

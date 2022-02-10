@@ -24,8 +24,9 @@ class GeneratorWithLength:
 
 
 class ElasticSearch:
-
-    def __init__(self, base_url, username=None, password=None, user_agent=None, timeout=10):
+    def __init__(
+        self, base_url, username=None, password=None, user_agent=None, timeout=10
+    ):
         self.base_url = base_url
         self.__username = username
         self.__password = password
@@ -56,7 +57,9 @@ class ElasticSearch:
         total_hits = next(result)
         return GeneratorWithLength(result, total_hits)
 
-    def consume_scroll(self, index, sort, page_size, ttl, query, max_retries=5, wait_time=3):
+    def consume_scroll(
+        self, index, sort, page_size, ttl, query, max_retries=5, wait_time=3
+    ):
         body = {
             "query": query,
             "size": page_size,
@@ -72,7 +75,9 @@ class ElasticSearch:
             retries = 0
             while retries < max_retries:
                 try:
-                    response = self.session.post(url, params=params, json=body, timeout=self.timeout)
+                    response = self.session.post(
+                        url, params=params, json=body, timeout=self.timeout
+                    )
                     response_data = response.json()
                 except json.decoder.JSONDecodeError:
                     print(f"\nERROR: cannot parse response as JSON: {response.content}")
@@ -117,7 +122,8 @@ class ElasticSearchConsumer(AsyncProcessExecutor):
         super().__init__(*args, **kwargs)
 
         self.convert_function = convert_function
-        self.es = ElasticSearch(api_url,
+        self.es = ElasticSearch(
+            api_url,
             username=username,
             password=password,
         )

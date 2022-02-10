@@ -32,17 +32,50 @@ def brazilian_epidemiological_week(date):
     (2021, 2)
     """
     dates = {
-        2012: {"start_date": datetime.date(2012, 1, 1), "end_date": datetime.date(2012, 12, 29),},
-        2013: {"start_date": datetime.date(2012, 12, 30), "end_date": datetime.date(2013, 12, 28),},
-        2014: {"start_date": datetime.date(2013, 12, 29), "end_date": datetime.date(2015, 1, 3),},
-        2015: {"start_date": datetime.date(2015, 1, 4), "end_date": datetime.date(2016, 1, 2),},
-        2016: {"start_date": datetime.date(2016, 1, 3), "end_date": datetime.date(2016, 12, 31),},
-        2017: {"start_date": datetime.date(2017, 1, 1), "end_date": datetime.date(2017, 12, 30),},
-        2018: {"start_date": datetime.date(2017, 12, 31), "end_date": datetime.date(2018, 12, 29),},
-        2019: {"start_date": datetime.date(2018, 12, 30), "end_date": datetime.date(2019, 12, 28),},
-        2020: {"start_date": datetime.date(2019, 12, 29), "end_date": datetime.date(2021, 1, 2),},
-        2021: {"start_date": datetime.date(2021, 1, 3), "end_date": datetime.date(2022, 1, 1),},
-        2022: {"start_date": datetime.date(2022, 1, 2), "end_date": datetime.date(2023, 1, 1),},
+        2012: {
+            "start_date": datetime.date(2012, 1, 1),
+            "end_date": datetime.date(2012, 12, 29),
+        },
+        2013: {
+            "start_date": datetime.date(2012, 12, 30),
+            "end_date": datetime.date(2013, 12, 28),
+        },
+        2014: {
+            "start_date": datetime.date(2013, 12, 29),
+            "end_date": datetime.date(2015, 1, 3),
+        },
+        2015: {
+            "start_date": datetime.date(2015, 1, 4),
+            "end_date": datetime.date(2016, 1, 2),
+        },
+        2016: {
+            "start_date": datetime.date(2016, 1, 3),
+            "end_date": datetime.date(2016, 12, 31),
+        },
+        2017: {
+            "start_date": datetime.date(2017, 1, 1),
+            "end_date": datetime.date(2017, 12, 30),
+        },
+        2018: {
+            "start_date": datetime.date(2017, 12, 31),
+            "end_date": datetime.date(2018, 12, 29),
+        },
+        2019: {
+            "start_date": datetime.date(2018, 12, 30),
+            "end_date": datetime.date(2019, 12, 28),
+        },
+        2020: {
+            "start_date": datetime.date(2019, 12, 29),
+            "end_date": datetime.date(2021, 1, 2),
+        },
+        2021: {
+            "start_date": datetime.date(2021, 1, 3),
+            "end_date": datetime.date(2022, 1, 1),
+        },
+        2022: {
+            "start_date": datetime.date(2022, 1, 2),
+            "end_date": datetime.date(2023, 1, 1),
+        },
     }
     year = None
     for possible_year, year_data in dates.items():

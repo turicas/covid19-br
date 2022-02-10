@@ -10,8 +10,7 @@ from bot.rocketchat import RocketChat
 def run(output_filename):
     rocket_chat = RocketChat(os.environ["ROCKETCHAT_BASE_URL"])
     rocket_chat.login(
-        os.environ["ROCKETCHAT_USERNAME"],
-        os.environ["ROCKETCHAT_PASSWORD"]
+        os.environ["ROCKETCHAT_USERNAME"], os.environ["ROCKETCHAT_PASSWORD"]
     )
     all_users = rocket_chat.user_list()
     with open(output_filename, "w") as csvfile:

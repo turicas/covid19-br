@@ -1,5 +1,6 @@
-import scrapy
 import re
+
+import scrapy
 
 from covid19br.common.base_spider import BaseCovid19Spider
 from covid19br.common.constants import State

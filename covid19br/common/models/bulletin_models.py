@@ -2,10 +2,10 @@ import datetime
 from abc import ABC
 
 from covid19br.common.constants import (
-    PlaceType,
-    NOT_INFORMED_CODE,
-    State,
     IMPORTED_OR_UNDEFINED_CODE,
+    NOT_INFORMED_CODE,
+    PlaceType,
+    State,
 )
 from covid19br.common.data_normalization_utils import NormalizationUtils
 from covid19br.common.exceptions import BadReportError
@@ -69,7 +69,9 @@ class BulletinModel(ABC):
     def set_deaths_value(self, deaths):
         try:
             cases_number = NormalizationUtils.ensure_integer(deaths)
-            self.deaths = cases_number if cases_number or cases_number == 0 else NOT_INFORMED_CODE
+            self.deaths = (
+                cases_number if cases_number or cases_number == 0 else NOT_INFORMED_CODE
+            )
         except ValueError:
             raise BadReportError(
                 f"Invalid value for deaths: '{deaths}'. Value can't be cast to int."

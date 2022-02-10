@@ -26,7 +26,9 @@ class Covid19PESpider(BaseCovid19Spider):
         return data
 
     def parse(self, response):
-        page_jsons = response.xpath("//script[@type='application/json' and @data-for]/text()")
+        page_jsons = response.xpath(
+            "//script[@type='application/json' and @data-for]/text()"
+        )
         case_data = None
         for json_data in page_jsons.extract():
             data = json.loads(json_data)["x"]
@@ -34,7 +36,9 @@ class Covid19PESpider(BaseCovid19Spider):
                 continue
             case_data = data["data"]
             break
-        header = rows.import_from_html(io.BytesIO(data["container"].encode("utf-8"))).field_names
+        header = rows.import_from_html(
+            io.BytesIO(data["container"].encode("utf-8"))
+        ).field_names
         result = []
         for row in zip(*case_data):
             row = dict(zip(header, row))
@@ -58,7 +62,9 @@ class Covid19PESpider(BaseCovid19Spider):
             confirmed = len(city_data)
             deaths = sum(1 for row in city_data if row["evolucao"] == "ÓBITO")
             self.add_city_case(
-                city=self.get_city_name_from_id(city_ibge_code), confirmed=confirmed, deaths=deaths,
+                city=self.get_city_name_from_id(city_ibge_code),
+                confirmed=confirmed,
+                deaths=deaths,
             )
             total_confirmed += confirmed
             total_deaths += deaths

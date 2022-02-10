@@ -9,8 +9,14 @@ STATES = "AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS S
 ETHNICITY_CHOICES = "I AMARELA BRANCA IGNORADA INDIGENA PARDA PRETA".split()
 PLACE_CHOICES = "HOSPITAL DOMICILIO VIA_PUBLICA OUTROS".split()
 CHART_TYPE_CHOICES = {
-    "respiratory": {"name": "chart5", "url": "https://transparencia.registrocivil.org.br/api/covid-covid-registral",},
-    "cardiac": {"name": "chartCardiac4", "url": "https://transparencia.registrocivil.org.br/api/covid-cardiaco",},
+    "respiratory": {
+        "name": "chart5",
+        "url": "https://transparencia.registrocivil.org.br/api/covid-covid-registral",
+    },
+    "cardiac": {
+        "name": "chartCardiac4",
+        "url": "https://transparencia.registrocivil.org.br/api/covid-cardiaco",
+    },
 }
 
 
@@ -46,7 +52,11 @@ class BaseRegistroCivilSpider(scrapy.Spider):
         yield self.make_login_request()
 
     def make_login_request(self):
-        return scrapy.Request(url=self.login_url, callback=self.parse_login_response, meta={"dont_cache": True},)
+        return scrapy.Request(
+            url=self.login_url,
+            callback=self.parse_login_response,
+            meta={"dont_cache": True},
+        )
 
     def make_request(self, *args, **kwargs):
         kwargs["headers"] = kwargs.get("headers", {})
@@ -59,7 +69,9 @@ class BaseRegistroCivilSpider(scrapy.Spider):
 
     def parse_login_response(self, response):
         self.cookie_jar.extract_cookies(response, response.request)
-        self.xsrf_token = next(c for c in self.cookie_jar if c.name == "XSRF-TOKEN").value
+        self.xsrf_token = next(
+            c for c in self.cookie_jar if c.name == "XSRF-TOKEN"
+        ).value
 
         for request in self.start_requests_after_login():
             yield request
@@ -103,7 +115,14 @@ class DeathsSpider(BaseRegistroCivilSpider):
                 )
 
     def make_chart_request(
-        self, chart_type, start_date, end_date, state, ethnicity="I", places="all", dont_cache=False
+        self,
+        chart_type,
+        start_date,
+        end_date,
+        state,
+        ethnicity="I",
+        places="all",
+        dont_cache=False,
     ):
         if ethnicity not in ETHNICITY_CHOICES:
             raise ValueError(f"Unknown ethnicity {repr(ethnicity)}")
@@ -137,7 +156,11 @@ class DeathsSpider(BaseRegistroCivilSpider):
             url=urljoin(base_url, "?" + urlencode(data)),
             headers={"X-XSRF-TOKEN": self.xsrf_token},
             callback=self.parse_chart_response,
-            meta={"row": qs_to_dict(data), "dont_cache": dont_cache, "chart_type": chart_type},
+            meta={
+                "row": qs_to_dict(data),
+                "dont_cache": dont_cache,
+                "chart_type": chart_type,
+            },
         )
 
     def parse_chart_response(self, response):

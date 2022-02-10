@@ -42,7 +42,9 @@ class Covid19MGSpider(BaseCovid19Spider):
             # self.convert_row_microdata: overriden by child spider classes
 
         desired_cases = [
-            row for row in converted_table if row["classificacao_caso"] in ("Caso Confirmado", "Óbito Confirmado")
+            row
+            for row in converted_table
+            if row["classificacao_caso"] in ("Caso Confirmado", "Óbito Confirmado")
         ]
         row_key = lambda row: row["municipio_residencia_cod"]
         desired_cases.sort(key=row_key)
@@ -50,7 +52,9 @@ class Covid19MGSpider(BaseCovid19Spider):
         for city_id, cases in groupby(desired_cases, key=row_key):
             cases = list(cases)
             confirmed = len(cases)
-            deaths = sum(1 for case in cases if case["classificacao_caso"] == "Óbito confirmado")
+            deaths = sum(
+                1 for case in cases if case["classificacao_caso"] == "Óbito confirmado"
+            )
             city = self.get_city_name_from_id(city_id)
             self.add_city_case(city=city, confirmed=confirmed, deaths=deaths)
             total_confirmed += confirmed

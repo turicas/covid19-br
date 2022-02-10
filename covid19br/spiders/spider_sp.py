@@ -1,13 +1,14 @@
 import csv
 import io
 import logging
+
 import scrapy
 
 from covid19br.common.base_spider import BaseCovid19Spider
 from covid19br.common.constants import State
 from covid19br.common.models.bulletin_models import (
-    ImportedUndefinedBulletinModel,
     CountyBulletinModel,
+    ImportedUndefinedBulletinModel,
 )
 
 logger = logging.getLogger(__name__)
@@ -56,8 +57,8 @@ class SpiderSP(BaseCovid19Spider):
                 total_imported_or_undefined_deaths += self.normalizer.ensure_integer(
                     deaths
                 )
-                total_imported_or_undefined_confirmed_cases += self.normalizer.ensure_integer(
-                    confirmed
+                total_imported_or_undefined_confirmed_cases += (
+                    self.normalizer.ensure_integer(confirmed)
                 )
             elif city:
                 bulletin = CountyBulletinModel(

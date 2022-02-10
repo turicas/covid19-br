@@ -1,5 +1,5 @@
-from collections import defaultdict
 import json
+from collections import defaultdict
 from typing import List
 
 import scrapy
@@ -7,8 +7,8 @@ import scrapy
 from covid19br.common.base_spider import BaseCovid19Spider
 from covid19br.common.constants import State
 from covid19br.common.models.bulletin_models import (
-    ImportedUndefinedBulletinModel,
     CountyBulletinModel,
+    ImportedUndefinedBulletinModel,
 )
 
 CONFIRMED_CASE_LABEL = "Confirmados"

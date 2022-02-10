@@ -1,13 +1,14 @@
+import datetime
 import logging
-import scrapy
 from abc import ABC
 from typing import Dict, List
+
+import scrapy
 from rows.utils.date import date_range
-import datetime
 
 from covid19br.common.constants import State
 from covid19br.common.data_normalization_utils import NormalizationUtils
-from covid19br.common.models.full_report import FullReportModel, BulletinModel
+from covid19br.common.models.full_report import BulletinModel, FullReportModel
 
 logger = logging.getLogger(__name__)
 
@@ -21,9 +22,9 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
 
     normalizer = NormalizationUtils
     custom_settings = {
-        'USER_AGENT': (
-            'Brasil.IO - Scraping para libertacao de dados da Covid 19 | '
-            'Mais infos em: https://brasil.io/dataset/covid19/'
+        "USER_AGENT": (
+            "Brasil.IO - Scraping para libertacao de dados da Covid 19 | "
+            "Mais infos em: https://brasil.io/dataset/covid19/"
         ),
     }
 
@@ -53,7 +54,9 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
             self.start_date = min(dates_range)
         else:
             tomorrow = self.today + datetime.timedelta(days=1)
-            self.end_date = tomorrow if not end_date or end_date > tomorrow else self.today
+            self.end_date = (
+                tomorrow if not end_date or end_date > tomorrow else self.today
+            )
             self.start_date = start_date if start_date else self.today
             self.dates_range = date_range(self.start_date, self.end_date)
 
@@ -77,4 +80,3 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
         """
         You can [optionally] implement this method if you need to do something before the crawler starts
         """
-        pass

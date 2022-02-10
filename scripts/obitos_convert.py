@@ -75,7 +75,9 @@ def convert_file(filename):
         except ValueError:  # This day does not exist in 2019 (29 February)
             yesterday = date - one_day
             this_day_in_2019 = datetime.date(2019, yesterday.month, yesterday.day)
-        row["epidemiological_week_2019"] = brazilian_epidemiological_week(this_day_in_2019)[1]
+        row["epidemiological_week_2019"] = brazilian_epidemiological_week(
+            this_day_in_2019
+        )[1]
         row["epidemiological_week_2020"] = brazilian_epidemiological_week(date)[1]
         row.update(base_row)
 
@@ -104,7 +106,9 @@ def convert_file(filename):
             accumulated[accumulated_key_total] += new_deaths
             accumulated[accumulated_key_new_total] += new_deaths
             row[key_new] = new_deaths
-            row[get_death_cause_key("deaths", cause, year)] = accumulated[accumulated_key]
+            row[get_death_cause_key("deaths", cause, year)] = accumulated[
+                accumulated_key
+            ]
             filled_causes.add((year, cause))
 
         # Fill other deaths_* (accumulated) values with the last available data

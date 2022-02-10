@@ -72,7 +72,9 @@ def main():
     parser.add_argument("--api-url", default="https://elastic-leitos.saude.gov.br/")
     parser.add_argument("--index", default="leito_ocupacao")
     parser.add_argument("--ttl", default="10m")
-    parser.add_argument("--output-filename", default=DOWNLOAD_PATH / f"ocupacao-{dt}.csv")
+    parser.add_argument(
+        "--output-filename", default=DOWNLOAD_PATH / f"ocupacao-{dt}.csv"
+    )
     args = parser.parse_args()
 
     es = ElasticSearch(

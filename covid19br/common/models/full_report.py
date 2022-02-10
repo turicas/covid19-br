@@ -1,18 +1,18 @@
 import datetime
 from typing import List, Optional
 
-from covid19br.common.constants import State, NOT_INFORMED_CODE
+from covid19br.common.constants import NOT_INFORMED_CODE, State
 from covid19br.common.exceptions import BadReportError
 from covid19br.common.models.bulletin_models import (
+    BulletinModel,
     CountyBulletinModel,
     ImportedUndefinedBulletinModel,
     StateTotalBulletinModel,
-    BulletinModel,
 )
 
 
 class FullReportModel:
-    """"
+    """ "
     Represents a complete report for a given date (with city data
     + imported/undefined cases and the state's total consolidated).
     It has the domain of how to validate this data and standardize

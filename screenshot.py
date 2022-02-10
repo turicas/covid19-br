@@ -17,6 +17,7 @@ def get_chrome_force_lang(lang):
     browser.driver = Chrome(options=options)
     return browser
 
+
 def get_chrome(remote_url, lang=None, width=None, height=None):
     # TODO: use `lang`
     browser = Browser(
@@ -31,7 +32,9 @@ def get_chrome(remote_url, lang=None, width=None, height=None):
     return browser
 
 
-def take_element_screenshot(selenium_url, url, element_xpath, lang=None, wait=None, width=None, height=None):
+def take_element_screenshot(
+    selenium_url, url, element_xpath, lang=None, wait=None, width=None, height=None
+):
     browser = get_chrome(
         remote_url=selenium_url,
         lang=lang,
