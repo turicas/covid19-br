@@ -160,7 +160,7 @@ class TocantinsBulletinExtractor:
 
             for city, city_data in result.items():
                 yield {
-                    "city": city,
+                    "city": city.replace("_", " "),
                     "confirmed": city_data.get("confirmed"),
                     "deaths": city_data.get("deaths", 0),
                 }
