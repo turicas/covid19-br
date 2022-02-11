@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys
+from pathlib import Path
 
 import rows
 from scrapy.crawler import CrawlerProcess
@@ -65,17 +66,6 @@ def display_results(results):
             print(f"- ({date}) {reports_by_date[date]}")
 
 
-def create_folder_if_doesnt_exist(filename):
-    *path_fragments, _csv_name = filename.split("/")
-    current_path = os.getcwd()
-    if not path_fragments or os.path.exists(current_path + "/".join(path_fragments)):
-        return
-    for path_fragment in path_fragments:
-        current_path = f"{current_path}/{path_fragment}"
-        if not os.path.exists(current_path):
-            os.makedirs(current_path)
-
-
 def save_results_in_csv(results, filename_pattern):
     print("\n" "\n---------------" "\nSAVING REPORTS" "\n---------------")
     for state, reports_by_date in results.items():
@@ -83,8 +73,9 @@ def save_results_in_csv(results, filename_pattern):
             print(f"No report found for {state} - skipping...")
             continue
         for date, report in reports_by_date.items():
-            filename = filename_pattern.format(date=date, state=report.state.value)
-            create_folder_if_doesnt_exist(filename)
+            filename = Path(filename_pattern.format(date=date, state=report.state.value))
+            if not filename.parent.exists():
+                filename.parent.mkdir(parents=True)
             print(f"Formatting and saving file {filename}...")
             writer = rows.utils.CsvLazyDictWriter(filename)
             for row in report.to_csv_rows():
