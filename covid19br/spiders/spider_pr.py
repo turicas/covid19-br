@@ -56,6 +56,7 @@ class SpiderPR(BaseCovid19Spider):
             dialect="excel-semicolon",
             force_types={
                 "casos": rows.fields.IntegerField,
+                "obitos_por_covid_19": rows.fields.IntegerField,
                 "obitos": rows.fields.IntegerField,
             },
         )
@@ -65,7 +66,7 @@ class SpiderPR(BaseCovid19Spider):
                 state=self.state,
                 city=report.municipio,
                 confirmed_cases=report.casos,
-                deaths=report.obitos,
+                deaths=report.obitos_por_covid_19 or report.obitos,
                 source_url=response.request.url,
             )
             self.add_new_bulletin_to_report(bulletin, date)
@@ -82,14 +83,12 @@ class SpiderPR(BaseCovid19Spider):
             starts_after="RESIDENTES FORA DO PARANÁ",
             force_types={"casos": RowsPtBrIntegerField, "obitos": RowsPtBrIntegerField},
         )
-        for row in table:
-            if row.fora_do_pr == "TOTAL":
-                bulletin = ImportedUndefinedBulletinModel(
-                    date=date,
-                    state=self.state,
-                    confirmed_cases=row.casos,
-                    deaths=row.obitos,
-                    source_url=response.request.url,
-                )
-                self.add_new_bulletin_to_report(bulletin, date)
-                return
+        row = [row for row in table if row.fora_do_pr == "TOTAL"][0]
+        bulletin = ImportedUndefinedBulletinModel(
+            date=date,
+            state=self.state,
+            confirmed_cases=row.casos,
+            deaths=row.obitos,
+            source_url=response.request.url,
+        )
+        self.add_new_bulletin_to_report(bulletin, date)
