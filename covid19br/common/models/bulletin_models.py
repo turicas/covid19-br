@@ -5,6 +5,7 @@ from pathlib import Path
 
 import rows
 from rows.fields import slug
+from fuzzy_types import FuzzyDict
 
 from covid19br.common.constants import (
     IMPORTED_OR_UNDEFINED_CODE,
@@ -22,8 +23,10 @@ POPULATION_PATH = BASE_PATH / "data" / "populacao-por-municipio-2020.csv"
 @lru_cache(maxsize=6000)
 def normalize_city_name(city):
     city = slug(city)
+
     for word in ("da", "das", "de", "do", "dos"):
         city = city.replace(f"_{word}_", "_")
+
     return city
 
 
@@ -46,10 +49,10 @@ def city_id_from_name(state):
 
 @lru_cache(maxsize=900)
 def get_city_id_from_name(state, name):
-    normalized_cities = {
+    normalized_cities = FuzzyDict({
         normalize_city_name(key): value
         for key, value in city_id_from_name(state).items()
-    }
+    })
     return normalized_cities[normalize_city_name(name)]
 
 

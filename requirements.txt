@@ -1,24 +1,25 @@
 # Main
+Pillow
 cached_property
 ckanapi
 click
 defusedxml>=0.6.0
+fuzzy_types
 goodtables==2.4.9
 gspread
 html2text
-https://github.com/turicas/rows/archive/develop.zip
 https://github.com/turicas/async_process_executor/archive/develop.zip
+https://github.com/turicas/rows/archive/develop.zip
 jinja2
 oauth2client
 openpyxl
 python-Levenshtein
 pytz
 requests
-selenium==3.141.0
-splinter==0.15.0
-Pillow
 s3cmd
 scrapy
+selenium==3.141.0
+splinter==0.15.0
 tqdm
 
 # Spiders

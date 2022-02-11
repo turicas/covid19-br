@@ -73,6 +73,11 @@ class SpiderTO(BaseCovid19Spider):
             extractor = TocantinsBulletinExtractor(tmp.name)
             date = extractor.date
             for row in extractor.data:
+                if row["city"].lower() in ("total", "", None):
+                    # TODO: forçar a adição do total no estado (é o valor
+                    # oficial deles e devemos usar preferencialmente - caso
+                    # disponível - em vez de somar os valores por município)
+                    continue
                 bulletin = CountyBulletinModel(
                     date=date,
                     state=self.state,
