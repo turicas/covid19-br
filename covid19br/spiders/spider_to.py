@@ -1,44 +1,17 @@
-import io
-import re
 import datetime
 import tempfile
 
-import rows
 import scrapy
 
 from covid19br.common.base_spider import BaseCovid19Spider
 from covid19br.common.constants import State
 from covid19br.common.models.bulletin_models import CountyBulletinModel, StateTotalBulletinModel
-from covid19br.parsers.tocantins import MONTHS, TocantinsBulletinExtractor
+from covid19br.parsers.tocantins import TocantinsBulletinExtractor
 
 
 EXPRESSION_FOR_DEATH_PLUS_CONFIRMED_CASES = (
     "Distribuição dos casos e óbitos confirmados acumulados"
 )
-REGEXP_DATE = re.compile("([0-9]{1,2})(?: +de)? ([^ ]+)(?: de ([0-9]{4}))?")
-REGEXP_DATE_2 = re.compile("([0-9]{2})-([0-9]{2})-([0-9]{2,4})[ .]?")
-
-def extract_date(value):
-    """
-    >>> extract_date("10 de fevereiro de 2022.pdf")
-    datetime.date(2022, 2, 10)
-    >>> extract_date("07 janeiro de 2022.pdf")
-    datetime.date(2022, 1, 7)
-    >>> extract_date("BOLETIM COVID 30-11-21.pdf")
-    datetime.date(2021, 11, 30)
-    >>> extract_date("25 de Novembro")
-    datetime.date(2020, 11, 25)
-    """
-
-    if "BOLETIM" in value:
-        result = REGEXP_DATE_2.findall(value)
-    else:
-        result = REGEXP_DATE.findall(value)
-    day, month, year = result[0]
-    year = int(year) if year else 2020
-    year = year if year > 2000 else 2000 + year
-    month = int(month) if month.isdigit() else MONTHS.index(month.lower()[:3]) + 1
-    return datetime.date(year, month, int(day))
 
 
 class SpiderTO(BaseCovid19Spider):
@@ -59,7 +32,7 @@ class SpiderTO(BaseCovid19Spider):
             raw_date_text = bulletin.xpath(".//span//text()").get() or "".join(
                 bulletin.xpath(".//text()").extract()
             )
-            bulletins_per_date[extract_date(raw_date_text)] = pdf_url
+            bulletins_per_date[self._extract_date(raw_date_text)] = pdf_url
 
         for date in self.dates_range:
             url = bulletins_per_date.get(date)
@@ -94,3 +67,22 @@ class SpiderTO(BaseCovid19Spider):
                         source_url=response.request.url,
                     )
                 self.add_new_bulletin_to_report(bulletin, date, auto_increase_cases=(not self.has_official_total))
+
+    def _extract_date(self, value) -> datetime.date:
+        """
+        >>> extract_date("10 de fevereiro de 2022.pdf")
+        datetime.date(2022, 2, 10)
+        >>> extract_date("07 janeiro de 2022.pdf")
+        datetime.date(2022, 1, 7)
+        >>> extract_date("BOLETIM COVID 30-11-21.pdf")
+        datetime.date(2021, 11, 30)
+        >>> extract_date("BOLETIM COVID 29-11-21 (1).pdf")
+        datetime.date(2021, 11, 29)
+        >>> extract_date("25 de Novembro")
+        datetime.date(2020, 11, 25)
+        >>> extract_date("file_open 24 de julho de 2021")
+        datetime.date(2021, 07, 24)
+        """
+        if "BOLETIM" in value:
+            return self.normalizer.extract_numeric_date(value)
+        return self.normalizer.extract_in_full_date(value)

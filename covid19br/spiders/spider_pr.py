@@ -31,7 +31,7 @@ class SpiderPR(BaseCovid19Spider):
         }
         for filetype, divs in filetype_divs.items():
             for div in divs:
-                date = self.normalizer.extract_date(div.xpath(".//p//text()").get())
+                date = self.normalizer.str_to_date(div.xpath(".//p//text()").get())
                 url = div.xpath(".//a/@href").get()
                 bulletins_per_date[date][filetype] = url
 

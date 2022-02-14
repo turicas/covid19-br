@@ -26,7 +26,7 @@ class SpiderBA(BaseCovid19Spider):
         for div in news_divs:
             titulo = div.xpath(".//h2//text()").get()
             if self.is_covid_report_news(titulo):
-                datahora = self.normalizer.extract_datetime(
+                datahora = self.normalizer.str_to_datetime(
                     div.xpath(".//p[@class = 'data-hora']/text()").get()
                 )
                 url = div.xpath(".//h2/a/@href").get()

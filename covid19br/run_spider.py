@@ -41,15 +41,15 @@ def build_date_parameters(start_date=None, end_date=None, dates_range=None) -> d
     if dates_range:
         return {
             "dates_range": [
-                NormalizationUtils.extract_date(date_)
+                NormalizationUtils.str_to_date(date_)
                 for date_ in dates_range.split(",")
             ]
         }
     params = {}
     if start_date:
-        params["start_date"] = NormalizationUtils.extract_date(start_date)
+        params["start_date"] = NormalizationUtils.str_to_date(start_date)
     if end_date:
-        params["end_date"] = NormalizationUtils.extract_date(end_date)
+        params["end_date"] = NormalizationUtils.str_to_date(end_date)
     if start_date and end_date and params["start_date"] > params["end_date"]:
         raise ValueError("BAD PARAMETER: end_date should be greater than start_date.")
     return params

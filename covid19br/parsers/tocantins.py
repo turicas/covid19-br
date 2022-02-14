@@ -1,14 +1,13 @@
 import datetime
 import re
 from collections import defaultdict
-
-import rows
 from rows.fields import slug
 from rows.plugins import pdf
 
+from covid19br.common.data_normalization_utils import NormalizationUtils
+
 REGEXP_DAY_MONTH = re.compile("([0-9]+) de (.+)$")
 REGEXP_YEAR = re.compile("^de ([0-9]{4})$")
-MONTHS = "jan fev mar abr mai jun jul ago set out nov dez".split()
 
 
 def match_object_from_regexp(regexp, objects):
@@ -36,7 +35,7 @@ class TocantinsBulletinExtractor:
         day_month = match_object_from_regexp(REGEXP_DAY_MONTH, first_objects)
         day, month = day_month[0]
         day = int(day)
-        month = MONTHS.index(month.lower()[:3]) + 1
+        month = NormalizationUtils.month_name_to_number(month)
         year = match_object_from_regexp(REGEXP_YEAR, first_objects)
         year = int(year[0])
 
