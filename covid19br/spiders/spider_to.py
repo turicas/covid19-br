@@ -8,7 +8,7 @@ import scrapy
 
 from covid19br.common.base_spider import BaseCovid19Spider
 from covid19br.common.constants import State
-from covid19br.common.models.bulletin_models import CountyBulletinModel
+from covid19br.common.models.bulletin_models import CountyBulletinModel, StateTotalBulletinModel
 from covid19br.parsers.tocantins import MONTHS, TocantinsBulletinExtractor
 
 
@@ -47,6 +47,8 @@ class SpiderTO(BaseCovid19Spider):
 
     start_urls = ["https://www.to.gov.br/saude/boletim-covid-19/3vvgvo8csrl6"]
 
+    has_official_total = False
+
     def parse(self, response, **kwargs):
         bulletins_per_date = {}
         bulletins = response.xpath(
@@ -74,16 +76,21 @@ class SpiderTO(BaseCovid19Spider):
             date = extractor.date
             for row in extractor.data:
                 if row["city"].lower() in ("total", "", None):
-                    # TODO: forçar a adição do total no estado (é o valor
-                    # oficial deles e devemos usar preferencialmente - caso
-                    # disponível - em vez de somar os valores por município)
-                    continue
-                bulletin = CountyBulletinModel(
-                    date=date,
-                    state=self.state,
-                    city=row["city"],
-                    confirmed_cases=row["confirmed"],
-                    deaths=row["deaths"],
-                    source_url=response.request.url,
-                )
-                self.add_new_bulletin_to_report(bulletin, date)
+                    bulletin = StateTotalBulletinModel(
+                        date=date,
+                        state=self.state,
+                        confirmed_cases=row["confirmed"],
+                        deaths=row["deaths"],
+                        source_url=response.request.url,
+                    )
+                    self.has_official_total = True
+                else:
+                    bulletin = CountyBulletinModel(
+                        date=date,
+                        state=self.state,
+                        city=row["city"],
+                        confirmed_cases=row["confirmed"],
+                        deaths=row["deaths"],
+                        source_url=response.request.url,
+                    )
+                self.add_new_bulletin_to_report(bulletin, date, auto_increase_cases=(not self.has_official_total))

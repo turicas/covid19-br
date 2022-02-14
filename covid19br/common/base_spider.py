@@ -69,12 +69,14 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
 
         self.pre_init()
 
-    def add_new_bulletin_to_report(self, bulletin: BulletinModel, date: datetime.date):
+    def add_new_bulletin_to_report(
+            self, bulletin: BulletinModel, date: datetime.date, auto_increase_cases: bool = True,
+    ):
         report = self.reports.get(date)
         if not report:
             report = FullReportModel(date=date, state=self.state)
             self.reports[date] = report
-        report.add_new_bulletin(bulletin)
+        report.add_new_bulletin(bulletin, auto_increase_cases)
 
     def pre_init(self) -> None:
         """
