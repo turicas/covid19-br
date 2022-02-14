@@ -42,8 +42,7 @@ Depois de coletados e checados os dados ficam disponíveis de 3 formas no
 
 Caso queira acessar os dados antes de serem publicados (ATENÇÃO: pode ser que
 não tenham sido checados), você pode [acessar diretamente as planilhas em que
-estamos
-trabalhando](https://drive.google.com/open?id=1l3tiwrGEcJEV3gxX0yP-VMRNaE1MLfS2).
+estamos trabalhando](https://drive.google.com/open?id=1l3tiwrGEcJEV3gxX0yP-VMRNaE1MLfS2).
 
 Se esse programa e/ou os dados resultantes foram úteis a você ou à sua empresa,
 **considere [fazer uma doação ao projeto Brasil.IO](https://brasil.io/doe)**,
@@ -70,7 +69,9 @@ clipping](clipping.md).
 Caso queira analisar os dados usando SQL, veja o script
 [`analysis.sh`](analysis.sh) (ele baixa e converte os CSVs para um banco de
 dados SQLite e já cria índices e *views* que facilitam o trabalho) e os
-arquivos na pasta [`sql/`](sql/). Por padrão o script reutiliza os arquivos
+arquivos na pasta [`sql/`](sql/).
+
+Por padrão o script reutiliza os arquivos
 caso já tenha baixado; para sempre baixar a versão mais atual dos dados,
 execute `./analysis.sh --clean`.
 
@@ -247,8 +248,8 @@ Em resumo, ao criar um spider de um novo estado tenha em mente:
     - De número de casos confirmados e número de mortes **importados/indefinidos**;
     - De números de casos confirmados e números de mortes **totais** do estado (esse
       valor normalmente é computado automaticamente conforme os casos acimas são obtidos,
-      mas em casos onde a scretaria disponibiliza apenas o valor total sem a granularidade
-      dos casos acima, pegar o valor total diretamente é uma opção).
+      mas em casos onde a scretaria disponibiliza o valor total, nós optamos por usá-lo
+      como "fonte da verdade").
     - Para diferentes datas (desde o início da pandemia até hoje).
     > OBS: Como não há uma padronização na forma em que as secretarias disponibilizam os
     dados, nem sempre é possível obter todas essas informações como desejamos. Obter parte
