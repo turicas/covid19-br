@@ -23,7 +23,6 @@ class BulletinModel(ABC):
     source_url: str
     place_type: PlaceType
     state: State
-    city: str
     confirmed_cases: int
     deaths: int
     notes: str
@@ -34,7 +33,6 @@ class BulletinModel(ABC):
         source_url,
         place_type,
         state,
-        city=None,
         confirmed_cases=None,
         deaths=None,
         notes=None,
@@ -45,16 +43,19 @@ class BulletinModel(ABC):
             raise BadReportError("source_url field is required in a report.")
         if not place_type:
             raise BadReportError("place_type field is required in a report.")
-        if not state:
-            raise BadReportError("state field is required in a report.")
+        self._check_state_or_raise_error(state)
+        self.state = state
         self.set_confirmed_cases_value(confirmed_cases)
         self.set_deaths_value(deaths)
         self.date = date
         self.source_url = source_url
         self.place_type = place_type
-        self.state = state
-        self.set_city(city)
         self.notes = notes
+
+    @staticmethod
+    def _check_state_or_raise_error(state):
+        if not state:
+            raise BadReportError("state field is required in a report.")
 
     def set_confirmed_cases_value(self, confirmed_cases):
         try:
@@ -77,9 +78,6 @@ class BulletinModel(ABC):
             raise BadReportError(
                 f"Invalid value for deaths: '{deaths}'. Value can't be cast to int."
             )
-
-    def set_city(self, value):
-        self.city = fix_city_name(self.state.value, value)
 
     @property
     def has_confirmed_cases_or_deaths(self) -> bool:
@@ -113,9 +111,6 @@ class StateTotalBulletinModel(BulletinModel):
             f")"
         )
 
-    def set_city(self, value):
-        self.city = value
-
     def increase_deaths(self, value: int):
         if self.deaths == NOT_INFORMED_CODE:
             self.deaths = value
@@ -137,15 +132,18 @@ class StateTotalBulletinModel(BulletinModel):
 
 
 class CountyBulletinModel(BulletinModel):
+    city: str
+
     def __init__(self, date, source_url, state, city, *args, **kwargs):
         if not city:
             raise BadReportError("city field is required in a county report.")
+        self._check_state_or_raise_error(state)
+        self.city = fix_city_name(state.value, city)
         super().__init__(
             date=date,
             source_url=source_url,
             place_type=PlaceType.CITY,
             state=state,
-            city=city,
             *args,
             **kwargs,
         )
@@ -190,9 +188,6 @@ class ImportedUndefinedBulletinModel(BulletinModel):
             f"qtd_deaths={self.deaths}"
             f")"
         )
-
-    def set_city(self, value):
-        self.city = value
 
     def to_csv_row(self):
         return {
