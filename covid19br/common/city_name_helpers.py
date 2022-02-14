@@ -5,7 +5,7 @@ from fuzzy_types import FuzzyDict
 from pathlib import Path
 
 BASE_PATH = Path(__file__).parent.parent.parent
-POPULATION_PATH = BASE_PATH / "data" / "populacao-por-municipio-2020.csv"
+POPULATION_PATH = BASE_PATH / "covid19br" / "data" / "populacao-por-municipio-2020.csv"
 
 
 @lru_cache()
