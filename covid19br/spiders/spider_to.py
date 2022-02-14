@@ -20,8 +20,6 @@ class SpiderTO(BaseCovid19Spider):
 
     start_urls = ["https://www.to.gov.br/saude/boletim-covid-19/3vvgvo8csrl6"]
 
-    has_official_total = False
-
     def parse(self, response, **kwargs):
         bulletins_per_date = {}
         bulletins = response.xpath(
@@ -66,7 +64,7 @@ class SpiderTO(BaseCovid19Spider):
                         deaths=row["deaths"],
                         source_url=response.request.url,
                     )
-                self.add_new_bulletin_to_report(bulletin, date, auto_increase_cases=(not self.has_official_total))
+                self.add_new_bulletin_to_report(bulletin, date)
 
     def _extract_date(self, value) -> datetime.date:
         """

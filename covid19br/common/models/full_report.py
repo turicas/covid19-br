@@ -25,6 +25,8 @@ class FullReportModel:
     undefined_or_imported_cases_bulletin: Optional[ImportedUndefinedBulletinModel]
     total_bulletin: StateTotalBulletinModel
 
+    _auto_calculate_total = True
+
     def __init__(self, date, state):
         self.date = date
         self.state = state
@@ -53,9 +55,7 @@ class FullReportModel:
             and self.undefined_or_imported_cases_bulletin.has_confirmed_cases_or_deaths
         )
 
-    def add_new_bulletin(
-        self, bulletin: BulletinModel, auto_increase_cases: bool = True
-    ):
+    def add_new_bulletin(self, bulletin: BulletinModel):
         if isinstance(bulletin, CountyBulletinModel):
             self.county_bulletins.append(bulletin)
         elif isinstance(bulletin, ImportedUndefinedBulletinModel):
@@ -66,11 +66,12 @@ class FullReportModel:
             self.undefined_or_imported_cases_bulletin = bulletin
         elif isinstance(bulletin, StateTotalBulletinModel):
             self.total_bulletin = bulletin
+            self._auto_calculate_total = False
             return
         else:
             return
 
-        if auto_increase_cases:
+        if self._auto_calculate_total:
             if (
                 bulletin.confirmed_cases is not None
                 and bulletin.confirmed_cases != NOT_INFORMED_CODE
