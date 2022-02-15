@@ -73,10 +73,10 @@ def save_results_in_csv(results, filename_pattern):
             print(f"No report found for {state} - skipping...")
             continue
         for date, report in reports_by_date.items():
-            filename = Path(filename_pattern.format(date=date, state=report.state.value))
+            filename = Path(filename_pattern.format(date=report.date, state=report.state.value))
             if not filename.parent.exists():
                 filename.parent.mkdir(parents=True)
-            print(f"Formatting and saving file {filename}...")
+            print(f"({date}) Formatting and saving file {filename}...")
             writer = rows.utils.CsvLazyDictWriter(filename)
             for row in report.to_csv_rows():
                 writer.writerow(row)

@@ -20,6 +20,7 @@ class FullReportModel:
     """
 
     date: datetime.date
+    publishing_date: datetime.date
     state: State
     county_bulletins: List[CountyBulletinModel]
     undefined_or_imported_cases_bulletin: Optional[ImportedUndefinedBulletinModel]
@@ -27,8 +28,9 @@ class FullReportModel:
 
     _auto_calculate_total = True
 
-    def __init__(self, date, state):
+    def __init__(self, date, publishing_date, state):
         self.date = date
+        self.publishing_date = publishing_date
         self.state = state
         self.county_bulletins = []
         self.undefined_or_imported_cases_bulletin = None
@@ -41,6 +43,7 @@ class FullReportModel:
             f"FullReportModel("
             f"state={self.state.value}, "
             f"date={self.date.strftime('%d/%m/%Y')}, "
+            f"publishing_date={self.publishing_date.strftime('%d/%m/%Y')}, "
             f"qtd_county_bulletins={len(self.county_bulletins)}, "
             f"has_undefined_or_imported_cases={self.has_undefined_or_imported_cases}, "
             f"total_deaths={self.total_bulletin.deaths}, "

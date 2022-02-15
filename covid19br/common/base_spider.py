@@ -31,6 +31,13 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
     # Your spider should override this value
     state: State = None
 
+    # The information delay is the amount of days that the data collected by your scraper
+    # is delayed in being published by the official source.
+    # For example, a report from the day 20 may actually have the data referring to the day
+    # 19, which means 1 day of information delay. If the data gathered by your scraper really
+    # represents the numbers for the day when the bulletin was made available, keep this value 0.
+    information_delay_in_days: int = 0
+
     def __init__(
         self,
         reports: Dict[datetime.date, FullReportModel],
@@ -72,7 +79,11 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
     def add_new_bulletin_to_report(self, bulletin: BulletinModel, date: datetime.date):
         report = self.reports.get(date)
         if not report:
-            report = FullReportModel(date=date, state=self.state)
+            report = FullReportModel(
+                date=date - datetime.timedelta(days=self.information_delay_in_days),
+                state=self.state,
+                publishing_date=date,
+            )
             self.reports[date] = report
         report.add_new_bulletin(bulletin)
 

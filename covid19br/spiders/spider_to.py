@@ -17,6 +17,7 @@ EXPRESSION_FOR_DEATH_PLUS_CONFIRMED_CASES = (
 class SpiderTO(BaseCovid19Spider):
     state = State.TO
     name = State.TO.value
+    information_delay_in_days = 1
 
     start_urls = ["https://www.to.gov.br/saude/boletim-covid-19/3vvgvo8csrl6"]
 
