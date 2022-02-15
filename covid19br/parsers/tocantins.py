@@ -1,10 +1,12 @@
 import datetime
 import re
 from collections import defaultdict
+
 from rows.fields import slug
 from rows.plugins import pdf
 
 from covid19br.common.data_normalization_utils import NormalizationUtils
+
 
 REGEXP_DAY_MONTH = re.compile("([0-9]+) de (.+)$")
 REGEXP_YEAR = re.compile("^de ([0-9]{4})$")
@@ -119,11 +121,17 @@ class TocantinsBulletinExtractor:
             raise ValueError("Cannot identify layout")
         return layout, start_page
 
-    def _get_table_lines(self, page_number):
-        starts_after, ends_before = (
-            "município de residência, TOCANTINS.",
-            "governodotocantins",
-        )
+    def _get_table_lines(self, page_number, second=False):
+        if not second:
+            starts_after, ends_before = (
+                "município de residência, TOCANTINS.",
+                "governodotocantins",
+            )
+        else:
+            starts_after, ends_before = (
+                re.compile("PG. [0-9]+"),
+                "DETALHE DOS NOVOS ÓBITOS",
+            )
         selected_objects = self.doc.text_objects(
             starts_after=starts_after,
             ends_before=ends_before,
@@ -136,13 +144,20 @@ class TocantinsBulletinExtractor:
         layout, start_page = self._identify_layout()
 
         if layout == "same table":
-            for line in self._get_table_lines(start_page):
-                city, confirmed, deaths = line
-                yield {
-                    "city": slug(city).replace("_", " "),
-                    "confirmed": parse_int(confirmed),
-                    "deaths": parse_int(deaths),
-                }
+            counter = 0
+            for page in (start_page, start_page + 1):
+                for line in self._get_table_lines(page, second=page == start_page + 1):
+                    city, confirmed, deaths = line
+                    yield {
+                        "city": slug(city).replace("_", " "),
+                        "confirmed": parse_int(confirmed),
+                        "deaths": parse_int(deaths),
+                    }
+                    counter += 1
+                if page == start_page and counter == 140:
+                    # Table is not split in two pages, so abort reading next
+                    # page
+                    break
 
         elif layout == "separate tables":
             result = defaultdict(dict)
