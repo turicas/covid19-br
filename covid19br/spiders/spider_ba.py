@@ -1,13 +1,13 @@
 import re
-
 import scrapy
+from collections import defaultdict
 
 from covid19br.common.base_spider import BaseCovid19Spider
 from covid19br.common.constants import State, ReportQuality
 from covid19br.common.models.bulletin_models import StateTotalBulletinModel
 
 REGEXP_CASES = re.compile("([0-9.]+) casos confirmados")
-REGEXP_DEATHS = re.compile("([0-9.]+) tiveram óbito confirmado")
+REGEXP_DEATHS = re.compile("([0-9.]+) (?:tiveram [óo]bito confirmado|evolu[ií]ram para [óo]bito)")
 
 
 class SpiderBA(BaseCovid19Spider):
@@ -24,7 +24,7 @@ class SpiderBA(BaseCovid19Spider):
         self.dates_range = list(self.dates_range)
 
     def parse(self, response, **kwargs):
-        news_per_date = {}
+        news_per_date = defaultdict(list)
         news_divs = response.xpath("//div[@class = 'noticia']")
         for div in news_divs:
             titulo = div.xpath(".//h2//text()").get()
@@ -33,14 +33,14 @@ class SpiderBA(BaseCovid19Spider):
                     div.xpath(".//p[@class = 'data-hora']/text()").get()
                 )
                 url = div.xpath(".//h2/a/@href").get()
-                news_per_date[datahora.date()] = url
+                news_per_date[datahora.date()].append(url)
 
         for date in news_per_date:
             if date in self.dates_range:
-                link = news_per_date[date]
-                yield scrapy.Request(
-                    link, callback=self.parse_bulletin_text, cb_kwargs={"date": date}
-                )
+                for link in news_per_date[date]:
+                    yield scrapy.Request(
+                        link, callback=self.parse_bulletin_text, cb_kwargs={"date": date}
+                    )
 
         if self.start_date < min(news_per_date):
             last_page_number = 1
@@ -51,7 +51,6 @@ class SpiderBA(BaseCovid19Spider):
                     url = url[:-1]
                 *_url_path, last_page_number = url.split("/")
                 last_page_number = self.normalizer.ensure_integer(last_page_number)
-
             next_page_number = last_page_number + 1
             next_page_url = f"{self.base_url}page/{next_page_number}/"
             yield scrapy.Request(next_page_url, callback=self.parse)
@@ -60,15 +59,15 @@ class SpiderBA(BaseCovid19Spider):
         html = response.text
         cases, *_other_matches = REGEXP_CASES.findall(html) or [None]
         deaths, *_other_matches = REGEXP_DEATHS.findall(html) or [None]
-
-        bulletin = StateTotalBulletinModel(
-            date=date,
-            state=self.state,
-            deaths=deaths,
-            confirmed_cases=cases,
-            source_url=response.request.url,
-        )
-        self.add_new_bulletin_to_report(bulletin, date)
+        if cases or deaths:
+            bulletin = StateTotalBulletinModel(
+                date=date,
+                state=self.state,
+                deaths=deaths,
+                confirmed_cases=cases,
+                source_url=response.request.url,
+            )
+            self.add_new_bulletin_to_report(bulletin, date)
 
     @staticmethod
     def is_covid_report_news(news_title: str) -> bool:

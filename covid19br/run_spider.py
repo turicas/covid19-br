@@ -72,7 +72,7 @@ def save_results_in_csv(results, filename_pattern):
         if not reports_by_date:
             print(f"No report found for {state} - skipping...")
             continue
-        for date, report in reports_by_date.items():
+        for date, report in sorted(reports_by_date.items()):
             filename = Path(filename_pattern.format(
                 date=report.date,
                 state=report.state.value,

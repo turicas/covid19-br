@@ -79,11 +79,16 @@ class BulletinModel(ABC):
             )
 
     @property
-    def has_confirmed_cases_or_deaths(self) -> bool:
-        return (
-            self.confirmed_cases != NOT_INFORMED_CODE
-            and self.deaths != NOT_INFORMED_CODE
-        )
+    def has_confirmed_cases_and_deaths(self) -> bool:
+        return self.has_confirmed_cases and self.has_deaths
+
+    @property
+    def has_deaths(self) -> bool:
+        return self.deaths != NOT_INFORMED_CODE
+
+    @property
+    def has_confirmed_cases(self) -> bool:
+        return self.confirmed_cases != NOT_INFORMED_CODE
 
     def to_csv_row(self):
         raise NotImplementedError()

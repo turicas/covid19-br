@@ -59,7 +59,7 @@ class FullReportModel:
     def has_undefined_or_imported_cases(self):
         return (
             bool(self.undefined_or_imported_cases_bulletin)
-            and self.undefined_or_imported_cases_bulletin.has_confirmed_cases_or_deaths
+            and self.undefined_or_imported_cases_bulletin.has_confirmed_cases_and_deaths
         )
 
     def add_new_bulletin(self, bulletin: BulletinModel):
@@ -106,7 +106,7 @@ class FullReportModel:
     def to_csv_rows(self):
         rows = []
         for bulletin in sorted(self.county_bulletins, key=lambda x: x.city):
-            if bulletin.has_confirmed_cases_or_deaths:
+            if bulletin.has_confirmed_cases_and_deaths:
                 rows.append(bulletin.to_csv_row())
         if self.has_undefined_or_imported_cases:
             rows.append(self.undefined_or_imported_cases_bulletin.to_csv_row())
@@ -122,6 +122,10 @@ class FullReportModel:
             warnings.append(f'faltando-{ReportQuality.UNDEFINED_OR_IMPORTED_CASES.value}')
         if ReportQuality.ONLY_TOTAL in self._expected_qualities:
             warnings.append(ReportQuality.ONLY_TOTAL.value)
+            if not self.total_bulletin.has_confirmed_cases:
+                warnings.append("faltando-casos-confirmados")
+            if not self.total_bulletin.has_deaths:
+                warnings.append("faltando-obitos")
 
         if not warnings:
             return ""
