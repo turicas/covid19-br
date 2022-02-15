@@ -1,7 +1,6 @@
 from enum import Enum
 
 NOT_INFORMED_CODE = -1
-IMPORTED_OR_UNDEFINED_CODE = "--"
 
 
 class PlaceType(Enum):

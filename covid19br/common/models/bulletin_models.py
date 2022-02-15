@@ -3,7 +3,6 @@ from abc import ABC
 
 from covid19br.common.city_name_helpers import fix_city_name
 from covid19br.common.constants import (
-    IMPORTED_OR_UNDEFINED_CODE,
     NOT_INFORMED_CODE,
     PlaceType,
     State,
@@ -174,7 +173,6 @@ class ImportedUndefinedBulletinModel(BulletinModel):
             source_url=source_url,
             place_type=PlaceType.CITY,
             state=state,
-            city=IMPORTED_OR_UNDEFINED_CODE,
             *args,
             **kwargs,
         )
