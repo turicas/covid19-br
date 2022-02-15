@@ -5,7 +5,7 @@ import rows
 import scrapy
 
 from covid19br.common.base_spider import BaseCovid19Spider
-from covid19br.common.constants import State
+from covid19br.common.constants import State, ReportQuality
 from covid19br.common.data_normalization_utils import RowsPtBrIntegerField
 from covid19br.common.models.bulletin_models import (
     CountyBulletinModel,
@@ -16,6 +16,10 @@ from covid19br.common.models.bulletin_models import (
 class SpiderPR(BaseCovid19Spider):
     state = State.PR
     name = State.PR.value
+    report_qualities = [
+        ReportQuality.COUNTY_BULLETINS,
+        ReportQuality.UNDEFINED_OR_IMPORTED_CASES,
+    ]
 
     start_urls = ["https://www.saude.pr.gov.br/Pagina/Coronavirus-COVID-19"]
 

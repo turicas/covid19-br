@@ -4,7 +4,7 @@ import tempfile
 import scrapy
 
 from covid19br.common.base_spider import BaseCovid19Spider
-from covid19br.common.constants import State
+from covid19br.common.constants import State, ReportQuality
 from covid19br.common.models.bulletin_models import CountyBulletinModel, StateTotalBulletinModel
 from covid19br.parsers.tocantins import TocantinsBulletinExtractor
 
@@ -18,6 +18,9 @@ class SpiderTO(BaseCovid19Spider):
     state = State.TO
     name = State.TO.value
     information_delay_in_days = 1
+    report_qualities = [
+        ReportQuality.COUNTY_BULLETINS,
+    ]
 
     start_urls = ["https://www.to.gov.br/saude/boletim-covid-19/3vvgvo8csrl6"]
 

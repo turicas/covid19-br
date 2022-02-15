@@ -1,7 +1,7 @@
 import datetime
 from typing import List, Optional
 
-from covid19br.common.constants import NOT_INFORMED_CODE, State
+from covid19br.common.constants import NOT_INFORMED_CODE, State, ReportQuality
 from covid19br.common.exceptions import BadReportError
 from covid19br.common.models.bulletin_models import (
     BulletinModel,
@@ -27,12 +27,16 @@ class FullReportModel:
     total_bulletin: StateTotalBulletinModel
 
     _auto_calculate_total = True
+    _expected_qualities = []
 
-    def __init__(self, date, publishing_date, state):
+    def __init__(self, date, publishing_date, state, qualities):
+        if not qualities:
+            raise BadReportError("A report can't have no qualities.")
         self.date = date
         self.publishing_date = publishing_date
         self.state = state
         self.county_bulletins = []
+        self._expected_qualities = qualities
         self.undefined_or_imported_cases_bulletin = None
         self.total_bulletin = StateTotalBulletinModel(
             date=date, state=state, source_url="auto computed"
@@ -108,3 +112,17 @@ class FullReportModel:
             rows.append(self.undefined_or_imported_cases_bulletin.to_csv_row())
         rows.append(self.total_bulletin.to_csv_row())
         return rows
+
+    @property
+    def warnings_slug(self) -> str:
+        warnings = []
+        if ReportQuality.COUNTY_BULLETINS in self._expected_qualities and not self.county_bulletins:
+            warnings.append(f'faltando-{ReportQuality.COUNTY_BULLETINS.value}')
+        if ReportQuality.UNDEFINED_OR_IMPORTED_CASES in self._expected_qualities and not self.has_undefined_or_imported_cases:
+            warnings.append(f'faltando-{ReportQuality.UNDEFINED_OR_IMPORTED_CASES.value}')
+        if ReportQuality.ONLY_TOTAL in self._expected_qualities:
+            warnings.append(ReportQuality.ONLY_TOTAL.value)
+
+        if not warnings:
+            return ""
+        return "__" + "__".join(warnings)

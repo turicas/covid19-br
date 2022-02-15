@@ -3,7 +3,7 @@ import re
 import scrapy
 
 from covid19br.common.base_spider import BaseCovid19Spider
-from covid19br.common.constants import State
+from covid19br.common.constants import State, ReportQuality
 from covid19br.common.models.bulletin_models import StateTotalBulletinModel
 
 REGEXP_CASES = re.compile("([0-9.]+) casos confirmados")
@@ -13,6 +13,9 @@ REGEXP_DEATHS = re.compile("([0-9.]+) tiveram óbito confirmado")
 class SpiderBA(BaseCovid19Spider):
     state = State.BA
     name = State.BA.value
+    report_qualities = [
+        ReportQuality.ONLY_TOTAL,
+    ]
 
     base_url = "http://www.saude.ba.gov.br/category/emergencias-em-saude/"
     start_urls = [base_url]

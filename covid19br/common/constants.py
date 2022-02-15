@@ -36,3 +36,9 @@ class State(Enum):
     SP = "SP"
     SE = "SE"
     TO = "TO"
+
+
+class ReportQuality(Enum):
+    COUNTY_BULLETINS = "boletins-por-estado"
+    UNDEFINED_OR_IMPORTED_CASES = "casos-importados-ou-indefinidos"
+    ONLY_TOTAL = "apenas-total"

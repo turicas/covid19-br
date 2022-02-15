@@ -5,7 +5,7 @@ from typing import List
 import scrapy
 
 from covid19br.common.base_spider import BaseCovid19Spider
-from covid19br.common.constants import State
+from covid19br.common.constants import State, ReportQuality
 from covid19br.common.models.bulletin_models import (
     CountyBulletinModel,
     ImportedUndefinedBulletinModel,
@@ -19,6 +19,10 @@ IMPORTED_OR_UNDEFINED_LABEL = "SEM INFORMAÇÃO"
 class SpiderCE(BaseCovid19Spider):
     state = State.CE
     name = State.CE.value
+    report_qualities = [
+        ReportQuality.COUNTY_BULLETINS,
+        ReportQuality.UNDEFINED_OR_IMPORTED_CASES,
+    ]
 
     base_url = "https://indicadores.integrasus.saude.ce.gov.br/api/coronavirus/qtd-por-municipio"
 

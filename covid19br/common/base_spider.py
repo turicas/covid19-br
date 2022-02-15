@@ -6,7 +6,7 @@ from typing import Dict, List
 import scrapy
 from rows.utils.date import date_range
 
-from covid19br.common.constants import State
+from covid19br.common.constants import State, ReportQuality
 from covid19br.common.data_normalization_utils import NormalizationUtils
 from covid19br.common.models.full_report import BulletinModel, FullReportModel
 
@@ -28,8 +28,9 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
         ),
     }
 
-    # Your spider should override this value
+    # Your spider should override these values
     state: State = None
+    report_qualities: List[ReportQuality]
 
     # The information delay is the amount of days that the data collected by your scraper
     # is delayed in being published by the official source.
@@ -83,6 +84,7 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
                 date=date - datetime.timedelta(days=self.information_delay_in_days),
                 state=self.state,
                 publishing_date=date,
+                qualities=self.report_qualities,
             )
             self.reports[date] = report
         report.add_new_bulletin(bulletin)

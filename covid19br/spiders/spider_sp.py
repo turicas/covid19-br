@@ -5,7 +5,7 @@ import logging
 import scrapy
 
 from covid19br.common.base_spider import BaseCovid19Spider
-from covid19br.common.constants import State
+from covid19br.common.constants import State, ReportQuality
 from covid19br.common.models.bulletin_models import (
     CountyBulletinModel,
     ImportedUndefinedBulletinModel,
@@ -22,6 +22,10 @@ IMPORTED_OR_UNDEFINED_LABELS = ["Outros países", "Outros estados", "Ignorado"]
 class SpiderSP(BaseCovid19Spider):
     state = State.SP
     name = State.SP.value
+    report_qualities = [
+        ReportQuality.COUNTY_BULLETINS,
+        ReportQuality.UNDEFINED_OR_IMPORTED_CASES,
+    ]
 
     base_url = "https://www.seade.gov.br"
     start_urls = [f"{base_url}/coronavirus/"]

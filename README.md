@@ -166,7 +166,7 @@ make docker-run-spiders         # caso esteja usando o setup com docker
 Os comandos acima irão rodar os scrapers de **todos os estados** que temos implementado
 buscando os dados sobre a **data de hoje** e **salvarão o consolidado** em `.csv` na pasta
 `data` deste diretório (por padrão são salvos em arquivos com o nome no padrão 
-`"data/{estado}/covid19-{estado}-{data}.csv"`).
+`"data/{estado}/covid19-{estado}-{data}{extra_info}.csv"`).
 
 Mas essa não é a única forma de usar esse comando, você pode optar por não salvar os
 consolidados em um `.csv` (apenas exibi-los na tela) ou então rodar apenas os scrapers

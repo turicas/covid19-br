@@ -178,7 +178,7 @@ The above commands will run the scrappers for **all available states**
 that we have implemented, fetching the data for **today's date** and 
 **will save the consolidated** in a `.csv` in the folder `data` from
 this directory (by default they are saved in files with this name pattern
-`"data/{estado}/covid19-{estado}-{data}.csv"`).
+`"data/{estado}/covid19-{estado}-{data}{extra_info}.csv"`).
 
 But this is not the only way to use this command, you can choose not to save the
 consolidated in a `.csv` (only display them on the screen) or run only scrapers
