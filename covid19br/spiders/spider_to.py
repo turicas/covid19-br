@@ -1,11 +1,14 @@
 import datetime
-import tempfile
-
+import json
 import scrapy
+import tempfile
 
 from covid19br.common.base_spider import BaseCovid19Spider
 from covid19br.common.constants import State, ReportQuality
-from covid19br.common.models.bulletin_models import CountyBulletinModel, StateTotalBulletinModel
+from covid19br.common.models.bulletin_models import (
+    CountyBulletinModel,
+    StateTotalBulletinModel,
+)
 from covid19br.parsers.tocantins import TocantinsBulletinExtractor
 
 
@@ -18,9 +21,7 @@ class SpiderTO(BaseCovid19Spider):
     state = State.TO
     name = State.TO.value
     information_delay_in_days = 1
-    report_qualities = [
-        ReportQuality.COUNTY_BULLETINS,
-    ]
+    report_qualities = [ReportQuality.COUNTY_BULLETINS]
 
     start_urls = ["https://www.to.gov.br/saude/boletim-covid-19/3vvgvo8csrl6"]
 
@@ -40,6 +41,12 @@ class SpiderTO(BaseCovid19Spider):
             url = bulletins_per_date.get(date)
             if url:
                 yield scrapy.Request(url, callback=self.parse_pdf)
+
+        # getting via API the official total displayed on http://integra.saude.to.gov.br/covid19
+        yield scrapy.Request(
+            "http://integra.saude.to.gov.br/Api/GetAtualizacaoCoronaTO?idPainel=31",
+            callback=self.get_official_total,
+        )
 
     def parse_pdf(self, response):
         """Converte PDF do boletim COVID-19 do Tocantins em CSV"""
@@ -88,3 +95,41 @@ class SpiderTO(BaseCovid19Spider):
         if "BOLETIM" in value:
             return self.normalizer.extract_numeric_date(value)
         return self.normalizer.extract_in_full_date(value)
+
+    def get_official_total(self, response):
+        resp = json.loads(response.body)
+        result = json.loads(resp.get("Resultado", "{}"))
+        published_at = result.get("resultset", [[None]])[0][0]
+        source = "http://integra.saude.to.gov.br/covid19 | " + resp.get("Rodape", "")
+
+        published_at_date = self.normalizer.extract_in_full_date(published_at)
+        if published_at_date in self.requested_dates:
+            official_total = StateTotalBulletinModel(
+                date=published_at_date, state=self.state, source_url=source
+            )
+            yield scrapy.Request(
+                "http://integra.saude.to.gov.br/Api/GetReleasesCovid?id=247",
+                callback=self.get_official_confirmed_cases,
+                cb_kwargs={"date": published_at_date, "official_total": official_total},
+            )
+
+    def get_official_confirmed_cases(self, response, date, official_total):
+        resp = json.loads(response.body)
+        if "casos confirmados" in resp.get("NomePainel", "").lower():
+            cases = json.loads(resp.get("Retorno", "{}")).get("resultset", [[0]])[0][0]
+            official_total.increase_confirmed_cases(cases)
+            yield scrapy.Request(
+                "http://integra.saude.to.gov.br/Api/GetReleasesCovid?id=249",
+                callback=self.get_official_deaths,
+                cb_kwargs={"date": date, "official_total": official_total},
+            )
+
+    def get_official_deaths(self, response, date, official_total):
+        resp = json.loads(response.body)
+        panel_name = self.normalizer.remove_accentuation(
+            resp.get("NomePainel", "").lower()
+        )
+        if "obitos" in panel_name:
+            cases = json.loads(resp.get("Retorno", "{}")).get("resultset", [[0]])[0][0]
+            official_total.increase_deaths(cases)
+            self.add_new_bulletin_to_report(official_total, date)

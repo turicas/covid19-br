@@ -112,12 +112,14 @@ class StateTotalBulletinModel(BulletinModel):
         )
 
     def increase_deaths(self, value: int):
+        value = NormalizationUtils.ensure_integer(value)
         if self.deaths == NOT_INFORMED_CODE:
             self.deaths = value
             return
         self.deaths += value
 
     def increase_confirmed_cases(self, value: int):
+        value = NormalizationUtils.ensure_integer(value)
         if self.confirmed_cases == NOT_INFORMED_CODE:
             self.confirmed_cases = value
             return

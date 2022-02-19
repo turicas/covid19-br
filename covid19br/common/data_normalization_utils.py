@@ -67,6 +67,8 @@ class NormalizationUtils:
         datetime.date(2020, 11, 25)
         >>> NormalizationUtils.extract_numeric_date("blabla 24 de julho de 2021")
         datetime.date(2021, 07, 24)
+        >>> NormalizationUtils.extract_numeric_date("19 de Fevereiro de 2022, às 13:01")
+        datetime.date(2022, 02, 19)
         """
         result = REGEXP_IN_FULL_DATE.findall(value)
         if result:
