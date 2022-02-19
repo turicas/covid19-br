@@ -23,12 +23,38 @@ class NormalizationUtils:
             return int(value.replace(".", "").replace(",", ""))
 
     @staticmethod
-    def str_to_datetime(value) -> datetime:
-        return datetime.strptime(value, "%d/%m/%Y %H:%M")
+    def str_to_datetime(value, separator=None) -> datetime:
+        date_format = NormalizationUtils.detect_date_format(value, separator)
+        return datetime.strptime(value, f"{date_format} %H:%M")
 
     @staticmethod
-    def str_to_date(value) -> date:
-        return datetime.strptime(value, "%d/%m/%Y").date()
+    def str_to_date(value, separator=None) -> date:
+        date_format = NormalizationUtils.detect_date_format(value, separator)
+        return datetime.strptime(value, date_format).date()
+
+    @staticmethod
+    def detect_date_format(value, sep) -> str:
+        """
+        >>> NormalizationUtils.detect_date_format("10/02/2034")
+        "%d/%m/%Y"
+        >>> NormalizationUtils.detect_date_format("18-09-2021")
+        "%d-%m-%Y"
+        >>> NormalizationUtils.detect_date_format("2021/07/09")
+        "%Y/%m/%d"
+        >>> NormalizationUtils.detect_date_format("2023-12-30")
+        "%Y-%m-%d"
+        >>> NormalizationUtils.detect_date_format("2023.12.30", sep=".")
+        "%Y.%m.%d"
+        """
+        if not sep:
+            sep = "/" if "/" in value else "-"
+        first_number, *_ = value.split(sep)
+        if len(first_number) == 2:
+            return f"%d{sep}%m{sep}%Y"
+        if len(first_number) == 4:
+            return f"%Y{sep}%m{sep}%d"
+        else:
+            raise ValueError(f"Invalid date '{value}'.")
 
     @staticmethod
     def extract_in_full_date(value, default_year=CURRENT_YEAR) -> date:
