@@ -63,7 +63,7 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
         else:
             tomorrow = self.today + datetime.timedelta(days=1)
             self.end_date = (
-                tomorrow if not end_date or end_date > tomorrow else self.today
+                tomorrow if not end_date or end_date >= tomorrow else end_date
             )
             self.start_date = start_date if start_date else self.today
             self.dates_range = date_range(self.start_date, self.end_date)
