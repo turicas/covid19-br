@@ -43,16 +43,20 @@ class SpiderPR(BaseCovid19Spider):
         for date in self.requested_dates:
             if date in bulletins_per_date:
                 urls = bulletins_per_date[date]
-                yield scrapy.Request(
-                    urls["csv"],
-                    callback=self.parse_reports_csv,
-                    cb_kwargs={"date": date},
-                )
-                yield scrapy.Request(
-                    urls["pdf"],
-                    callback=self.parse_report_pdf,
-                    cb_kwargs={"date": date},
-                )
+                csv_url = urls.get("csv")
+                pdf_url = urls.get("pdf")
+                if csv_url:
+                    yield scrapy.Request(
+                        csv_url,
+                        callback=self.parse_reports_csv,
+                        cb_kwargs={"date": date},
+                    )
+                if pdf_url:
+                    yield scrapy.Request(
+                        pdf_url,
+                        callback=self.parse_report_pdf,
+                        cb_kwargs={"date": date},
+                    )
 
     def parse_reports_csv(self, response, date):
         county_reports = rows.import_from_csv(
