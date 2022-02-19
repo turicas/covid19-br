@@ -40,7 +40,7 @@ class SpiderPR(BaseCovid19Spider):
                 url = div.xpath(".//a/@href").get()
                 bulletins_per_date[date][filetype] = url
 
-        for date in self.dates_range:
+        for date in self.requested_dates:
             if date in bulletins_per_date:
                 urls = bulletins_per_date[date]
                 yield scrapy.Request(

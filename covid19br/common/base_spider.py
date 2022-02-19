@@ -1,4 +1,5 @@
 import datetime
+from datetime import timedelta
 import logging
 from abc import ABC
 from typing import Dict, List
@@ -56,17 +57,29 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
             )
 
         self.today = datetime.date.today()
-        if dates_range:
-            self.dates_range = dates_range
-            self.end_date = max(dates_range)
-            self.start_date = min(dates_range)
+        tomorrow = self.today + timedelta(days=1)
+        if not dates_range and not start_date and not end_date:
+            # if no date filter is passed, by default we gather the most recent data whatever
+            # it's reference date is
+            self.start_date = self.today
+            self.end_date = tomorrow
+            self.requested_dates = [self.today]
         else:
-            tomorrow = self.today + datetime.timedelta(days=1)
-            self.end_date = (
-                tomorrow if not end_date or end_date >= tomorrow else end_date
-            )
-            self.start_date = start_date if start_date else self.today
-            self.dates_range = date_range(self.start_date, self.end_date)
+            # if there are date filters, the user is searching for data from specific dates, so we
+            # need to add the information delay on the dates to consider the difference between the
+            # bulletin's publishing date and the date it refers to in order to get the correct data
+            if dates_range:
+                self.start_date = min(dates_range)
+                self.end_date = max(dates_range)
+                requested_dates = dates_range
+            else:
+                self.start_date = start_date if start_date else self.today
+                self.end_date = (
+                    tomorrow if not end_date or end_date > tomorrow else end_date
+                )
+                requested_dates = date_range(self.start_date, self.end_date)
+            delay = timedelta(days=self.information_delay_in_days)
+            self.requested_dates = (date + delay for date in requested_dates)
 
         # The following variable is used to store the results of the scraping
         # so they can be used outside the spider - it will have one report per
@@ -81,9 +94,9 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
         report = self.reports.get(date)
         if not report:
             report = FullReportModel(
-                date=date - datetime.timedelta(days=self.information_delay_in_days),
+                reference_date=date - timedelta(days=self.information_delay_in_days),
+                published_at=date,
                 state=self.state,
-                publishing_date=date,
                 qualities=self.report_qualities,
             )
             self.reports[date] = report

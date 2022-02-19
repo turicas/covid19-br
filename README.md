@@ -219,7 +219,7 @@ Para padronizar a forma que os scrapers recebem parâmetros e retornam os dados,
 criamos um [Spider Base](covid19br/common/base_spider.py), que nada mais é que
 um spider básico do scrapy com lógica a mais para:
 - Identificar _para quais datas_ o spider deve procurar dados (essa informação
-  é recebida como parâmetro e é guardada na classe no atributo `self.dates_range`,
+  é recebida como parâmetro e é guardada na classe no atributo `self.requested_dates`,
   que é um `generator` de valores do tipo `datetime.date` com as datas que precisamos
   raspar os dados, e deve ser usada pelo seu spider para buscar os dados como
   solicitado).

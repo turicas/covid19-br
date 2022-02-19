@@ -63,7 +63,8 @@ def display_results(results):
             print("- No report found")
             continue
         for date in sorted(reports_by_date):
-            print(f"- ({date}) {reports_by_date[date]}")
+            report = reports_by_date[date]
+            print(f"- ({report.reference_date}) {report}")
 
 
 def save_results_in_csv(results, filename_pattern):
@@ -74,13 +75,13 @@ def save_results_in_csv(results, filename_pattern):
             continue
         for date, report in sorted(reports_by_date.items()):
             filename = Path(filename_pattern.format(
-                date=report.date,
+                date=report.reference_date,
                 state=report.state.value,
                 extra_info=report.warnings_slug,
             ))
             if not filename.parent.exists():
                 filename.parent.mkdir(parents=True)
-            print(f"({date}) Formatting and saving file {filename}...")
+            print(f"({report.reference_date}) Formatting and saving file {filename}...")
             writer = rows.utils.CsvLazyDictWriter(filename)
             for row in report.to_csv_rows():
                 writer.writerow(row)

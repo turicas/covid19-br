@@ -19,8 +19,8 @@ class FullReportModel:
     it to be consumed elsewhere in the application.
     """
 
-    date: datetime.date
-    publishing_date: datetime.date
+    reference_date: datetime.date  # data date
+    published_at: datetime.date    # bulletin date
     state: State
     county_bulletins: List[CountyBulletinModel]
     undefined_or_imported_cases_bulletin: Optional[ImportedUndefinedBulletinModel]
@@ -29,28 +29,28 @@ class FullReportModel:
     _auto_calculate_total = True
     _expected_qualities = []
 
-    def __init__(self, date, publishing_date, state, qualities):
+    def __init__(self, reference_date, published_at, state, qualities):
         if not qualities:
             raise BadReportError("A report can't have no qualities.")
-        self.date = date
-        self.publishing_date = publishing_date
+        self.reference_date = reference_date
+        self.published_at = published_at
         self.state = state
         self.county_bulletins = []
         self._expected_qualities = qualities
         self.undefined_or_imported_cases_bulletin = None
         self.total_bulletin = StateTotalBulletinModel(
-            date=date, state=state, source_url="auto computed"
+            date=reference_date, state=state, source_url="auto computed"
         )
         self.undefined_or_imported_cases_bulletin = ImportedUndefinedBulletinModel(
-            date=date, state=state, source_url="not found"
+            date=reference_date, state=state, source_url="not found"
         )
 
     def __repr__(self):
         return (
             f"FullReportModel("
             f"state={self.state.value}, "
-            f"date={self.date.strftime('%d/%m/%Y')}, "
-            f"publishing_date={self.publishing_date.strftime('%d/%m/%Y')}, "
+            f"reference_date={self.reference_date.strftime('%d/%m/%Y')}, "
+            f"published_at={self.published_at.strftime('%d/%m/%Y')}, "
             f"qtd_county_bulletins={len(self.county_bulletins)}, "
             f"has_undefined_or_imported_cases={self.has_undefined_or_imported_cases}, "
             f"total_deaths={self.total_bulletin.deaths}, "

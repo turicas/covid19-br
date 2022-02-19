@@ -22,7 +22,7 @@ class SpiderBA(BaseCovid19Spider):
     start_urls = [base_url]
 
     def pre_init(self):
-        self.dates_range = list(self.dates_range)
+        self.requested_dates = list(self.requested_dates)
 
     def parse(self, response, **kwargs):
         news_per_date = defaultdict(list)
@@ -37,7 +37,7 @@ class SpiderBA(BaseCovid19Spider):
                 news_per_date[datahora.date()].append(url)
 
         for date in news_per_date:
-            if date in self.dates_range:
+            if date in self.requested_dates:
                 for link in news_per_date[date]:
                     yield scrapy.Request(
                         link, callback=self.parse_bulletin_text, cb_kwargs={"date": date}

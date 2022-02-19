@@ -232,7 +232,7 @@ To standardize the way scrapers receive parameters and return data,
 we created a [Base Spider](covid19br/common/base_spider.py), which is nothing more than
 a basic scrapy spider with extra logic for:
 - Identify _for which dates_ the spider should look for data (this information
-   is received as a parameter and is stored in the class in the `self.dates_range` attribute,
+   is received as a parameter and is stored in the class in the `self.requested_dates` attribute,
    which is a `generator` of values of type `datetime.date` with the dates we need
    scrape the data, and should be used by your spider to fetch the data like
    requested).

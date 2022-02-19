@@ -34,7 +34,7 @@ class SpiderSP(BaseCovid19Spider):
     def pre_init(self):
         logger.warning(
             "This spider only gathers data for the current date. "
-            "It does not consider any given 'dates_range'."
+            "It does not consider any given 'requested_dates'."
         )
 
     def parse(self, response, **kwargs):
