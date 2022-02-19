@@ -19,6 +19,7 @@ IMPORTED_OR_UNDEFINED_LABEL = "SEM INFORMAÇÃO"
 class SpiderCE(BaseCovid19Spider):
     state = State.CE
     name = State.CE.value
+    information_delay_in_days = 0
     report_qualities = [
         ReportQuality.COUNTY_BULLETINS,
         ReportQuality.UNDEFINED_OR_IMPORTED_CASES,

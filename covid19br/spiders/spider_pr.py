@@ -16,6 +16,7 @@ from covid19br.common.models.bulletin_models import (
 class SpiderPR(BaseCovid19Spider):
     state = State.PR
     name = State.PR.value
+    information_delay_in_days = 0
     report_qualities = [
         ReportQuality.COUNTY_BULLETINS,
         ReportQuality.UNDEFINED_OR_IMPORTED_CASES,

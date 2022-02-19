@@ -13,6 +13,7 @@ REGEXP_DEATHS = re.compile("([0-9.]+) (?:tiveram [óo]bito confirmado|evolu[ií]
 class SpiderBA(BaseCovid19Spider):
     state = State.BA
     name = State.BA.value
+    information_delay_in_days = 0
     report_qualities = [
         ReportQuality.ONLY_TOTAL,
     ]

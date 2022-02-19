@@ -22,6 +22,7 @@ IMPORTED_OR_UNDEFINED_LABELS = ["Outros países", "Outros estados", "Ignorado"]
 class SpiderSP(BaseCovid19Spider):
     state = State.SP
     name = State.SP.value
+    information_delay_in_days = 0
     report_qualities = [
         ReportQuality.COUNTY_BULLETINS,
         ReportQuality.UNDEFINED_OR_IMPORTED_CASES,
