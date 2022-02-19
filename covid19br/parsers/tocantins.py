@@ -5,8 +5,9 @@ from collections import defaultdict
 from rows.fields import slug
 from rows.plugins import pdf
 
+from covid19br.common.constants import State
 from covid19br.common.data_normalization_utils import NormalizationUtils
-
+from covid19br.common.demographic_utils import DemographicUtils
 
 REGEXP_DAY_MONTH = re.compile("([0-9]+) de (.+)$")
 REGEXP_YEAR = re.compile("^de ([0-9]{4})$")
@@ -25,6 +26,9 @@ def parse_int(value):
 
 
 class TocantinsBulletinExtractor:
+    state = State.TO
+    demographics = DemographicUtils()
+
     def __init__(self, filename):
         self.doc = pdf.PyMuPDFBackend(filename)
 
@@ -154,7 +158,8 @@ class TocantinsBulletinExtractor:
                         "deaths": parse_int(deaths),
                     }
                     counter += 1
-                if page == start_page and counter == 140:
+                qtd_cities_plus_total = self.demographics.get_cities_amount(self.state) + 1
+                if page == start_page and counter == qtd_cities_plus_total:
                     # Table is not split in two pages, so abort reading next
                     # page
                     break
