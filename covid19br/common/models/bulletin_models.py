@@ -2,11 +2,7 @@ import datetime
 from abc import ABC
 
 from covid19br.common.city_name_helpers import fix_city_name
-from covid19br.common.constants import (
-    NOT_INFORMED_CODE,
-    PlaceType,
-    State,
-)
+from covid19br.common.constants import NOT_INFORMED_CODE, PlaceType, State
 from covid19br.common.data_normalization_utils import NormalizationUtils
 from covid19br.common.exceptions import BadReportError
 
@@ -79,16 +75,16 @@ class BulletinModel(ABC):
             )
 
     @property
-    def has_confirmed_cases_and_deaths(self) -> bool:
-        return self.has_confirmed_cases and self.has_deaths
+    def is_empty(self) -> bool:
+        return not self.has_deaths and not self.has_confirmed_cases
 
     @property
     def has_deaths(self) -> bool:
-        return self.deaths != NOT_INFORMED_CODE
+        return self.deaths and self.deaths != NOT_INFORMED_CODE
 
     @property
     def has_confirmed_cases(self) -> bool:
-        return self.confirmed_cases != NOT_INFORMED_CODE
+        return self.confirmed_cases and self.confirmed_cases != NOT_INFORMED_CODE
 
     def to_csv_row(self):
         raise NotImplementedError()
@@ -130,11 +126,7 @@ class StateTotalBulletinModel(BulletinModel):
     def to_csv_row(self):
         cases = self.confirmed_cases if self.confirmed_cases != NOT_INFORMED_CODE else 0
         deaths = self.deaths if self.deaths != NOT_INFORMED_CODE else 0
-        return {
-            "municipio": "TOTAL NO ESTADO",
-            "confirmados": cases,
-            "mortes": deaths,
-        }
+        return {"municipio": "TOTAL NO ESTADO", "confirmados": cases, "mortes": deaths}
 
 
 class CountyBulletinModel(BulletinModel):
@@ -168,11 +160,7 @@ class CountyBulletinModel(BulletinModel):
     def to_csv_row(self):
         cases = self.confirmed_cases if self.confirmed_cases != NOT_INFORMED_CODE else 0
         deaths = self.deaths if self.deaths != NOT_INFORMED_CODE else 0
-        return {
-            "municipio": self.city,
-            "confirmados": cases,
-            "mortes": deaths,
-        }
+        return {"municipio": self.city, "confirmados": cases, "mortes": deaths}
 
 
 class ImportedUndefinedBulletinModel(BulletinModel):
