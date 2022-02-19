@@ -41,6 +41,9 @@ class FullReportModel:
         self.total_bulletin = StateTotalBulletinModel(
             date=date, state=state, source_url="auto computed"
         )
+        self.undefined_or_imported_cases_bulletin = ImportedUndefinedBulletinModel(
+            date=date, state=state, source_url="not found"
+        )
 
     def __repr__(self):
         return (
@@ -66,10 +69,6 @@ class FullReportModel:
         if isinstance(bulletin, CountyBulletinModel):
             self.county_bulletins.append(bulletin)
         elif isinstance(bulletin, ImportedUndefinedBulletinModel):
-            if self.undefined_or_imported_cases_bulletin:
-                raise ValueError(
-                    "undefined_or_imported_cases_bulletin was already set in this report."
-                )
             self.undefined_or_imported_cases_bulletin = bulletin
         elif isinstance(bulletin, StateTotalBulletinModel):
             self.total_bulletin = bulletin
@@ -108,8 +107,7 @@ class FullReportModel:
         for bulletin in sorted(self.county_bulletins, key=lambda x: x.city):
             if bulletin.has_confirmed_cases_and_deaths:
                 rows.append(bulletin.to_csv_row())
-        if self.has_undefined_or_imported_cases:
-            rows.append(self.undefined_or_imported_cases_bulletin.to_csv_row())
+        rows.append(self.undefined_or_imported_cases_bulletin.to_csv_row())
         rows.append(self.total_bulletin.to_csv_row())
         return rows
 

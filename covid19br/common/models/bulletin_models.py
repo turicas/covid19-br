@@ -128,10 +128,12 @@ class StateTotalBulletinModel(BulletinModel):
         self.confirmed_cases += value
 
     def to_csv_row(self):
+        cases = self.confirmed_cases if self.confirmed_cases != NOT_INFORMED_CODE else 0
+        deaths = self.deaths if self.deaths != NOT_INFORMED_CODE else 0
         return {
             "municipio": "TOTAL NO ESTADO",
-            "confirmados": self.confirmed_cases,
-            "mortes": self.deaths,
+            "confirmados": cases,
+            "mortes": deaths,
         }
 
 
@@ -164,10 +166,12 @@ class CountyBulletinModel(BulletinModel):
         )
 
     def to_csv_row(self):
+        cases = self.confirmed_cases if self.confirmed_cases != NOT_INFORMED_CODE else 0
+        deaths = self.deaths if self.deaths != NOT_INFORMED_CODE else 0
         return {
             "municipio": self.city,
-            "confirmados": self.confirmed_cases,
-            "mortes": self.deaths,
+            "confirmados": cases,
+            "mortes": deaths,
         }
 
 
@@ -193,8 +197,10 @@ class ImportedUndefinedBulletinModel(BulletinModel):
         )
 
     def to_csv_row(self):
+        cases = self.confirmed_cases if self.confirmed_cases != NOT_INFORMED_CODE else 0
+        deaths = self.deaths if self.deaths != NOT_INFORMED_CODE else 0
         return {
             "municipio": "Importados/Indefinidos",
-            "confirmados": self.confirmed_cases,
-            "mortes": self.deaths,
+            "confirmados": cases,
+            "mortes": deaths,
         }
