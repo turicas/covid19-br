@@ -182,19 +182,19 @@ as seguintes opções:
 
 ```shell
 # Exemplo de como raspar os dados de todos os estados em um intervalo de datas
-python covid19br/run_spider.py --start_date 24/02/2021 --end_date 30/03/2021
+python covid19br/run_spider.py --start-date 24/02/2021 --end-date 30/03/2021
 
 # Caso você queira executar para datas específicas (coloque-as em lista separando-as por vírgulas):
-python covid19br/run_spider.py --dates_range  15/01/2022,17/01/2022
+python covid19br/run_spider.py --dates-list  15/01/2022,17/01/2022
 
 # Para executar apenas spiders de estados específicos (coloque-os em lista e separados por vírgulas):
 python covid19br/run_spider.py --states BA,PR
 
 # Para ver quais são os estados com scrapers implementados:
-python covid19br/run_spider.py --available_spiders
+python covid19br/run_spider.py --available-spiders
 
 # Caso você não queira salvar os csv's, apenas mostrar na tela os resultados:
-python covid19br/run_spider.py --print_results_only
+python covid19br/run_spider.py --print-results-only
 
 # Você pode consultar essas e outras opções disponíveis usando:
 python covid19br/run_spider.py -h

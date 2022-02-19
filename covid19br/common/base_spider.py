@@ -45,20 +45,20 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
         reports: Dict[datetime.date, FullReportModel],
         start_date: datetime.date = None,
         end_date: datetime.date = None,
-        dates_range: List[datetime.date] = None,
+        dates_list: List[datetime.date] = None,
         *args,
         **kwargs
     ):
         super().__init__(*args, **kwargs)
 
-        if dates_range and (start_date or end_date):
+        if dates_list and (start_date or end_date):
             raise ValueError(
                 "The parameter 'date_range' is not simultaneously supported with 'start_date' or 'end_date'."
             )
 
         self.today = datetime.date.today()
         tomorrow = self.today + timedelta(days=1)
-        if not dates_range and not start_date and not end_date:
+        if not dates_list and not start_date and not end_date:
             # if no date filter is passed, by default we gather the most recent data whatever
             # it's reference date is
             self.start_date = self.today
@@ -68,10 +68,10 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
             # if there are date filters, the user is searching for data from specific dates, so we
             # need to add the information delay on the dates to consider the difference between the
             # bulletin's publishing date and the date it refers to in order to get the correct data
-            if dates_range:
-                self.start_date = min(dates_range)
-                self.end_date = max(dates_range)
-                requested_dates = dates_range
+            if dates_list:
+                self.start_date = min(dates_list)
+                self.end_date = max(dates_list)
+                requested_dates = dates_list
             else:
                 self.start_date = start_date if start_date else self.today
                 self.end_date = (

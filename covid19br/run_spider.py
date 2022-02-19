@@ -37,12 +37,12 @@ def get_spiders_to_run(filter_states) -> list:
     return [spider for spider in AVAILABLE_SPIDERS if spider.name in filter_states]
 
 
-def build_date_parameters(start_date=None, end_date=None, dates_range=None) -> dict:
-    if dates_range:
+def build_date_parameters(start_date=None, end_date=None, dates_list=None) -> dict:
+    if dates_list:
         return {
-            "dates_range": [
+            "dates_list": [
                 NormalizationUtils.str_to_date(date_)
-                for date_ in dates_range.split(",")
+                for date_ in dates_list.split(",")
             ]
         }
     params = {}
@@ -92,24 +92,24 @@ parser = argparse.ArgumentParser(
     description="Runs spiders to get covid-19 data for one or more states in specified dates."
 )
 parser.add_argument(
-    "--available_spiders",
+    "--available-spiders",
     help="list the names of all available spiders",
     action="store_true",
 )
 parser.add_argument(
-    "--start_date",
+    "--start-date",
     help="Date in the format dd/mm/yyyy. "
     "The spiders only gather data provided after this date (open interval). "
-    "Default is today (when dates_range is not set)",
+    "Default is today (when dates-list is not set)",
 )
 parser.add_argument(
-    "--end_date",
+    "--end-date",
     help="Date in the format dd/mm/yyyy. "
     "The spiders only gather data provided before this date (closed interval). "
-    "Default is tomorrow (when dates_range is not set)",
+    "Default is tomorrow (when dates-list is not set)",
 )
 parser.add_argument(
-    "--dates_range",
+    "--dates-list",
     help="List of dates to run the spiders in the format dd/mm/yyyy separated by comma (,). "
     "Not supported when provided with start_date or end_date (choose only one option)",
 )
@@ -118,12 +118,12 @@ parser.add_argument(
     help="List of states (abbreviated) to run the spiders separated by comma (,)",
 )
 parser.add_argument(
-    "--filename_pattern",
+    "--filename-pattern",
     help='Use this to provide a custom file name to store the data. Default: "data/{state}/covid19-{state}-{date}.csv"',
     default="data/{state}/covid19-{state}-{date}{extra_info}.csv",
 )
 parser.add_argument(
-    "--print_results_only",
+    "--print-results-only",
     help="Use this flag if you don't want to store the results in a csv, this will only print them in the screen.",
     action="store_true",
 )
@@ -132,9 +132,9 @@ args = parser.parse_args()
 if args.available_spiders:
     display_available_spiders()
 
-elif args.dates_range and (args.start_date or args.end_date):
+elif args.dates_list and (args.start_date or args.end_date):
     raise ValueError(
-        "NOT SUPPORTED ERROR: dates_range can't be used simultaneously with start_date/end_date."
+        "NOT SUPPORTED ERROR: dates_list can't be used simultaneously with start_date/end_date."
     )
 
 elif args.filename_pattern and args.filename_pattern[-4:] != ".csv":
@@ -143,7 +143,7 @@ elif args.filename_pattern and args.filename_pattern[-4:] != ".csv":
 else:
     spiders = get_spiders_to_run(args.states)
     date_params = build_date_parameters(
-        args.start_date, args.end_date, args.dates_range
+        args.start_date, args.end_date, args.dates_list
     )
 
     process = CrawlerProcess()

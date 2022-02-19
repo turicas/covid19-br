@@ -194,19 +194,19 @@ the following options:
    
 ```shell
 # Example of how to scrape data from all states in a date range
-python covid19br/run_spider.py --start_date 24/02/2021 --end_date 30/03/2021
+python covid19br/run_spider.py --start-date 24/02/2021 --end-date 30/03/2021
 
 # In case you want to run it for specific dates (put them in a list separating them by commas):
-python covid19br/run_spider.py --dates_range  15/01/2022,17/01/2022
+python covid19br/run_spider.py --dates-list  15/01/2022,17/01/2022
 
 # To only execute spiders of specific states (list them and separate them by commas):
 python covid19br/run_spider.py --states BA,PR
 
 # To check which states are available for scraping:
-python covid19br/run_spider.py --available_spiders
+python covid19br/run_spider.py --available-spiders
 
 # If you don't want to save the csv's, just show the results on the screen:
-python covid19br/run_spider.py --print_results_only
+python covid19br/run_spider.py --print-results-only
 
 # You can consult these and other available options using:
 python covid19br/run_spider.py -h
