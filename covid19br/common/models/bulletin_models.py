@@ -79,6 +79,10 @@ class BulletinModel(ABC):
         return not self.has_deaths and not self.has_confirmed_cases
 
     @property
+    def is_complete(self) -> bool:
+        return self.has_deaths and self.has_confirmed_cases
+
+    @property
     def has_deaths(self) -> bool:
         return self.deaths and self.deaths != NOT_INFORMED_CODE
 
@@ -125,6 +129,18 @@ class StateTotalBulletinModel(BulletinModel):
             return
         self.confirmed_cases += value
 
+    def decrease_deaths(self, value: int):
+        value = NormalizationUtils.ensure_integer(value)
+        self.deaths -= value
+        if self.deaths < 0:
+            self.deaths = NOT_INFORMED_CODE
+
+    def decrease_confirmed_cases(self, value: int):
+        value = NormalizationUtils.ensure_integer(value)
+        self.confirmed_cases -= value
+        if self.confirmed_cases < 0:
+            self.confirmed_cases = NOT_INFORMED_CODE
+
     def to_csv_row(self):
         cases = self.confirmed_cases if self.confirmed_cases != NOT_INFORMED_CODE else 0
         deaths = self.deaths if self.deaths != NOT_INFORMED_CODE else 0
@@ -159,10 +175,42 @@ class CountyBulletinModel(BulletinModel):
             f")"
         )
 
+    def __eq__(self, other):
+        """
+        Overrides the default implementation to better check if two
+        CountyBulletins have the same data (even if from different sources)
+        """
+        if isinstance(other, self.__class__):
+            return (
+                self.state == other.state
+                and self.city == other.city
+                and self.date == other.date
+                and self.deaths == other.deaths
+                and self.confirmed_cases == other.confirmed_cases
+            )
+        else:
+            return False
+
+    def __hash__(self):
+        """
+        Overrides the default implementation to faster lookup for
+        CountyBulletins for the same city in the same date.
+        """
+        return hash((self.state, self.city, self.date))
+
     def to_csv_row(self):
         cases = self.confirmed_cases if self.confirmed_cases != NOT_INFORMED_CODE else 0
         deaths = self.deaths if self.deaths != NOT_INFORMED_CODE else 0
         return {"municipio": self.city, "confirmados": cases, "mortes": deaths}
+
+    def merge_data(self, other):
+        if isinstance(other, self.__class__) and hash(self) == hash(other):
+            if not self.has_deaths and other.has_deaths:
+                self.deaths = other.deaths
+                self.source_url += f" | {other.source_url}"
+            if not self.has_confirmed_cases and other.has_confirmed_cases:
+                self.confirmed_cases = other.confirmed_cases
+                self.source_url += f" | {other.source_url}"
 
 
 class ImportedUndefinedBulletinModel(BulletinModel):

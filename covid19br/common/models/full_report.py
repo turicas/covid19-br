@@ -1,5 +1,5 @@
 import datetime
-from typing import List, Optional, Set
+from typing import Dict, List, Optional, Set
 
 from covid19br.common.constants import State, ReportQuality
 from covid19br.common.exceptions import BadReportError
@@ -22,11 +22,11 @@ class FullReportModel:
     reference_date: datetime.date  # data date
     published_at: datetime.date  # bulletin date
     state: State
-    county_bulletins: List[CountyBulletinModel]
     undefined_or_imported_cases_bulletin: Optional[ImportedUndefinedBulletinModel]
 
     # we can fact check with lots of different sources
     _official_total_bulletins: List[StateTotalBulletinModel]
+    _county_bulletins: Dict[int, CountyBulletinModel]
     _auto_calculated_total: StateTotalBulletinModel
     _expected_qualities: List
     _warnings: Set
@@ -37,7 +37,7 @@ class FullReportModel:
         self.reference_date = reference_date
         self.published_at = published_at
         self.state = state
-        self.county_bulletins = []
+        self._county_bulletins = {}
         self._warnings = set()
         self._expected_qualities = qualities
         self.undefined_or_imported_cases_bulletin = None
@@ -55,7 +55,7 @@ class FullReportModel:
             f"state={self.state.value}, "
             f"reference_date={self.reference_date.strftime('%d/%m/%Y')}, "
             f"published_at={self.published_at.strftime('%d/%m/%Y')}, "
-            f"qtd_county_bulletins={len(self.county_bulletins)}, "
+            f"qtd_county_bulletins={len(self._county_bulletins)}, "
             f"has_undefined_or_imported_cases={self.has_undefined_or_imported_cases}, "
             f"total_deaths={self.total_bulletin.deaths}, "
             f"total_confirmed_cases={self.total_bulletin.confirmed_cases}"
@@ -69,6 +69,10 @@ class FullReportModel:
         return self._auto_calculated_total
 
     @property
+    def county_bulletins(self) -> List[CountyBulletinModel]:
+        return list(self._county_bulletins.values())
+
+    @property
     def has_undefined_or_imported_cases(self):
         return (
             bool(self.undefined_or_imported_cases_bulletin)
@@ -77,7 +81,13 @@ class FullReportModel:
 
     def add_new_bulletin(self, bulletin: BulletinModel):
         if isinstance(bulletin, CountyBulletinModel):
-            self.county_bulletins.append(bulletin)
+            bulletin_key = hash(bulletin)
+            existent_bulletin = self._pop_county_bulletin(bulletin_key)
+            if existent_bulletin:
+                bulletin = self._compare_county_bulletins_and_return_the_completest(
+                    existent_bulletin, bulletin
+                )
+            self._county_bulletins[bulletin_key] = bulletin
         elif isinstance(bulletin, ImportedUndefinedBulletinModel):
             self.undefined_or_imported_cases_bulletin = bulletin
         elif isinstance(bulletin, StateTotalBulletinModel):
@@ -141,10 +151,51 @@ class FullReportModel:
             return ""
         return "__" + "__".join(sorted(self._warnings))
 
+    def _pop_county_bulletin(self, bulletin_key: int) -> Optional[CountyBulletinModel]:
+        existent_bulletin = self._county_bulletins.pop(bulletin_key, None)
+        if existent_bulletin:
+            if existent_bulletin.has_confirmed_cases:
+                self._auto_calculated_total.decrease_confirmed_cases(
+                    existent_bulletin.confirmed_cases
+                )
+            if existent_bulletin.has_deaths:
+                self._auto_calculated_total.decrease_deaths(existent_bulletin.deaths)
+        return existent_bulletin
+
+    def _compare_county_bulletins_and_return_the_completest(
+        self, existent_bulletin: CountyBulletinModel, new_bulletin: CountyBulletinModel
+    ) -> CountyBulletinModel:
+        """
+        It assumes that both the bulletins are from different sources and compare them to
+        check if the sources has different values for the same data, if it does, we add a
+        warning in the report.
+        Returns the bulletin with more information or, if both the bulletins have incomplete data,
+        returns a merged bulletin to get a completer one.
+        """
+        both_have_deaths = existent_bulletin.has_deaths and new_bulletin.has_deaths
+        both_have_confirmed_cases = (
+            existent_bulletin.has_confirmed_cases and new_bulletin.has_confirmed_cases
+        )
+        if existent_bulletin == new_bulletin:
+            return existent_bulletin
+
+        if (both_have_deaths and existent_bulletin.deaths != new_bulletin.deaths) or (
+            both_have_confirmed_cases
+            and existent_bulletin.confirmed_cases != new_bulletin.confirmed_cases
+        ):
+            self.add_warning("fontes-diferem-casos-municipios")
+
+        if existent_bulletin.is_complete:
+            return existent_bulletin
+        if new_bulletin.is_complete:
+            return new_bulletin
+        existent_bulletin.merge_data(new_bulletin)
+        return existent_bulletin
+
     def _auto_detect_warnings(self):
         if (
             ReportQuality.COUNTY_BULLETINS in self._expected_qualities
-            and not self.county_bulletins
+            and not self._county_bulletins
         ):
             self.add_warning(f"faltando-{ReportQuality.COUNTY_BULLETINS.value}")
         if (
