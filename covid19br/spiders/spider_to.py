@@ -65,7 +65,6 @@ class SpiderTO(BaseCovid19Spider):
                         deaths=row["deaths"],
                         source_url=response.request.url,
                     )
-                    self.has_official_total = True
                 else:
                     bulletin = CountyBulletinModel(
                         date=date,
