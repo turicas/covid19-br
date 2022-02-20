@@ -1,5 +1,5 @@
 import datetime
-from typing import List, Optional
+from typing import List, Optional, Set
 
 from covid19br.common.constants import State, ReportQuality
 from covid19br.common.exceptions import BadReportError
@@ -29,6 +29,7 @@ class FullReportModel:
     _official_total_bulletins: List[StateTotalBulletinModel]
     _auto_calculated_total: StateTotalBulletinModel
     _expected_qualities: List
+    _warnings: Set
 
     def __init__(self, reference_date, published_at, state, qualities):
         if not qualities:
@@ -37,6 +38,7 @@ class FullReportModel:
         self.published_at = published_at
         self.state = state
         self.county_bulletins = []
+        self._warnings = set()
         self._expected_qualities = qualities
         self.undefined_or_imported_cases_bulletin = None
         self._official_total_bulletins = []
@@ -123,34 +125,44 @@ class FullReportModel:
         rows.append(self.total_bulletin.to_csv_row())
         return rows
 
+    def add_warning(self, warning: str):
+        """
+        It takes a string formatted as a slug and saves it to use as a warning of something that
+        didn't go well during the report assembly (such as missing data, data without validation, etc.).
+        Use with moderation because all warnings are concatenated and used in the name of the state's csv
+        and if this name gets too long it can be more of a hindrance than a help.
+        """
+        self._warnings.add(warning)
+
     @property
     def warnings_slug(self) -> str:
-        warnings = []
+        self._auto_detect_warnings()
+        if not self._warnings:
+            return ""
+        return "__" + "__".join(sorted(self._warnings))
+
+    def _auto_detect_warnings(self):
         if (
             ReportQuality.COUNTY_BULLETINS in self._expected_qualities
             and not self.county_bulletins
         ):
-            warnings.append(f"faltando-{ReportQuality.COUNTY_BULLETINS.value}")
+            self.add_warning(f"faltando-{ReportQuality.COUNTY_BULLETINS.value}")
         if (
             ReportQuality.UNDEFINED_OR_IMPORTED_CASES in self._expected_qualities
             and not self.has_undefined_or_imported_cases
         ):
-            warnings.append(
+            self.add_warning(
                 f"faltando-{ReportQuality.UNDEFINED_OR_IMPORTED_CASES.value}"
             )
         if ReportQuality.ONLY_TOTAL in self._expected_qualities:
-            warnings.append(ReportQuality.ONLY_TOTAL.value)
+            self.add_warning(ReportQuality.ONLY_TOTAL.value)
             if not self.total_bulletin.has_confirmed_cases:
-                warnings.append("faltando-casos-confirmados")
+                self.add_warning("faltando-casos-confirmados")
             if not self.total_bulletin.has_deaths:
-                warnings.append("faltando-obitos")
+                self.add_warning("faltando-obitos")
         if not self._official_total_bulletins:
-            warnings.append("total-oficial-nao-considerado")
+            self.add_warning("total-oficial-nao-considerado")
         elif not self._auto_calculated_total.is_empty and (
             not self.check_total_confirmed_cases() or not self.check_total_death_cases()
         ):
-            warnings.append("verificar-total")
-
-        if not warnings:
-            return ""
-        return "__" + "__".join(warnings)
+            self.add_warning("verificar-total")
