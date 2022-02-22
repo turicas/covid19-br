@@ -2,6 +2,7 @@ import datetime
 from typing import Dict, List, Optional, Set
 
 from covid19br.common.constants import State, ReportQuality
+from covid19br.common.demographic_utils import DemographicUtils
 from covid19br.common.exceptions import BadReportError
 from covid19br.common.models.bulletin_models import (
     BulletinModel,
@@ -20,6 +21,8 @@ class FullReportModel:
     it to be consumed elsewhere in the application.
     """
 
+    demographics = DemographicUtils()
+
     reference_date: datetime.date  # data date
     published_at: datetime.date  # bulletin date
     state: State
@@ -31,6 +34,7 @@ class FullReportModel:
     _auto_calculated_total: StateTotalBulletinModel
     _expected_qualities: List
     _warnings: Set[BulletinWarning]
+    _notes: Set[str]
 
     def __init__(self, reference_date, published_at, state, qualities):
         if not qualities:
@@ -40,6 +44,7 @@ class FullReportModel:
         self.state = state
         self._county_bulletins = {}
         self._warnings = set()
+        self._notes = set()
         self._expected_qualities = qualities
         self.undefined_or_imported_cases_bulletin = None
         self._official_total_bulletins = []
@@ -71,7 +76,19 @@ class FullReportModel:
 
     @property
     def county_bulletins(self) -> List[CountyBulletinModel]:
-        return list(self._county_bulletins.values())
+        county_bulletins = self._county_bulletins.values()
+        bulletins_qt = len(county_bulletins)
+        expected_bulletins_qt = self.demographics.get_cities_amount(self.state)
+        if bulletins_qt == expected_bulletins_qt:
+            return list(county_bulletins)
+        missing_bulletins = self._get_missing_bulletins()
+        if ReportQuality.ONLY_TOTAL not in self._expected_qualities:
+            for bulletin in missing_bulletins:
+                self.add_note(
+                    f"A cidade {bulletin.city} não foi encontrada pelo raspador, "
+                    f"então foi dado que o valor de óbitos e casos para ela é zero."
+                )
+        return [*self._county_bulletins.values(), *missing_bulletins]
 
     @property
     def has_undefined_or_imported_cases(self):
@@ -130,18 +147,23 @@ class FullReportModel:
     def to_csv_rows(self):
         rows = []
         for bulletin in sorted(self.county_bulletins, key=lambda x: x.city):
-            if not bulletin.is_empty:
-                rows.append(bulletin.to_csv_row())
+            rows.append(bulletin.to_csv_row())
         rows.append(self.undefined_or_imported_cases_bulletin.to_csv_row())
         rows.append(self.total_bulletin.to_csv_row())
         return rows
 
+    def add_note(self, note: str):
+        """
+        It saves notes to inform humans about important things that happened during the report assembly.
+        """
+        self._notes.add(note)
+
     def add_warning(self, slug: WarningType, description: str = None):
         """
-        It takes a string formatted as a slug and saves it to use as a warning of something that
-        didn't go well during the report assembly (such as missing data, data without validation, etc.).
-        Use with moderation because all warnings are concatenated and used in the name of the state's csv
-        and if this name gets too long it can be more of a hindrance than a help.
+        It saves warnings of things that didn't go well during the report assembly (such as missing data,
+        data without validation, etc.). Use with moderation because all warnings are concatenated and used
+        in the name of the state's csv and if this name gets too long it can be more of a hindrance than a help.
+        If the thing you want to inform is not critical, use the method add_note instead :)
         """
         warning = BulletinWarning(slug.value, description)
         self._warnings.add(warning)
@@ -153,6 +175,25 @@ class FullReportModel:
             return ""
         warnings = set([w.slug for w in self._warnings])
         return "__" + "__".join(sorted(warnings))
+
+    def _get_missing_bulletins(self) -> List[CountyBulletinModel]:
+        all_cities = self.demographics.get_cities(self.state)
+        existent_cities = [
+            bulletin.city for bulletin in self._county_bulletins.values()
+        ]
+        resp = []
+        for city in all_cities:
+            city_name = city.city
+            if city.city not in existent_cities:
+                resp.append(
+                    CountyBulletinModel(
+                        date=self.published_at,
+                        state=self.state,
+                        city=city_name,
+                        source="Não encontrado",
+                    )
+                )
+        return resp
 
     def _pop_county_bulletin(self, bulletin_key: int) -> Optional[CountyBulletinModel]:
         existent_bulletin = self._county_bulletins.pop(bulletin_key, None)
