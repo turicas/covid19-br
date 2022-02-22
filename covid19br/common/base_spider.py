@@ -10,6 +10,7 @@ from rows.utils.date import date_range
 from covid19br.common.constants import State, ReportQuality
 from covid19br.common.data_normalization_utils import NormalizationUtils
 from covid19br.common.models.full_report import BulletinModel, FullReportModel
+from covid19br.common.warnings import WarningType
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +27,7 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
         "USER_AGENT": (
             "Brasil.IO - Scraping para libertacao de dados da Covid 19 | "
             "Mais infos em: https://brasil.io/dataset/covid19/"
-        ),
+        )
     }
 
     # Your spider should override these values
@@ -91,6 +92,16 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
         self.pre_init()
 
     def add_new_bulletin_to_report(self, bulletin: BulletinModel, date: datetime.date):
+        report = self._get_or_create_report(date)
+        report.add_new_bulletin(bulletin)
+
+    def add_warning_in_report(
+        self, date: datetime.date, slug: WarningType, description: str = None
+    ):
+        report = self._get_or_create_report(date)
+        report.add_warning(slug, description)
+
+    def _get_or_create_report(self, date: datetime.date):
         report = self.reports.get(date)
         if not report:
             report = FullReportModel(
@@ -100,7 +111,7 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
                 qualities=self.report_qualities,
             )
             self.reports[date] = report
-        report.add_new_bulletin(bulletin)
+        return report
 
     def pre_init(self) -> None:
         """

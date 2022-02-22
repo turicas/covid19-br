@@ -9,7 +9,7 @@ CURRENT_YEAR = date.today().year
 MONTHS = "jan fev mar abr mai jun jul ago set out nov dez".split()
 
 REGEXP_IN_FULL_DATE = re.compile("([0-9]{1,2})(?: +de)? ([^ ]+)(?: de ([0-9]{4}))?")
-REGEXP_NUMERIC_DATE = re.compile("([0-9]{2})-([0-9]{2})-([0-9]{2,4})[ .]?")
+REGEXP_NUMERIC_DATE = re.compile("([0-9]{2})[/-]([0-9]{2})[/-]([0-9]{2,4})[ .]?")
 
 
 class NormalizationUtils:
@@ -84,6 +84,10 @@ class NormalizationUtils:
         >>> NormalizationUtils.extract_numeric_date("some text 30-11-21.pdf")
         datetime.date(2021, 11, 30)
         >>> NormalizationUtils.extract_numeric_date("30-11-2021(1).pdf")
+        datetime.date(2021, 11, 30)
+        >>> NormalizationUtils.extract_numeric_date("PUBLICADO ÀS 13:00 do dia 30/11/2021")
+        datetime.date(2021, 11, 30)
+        >>> NormalizationUtils.extract_numeric_date("30/11/21")
         datetime.date(2021, 11, 30)
         >>> NormalizationUtils.extract_numeric_date("29-11")
         None

@@ -11,6 +11,7 @@ from covid19br.common.models.bulletin_models import (
     CountyBulletinModel,
     ImportedUndefinedBulletinModel,
 )
+from covid19br.common.warnings import WarningType
 
 
 class SpiderPR(BaseCovid19Spider):
@@ -86,6 +87,7 @@ class SpiderPR(BaseCovid19Spider):
         The information is always on the last page, after 'RESIDENTES FORA DO PARANÁ'.
         """
         last_page = rows.plugins.pdf.number_of_pages(io.BytesIO(response.body))
+        full_pdf = rows.plugins.pdf.PyMuPDFBackend(io.BytesIO(response.body))
         table = rows.import_from_pdf(
             io.BytesIO(response.body),
             page_numbers=(last_page,),
@@ -93,11 +95,32 @@ class SpiderPR(BaseCovid19Spider):
             force_types={"casos": RowsPtBrIntegerField, "obitos": RowsPtBrIntegerField},
         )
         row = [row for row in table if row.fora_do_pr == "TOTAL"][0]
+        source_url = response.request.url
         bulletin = ImportedUndefinedBulletinModel(
             date=date,
             state=self.state,
             confirmed_cases=row.casos,
             deaths=row.obitos,
-            source=response.request.url,
+            source=source_url,
         )
         self.add_new_bulletin_to_report(bulletin, date)
+        self._check_pdf_date(full_pdf, date, source_url)
+
+    def _check_pdf_date(self, pdf_content, expected_date, source_url):
+        pdf_date = self._extract_pdf_date(pdf_content)
+        if pdf_date != expected_date:
+            self.add_warning_in_report(
+                date=expected_date,
+                slug=WarningType.WRONG_DATE_IN_SOURCE,
+                description=(
+                    f'Era esperado que a data da fonte "{source_url}" de dados importados fosse {expected_date}, '
+                    f" porém ela parece ser referente a {pdf_date}. Conferir fonte."
+                ),
+            )
+
+    def _extract_pdf_date(self, pdf_content):
+        first_page_objects = next(pdf_content.text_objects(page_numbers=(1,)))
+        for obj in first_page_objects:
+            date = self.normalizer.extract_numeric_date(obj.text)
+            if date:
+                return date

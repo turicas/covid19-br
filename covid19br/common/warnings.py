@@ -5,6 +5,7 @@ BulletinWarning = namedtuple("BulletinWarning", "slug description")
 
 
 class WarningType(Enum):
+    WRONG_DATE_IN_SOURCE = "data-difere-fonte"
     SOURCES_DONT_MATCH = "fontes-diferem-casos-municipios"
     TOTAL_DONT_MATCH = "verificar-total"
     MISSING_COUNTY_BULLETINS = "faltando-boletins-por-estado"
