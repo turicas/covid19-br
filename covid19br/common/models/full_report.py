@@ -43,10 +43,10 @@ class FullReportModel:
         self.undefined_or_imported_cases_bulletin = None
         self._official_total_bulletins = []
         self._auto_calculated_total = StateTotalBulletinModel(
-            date=reference_date, state=state, source_url="auto computed"
+            date=reference_date, state=state, source="Soma automática dos casos dos municípios"
         )
         self.undefined_or_imported_cases_bulletin = ImportedUndefinedBulletinModel(
-            date=reference_date, state=state, source_url="not found"
+            date=reference_date, state=state, source="Não encontrada"
         )
 
     def __repr__(self):

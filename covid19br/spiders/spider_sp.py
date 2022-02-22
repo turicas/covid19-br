@@ -60,7 +60,7 @@ class SpiderSP(BaseCovid19Spider):
                     state=self.state,
                     confirmed_cases=report.casos_acum,
                     deaths=report.obitos_acum,
-                    source_url=response.request.url,
+                    source=response.request.url,
                 )
                 self.add_new_bulletin_to_report(bulletin, report.datahora)
 
@@ -98,7 +98,7 @@ class SpiderSP(BaseCovid19Spider):
                         state=self.state,
                         confirmed_cases=report.casos,
                         deaths=report.obitos,
-                        source_url=response.request.url,
+                        source=response.request.url,
                     )
                 else:
                     bulletin = CountyBulletinModel(
@@ -107,7 +107,7 @@ class SpiderSP(BaseCovid19Spider):
                         city=report.nome_munic,
                         confirmed_cases=report.casos,
                         deaths=report.obitos,
-                        source_url=response.request.url,
+                        source=response.request.url,
                     )
                 self.add_new_bulletin_to_report(bulletin, report.datahora)
 
@@ -146,7 +146,7 @@ class SpiderSP(BaseCovid19Spider):
                     city=city,
                     confirmed_cases=confirmed,
                     deaths=deaths,
-                    source_url=source,
+                    source=source,
                 )
                 self.add_new_bulletin_to_report(bulletin, capture_date)
         bulletin = ImportedUndefinedBulletinModel(
@@ -154,6 +154,6 @@ class SpiderSP(BaseCovid19Spider):
             state=self.state,
             confirmed_cases=total_imported_or_undefined_confirmed_cases,
             deaths=total_imported_or_undefined_deaths,
-            source_url=source,
+            source=source,
         )
         self.add_new_bulletin_to_report(bulletin, capture_date)

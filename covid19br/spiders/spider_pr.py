@@ -76,7 +76,7 @@ class SpiderPR(BaseCovid19Spider):
                 city=report.municipio,
                 confirmed_cases=report.casos,
                 deaths=report.obitos_por_covid_19 or report.obitos,
-                source_url=response.request.url,
+                source=response.request.url,
             )
             self.add_new_bulletin_to_report(bulletin, date)
 
@@ -98,6 +98,6 @@ class SpiderPR(BaseCovid19Spider):
             state=self.state,
             confirmed_cases=row.casos,
             deaths=row.obitos,
-            source_url=response.request.url,
+            source=response.request.url,
         )
         self.add_new_bulletin_to_report(bulletin, date)

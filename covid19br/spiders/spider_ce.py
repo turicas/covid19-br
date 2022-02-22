@@ -49,7 +49,7 @@ class SpiderCE(BaseCovid19Spider):
                     state=self.state,
                     confirmed_cases=cases.get(CONFIRMED_CASE_LABEL),
                     deaths=cases.get(DEATH_CASE_LABEL),
-                    source_url=source,
+                    source=source,
                 )
             else:
                 bulletin = CountyBulletinModel(
@@ -58,7 +58,7 @@ class SpiderCE(BaseCovid19Spider):
                     city=city,
                     confirmed_cases=cases.get(CONFIRMED_CASE_LABEL),
                     deaths=cases.get(DEATH_CASE_LABEL),
-                    source_url=source,
+                    source=source,
                 )
             self.add_new_bulletin_to_report(bulletin, date)
 

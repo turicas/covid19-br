@@ -1,5 +1,6 @@
 import datetime
 from abc import ABC
+from typing import Set
 
 from covid19br.common.city_name_helpers import fix_city_name
 from covid19br.common.constants import NOT_INFORMED_CODE, PlaceType, State
@@ -15,7 +16,7 @@ class BulletinModel(ABC):
     """
 
     date: datetime.date
-    source_url: str
+    sources: Set[str]
     place_type: PlaceType
     state: State
     confirmed_cases: int
@@ -25,7 +26,7 @@ class BulletinModel(ABC):
     def __init__(
         self,
         date,
-        source_url,
+        source,
         place_type,
         state,
         confirmed_cases=None,
@@ -34,8 +35,8 @@ class BulletinModel(ABC):
     ):
         if not date:
             raise BadReportError("date field is required in a report.")
-        if not source_url:
-            raise BadReportError("source_url field is required in a report.")
+        if not source:
+            raise BadReportError("source field is required in a report.")
         if not place_type:
             raise BadReportError("place_type field is required in a report.")
         self._check_state_or_raise_error(state)
@@ -43,7 +44,7 @@ class BulletinModel(ABC):
         self.set_confirmed_cases_value(confirmed_cases)
         self.set_deaths_value(deaths)
         self.date = date
-        self.source_url = source_url
+        self.sources = {source}
         self.place_type = place_type
         self.notes = notes
 
@@ -95,10 +96,10 @@ class BulletinModel(ABC):
 
 
 class StateTotalBulletinModel(BulletinModel):
-    def __init__(self, date, source_url, state, *args, **kwargs):
+    def __init__(self, date, source, state, *args, **kwargs):
         super().__init__(
             date=date,
-            source_url=source_url,
+            source=source,
             place_type=PlaceType.STATE,
             state=state,
             *args,
@@ -150,14 +151,14 @@ class StateTotalBulletinModel(BulletinModel):
 class CountyBulletinModel(BulletinModel):
     city: str
 
-    def __init__(self, date, source_url, state, city, *args, **kwargs):
+    def __init__(self, date, source, state, city, *args, **kwargs):
         if not city:
             raise BadReportError("city field is required in a county report.")
         self._check_state_or_raise_error(state)
         self.city = fix_city_name(state.value, city)
         super().__init__(
             date=date,
-            source_url=source_url,
+            source=source,
             place_type=PlaceType.CITY,
             state=state,
             *args,
@@ -207,17 +208,17 @@ class CountyBulletinModel(BulletinModel):
         if isinstance(other, self.__class__) and hash(self) == hash(other):
             if not self.has_deaths and other.has_deaths:
                 self.deaths = other.deaths
-                self.source_url += f" | {other.source_url}"
+                self.sources.update(other.sources)
             if not self.has_confirmed_cases and other.has_confirmed_cases:
                 self.confirmed_cases = other.confirmed_cases
-                self.source_url += f" | {other.source_url}"
+                self.sources.update(other.sources)
 
 
 class ImportedUndefinedBulletinModel(BulletinModel):
-    def __init__(self, date, source_url, state, *args, **kwargs):
+    def __init__(self, date, source, state, *args, **kwargs):
         super().__init__(
             date=date,
-            source_url=source_url,
+            source=source,
             place_type=PlaceType.CITY,
             state=state,
             *args,

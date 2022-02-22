@@ -63,7 +63,7 @@ class SpiderTO(BaseCovid19Spider):
                         state=self.state,
                         confirmed_cases=row["confirmed"],
                         deaths=row["deaths"],
-                        source_url=response.request.url,
+                        source=response.request.url,
                     )
                 else:
                     bulletin = CountyBulletinModel(
@@ -72,7 +72,7 @@ class SpiderTO(BaseCovid19Spider):
                         city=row["city"],
                         confirmed_cases=row["confirmed"],
                         deaths=row["deaths"],
-                        source_url=response.request.url,
+                        source=response.request.url,
                     )
                 self.add_new_bulletin_to_report(bulletin, date)
 
@@ -104,7 +104,7 @@ class SpiderTO(BaseCovid19Spider):
         published_at_date = self.normalizer.extract_in_full_date(published_at)
         if published_at_date in self.requested_dates:
             official_total = StateTotalBulletinModel(
-                date=published_at_date, state=self.state, source_url=source
+                date=published_at_date, state=self.state, source=source
             )
             yield scrapy.Request(
                 "http://integra.saude.to.gov.br/Api/GetReleasesCovid?id=247",

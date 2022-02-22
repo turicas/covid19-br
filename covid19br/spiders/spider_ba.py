@@ -66,7 +66,7 @@ class SpiderBA(BaseCovid19Spider):
                 state=self.state,
                 deaths=deaths,
                 confirmed_cases=cases,
-                source_url=response.request.url,
+                source=response.request.url,
             )
             self.add_new_bulletin_to_report(bulletin, date)
 
