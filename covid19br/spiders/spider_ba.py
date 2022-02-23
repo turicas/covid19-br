@@ -19,10 +19,15 @@ class SpiderBA(BaseCovid19Spider):
     ]
 
     base_url = "http://www.saude.ba.gov.br/category/emergencias-em-saude/"
-    start_urls = [base_url]
 
     def pre_init(self):
         self.requested_dates = list(self.requested_dates)
+
+    def start_requests(self):
+        yield scrapy.Request(
+            self.base_url,
+            meta={'download_timeout': 3}
+        )
 
     def parse(self, response, **kwargs):
         news_per_date = defaultdict(list)
