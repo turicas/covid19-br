@@ -1,5 +1,5 @@
 import argparse
-import os
+from datetime import datetime
 import sys
 from pathlib import Path
 
@@ -25,6 +25,13 @@ AVAILABLE_SPIDERS = [
 ]
 
 
+def save_csv(file_name, csv_rows):
+    writer = rows.utils.CsvLazyDictWriter(file_name)
+    for row in csv_rows:
+        writer.writerow(row)
+    writer.close()
+
+
 def display_available_spiders():
     print("Available spiders:")
     for spider in AVAILABLE_SPIDERS:
@@ -41,8 +48,7 @@ def build_date_parameters(start_date=None, end_date=None, dates_list=None) -> di
     if dates_list:
         return {
             "dates_list": [
-                NormalizationUtils.str_to_date(date_)
-                for date_ in dates_list.split(",")
+                NormalizationUtils.str_to_date(date_) for date_ in dates_list.split(",")
             ]
         }
     params = {}
@@ -74,18 +80,45 @@ def save_results_in_csv(results, filename_pattern):
             print(f"No report found for {state} - skipping...")
             continue
         for date, report in sorted(reports_by_date.items()):
-            filename = Path(filename_pattern.format(
-                date=report.reference_date,
-                state=report.state.value,
-                extra_info=report.warnings_slug,
-            ))
+            filename = Path(
+                filename_pattern.format(
+                    date=report.reference_date,
+                    state=report.state.value,
+                    extra_info=report.warnings_slug,
+                )
+            )
             if not filename.parent.exists():
                 filename.parent.mkdir(parents=True)
             print(f"({report.reference_date}) Formatting and saving file {filename}...")
-            writer = rows.utils.CsvLazyDictWriter(filename)
-            for row in report.to_csv_rows():
-                writer.writerow(row)
-            writer.close()
+            save_csv(filename, report.to_csv_rows())
+
+
+def save_metadata(results):
+    print("\n" "\n---------------" "\nSAVING METADATA" "\n---------------")
+    extraction_time = datetime.now().strftime("%Y-%m-%d-%H:%M:%S")
+    base_path = "data/metadata"
+    csv_filename = Path(f"{base_path}/covid-19-metadata__{extraction_time}.csv")
+    txt_filename = Path(f"{base_path}/covid-19-metadata__{extraction_time}.txt")
+    if not csv_filename.parent.exists():
+        csv_filename.parent.mkdir(parents=True)
+
+    bulletins = sorted(
+        [
+            report
+            for reports_by_date in results.values()
+            if reports_by_date
+            for report in reports_by_date.values()
+        ],
+        key=lambda x: x.state.value,
+    )
+    csv_rows = [bulletin.export_metadata_in_csv() for bulletin in bulletins]
+    txt_lines = [bulletin.export_metadata_in_text() for bulletin in bulletins]
+
+    print(f"Formatting and saving metadata file {csv_filename}...")
+    save_csv(csv_filename, csv_rows)
+    print(f"Formatting and saving metadata file {txt_filename}...")
+    with open(txt_filename, "w") as f:
+        f.write("\n\n".join(txt_lines))
 
 
 parser = argparse.ArgumentParser(
@@ -127,6 +160,13 @@ parser.add_argument(
     help="Use this flag if you don't want to store the results in a csv, this will only print them in the screen.",
     action="store_true",
 )
+parser.add_argument(
+    "--also-export-metadata",
+    help="Use this flag if you want to save a csv with metadata from the scrapped data (such as sources, warnings, "
+    "etc.). The result is saved in the folder data/metadata in the files covid-19-metadata__{extraction_time}.csv"
+    "and covid-19-metadata__{extraction_time}.txt",
+    action="store_true",
+)
 args = parser.parse_args()
 
 if args.available_spiders:
@@ -142,9 +182,7 @@ elif args.filename_pattern and args.filename_pattern[-4:] != ".csv":
 
 else:
     spiders = get_spiders_to_run(args.states)
-    date_params = build_date_parameters(
-        args.start_date, args.end_date, args.dates_list
-    )
+    date_params = build_date_parameters(args.start_date, args.end_date, args.dates_list)
 
     process = CrawlerProcess()
 
@@ -159,3 +197,6 @@ else:
         display_results(all_reports)
     else:
         save_results_in_csv(all_reports, args.filename_pattern)
+
+    if args.also_export_metadata:
+        save_metadata(all_reports)

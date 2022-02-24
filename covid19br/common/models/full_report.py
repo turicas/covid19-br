@@ -25,6 +25,7 @@ class FullReportModel:
 
     reference_date: datetime.date  # data date
     published_at: datetime.date  # bulletin date
+    extraction_date: datetime.datetime
     state: State
     undefined_or_imported_cases_bulletin: Optional[ImportedUndefinedBulletinModel]
 
@@ -39,6 +40,7 @@ class FullReportModel:
     def __init__(self, reference_date, published_at, state, qualities):
         if not qualities:
             raise BadReportError("A report can't have no qualities.")
+        self.extraction_date = datetime.datetime.now()
         self.reference_date = reference_date
         self.published_at = published_at
         self.state = state
@@ -71,7 +73,9 @@ class FullReportModel:
     @property
     def total_bulletin(self) -> StateTotalBulletinModel:
         if self._official_total_bulletins:
-            return self._official_total_bulletins[0]
+            for official_bulletin in self._official_total_bulletins:
+                if official_bulletin.is_complete:
+                    return official_bulletin
         return self._auto_calculated_total
 
     @property
@@ -152,6 +156,45 @@ class FullReportModel:
         rows.append(self.total_bulletin.to_csv_row())
         return rows
 
+    def export_metadata_in_csv(self):
+        total_bulletin = self.total_bulletin
+        return {
+            "data_boletim": self.published_at.strftime("%Y-%m-%d"),
+            "data_coleta": self.extraction_date.strftime("%d/%m/%Y %H:%M:%S"),
+            "state": self.state.value,
+            "data_dados": self.reference_date.strftime("%Y-%m-%d"),
+            "confirmed": total_bulletin.confirmed_cases,
+            "deaths": total_bulletin.deaths,
+            "FONTES": self.sources,
+        }
+
+    def export_metadata_in_text(self):
+        total_bulletin = self.total_bulletin
+
+        resp = [
+            f"{self.reference_date.strftime('%Y-%m-%d')} COVID-19 {self.state.value}",
+            f"Data do boletim..: {self.published_at.strftime('%Y-%m-%d')}",
+            f"Data dos dados...: {self.reference_date.strftime('%Y-%m-%d')}",
+            f"Data da coleta...: {self.extraction_date.strftime('%d/%m/%Y %H:%M:%S')}\n",
+            f"Qtd casos confirmados.: {total_bulletin.confirmed_cases}",
+            f"Qtd casos de óbitos...: {total_bulletin.deaths}",
+            "\nFONTES:",
+            f"{self.sources}",
+        ]
+
+        if self._warnings:
+            resp.append("\nWARNINGS:")
+            for warning in self._warnings:
+                description = "\n\t".join(warning.description.split("\n"))
+                resp.append(f"- {warning.slug}:\n\t{description}")
+
+        if self._notes:
+            resp.append("\nNOTAS:")
+            resp.append("\n- ".join(self._notes))
+
+        resp.append("\n" + "-" * 20)
+        return "\n".join(resp)
+
     def add_note(self, note: str):
         """
         It saves notes to inform humans about important things that happened during the report assembly.
@@ -175,6 +218,23 @@ class FullReportModel:
             return ""
         warnings = set([w.slug for w in self._warnings])
         return "__" + "__".join(sorted(warnings))
+
+    @property
+    def sources(self) -> str:
+        sources = []
+        for bulletin in self._official_total_bulletins:
+            bulletin_source = " | ".join(sorted(bulletin.sources))
+            sources.append(f"- Total oficial: {bulletin_source}")
+
+        county_sources = set()
+        for bulletin in self._county_bulletins.values():
+            county_sources.update(bulletin.sources)
+        if self.has_undefined_or_imported_cases:
+            county_sources.update(self.undefined_or_imported_cases_bulletin.sources)
+        for source in county_sources:
+            sources.append(f"- Fonte municipios: {source}")
+
+        return "\n".join(sources) or "-"
 
     def _get_missing_bulletins(self) -> List[CountyBulletinModel]:
         all_cities = self.demographics.get_cities(self.state)
@@ -302,8 +362,8 @@ class FullReportModel:
         ):
             sources_data = "\n".join(
                 [
-                    f"Fonte {bulletin.sources}:\n"
-                    f"- {bulletin.confirmed_cases} casos confirmados e {bulletin.deaths} óbitos."
+                    f"Fonte {{ {' | '.join(bulletin.sources)} }}: "
+                    f"{bulletin.confirmed_cases} confirmados e {bulletin.deaths} óbitos."
                     for bulletin in self._official_total_bulletins
                 ]
             )
@@ -312,8 +372,8 @@ class FullReportModel:
                 description=(
                     "A soma automática do total de casos e mortes por municípios não bate com o total "
                     "disponibilizado por fontes oficiais.\n"
-                    f"Fonte {self._auto_calculated_total.sources}:\n"
-                    f"- {self._auto_calculated_total.confirmed_cases} casos confirmados "
+                    f"Fonte soma automática: "
+                    f"{self._auto_calculated_total.confirmed_cases} confirmados "
                     f"e {self._auto_calculated_total.deaths} óbitos.\n"
                     f"{sources_data}"
                 ),
