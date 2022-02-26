@@ -12,6 +12,7 @@ from covid19br.common.data_normalization_utils import NormalizationUtils
 from covid19br.spiders.spider_ba import SpiderBA
 from covid19br.spiders.spider_ce import SpiderCE
 from covid19br.spiders.spider_pr import SpiderPR
+from covid19br.spiders.spider_rn import SpiderRN
 from covid19br.spiders.spider_sp import SpiderSP
 from covid19br.spiders.spider_to import SpiderTO
 
@@ -20,6 +21,7 @@ AVAILABLE_SPIDERS = [
     SpiderBA,
     SpiderCE,
     SpiderPR,
+    SpiderRN,
     SpiderSP,
     SpiderTO,
 ]
