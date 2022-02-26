@@ -62,9 +62,6 @@ def download_file_curl(url, filename):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--chunk-size", type=int, default=1_024 * 1_024)
-    parser.add_argument("--refresh-count", type=int, default=10_000)
-    parser.add_argument("--input-encoding", type=str, default="utf-8")
     parser.add_argument("--connections", type=int, default=8)
     parser.add_argument("--preserve-raw", action="store_true")
     parser.add_argument("--buffering", type=int, default=8 * 1024 * 1024)
@@ -98,7 +95,6 @@ def main():
         writer_uncensored = CsvLazyDictWriter(fobj_uncensored)
         uncensored_writerow = writer_uncensored.writerow
 
-        args.refresh_count
         reader = csv.DictReader(fobj, delimiter=";")
         for counter, row in tqdm(enumerate(reader), unit_scale=True, unit="row"):
             row = convert_row_uncensored(row)
