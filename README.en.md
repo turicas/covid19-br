@@ -37,7 +37,7 @@ The data, after collected and treated, stays available in 3 ways on [Brasil.IO](
 - [API](https://brasil.io/api/dataset/covid19) (made for humans that develop apps) - [see available API documentation](api.md)
 - [Full dataset download](https://data.brasil.io/dataset/covid19/_meta/list.html)
 
-In case you want to access the data before they are published (ATTENTION: they 
+In case you want to access the data before they are published (ATTENTION: they
 may not have been checked yet), you can [access directly the sheets in which we
 are working on](https://drive.google.com/open?id=1l3tiwrGEcJEV3gxX0yP-VMRNaE1MLfS2).
 
@@ -51,7 +51,7 @@ is maintained voluntarily.
 **Before contacting us to ask questions about the data (we're quite busy),
 [CHECK OUR FAQ](faq.md)** (still in Portuguese).
 
-For more information [see the data collection 
+For more information [see the data collection
 methodology](https://drive.google.com/open?id=1escumcbjS8inzAKvuXOQocMcQ8ZCqbyHU5X5hFrPpn4).
 
 ### Clipping
@@ -61,7 +61,7 @@ Wanna see which projects and news are using our data? [See the clipping](clippin
 ### Analyzing the data
 
 In case you want to analyze our data using SQL, look at the script
-[`analysis.sh`](analysis.sh) (it downloads and transforms CSVs to 
+[`analysis.sh`](analysis.sh) (it downloads and transforms CSVs to
 an SQLite database and create indexes and views that make the job easier)
 and the archives in the folder [`sql/`](sql/).
 
@@ -69,7 +69,7 @@ By default, the script reuses the same files if they have already been
 downloaded; in order to always download the most up-to-date version of
 the data, run `./analysis.sh --clean`.
 
-Also read our [review of the vaccination microdata available on 
+Also read our [review of the vaccination microdata available on
 OpenDataSUS](analises/microdados-vacinacao/README.md) (still in Portuguese).
 
 ### Validating the data
@@ -87,8 +87,8 @@ To verify, activate the virtual Python environment and after that type:
 goodtables data/datapackage.json
 ```
 
-The report from the tool 
-*[Good Tables](https://github.com/frictionlessdata/goodtables-py)* will 
+The report from the tool
+*[Good Tables](https://github.com/frictionlessdata/goodtables-py)* will
 indicate if there are any inconsistencies. The validation can also be done
 online through [Goodtables.io](http://goodtables.io/).
 
@@ -175,7 +175,7 @@ make docker-run-spiders         # if you are usinf the docker setup
 ```
 
 The above commands will run the scrappers for **all available states**
-that we have implemented, fetching the data for **today's date** and 
+that we have implemented, fetching the data for **today's date** and
 **will save the consolidated** in a `.csv` in the folder `data` from
 this directory (by default they are saved in files with this name pattern
 `"data/{estado}/covid19-{estado}-{data}{extra_info}.csv"`).
@@ -191,7 +191,7 @@ the following options:
 > NOTE: If you are using docker, just add `docker container run --rm
   --name covid19-br -v $(PWD)/data:/app/data covid19-br` before any of the
    commands to follow.
-   
+
 ```shell
 # Example of how to scrape data from all states in a date range
 python covid19br/run_spider.py --start-date 24/02/2021 --end-date 30/03/2021
@@ -241,7 +241,7 @@ a basic scrapy spider with extra logic for:
 
 To standardize the data that is returned by the spiders, we create the class
 [FullReport](covid19br/common/models/full_report.py) which represents a "complete
-report" and stores all data collected for a given state in a specific date. 
+report" and stores all data collected for a given state in a specific date.
 This full report consists of several [bulletins](covid19br/common/models/bulletin_models.py),
 (one for each city in the state + one for imported/undefined cases) with the total
 number of confirmed cases and number of deaths for that day.
@@ -253,7 +253,7 @@ with the data it collects and save these `bulletins` in the report via the
 `add_new_bulletin_to_report` provided by `Spider Base`.
 
 In summary, when creating a new state spider keep in mind:
-- It is desirable that you create your spider by extending the 
+- It is desirable that you create your spider by extending the
   [Spider Base](covid19br/common/base_spider.py) class (you can
   check some examples of how other spiders are implemented in the
   [/covid19br/spiders](covid19br/spiders) folder).
@@ -267,7 +267,7 @@ In summary, when creating a new state spider keep in mind:
     - For different dates (from the beginning of the pandemic until today).
     > OBS: As there is no standardization in the way in which the secretariats provide the
     data, it is not always possible to obtain all this information as we wish. Eve if you
-    can get only a part of the information in an automated way, it can already be a good 
+    can get only a part of the information in an automated way, it can already be a good
     start and a valid contribution! :)
 - The collected data must be saved in [bulletins](covid19br/common/models/bulletin_models.py)
   and added to the spider's return via the `add_new_bulletin_to_report` method.
@@ -302,4 +302,4 @@ the repository, compact them, send them to the server, and execute
 the dataset update command.
 
 > Note: the script that automatically downloads and converts data must
-> be executed separately, with the command `./run-spiders.sh`.
+> be executed separately, with the command `python covid19br/run_spider.py`.

@@ -165,7 +165,7 @@ make docker-run-spiders         # caso esteja usando o setup com docker
 
 Os comandos acima irão rodar os scrapers de **todos os estados** que temos implementado
 buscando os dados sobre a **data de hoje** e **salvarão o consolidado** em `.csv` na pasta
-`data` deste diretório (por padrão são salvos em arquivos com o nome no padrão 
+`data` deste diretório (por padrão são salvos em arquivos com o nome no padrão
 `"data/{estado}/covid19-{estado}-{data}{extra_info}.csv"`).
 
 Mas essa não é a única forma de usar esse comando, você pode optar por não salvar os
@@ -290,4 +290,4 @@ repositório, compactá-los, enviá-los ao servidor e executar o comando de
 atualização de dataset.
 
 > Nota: o script que baixa e converte os dados automaticamente deve ser
-> executado separadamente, com o comando `./run-spiders.sh`.
+> executado separadamente, com o comando `python covid19br/run_spider.py`.
