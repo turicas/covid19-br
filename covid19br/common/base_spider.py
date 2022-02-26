@@ -54,7 +54,7 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
 
         if dates_list and (start_date or end_date):
             raise ValueError(
-                "The parameter 'date_range' is not simultaneously supported with 'start_date' or 'end_date'."
+                "The parameter 'dates_list' is not simultaneously supported with 'start_date' or 'end_date'."
             )
 
         self.today = datetime.date.today()
