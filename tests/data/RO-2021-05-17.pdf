@@ -1,0 +1,1402 @@
+﻿<!doctype html>
+<!--[if lt IE 8]> <html class="no-js ie7 oldie" lang="pt-BR"> <![endif]-->
+<!--[if IE 8]> <html class="no-js ie8 oldie" lang="pt-BR"> <![endif]-->
+<!--[if IE 9]> <html class="no-js ie9 oldie" lang="pt-BR"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="pt-BR"> <!--<![endif]-->
+<head>	<meta property="fb:app_id" content="325964054281248"> 		<meta property="og:url" content="https://rondonia.ro.gov.br/">
+		<meta property="og:title" content="Governo do Estado de Rondônia">
+		<meta property="og:site_name" content="Governo do Estado de Rondônia">
+		<meta property="og:description" content="Portal Oficial do Governo do Estado de Rondônia">
+		<meta property="og:type" content="website">
+		<meta property="og:image" content=""> 	<title> Página não encontrada - Governo do Estado de Rondônia	</title>
+	<meta name="description" content="Portal do Governo do Estado de Rondônia. Aqui você encontra todo o conteúdo institucional e notícias relacionados ao Governo do Estado de Rondônia.">
+	<meta name="keywords" content="rondônia, ro, governo, estado, portal, norte, amazônia">
+	<meta name="author" content="Governo do Estado de Rondônia">
+	<meta name="robots" content="index,follow">
+	<meta name="viewport" content="width=device-width">
+	<meta name='robots' content='noindex, follow' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v17.6 - https://yoast.com/wordpress/plugins/seo/ -->
+	<meta property="og:locale" content="pt_BR" />
+	<meta property="og:title" content="Página não encontrada - Governo do Estado de Rondônia" />
+	<meta property="og:site_name" content="Governo do Estado de Rondônia" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://rondonia.ro.gov.br/#organization","name":"GOVERNO DO ESTADO DE ROND\u00d4NIA","url":"https://rondonia.ro.gov.br/","sameAs":["https://www.facebook.com/governoderondonia","https://www.instagram.com/governoro/","https://www.linkedin.com/company/governorondonia/","https://www.youtube.com/channel/UCXgrwFrZfFQxwhdbsjYmwTg","https://pt.wikipedia.org/wiki/Rond\u00f4nia","https://twitter.com/GovernoRO"],"logo":{"@type":"ImageObject","@id":"https://rondonia.ro.gov.br/#logo","inLanguage":"pt-BR","url":"https://rondonia.ro.gov.br/wp-content/uploads/2021/11/15bjy6nly8ww6.png","contentUrl":"https://rondonia.ro.gov.br/wp-content/uploads/2021/11/15bjy6nly8ww6.png","width":300,"height":250,"caption":"GOVERNO DO ESTADO DE ROND\u00d4NIA"},"image":{"@id":"https://rondonia.ro.gov.br/#logo"}},{"@type":"WebSite","@id":"https://rondonia.ro.gov.br/#website","url":"https://rondonia.ro.gov.br/","name":"Governo do Estado de Rond\u00f4nia","description":"Portal Oficial do Governo do Estado de Rond\u00f4nia","publisher":{"@id":"https://rondonia.ro.gov.br/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://rondonia.ro.gov.br/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"pt-BR"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//js.sistemas.ro.gov.br' />
+<link rel='dns-prefetch' href='//font.sistemas.ro.gov.br' />
+<link rel='dns-prefetch' href='//css.sistemas.ro.gov.br' />
+<link rel='dns-prefetch' href='//cdn.detic.ro.gov.br' />
+<link rel='dns-prefetch' href='//s.w.org' />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"wpemoji":"https:\/\/rondonia.ro.gov.br\/wp-includes\/js\/wp-emoji.js?ver=5.8.2","twemoji":"https:\/\/rondonia.ro.gov.br\/wp-includes\/js\/twemoji.js?ver=5.8.2"}};
+			/**
+ * @output wp-includes/js/wp-emoji-loader.js
+ */
+
+( function( window, document, settings ) {
+	var src, ready, ii, tests;
+
+	// Create a canvas element for testing native browser support of emoji.
+	var canvas = document.createElement( 'canvas' );
+	var context = canvas.getContext && canvas.getContext( '2d' );
+
+	/**
+	 * Checks if two sets of Emoji characters render the same visually.
+	 *
+	 * @since 4.9.0
+	 *
+	 * @private
+	 *
+	 * @param {number[]} set1 Set of Emoji character codes.
+	 * @param {number[]} set2 Set of Emoji character codes.
+	 *
+	 * @return {boolean} True if the two sets render the same.
+	 */
+	function emojiSetsRenderIdentically( set1, set2 ) {
+		var stringFromCharCode = String.fromCharCode;
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set1 ), 0, 0 );
+		var rendered1 = canvas.toDataURL();
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set2 ), 0, 0 );
+		var rendered2 = canvas.toDataURL();
+
+		return rendered1 === rendered2;
+	}
+
+	/**
+	 * Detects if the browser supports rendering emoji or flag emoji.
+	 *
+	 * Flag emoji are a single glyph made of two characters, so some browsers
+	 * (notably, Firefox OS X) don't support them.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @private
+	 *
+	 * @param {string} type Whether to test for support of "flag" or "emoji".
+	 *
+	 * @return {boolean} True if the browser can render emoji, false if it cannot.
+	 */
+	function browserSupportsEmoji( type ) {
+		var isIdentical;
+
+		if ( ! context || ! context.fillText ) {
+			return false;
+		}
+
+		/*
+		 * Chrome on OS X added native emoji rendering in M41. Unfortunately,
+		 * it doesn't work when the font is bolder than 500 weight. So, we
+		 * check for bold rendering support to avoid invisible emoji in Chrome.
+		 */
+		context.textBaseline = 'top';
+		context.font = '600 32px Arial';
+
+		switch ( type ) {
+			case 'flag':
+				/*
+				 * Test for Transgender flag compatibility. This flag is shortlisted for the Emoji 13 spec,
+				 * but has landed in Twemoji early, so we can add support for it, too.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (white flag emoji + transgender symbol).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 0x1F3F3, 0xFE0F, 0x200D, 0x26A7, 0xFE0F ],
+					[ 0x1F3F3, 0xFE0F, 0x200B, 0x26A7, 0xFE0F ]
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for UN flag compatibility. This is the least supported of the letter locale flags,
+				 * so gives us an easy test for full support.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly ([U] + [N]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 0xD83C, 0xDDFA, 0xD83C, 0xDDF3 ],
+					[ 0xD83C, 0xDDFA, 0x200B, 0xD83C, 0xDDF3 ]
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for English flag compatibility. England is a country in the United Kingdom, it
+				 * does not have a two letter locale code but rather an five letter sub-division code.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (black flag emoji + [G] + [B] + [E] + [N] + [G]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 0xD83C, 0xDFF4, 0xDB40, 0xDC67, 0xDB40, 0xDC62, 0xDB40, 0xDC65, 0xDB40, 0xDC6E, 0xDB40, 0xDC67, 0xDB40, 0xDC7F ],
+					[ 0xD83C, 0xDFF4, 0x200B, 0xDB40, 0xDC67, 0x200B, 0xDB40, 0xDC62, 0x200B, 0xDB40, 0xDC65, 0x200B, 0xDB40, 0xDC6E, 0x200B, 0xDB40, 0xDC67, 0x200B, 0xDB40, 0xDC7F ]
+				);
+
+				return ! isIdentical;
+			case 'emoji':
+				/*
+				 * Burning Love: Just a hunk, a hunk of burnin' love.
+				 *
+				 *  To test for Emoji 13.1 support, try to render a new emoji: Heart on Fire!
+				 *
+				 * The Heart on Fire emoji is a ZWJ sequence combining ❤️ Red Heart, a Zero Width Joiner and 🔥 Fire.
+				 *
+				 * 0x2764, 0xfe0f == Red Heart emoji.
+				 * 0x200D == Zero-Width Joiner (ZWJ) that links the two code points for the new emoji or
+				 * 0x200B == Zero-Width Space (ZWS) that is rendered for clients not supporting the new emoji.
+				 * 0xD83D, 0xDD25 == Fire.
+				 *
+				 * When updating this test for future Emoji releases, ensure that individual emoji that make up the
+				 * sequence come from older emoji standards.
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[0x2764, 0xfe0f, 0x200D, 0xD83D, 0xDD25],
+					[0x2764, 0xfe0f, 0x200B, 0xD83D, 0xDD25]
+				);
+
+				return ! isIdentical;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Adds a script to the head of the document.
+	 *
+	 * @ignore
+	 *
+	 * @since 4.2.0
+	 *
+	 * @param {Object} src The url where the script is located.
+	 * @return {void}
+	 */
+	function addScript( src ) {
+		var script = document.createElement( 'script' );
+
+		script.src = src;
+		script.defer = script.type = 'text/javascript';
+		document.getElementsByTagName( 'head' )[0].appendChild( script );
+	}
+
+	tests = Array( 'flag', 'emoji' );
+
+	settings.supports = {
+		everything: true,
+		everythingExceptFlag: true
+	};
+
+	/*
+	 * Tests the browser support for flag emojis and other emojis, and adjusts the
+	 * support settings accordingly.
+	 */
+	for( ii = 0; ii < tests.length; ii++ ) {
+		settings.supports[ tests[ ii ] ] = browserSupportsEmoji( tests[ ii ] );
+
+		settings.supports.everything = settings.supports.everything && settings.supports[ tests[ ii ] ];
+
+		if ( 'flag' !== tests[ ii ] ) {
+			settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && settings.supports[ tests[ ii ] ];
+		}
+	}
+
+	settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && ! settings.supports.flag;
+
+	// Sets DOMReady to false and assigns a ready function to settings.
+	settings.DOMReady = false;
+	settings.readyCallback = function() {
+		settings.DOMReady = true;
+	};
+
+	// When the browser can not render everything we need to load a polyfill.
+	if ( ! settings.supports.everything ) {
+		ready = function() {
+			settings.readyCallback();
+		};
+
+		/*
+		 * Cross-browser version of adding a dom ready event.
+		 */
+		if ( document.addEventListener ) {
+			document.addEventListener( 'DOMContentLoaded', ready, false );
+			window.addEventListener( 'load', ready, false );
+		} else {
+			window.attachEvent( 'onload', ready );
+			document.attachEvent( 'onreadystatechange', function() {
+				if ( 'complete' === document.readyState ) {
+					settings.readyCallback();
+				}
+			} );
+		}
+
+		src = settings.source || {};
+
+		if ( src.concatemoji ) {
+			addScript( src.concatemoji );
+		} else if ( src.wpemoji && src.twemoji ) {
+			addScript( src.twemoji );
+			addScript( src.wpemoji );
+		}
+	}
+
+} )( window, document, window._wpemojiSettings );
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://rondonia.ro.gov.br/wp-includes/css/dist/block-library/style.css?ver=5.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='css-font-css'  href='https://font.sistemas.ro.gov.br/font.css' type='text/css' media='all' />
+<link rel='stylesheet' id='css-all-css'  href='https://css.sistemas.ro.gov.br/all.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='css-fontawesome-css'  href='https://cdn.detic.ro.gov.br/vendors/fontawesome/v5/css/all.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='css-portal-css'  href='https://rondonia.ro.gov.br/wp-content/themes/portal-rondonia/assets/css/portal.qa.css' type='text/css' media='all' />
+<script type='text/javascript' src='https://js.sistemas.ro.gov.br/modernizr.js' id='js-modernizr-js'></script>
+<script type='text/javascript' src='https://rondonia.ro.gov.br/wp-includes/js/jquery/jquery.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://rondonia.ro.gov.br/wp-includes/js/jquery/jquery-migrate.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://rondonia.ro.gov.br/wp-content/plugins/sticky-header-effects-for-elementor/assets/js/she-header.js?ver=1.4.7' id='she-header-js'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://rondonia.ro.gov.br/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://rondonia.ro.gov.br/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.2" />
+	<link rel="shortcut icon" href="https://img.sistemas.ro.gov.br/portal/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" href="http://img.sistemas.ro.gov.br/portal/apple-touch-icon.png">
+	<link rel="apple-touch-icon-precomposed" href="http://img.sistemas.ro.gov.br/portal/apple-touch-icon-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://img.sistemas.ro.gov.br/portal/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://img.sistemas.ro.gov.br/portal/apple-touch-icon-114x114.png">
+	<!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link href="http://css.sistemas.ro.gov.br/font-awesome-ie7.css" rel="stylesheet">
+    <![endif]-->		<style>
+		.modal-fullscreen.in {
+			top:5%!important;
+			/* height: 100%; */
+			width: 100%;
+			left: auto;
+			margin-left:0;
+		}
+		.modal-fullscreen.in .modal-body {
+			max-height:465px;
+		}
+	</style>
+	<link href="https://cdn.sistemas.ro.gov.br/vendors/artim/css/cookieconsent.min.css" rel="stylesheet">
+</head>
+<body>
+	<!-- Matomo -->
+	<script type="text/javascript">
+		var _paq = window._paq || [];
+		/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+		_paq.push(['trackPageView']);
+		_paq.push(['enableLinkTracking']);
+		(function() {
+			var u="//analytics.sistemas.ro.gov.br/";
+			_paq.push(['setTrackerUrl', u+'matomo.php']);
+			_paq.push(['setSiteId', '2']);
+			var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+			g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+		})();
+	</script>
+	<!-- End Matomo Code -->
+
+	<header class="portal container-fluid hidden-print">
+		<div class="container">
+			<div class="row">
+				<div class="span12 relative">
+					<div class="row">
+						<!-- Logo -->
+						<a id="brasao-portal" class="absolute" href="https://rondonia.ro.gov.br">
+							<img src="http://img.sistemas.ro.gov.br/portal/brasao-portal-lg.png" alt="Governo de Rondônia">
+						</a>
+						<!-- Logo -->
+						<!-- Barras -->
+						<div class="span11 offset1">
+							<!-- Acessibilidade -->
+							<div class="row acessibilidade">
+								<!-- Data -->
+								<div class="span4 data visible-desktop visible-tablet">
+									<span class="muted">Wednesday, 09 de March de 2022</span>
+								</div>
+								<!-- /Data -->
+								<!-- Menu -->
+								<!-- <div class="span7"> -->
+									<!-- <ul class="pull-right m0"> -->
+										<!-- <li class="visible-desktop"><a href="#"><i class="icon icon-font"></i></a></li>
+										<li class="visible-desktop"><a href="#">+<i class="icon icon-font"></i></a></li>
+										<li class="visible-desktop"><a href="#"><i class="icon icon-print"></i> Imprimir</a></li>
+										<li><a href="#"><i class="icon icon-sitemap"></i> Mapa do Site</a></li> -->
+										<!-- <li><a href="#"><i class="icon icon-question-circle"></i> Ajuda</a></li> -->
+										<!-- <li><a href="http://antigo.rondonia.ro.gov.br" target="_blank"><i class="icon icon-globe"></i> Portal Antigo</a></li> -->
+									<!-- </ul> -->
+								<!-- </div> -->
+								<!-- /Menu -->
+							</div>
+							<!-- /Acessibilidade -->
+							<!-- Principal -->
+							<div class="row principal">
+								<!-- Título -->
+								<div class="span6 pt-sans-narrow">
+									<h3 class="visible-desktop"><a href="https://rondonia.ro.gov.br">Portal do Governo do <b>Estado de Rondônia</b></a></h3>
+									<h3 class="hidden-desktop absolute"><a href="https://rondonia.ro.gov.br"> Governo <b>de Rondônia</b></a></h3>
+								</div>
+								<!-- /Título -->
+								<!-- Menu Rápido -->
+								<div class="span5 relative">
+									<ul class="nav nav-pills pull-right">
+										<li class="visible-desktop dropdown">
+											<a class="dropdown-toggle" data-toggle="dropdown" href="#"><img class="relative" style="top:-2px" src="http://img.sistemas.ro.gov.br/portal/acesso-informacao.png" alt="Acesso à Informação"> Acesso à Informação <b class="caret"></b></a>
+											<ul class="dropdown-menu">
+												<li><a href="http://www.transparencia.ro.gov.br/Menu/Legislacao" target="_blank"><i class="icon icon-info-circle"></i> Lei de Acesso a Informação</a></li>
+												<li><a href="http://www.transparencia.ro.gov.br/Pessoal/Index" target="_blank"><i class="icon icon-question-circle"></i> Solicitar Informação</a></li>
+												<li class="divider"></li>
+												<li><a href="http://esic.cge.ro.gov.br/" target="_blank"><img class="relative" style="top:-2px" src="http://img.sistemas.ro.gov.br/portal/acesso-informacao.png" alt="e-SIC"> e-SIC</a></li>
+												<li class="divider"></li>
+												<li><a href="http://www.transparencia.ro.gov.br/" target="_blank"><i class="icon icon-laptop"></i> Portal da Transparência</a></li>
+											</ul>
+										</li>
+										<!-- <li><a href="#">Serviços <b class="caret"></b></a></li> -->
+										<li class="visible-desktop dropdown">
+											<a class="dropdown-toggle" data-toggle="dropdown" href="#">Secretarias e Órgãos <b class="caret"></b></a>
+											<ul class="dropdown-menu mega-menu">														<li><a href="https://rondonia.ro.gov.br/agero/"><b>AGERO</b><br><small>Agência de Regulação</small></a></li>														<li><a href="https://rondonia.ro.gov.br/agevisa/"><b>AGEVISA</b><br><small>Vigilância em Saúde</small></a></li>														<li><a href="https://rondonia.ro.gov.br/caerd/"><b>CAERD</b><br><small>Água e Esgoto</small></a></li>														<li><a href="https://rondonia.ro.gov.br/casa-civil/"><b>CASA CIVIL</b><br><small>Casa Civil</small></a></li>														<li><a href="https://rondonia.ro.gov.br/casa-militar/"><b>CASA MILITAR</b><br><small>Segurança Institucional</small></a></li>														<li><a href="https://rondonia.ro.gov.br/cbm/"><b>CBM</b><br><small>Bombeiros</small></a></li>														<li><a href="https://rondonia.ro.gov.br/cetas/"><b>CETAS</b><br><small>Centro de Educação na Área de Saúde</small></a></li>														<li><a href="https://rondonia.ro.gov.br/cge/"><b>CGE</b><br><small>Controladoria Geral</small></a></li>														<li><a href="https://rondonia.ro.gov.br/cmr/"><b>CMR</b><br><small>Mineração</small></a></li>														<li><a href="https://rondonia.ro.gov.br/coetic/"><b>COETIC</b><br><small>Comitê de TI</small></a></li>														<li><a href="https://rondonia.ro.gov.br/cop26/"><b>COP26</b><br><small>Sustainability Rondônia</small></a></li>														<li><a href="https://rondonia.ro.gov.br/der/"><b>DER</b><br><small>Estradas, Transportes, Serviços Públicos</small></a></li>														<li><a href="https://rondonia.ro.gov.br/detran/"><b>DETRAN</b><br><small>Trânsito</small></a></li>														<li><a href="https://rondonia.ro.gov.br/diof/"><b>DIOF</b><br><small>Imprensa Oficial</small></a></li>														<li><a href="https://rondonia.ro.gov.br/drpc/"><b>DRPC</b><br><small>Cerimonial</small></a></li>														<li><a href="https://rondonia.ro.gov.br/emater/"><b>EMATER</b><br><small>Assistência Técnica e Extensão Rural</small></a></li>														<li><a href="https://rondonia.ro.gov.br/fapero/"><b>FAPERO</b><br><small>Ciência e Tecnologia</small></a></li>														<li><a href="https://rondonia.ro.gov.br/fease/"><b>FEASE</b><br><small>Atendimento Socioeducativo</small></a></li>														<li><a href="https://rondonia.ro.gov.br/fhemeron/"><b>FHEMERON</b><br><small>Fhemeron</small></a></li>														<li><a href="https://rondonia.ro.gov.br/funcer/"><b>FUNCER</b><br><small>Cultura</small></a></li>														<li><a href="https://rondonia.ro.gov.br/idaron/"><b>IDARON</b><br><small>Defesa Sanitária</small></a></li>														<li><a href="https://rondonia.ro.gov.br/idep/"><b>IDEP</b><br><small>Educação Profissional </small></a></li>														<li><a href="https://rondonia.ro.gov.br/ipem/"><b>IPEM</b><br><small>Pesos e Medidas</small></a></li>														<li><a href="https://rondonia.ro.gov.br/iperon/"><b>IPERON</b><br><small>Previdência</small></a></li>														<li><a href="https://rondonia.ro.gov.br/jucer/"><b>JUCER</b><br><small>Junta Comercial</small></a></li>														<li><a href="https://rondonia.ro.gov.br/ouvidoria/"><b>OUVIDORIA</b><br><small>Ouvidoria Geral</small></a></li>														<li><a href="https://rondonia.ro.gov.br/pc/"><b>PC</b><br><small>Polícia Civil</small></a></li>														<li><a href="https://rondonia.ro.gov.br/pge/"><b>PGE</b><br><small>Procuradoria Geral</small></a></li>														<li><a href="https://rondonia.ro.gov.br/pm/"><b>PM</b><br><small>Polícia Militar</small></a></li>														<li><a href="https://rondonia.ro.gov.br/politec/"><b>POLITEC</b><br><small>Polícia Técnico-Científica</small></a></li>														<li><a href="https://rondonia.ro.gov.br/procon/"><b>PROCON</b><br><small>Defesa do Consumidor</small></a></li>														<li><a href="https://rondonia.ro.gov.br/seagri/"><b>SEAGRI</b><br><small>Agricultura</small></a></li>														<li><a href="https://rondonia.ro.gov.br/seas/"><b>SEAS</b><br><small>Assistência Social</small></a></li>														<li><a href="https://rondonia.ro.gov.br/secom/"><b>SECOM</b><br><small>Comunicação</small></a></li>														<li><a href="https://rondonia.ro.gov.br/sedam/"><b>SEDAM</b><br><small>Desenvolvimento Ambiental</small></a></li>														<li><a href="https://rondonia.ro.gov.br/sedec/"><b>SEDEC</b><br><small>Desenvolvimento</small></a></li>														<li><a href="https://rondonia.ro.gov.br/seduc/"><b>SEDUC</b><br><small>Educação</small></a></li>														<li><a href="https://rondonia.ro.gov.br/sefin/"><b>SEFIN</b><br><small>Finanças</small></a></li>														<li><a href="https://rondonia.ro.gov.br/segep/"><b>SEGEP</b><br><small>Administração e Recursos Humanos</small></a></li>														<li><a href="https://rondonia.ro.gov.br/secel/"><b>SEJUCEL</b><br><small>Esporte, Cultura e Lazer</small></a></li>														<li><a href="https://rondonia.ro.gov.br/sejus/"><b>SEJUS</b><br><small>Justiça</small></a></li>														<li><a href="https://rondonia.ro.gov.br/seosp/"><b>SEOSP</b><br><small>Obras e Serviços Públicos</small></a></li>														<li><a href="https://rondonia.ro.gov.br/sepat/"><b>SEPAT</b><br><small> Patrimônio</small></a></li>														<li><a href="https://rondonia.ro.gov.br/sepog/"><b>SEPOG</b><br><small>Planejamento, Orçamento e Gestão</small></a></li>														<li><a href="https://rondonia.ro.gov.br/sesau/"><b>SESAU</b><br><small>Saúde</small></a></li>														<li><a href="https://rondonia.ro.gov.br/sesdec/"><b>SESDEC</b><br><small>Segurança, Defesa e Cidadania</small></a></li>														<li><a href="https://rondonia.ro.gov.br/setic/"><b>SETIC</b><br><small>Tecnologia da Informação</small></a></li>														<li><a href="https://rondonia.ro.gov.br/setur/"><b>SETUR</b><br><small>Turismo</small></a></li>														<li><a href="https://rondonia.ro.gov.br/sibra/"><b>SIBRA</b><br><small>Integração</small></a></li>														<li><a href="https://rondonia.ro.gov.br/soph/"><b>SOPH</b><br><small>Portos e Hidrovias</small></a></li>														<li><a href="https://rondonia.ro.gov.br/sugespe/"><b>SUGESP</b><br><small>Gestão de Gastos Públicos Administrativos</small></a></li>														<li><a href="https://rondonia.ro.gov.br/supel/"><b>SUPEL</b><br><small>Licitações</small></a></li>														<li><a href="https://rondonia.ro.gov.br/secon/"><b>SUPER</b><br><small>Contabilidade</small></a></li>											</ul>
+										</li>
+										<li class="hidden-desktop">
+											<a class="collapsed" data-toggle="collapse" data-target="#navbar-responsive-sites">
+												Sites <b class="caret"></b>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<!-- /Menu Rápido -->
+							</div>
+							<!-- /Principal -->
+							<!-- Portal -->
+							<div class="row global visible-desktop">
+								<!-- Menu -->
+								<ul id="menu-portal-global" class="span8"><li id="menu-item-1227" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1227"><a href="https://rondonia.ro.gov.br/">Portal</a></li>
+<li id="menu-item-1239" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1239 dropdown"><a href="#" data-toggle="dropdown" data-target="#" class="dropdown-toggle">Sobre <span class="caret"></span></a>
+<ul class="dropdown-menu">
+	<li id="menu-item-1234" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1234"><a href="https://rondonia.ro.gov.br/portal/o-governador/">O Governador</a></li>
+	<li id="menu-item-323990" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-323990"><a href="https://rondonia.ro.gov.br/portal/gabinete-do-governador/">Gabinete do Governador</a></li>
+	<li id="menu-item-1228" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1228"><a href="https://rondonia.ro.gov.br/portal/programas/">Programas</a></li>
+</ul>
+</li>
+<li id="menu-item-306923" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-306923"><a href="https://rondonia.ro.gov.br/portal/plano-estrategico/">Plano Estratégico</a></li>
+<li id="menu-item-43571" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-43571"><a href="https://rondonia.ro.gov.br/portal/manual-de-marca/">Manual de marca</a></li>
+<li id="menu-item-1236" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1236"><a href="https://rondonia.ro.gov.br/portal/publicacoes/">Publicações</a></li>
+<li id="menu-item-310050" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-310050"><a href="https://rondonia.ro.gov.br/portal/noticias/">Notícias</a></li>
+<li id="menu-item-293446" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-293446 dropdown"><a href="#" data-toggle="dropdown" data-target="#" class="dropdown-toggle">Agenda <span class="caret"></span></a>
+<ul class="dropdown-menu">
+	<li id="menu-item-1229" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1229"><a href="https://rondonia.ro.gov.br/portal/agenda/">Ver a agenda</a></li>
+	<li id="menu-item-293447" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-293447"><a href="https://rondonia.ro.gov.br/portal/como-agendar/">Como agendar?</a></li>
+</ul>
+</li>
+<li id="menu-item-1231" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1231"><a href="https://rondonia.ro.gov.br/portal/contato/">Contato</a></li>
+</ul>								<!-- /Menu -->							</div>
+							<!-- /Portal -->
+						</div>
+					</div>
+					<!-- /Barras -->
+				</div>
+				<!-- /Logo -->
+			</div>
+		</div>
+	</header>
+	<div class="hidden-desktop hidden-print nav-collapse navbar-responsive-collapse collapse" id="navbar-responsive-sites" style="height: 0px;">
+		<ul class="nav">					<li><a href="https://rondonia.ro.gov.br/agero/"><b>AGERO</b><br><small>Agência de Regulação</small></a></li>					<li><a href="https://rondonia.ro.gov.br/agevisa/"><b>AGEVISA</b><br><small>Vigilância em Saúde</small></a></li>					<li><a href="https://rondonia.ro.gov.br/caerd/"><b>CAERD</b><br><small>Água e Esgoto</small></a></li>					<li><a href="https://rondonia.ro.gov.br/casa-civil/"><b>CASA CIVIL</b><br><small>Casa Civil</small></a></li>					<li><a href="https://rondonia.ro.gov.br/casa-militar/"><b>CASA MILITAR</b><br><small>Segurança Institucional</small></a></li>					<li><a href="https://rondonia.ro.gov.br/cbm/"><b>CBM</b><br><small>Bombeiros</small></a></li>					<li><a href="https://rondonia.ro.gov.br/cetas/"><b>CETAS</b><br><small>Centro de Educação na Área de Saúde</small></a></li>					<li><a href="https://rondonia.ro.gov.br/cge/"><b>CGE</b><br><small>Controladoria Geral</small></a></li>					<li><a href="https://rondonia.ro.gov.br/cmr/"><b>CMR</b><br><small>Mineração</small></a></li>					<li><a href="https://rondonia.ro.gov.br/coetic/"><b>COETIC</b><br><small>Comitê de TI</small></a></li>					<li><a href="https://rondonia.ro.gov.br/cop26/"><b>COP26</b><br><small>Sustainability Rondônia</small></a></li>					<li><a href="https://rondonia.ro.gov.br/der/"><b>DER</b><br><small>Estradas, Transportes, Serviços Públicos</small></a></li>					<li><a href="https://rondonia.ro.gov.br/detran/"><b>DETRAN</b><br><small>Trânsito</small></a></li>					<li><a href="https://rondonia.ro.gov.br/diof/"><b>DIOF</b><br><small>Imprensa Oficial</small></a></li>					<li><a href="https://rondonia.ro.gov.br/drpc/"><b>DRPC</b><br><small>Cerimonial</small></a></li>					<li><a href="https://rondonia.ro.gov.br/emater/"><b>EMATER</b><br><small>Assistência Técnica e Extensão Rural</small></a></li>					<li><a href="https://rondonia.ro.gov.br/fapero/"><b>FAPERO</b><br><small>Ciência e Tecnologia</small></a></li>					<li><a href="https://rondonia.ro.gov.br/fease/"><b>FEASE</b><br><small>Atendimento Socioeducativo</small></a></li>					<li><a href="https://rondonia.ro.gov.br/fhemeron/"><b>FHEMERON</b><br><small>Fhemeron</small></a></li>					<li><a href="https://rondonia.ro.gov.br/funcer/"><b>FUNCER</b><br><small>Cultura</small></a></li>					<li><a href="https://rondonia.ro.gov.br/idaron/"><b>IDARON</b><br><small>Defesa Sanitária</small></a></li>					<li><a href="https://rondonia.ro.gov.br/idep/"><b>IDEP</b><br><small>Educação Profissional </small></a></li>					<li><a href="https://rondonia.ro.gov.br/ipem/"><b>IPEM</b><br><small>Pesos e Medidas</small></a></li>					<li><a href="https://rondonia.ro.gov.br/iperon/"><b>IPERON</b><br><small>Previdência</small></a></li>					<li><a href="https://rondonia.ro.gov.br/jucer/"><b>JUCER</b><br><small>Junta Comercial</small></a></li>					<li><a href="https://rondonia.ro.gov.br/ouvidoria/"><b>OUVIDORIA</b><br><small>Ouvidoria Geral</small></a></li>					<li><a href="https://rondonia.ro.gov.br/pc/"><b>PC</b><br><small>Polícia Civil</small></a></li>					<li><a href="https://rondonia.ro.gov.br/pge/"><b>PGE</b><br><small>Procuradoria Geral</small></a></li>					<li><a href="https://rondonia.ro.gov.br/pm/"><b>PM</b><br><small>Polícia Militar</small></a></li>					<li><a href="https://rondonia.ro.gov.br/politec/"><b>POLITEC</b><br><small>Polícia Técnico-Científica</small></a></li>					<li><a href="https://rondonia.ro.gov.br/procon/"><b>PROCON</b><br><small>Defesa do Consumidor</small></a></li>					<li><a href="https://rondonia.ro.gov.br/seagri/"><b>SEAGRI</b><br><small>Agricultura</small></a></li>					<li><a href="https://rondonia.ro.gov.br/seas/"><b>SEAS</b><br><small>Assistência Social</small></a></li>					<li><a href="https://rondonia.ro.gov.br/secom/"><b>SECOM</b><br><small>Comunicação</small></a></li>					<li><a href="https://rondonia.ro.gov.br/sedam/"><b>SEDAM</b><br><small>Desenvolvimento Ambiental</small></a></li>					<li><a href="https://rondonia.ro.gov.br/sedec/"><b>SEDEC</b><br><small>Desenvolvimento</small></a></li>					<li><a href="https://rondonia.ro.gov.br/seduc/"><b>SEDUC</b><br><small>Educação</small></a></li>					<li><a href="https://rondonia.ro.gov.br/sefin/"><b>SEFIN</b><br><small>Finanças</small></a></li>					<li><a href="https://rondonia.ro.gov.br/segep/"><b>SEGEP</b><br><small>Administração e Recursos Humanos</small></a></li>					<li><a href="https://rondonia.ro.gov.br/secel/"><b>SEJUCEL</b><br><small>Esporte, Cultura e Lazer</small></a></li>					<li><a href="https://rondonia.ro.gov.br/sejus/"><b>SEJUS</b><br><small>Justiça</small></a></li>					<li><a href="https://rondonia.ro.gov.br/seosp/"><b>SEOSP</b><br><small>Obras e Serviços Públicos</small></a></li>					<li><a href="https://rondonia.ro.gov.br/sepat/"><b>SEPAT</b><br><small> Patrimônio</small></a></li>					<li><a href="https://rondonia.ro.gov.br/sepog/"><b>SEPOG</b><br><small>Planejamento, Orçamento e Gestão</small></a></li>					<li><a href="https://rondonia.ro.gov.br/sesau/"><b>SESAU</b><br><small>Saúde</small></a></li>					<li><a href="https://rondonia.ro.gov.br/sesdec/"><b>SESDEC</b><br><small>Segurança, Defesa e Cidadania</small></a></li>					<li><a href="https://rondonia.ro.gov.br/setic/"><b>SETIC</b><br><small>Tecnologia da Informação</small></a></li>					<li><a href="https://rondonia.ro.gov.br/setur/"><b>SETUR</b><br><small>Turismo</small></a></li>					<li><a href="https://rondonia.ro.gov.br/sibra/"><b>SIBRA</b><br><small>Integração</small></a></li>					<li><a href="https://rondonia.ro.gov.br/soph/"><b>SOPH</b><br><small>Portos e Hidrovias</small></a></li>					<li><a href="https://rondonia.ro.gov.br/sugespe/"><b>SUGESP</b><br><small>Gestão de Gastos Públicos Administrativos</small></a></li>					<li><a href="https://rondonia.ro.gov.br/supel/"><b>SUPEL</b><br><small>Licitações</small></a></li>					<li><a href="https://rondonia.ro.gov.br/secon/"><b>SUPER</b><br><small>Contabilidade</small></a></li>		</ul>
+	</div>
+	<div class="navbar m0 hidden-desktop hidden-print">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar collapsed" data-toggle="collapse" data-target="#navbar-responsive-portal">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand pt-sans-narrow" href="#">Menu - Portal</a>
+				<div class="nav-collapse navbar-responsive-collapse collapse" id="navbar-responsive-portal" style="height: 0px;">
+					<ul id="menu-portal-mobile" class="nav"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1227"><a href="https://rondonia.ro.gov.br/">Portal</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1239 dropdown"><a href="#" data-toggle="dropdown" data-target="#" class="dropdown-toggle">Sobre <span class="caret"></span></a>
+<ul class="dropdown-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1234"><a href="https://rondonia.ro.gov.br/portal/o-governador/">O Governador</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-323990"><a href="https://rondonia.ro.gov.br/portal/gabinete-do-governador/">Gabinete do Governador</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1228"><a href="https://rondonia.ro.gov.br/portal/programas/">Programas</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-306923"><a href="https://rondonia.ro.gov.br/portal/plano-estrategico/">Plano Estratégico</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-43571"><a href="https://rondonia.ro.gov.br/portal/manual-de-marca/">Manual de marca</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1236"><a href="https://rondonia.ro.gov.br/portal/publicacoes/">Publicações</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-310050"><a href="https://rondonia.ro.gov.br/portal/noticias/">Notícias</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-293446 dropdown"><a href="#" data-toggle="dropdown" data-target="#" class="dropdown-toggle">Agenda <span class="caret"></span></a>
+<ul class="dropdown-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1229"><a href="https://rondonia.ro.gov.br/portal/agenda/">Ver a agenda</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-293447"><a href="https://rondonia.ro.gov.br/portal/como-agendar/">Como agendar?</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1231"><a href="https://rondonia.ro.gov.br/portal/contato/">Contato</a></li>
+</ul>					<form class="navbar-search" action="https://rondonia.ro.gov.br" method="GET">
+						<input class="search-query span2" name="s" type="text" placeholder="Busca.." value="">							<input type="hidden" name="e" value="portal">					</form>
+				</div><!-- /.nav-collapse -->
+			</div>
+		</div><!-- /navbar-inner -->
+	</div>
+	
+<script src="https://cdn.sistemas.ro.gov.br/vendors/artim/js/cookieconsent.min.js" integrity="sha384-NVK1eA/EZ6+gUqFf1S7t0i4Vz7W5WxWG1YGjwDGzRoLti6r6Ge6/Ps3FfEZTn8YQ" crossorigin="anonymous"></script><!--Breadcrumb -->
+<div class="breadcrumb visible-desktop  container-fluid">
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				Você está aqui: <a class="azul" href="https://rondonia.ro.gov.br"><i class="icon icon-home"></i> Governo do Estado de Rondônia</a> &raquo; Erro! Página não encontrada
+				<!-- Busca -->
+				<div class="busca pull-right">
+						<form class="relative" action="https://rondonia.ro.gov.br" method="GET">
+		<div class="input-append pull-right">
+			<input class="span2" name="s" type="text" placeholder="Busca.." value="">
+			<button class="btn" type="submit"><i class="icon icon-search"></i></button>
+		</div>			<input type="hidden" name="e" value="portal">	</form>				</div>
+				<!-- /Busca -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /Breadcrump -->
+
+<section class="conteudo container-fluid">
+	<div class="container">
+		<div class="row">
+			<div class="span9">
+				<h1>
+					<small>Erro 404</small><br>
+					<b>Página não encontrada</b>
+				</h1>
+				<p>Utilize o menu acima ou a busca para procurar o conteúdo desejado ou <a class="azul bolder" href="https://rondonia.ro.gov.br">clique aqui</a> para acessar a página inicial.</p>
+
+			</div>
+
+			<!-- Sidebar -->
+			<div class="span3">
+
+				<div class="sidebar right visible-desktop">
+
+					<!-- Observatório -->
+					<div class="text-center">
+						<a href="http://www.odr.ro.gov.br/">
+							<img src="http://data.portal.sistemas.ro.gov.br/2019/07/banner-observatorio-longo.jpg" alt="Observatório Estadual de Desenvolvimento Regional">
+						</a>
+					</div>
+					<!-- /Observatório -->
+
+					<!-- Ouvidoria -->
+					<div class="text-center mt10">
+						<a href="https://sistema.ouvidorias.gov.br/publico/RO/Manifestacao/RegistrarManifestacao">
+							<img src="http://img.sistemas.ro.gov.br/portal/sidebar-falabr.png" alt="Ouvidoria Geral do Governo do Estado de Rondônia">
+						</a>
+					</div>
+					<!-- /Ouvidoria -->
+
+					<hr>
+
+					<!-- Serviços -->
+						<h5 class="azul m0 pt-sans-narrow">Serviços</h5> 	<div class="container-barra-titulo">
+		<div class="barra-titulo azul"></div>
+	</div>		<ul class="nav nav-pills nav-stacked mb10 mt10">				<li><a class="modal-servicos" href="#modal-servicos-cidadao" data-toggle="modal" data-title="Cidadão" data-url="https://rondonia.ro.gov.br/tx-servico/cidadao/">Cidadão</a></li>				<li><a class="modal-servicos" href="#modal-servicos-empresa" data-toggle="modal" data-title="Empresa" data-url="https://rondonia.ro.gov.br/tx-servico/empresa/">Empresa</a></li>				<li><a class="modal-servicos" href="#modal-servicos-intranet" data-toggle="modal" data-title="Intranet" data-url="https://rondonia.ro.gov.br/tx-servico/intranet/">Intranet</a></li>				<li><a class="modal-servicos" href="#modal-servicos-servidor-publico" data-toggle="modal" data-title="Servidor Público" data-url="https://rondonia.ro.gov.br/tx-servico/servidor-publico/">Servidor Público</a></li>		</ul>			<div id="modal-servicos-cidadao" class="modal servicos hide fade">
+				<div class="modal-header">
+					<h3 class="pt-sans-narrow">
+						Serviços - Cidadão						<input class="visible-desktop input-small pull-right search-table" type="text" placeholder="Busca..">
+					</h3>
+				</div>
+				<div class="modal-body">					<ul class="nav nav-tabs mb10">						<li class="active"><a href="#todos-cidadao" data-toggle="tab">Todos</a></li>
+					</ul>
+					<div class="tab-content">						<div class="tab-pane fade in active" id="todos-cidadao">									<table class="table table-condensed search-this-table m0">
+										<thead>
+											<tr>
+												<th>Serviço</th>
+												<th style="width:70px">Link</th>
+											</tr>
+										</thead>
+										<tbody>												<tr>
+													<td>1º Seletivo DER-RO 2016 Edital 001/DER-RO 30/05/2016 <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://seletivo.der.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>1º Seletivo DER-RO 2018 Edital 001/DER-RO <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://seletivo2018.der.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>2º Seletivo DER-RO 2016 Edital 002/DER-RO 10/06/2016 <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://si.der.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ABAR - Associação Brasileira de Agências de Regulação <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.abar.org.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ADASA - Agência Reguladora de Águas, Energia e Saneamento Básico do DF <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="www.adasa.df.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>AGEAC - Agência Reguladora dos Serviços Públicos do Estado do Acre <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="www.ageac.ac.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Agência Virtual <small style="color:#999"> - CAERD</small></td>
+													<td><a class="azul" href="http://200.96.238.26:9106/caerd/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>AGENERSA - Agência Reguladora de Energia e Saneamento Básico do Estado do Rio de Janeiro <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.agenersa.rj.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>AGEPAN - Agência Estadual de Regulação de Serviços Públicos do Mato Grosso do Sul - MS <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="www.agepan.ms.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>AGEPAR - Agência Reguladora do Paraná <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.agepar.pr.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>AGER - Agência Estadual de Regulação dos Serviços Públicos Delegados do MT <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.ager.mt.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>AGERBA - Agência Estadual de Regulação de Serviços Públicos de Energia, Transporte e Comunicações da BA <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="www.agerba.ba.gov.br " target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>AGERGS - Agência Estadual de Regulação dos Serviços Públicos Delegados do Rio Grande do Sul <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.agergs.rs.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>AGERSA- Agência Reguladora de Saneamento Básico do Estado da Bahia <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="www.agersa.ba.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>AGESAN - Agência Reguladora de Serviços de Saneamento Básico do Estado de Santa Catarina <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.agesan.sc.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>AGESC - Agência Reguladora de Serviços Públicos de Santa Catarina <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.agesc.sc.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>AGETRANSP - Agência Reguladora de Serviços Públicos Concedidos de Transportes Aquaviários, Ferroviários e Metroviários e de Rodovias do Estado do RJ <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.agetransp.rj.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>AGR - Agência Goiana de Regulação, Controle e Fiscalização de Serviços Públicos <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="www.agr.go.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>AGUASPARANÁ - Instituto das Águas do Paraná <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.aguasparana.pr.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ANA - Agência Nacional de Águas <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="www.ana.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ANAC - Agência Nacional de Aviação Civil <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.anac.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ANCINE - Agência Nacional do Cinema <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.ancine.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ANEEL - Agência Nacional de Energia Elétrica <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.aneel.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ANP - Agência Nacional do Petróleo, Gás Natural e Biocombustíveis <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.anp.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ANTAQ - Agência Nacional de Transportes Aquaviários <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.antaq.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ANTT - Agência Nacional de Transportes Terrestres <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.antt.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ARCE - Agência Reguladora de Serviços Públicos Delegados do CE <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="www.arce.ce.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ARCON - Agência de Regulação e Controle de Serviços Públicos do PA <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.arcon.pa.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ARPB - Agência de Regulação do Estado da Paraíba <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.arpb.pb.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ARPE - Agência de Regulação dos Serviços Públicos Delegados do PE <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.arpe.pe.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ARSAE - Agência Reguladora de Serviços de Abastecimento de Água e de Esgotamento Sanitário do Estado de Minas Gerais - MG <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="www.arsae.mg.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ARSAL - Agência Reguladora de Serviços Públicos do Estado de Alagoas <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="www.arsal.al.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ARSAM - Agência Reguladora dos Serviços Públicos Concedidos do Estado do Amazonas <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="www.arsam.am.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ARSEMA - Agência Reguladora de Serviços Públicos do Maranhão <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="www.arsema.ma.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ARSEP - Agência Reguladora de Serviços Públicos do Rio Grande do Norte <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.arsep.rn.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ARSESP - Agência Reguladora de Saneamento e Energia de SP <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.arsesp.sp.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ARSI - Agência Reguladora de Saneamento Básico e Infraestrutura Viária do Espírito Santo <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="www.arsi.es.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ARTESP - Agência Reguladora de Serviços Públicos Delegados de Transporte do Estado de São Paulo <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.artesp.sp.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ASPE - Agência de Serviços Públicos de Energia do Estado do Espírito Santo <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="www.aspe.es.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>ATR.TO - Agência Tocantinense de Regulação Controle e Fiscalização de Serviços Públicos <small style="color:#999"> - AGERO</small></td>
+													<td><a class="azul" href="http://www.atr.to.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Avaliação do Seminário Estadual de Reformulação do Projeto Correção de Fluxo Escolar do Ensino Médio <small style="color:#999"> - SEDUC</small></td>
+													<td><a class="azul" href="https://docs.google.com/forms/d/1fhZ_k0yWLvkDhDy048tAh2bj5ip3R9poYN7xKZkK3ig/edit?usp=sharing_eil&amp;ts=5b5f1a29" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Bloqueio de CPF (Cadastro de Pessoa Física) <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://rondonia.ro.gov.br/jucer/servicos/bloqueio-de-cpf/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Cadastro Ambiental Rural de Rondônia - CAR <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://apps.global.lemaf.com.br/car/#/site" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Cadastro de Exploradores e Consumidores de Produtos Florestais - CEPROF <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://ceprof.sedam.ro.gov.br/ceprof/index.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Cadastro de Exploradores e Consumidores de Produtos Florestais - CEPROF <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://ceprof.sedam.ro.gov.br/ceprof/index.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Cadastro de propriedades produtoras de soja <small style="color:#999"> - IDARON</small></td>
+													<td><a class="azul" href="http://192.168.155.27/Portal/svSoja.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Carta de Serviço SUPEL <small style="color:#999"> - SUPEL</small></td>
+													<td><a class="azul" href="https://rondonia.ro.gov.br/wp-content/uploads/2018/11/TERCEIRO-PASSO.pdf" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Central de Consultas e Emissão de Guias <small style="color:#999"> - DETRAN</small></td>
+													<td><a class="azul" href="http://consulta.detran.ro.gov.br/CentralDeConsultasInternet/#servicos" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Certidão FGTS <small style="color:#999"> - CGE</small></td>
+													<td><a class="azul" href="https://www.sifge.caixa.gov.br/Cidadao/Crf/FgeCfSCriteriosPesquisa.asp" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Certidão INSS <small style="color:#999"> - CGE</small></td>
+													<td><a class="azul" href="http://www010.dataprev.gov.br/cws/contexto/cnd/cnd.html" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Certidão Negativa de Débitos Estaduais <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://www.portal.sefin.ro.gov.br/site/click!go.action?type=category&amp;id=192" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Certidão Receita Estadual <small style="color:#999"> - CGE</small></td>
+													<td><a class="azul" href="http://portal.intranet.sefin.ro.gov.br/PortalContribuinte/certidaoNegativa.jsp" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Certidão Receita Federal <small style="color:#999"> - CGE</small></td>
+													<td><a class="azul" href="http://www.receita.fazenda.gov.br/aplicacoes/ATSPO/certidao/CndconjuntaInter/InformaNICertidao.asp?Tipo=1" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Certidão Receita Municipal(Porto Velho) <small style="color:#999"> - CGE</small></td>
+													<td><a class="azul" href="http://www.semfazonline.com/certidoes.action" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Certidão TCE <small style="color:#999"> - CGE</small></td>
+													<td><a class="azul" href="http://www.tce.ro.gov.br/nova/certidao/consulta.asp" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Certidão TJ <small style="color:#999"> - CGE</small></td>
+													<td><a class="azul" href="http://www.tjro.jus.br/certidaoonline/jsp/apresenta.jsf" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Certidão TSE <small style="color:#999"> - CGE</small></td>
+													<td><a class="azul" href="http://www.tse.jus.br/eleitor/certidoes/certidao-de-quitacao-eleitoral" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Chamada Pública - Alimentação Escolar <small style="color:#999"> - SEDUC</small></td>
+													<td><a class="azul" href="http://cheffescolar.digix.com.br/chamada-publica" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Conheça a SUPEL <small style="color:#999"> - SUPEL</small></td>
+													<td><a class="azul" href="http://wiki.supel.ro.gov.br/index.php/P%C3%A1gina_principal" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Consulta de Declaração Cadastral <small style="color:#999"> - IDARON</small></td>
+													<td><a class="azul" href="http://192.168.155.27/Portal/svValidaDeclaracaoCadastral.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Consulta de GTA <small style="color:#999"> - IDARON</small></td>
+													<td><a class="azul" href="http://192.168.155.27/Portal/svConsultaGTA.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Consulta Internamento de Notas Fiscais <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://www.portal.sefin.ro.gov.br/site/nota-embaraco.action" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Consulta Pagamento de DARE <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://portal.intranet.sefin.ro.gov.br/PortalContribuinte/Publico/consultaPagamentoDare.jsp" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Consulta Pública de Processos <small style="color:#999"> - </small></td>
+													<td><a class="azul" href="http://consulta.protocolo.intranet.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Consulta REDESIM Estadual <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://portal.intranet.sefin.ro.gov.br/PortalContribuinte/Publico/parametropublica.jsp" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Consultar Dados de Veículos <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://www2.sefin.ro.gov.br/consulta_dados_veiculos2.asp" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>DARE <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://portal.intranet.sefin.ro.gov.br/PortalContribuinte/Publico/dareAvulso.jsp" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>DARE <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="https://dareavulso.sefin.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>DataGeo <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="https://www.google.com/maps/d/viewer?mid=1j7ognnElQUNtyn0uIyafwzuV7ZM&amp;ll=-10.843987432337787%2C-62.90203828749998&amp;z=7" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>E-SIC <small style="color:#999"> - </small></td>
+													<td><a class="azul" href="http://esic.sistemas.ro.gov.br/site/index.php" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Economia Solidária <small style="color:#999"> - SEAS</small></td>
+													<td><a class="azul" href="http://cadsol.mte.gov.br/inter/cadsol/main.seam" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Emissao/Validação - Certidão Nada Consta Servidor DER-RO <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://certidao.der.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Eventos <small style="color:#999"> - CASA CIVIL</small></td>
+													<td><a class="azul" href="http://eventos.sistemas.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Impressão de DARE <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://www.portal.sefin.ro.gov.br/site/click!go.action?type=category&amp;id=96" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Matricula Online <small style="color:#999"> - SEDUC</small></td>
+													<td><a class="azul" href="http://matricula.seduc.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Ouvidoria <small style="color:#999"> - </small></td>
+													<td><a class="azul" href="http://ouvidoria.sistemas.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Pagamento IPVA <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://portal.intranet.sefin.ro.gov.br/PortalContribuinte/Publico/ConsultaRenavam.jsp" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Parcelamento de IPVA <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://portal.intranet.sefin.ro.gov.br/PortalContribuinte/Publico/parcelamentoIpva.jsp" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Pesquisa de Processo <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://www.sedam.ro.gov.br/pesquisar-processo/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Pesquisa de Processo - SIGLAM <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://www.sedam.ro.gov.br/pesquisar-processo/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Plano anual de manutenção de Rodovias 2016 (MAPAS) <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="https://www.google.com/maps/d/viewer?mid=1hPnkz1Bpfj6H6ovG1NcS_KzQYNY" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Portal Conselho de Educação <small style="color:#999"> - SEDUC</small></td>
+													<td><a class="azul" href="http://www.seduc.ro.gov.br/cee" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Portal Educação Física <small style="color:#999"> - SEDUC</small></td>
+													<td><a class="azul" href="http://www.seduc.ro.gov.br/educacaofisica" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Portal Jogos Escolares <small style="color:#999"> - SEDUC</small></td>
+													<td><a class="azul" href="http://www.seduc.ro.gov.br/jogosescolares/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SAERO - Sistema de Avaliação Educacional do Estado de Rondônia <small style="color:#999"> - SEDUC</small></td>
+													<td><a class="azul" href="http://www.saero.caedufjf.net/resultados/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SCINM - Sistema de Consulta das Infrações, Notificações e Multas <small style="color:#999"> - </small></td>
+													<td><a class="azul" href="http://scinm.der.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SIAGEO <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://www.amazonia.cnptia.embrapa.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SIC - Sistema de Informações Cadastrais - Empresa (SINAD) <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://sic.certidao.der.ro.gov.br/Default.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SINAFLOR <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="https://servicos.ibama.gov.br/ctf/sistema.php" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Sistema Cadastro Digital de Obras (MAPAS) - Em andamento <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="https://www.google.com/maps/d/viewer?mid=1G_b8glPMWlEB-7T38rL33W6vMGI" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Sistema de Gerenciamento de Lotes - SIGLO INCRA <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="https://servicos.ibama.gov.br/ctf/sistema.php" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SROF - Certificado de Regularidade de Obras <small style="color:#999"> - </small></td>
+													<td><a class="azul" href="http://srof.der.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Transparência da EpR Contratos e Convênios <small style="color:#999"> - SETIC</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/ContratoConvenio" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Transparência DEOSP-RO <small style="color:#999"> - </small></td>
+													<td><a class="azul" href="http://transparencia.deosp.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Transparência DER-RO <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://transparencia.der.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Zoneamento Socioeconômico e Ecológico do Estado de Rondônia - ZSEE <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://www.sedam.ro.gov.br/zsee/zsee_index.html" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>										</tbody>
+									</table>						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal">Fechar</button>
+				</div>
+			</div>			<div id="modal-servicos-empresa" class="modal servicos hide fade">
+				<div class="modal-header">
+					<h3 class="pt-sans-narrow">
+						Serviços - Empresa						<input class="visible-desktop input-small pull-right search-table" type="text" placeholder="Busca..">
+					</h3>
+				</div>
+				<div class="modal-body">					<ul class="nav nav-tabs mb10">						<li class="active"><a href="#todos-empresa" data-toggle="tab">Todos</a></li>
+					</ul>
+					<div class="tab-content">						<div class="tab-pane fade in active" id="todos-empresa">									<table class="table table-condensed search-this-table m0">
+										<thead>
+											<tr>
+												<th>Serviço</th>
+												<th style="width:70px">Link</th>
+											</tr>
+										</thead>
+										<tbody>												<tr>
+													<td>1º Seletivo DER-RO 2016 Edital 001/DER-RO 30/05/2016 <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://seletivo.der.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>2º Seletivo DER-RO 2016 Edital 002/DER-RO 10/06/2016 <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://si.der.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Alvará provisório (município de Porto Velho) <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/?pEncPastaId=kMpCnYfzD5Rn_9epCJV1OnI_YDY_wK2rZ4fg6dOHdG5iRtyoNZ4FCOTSypanAdnhhmHY4gpUvqh_CHYrsm9Tsx_IeK9q7Nh15m4k_n_hN1I3QU4L#!" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Capa de Processo <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://rondonia.ro.gov.br/wp-content/uploads/2014/07/capa-de-processo.doc" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Certidão de inteiro teor – cópia de documento registrado <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/?pEncPastaId=kMpCnYfzD5Rn_9epCJV1OnI_YDY_wK2rZ4fg6dOHdG5iRtyoNZ4FCOTSypanAdnhhmHY4gpUvqh_CHYrsm9Tsx_IeK9q7Nh15m4k_n_hN1I3QU4L#!" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Certidão específica <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/?pEncPastaId=kMpCnYfzD5Rn_9epCJV1OnI_YDY_wK2rZ4fg6dOHdG5iRtyoNZ4FCOTSypanAdnhhmHY4gpUvqh_CHYrsm9Tsx_IeK9q7Nh15m4k_n_hN1I3QU4L#!" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Certidão simplificada <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/?pEncPastaId=kMpCnYfzD5Rn_9epCJV1OnI_YDY_wK2rZ4fg6dOHdG5iRtyoNZ4FCOTSypanAdnhhmHY4gpUvqh_CHYrsm9Tsx_IeK9q7Nh15m4k_n_hN1I3QU4L#!" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Checklist <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://rondonia.ro.gov.br/wp-content/uploads/2015/09/Checklists-JUCER.pdf" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>CNPJ <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://www16.receita.fazenda.gov.br/Cadsinc/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Comunicação de funcionamento <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/?pEncPastaId=kMpCnYfzD5Rn_9epCJV1OnI_YDY_wK2rZ4fg6dOHdG5iRtyoNZ4FCOTSypanAdnhhmHY4gpUvqh_CHYrsm9Tsx_IeK9q7Nh15m4k_n_hN1I3QU4L#!" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Comunicação de paralisação temporária de atividades <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/?pEncPastaId=kMpCnYfzD5Rn_9epCJV1OnI_YDY_wK2rZ4fg6dOHdG5iRtyoNZ4FCOTSypanAdnhhmHY4gpUvqh_CHYrsm9Tsx_IeK9q7Nh15m4k_n_hN1I3QU4L#!" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Consulta Internamento de Notas Fiscais <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://www.portal.sefin.ro.gov.br/site/nota-embaraco.action" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Consulta Pagamento de DARE <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://portal.intranet.sefin.ro.gov.br/PortalContribuinte/Publico/consultaPagamentoDare.jsp" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Consulta REDESIM Estadual <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://portal.intranet.sefin.ro.gov.br/PortalContribuinte/Publico/parametropublica.jsp" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Consulta SINTEGRA <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://www.sintegra.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>DataGeo <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="https://www.google.com/maps/d/viewer?mid=1j7ognnElQUNtyn0uIyafwzuV7ZM&amp;ll=-10.843987432337787%2C-62.90203828749998&amp;z=7" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Declarações de ME/EPP <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.drei.smpe.gov.br/dnrc/form" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Documento de Arrecadação de Receitas Estaduais – DARE <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/?pEncPastaId=kMpCnYfzD5Rn_9epCJV1OnI_YDY_wK2rZ4fg6dOHdG5iRtyoNZ4FCOTSypanAdnhhmHY4gpUvqh_CHYrsm9Tsx_IeK9q7Nh15m4k_n_hN1I3QU4L" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Documento de Arrecadação de Receitas Federais – DARF <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/?pEncPastaId=kMpCnYfzD5Rn_9epCJV1OnI_YDY_wK2rZ4fg6dOHdG5iRtyoNZ4FCOTSypanAdnhhmHY4gpUvqh_CHYrsm9Tsx_IeK9q7Nh15m4k_n_hN1I3QU4L" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Ficha de cadastro nacional de empresas – FCN 1 <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://rondonia.ro.gov.br/wp-content/uploads/2015/09/FCN_Folha_1.doc" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Ficha de cadastro nacional de empresas – FCN 2 <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://rondonia.ro.gov.br/wp-content/uploads/2015/09/FCN_Folha_2.doc" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Impressão de DARE <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://www.portal.sefin.ro.gov.br/site/click!go.action?type=category&amp;id=96" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Inscrição Estadual <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/?pEncPastaId=kMpCnYfzD5Rn_9epCJV1OnI_YDY_wK2rZ4fg6dOHdG5iRtyoNZ4FCOTSypanAdnhhmHY4gpUvqh_CHYrsm9Tsx_IeK9q7Nh15m4k_n_hN1I3QU4L#!" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Livro digital <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/?pEncPastaId=kMpCnYfzD5Rn_9epCJV1OnI_YDY_wK2rZ4fg6dOHdG5iRtyoNZ4FCOTSypanAdnhhmHY4gpUvqh_CHYrsm9Tsx_IeK9q7Nh15m4k_n_hN1I3QU4L#!" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Livro mercantil <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/?pEncPastaId=kMpCnYfzD5Rn_9epCJV1OnI_YDY_wK2rZ4fg6dOHdG5iRtyoNZ4FCOTSypanAdnhhmHY4gpUvqh_CHYrsm9Tsx_IeK9q7Nh15m4k_n_hN1I3QU4L#!" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Pedido de restituição <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/?pEncPastaId=kMpCnYfzD5Rn_9epCJV1OnI_YDY_wK2rZ4fg6dOHdG5iRtyoNZ4FCOTSypanAdnhhmHY4gpUvqh_CHYrsm9Tsx_IeK9q7Nh15m4k_n_hN1I3QU4L#!" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Pesquisa CNAE (Classificação Nacional de Atividades Econômicas) <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/?pEncPastaId=kMpCnYfzD5Rn_9epCJV1OnI_YDY_wK2rZ4fg6dOHdG5iRtyoNZ4FCOTSypanAdnhhmHY4gpUvqh_CHYrsm9Tsx_IeK9q7Nh15m4k_n_hN1I3QU4L#!" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Pesquisa de Processo <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://www.sedam.ro.gov.br/pesquisar-processo/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Plano anual de manutenção de Rodovias 2016 (MAPAS) <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="https://www.google.com/maps/d/viewer?mid=1hPnkz1Bpfj6H6ovG1NcS_KzQYNY" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Portal de serviços <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="#.http://portalservicos.jucer.ro.gov.br/Portal/login.jsp?josso_back_to=http://portalservicos.jucer.ro.gov.br/Potal/josso_security_check/ERROR" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Protocolo Online - Empresa Fácil <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://www.empresafacil.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Registro de balanço <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/?pEncPastaId=kMpCnYfzD5Rn_9epCJV1OnI_YDY_wK2rZ4fg6dOHdG5iRtyoNZ4FCOTSypanAdnhhmHY4gpUvqh_CHYrsm9Tsx_IeK9q7Nh15m4k_n_hN1I3QU4L" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Requerimento de Empresário <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://rondonia.ro.gov.br/wp-content/uploads/2015/09/Requerimento-de-Empresario.doc" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SIAGEO <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://www.amazonia.cnptia.embrapa.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SIC - Sistema de Informações Cadastrais - Empresa (SINAD) <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://sic.certidao.der.ro.gov.br/Default.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Sistema Cadastro Digital de Obras (MAPAS) - Em andamento <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="https://www.google.com/maps/d/viewer?mid=1G_b8glPMWlEB-7T38rL33W6vMGI" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Sistema de Fiscalização do Comércio de Agrotóxico - Siafro <small style="color:#999"> - IDARON</small></td>
+													<td><a class="azul" href="http://192.168.155.27/SIAFRO/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Transparência da EpR Contratos e Convênios <small style="color:#999"> - SETIC</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/ContratoConvenio" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Via Postal <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="http://www.transparencia.ro.gov.br/?pEncPastaId=kMpCnYfzD5Rn_9epCJV1OnI_YDY_wK2rZ4fg6dOHdG5iRtyoNZ4FCOTSypanAdnhhmHY4gpUvqh_CHYrsm9Tsx_IeK9q7Nh15m4k_n_hN1I3QU4L" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Zoneamento Socioeconômico e Ecológico do Estado de Rondônia - ZSEE <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://www.sedam.ro.gov.br/zsee/zsee_index.html" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>										</tbody>
+									</table>						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal">Fechar</button>
+				</div>
+			</div>			<div id="modal-servicos-intranet" class="modal servicos hide fade">
+				<div class="modal-header">
+					<h3 class="pt-sans-narrow">
+						Serviços - Intranet						<input class="visible-desktop input-small pull-right search-table" type="text" placeholder="Busca..">
+					</h3>
+				</div>
+				<div class="modal-body">					<ul class="nav nav-tabs mb10">						<li class="active"><a href="#todos-intranet" data-toggle="tab">Todos</a></li>
+					</ul>
+					<div class="tab-content">						<div class="tab-pane fade in active" id="todos-intranet">									<table class="table table-condensed search-this-table m0">
+										<thead>
+											<tr>
+												<th>Serviço</th>
+												<th style="width:70px">Link</th>
+											</tr>
+										</thead>
+										<tbody>												<tr>
+													<td>1º Seletivo DER-RO 2016 Edital 001/DER-RO 30/05/2016 <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://seletivo.der.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>2º Seletivo DER-RO 2016 Edital 002/DER-RO 10/06/2016 <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://si.der.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Chamado Técnico <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://abertura-chamado.sedam.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Contra-cheque <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://contracheque.sistemas.ro.gov.br/AcessoServicos.aspx?ReturnUrl=%2fServicos.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Contracheque <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://sead.sefin.ro.gov.br/AcessoServicos.aspx?ReturnUrl=%2fServicos.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>DataGeo <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="https://www.google.com/maps/d/viewer?mid=1j7ognnElQUNtyn0uIyafwzuV7ZM&amp;ll=-10.843987432337787%2C-62.90203828749998&amp;z=7" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Emissao/Validação - Certidão Nada Consta Servidor DER-RO <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://certidao.der.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Intranet <small style="color:#999"> - IDARON</small></td>
+													<td><a class="azul" href="http://192.168.155.26/portalservidor/visao_inicio.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Plano anual de manutenção de Rodovias 2016 (MAPAS) <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="https://www.google.com/maps/d/viewer?mid=1hPnkz1Bpfj6H6ovG1NcS_KzQYNY" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Protocolo Web <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://protocolo.intranet.ro.gov.br/Account/Login.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SEI - Sistema Eletrônico de Informações <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="https://sei.sistemas.ro.gov.br/sip/login.php?sigla_orgao_sistema=ABC&amp;sigla_sistema=SEI" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SIAOF <small style="color:#999"> - SEPOG</small></td>
+													<td><a class="azul" href="http://siaof.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SIGATER <small style="color:#999"> - EMATER</small></td>
+													<td><a class="azul" href="http://sigater.emater.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SIGLAM <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://siglam.sedam.ro.gov.br/siglam/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Sistema Cadastro Digital de Obras (MAPAS) - Em andamento <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="https://www.google.com/maps/d/viewer?mid=1G_b8glPMWlEB-7T38rL33W6vMGI" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Webmail <small style="color:#999"> - CAERD</small></td>
+													<td><a class="azul" href="http://webmail.caerd-ro.com.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Webmail <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://webmail.detic.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Webmail <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="https://webmail.sedam.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>										</tbody>
+									</table>						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal">Fechar</button>
+				</div>
+			</div>			<div id="modal-servicos-servidor-publico" class="modal servicos hide fade">
+				<div class="modal-header">
+					<h3 class="pt-sans-narrow">
+						Serviços - Servidor Público						<input class="visible-desktop input-small pull-right search-table" type="text" placeholder="Busca..">
+					</h3>
+				</div>
+				<div class="modal-body">					<ul class="nav nav-tabs mb10">						<li class="active"><a href="#todos-servidor-publico" data-toggle="tab">Todos</a></li>
+					</ul>
+					<div class="tab-content">						<div class="tab-pane fade in active" id="todos-servidor-publico">									<table class="table table-condensed search-this-table m0">
+										<thead>
+											<tr>
+												<th>Serviço</th>
+												<th style="width:70px">Link</th>
+											</tr>
+										</thead>
+										<tbody>												<tr>
+													<td>1º Seletivo DER-RO 2016 Edital 001/DER-RO 30/05/2016 <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://seletivo.der.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>2º Seletivo DER-RO 2016 Edital 002/DER-RO 10/06/2016 <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://si.der.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Cédula C <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="https://contracheque.sistemas.ro.gov.br/AcessoServicos.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Cédula C <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="https://contracheque.sistemas.ro.gov.br/AcessoServicos.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Consulta Pública de Processos <small style="color:#999"> - IDARON</small></td>
+													<td><a class="azul" href="http://consulta.protocolo.intranet.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Consulta SINTEGRA <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://www.sintegra.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Contra Cheque <small style="color:#999"> - </small></td>
+													<td><a class="azul" href="http://sead.sefin.ro.gov.br/AcessoServicos.aspx?ReturnUrl=%2fServicos.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Contra Cheque <small style="color:#999"> - SESDEC</small></td>
+													<td><a class="azul" href="http://sead.sefin.ro.gov.br/AcessoServicos.aspx?ReturnUrl=%2fServicos.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Contra Cheque <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://sead.sefin.ro.gov.br/AcessoServicos.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Contra-cheque <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://sead.sefin.ro.gov.br/AcessoServicos.aspx?ReturnUrl=%2fServicos.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Contracheque <small style="color:#999"> - IDARON</small></td>
+													<td><a class="azul" href="http://sead.sefin.ro.gov.br/AcessoServicos.aspx?ReturnUrl=%2fServicos.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Contracheque <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://sead.sefin.ro.gov.br/AcessoServicos.aspx?ReturnUrl=%2fServicos.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Controle de Tramitação <small style="color:#999"> - PGE</small></td>
+													<td><a class="azul" href="http://hermes.pge.ro.gov.br/users/sign_in" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>CSTI <small style="color:#999"> - </small></td>
+													<td><a class="azul" href="http://csti.deti.ro.gov.br/csti/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Declaração que tem vínculo empregatício <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://rondonia.ro.gov.br/wp-content/uploads/2015/05/DECLARAÇÃO-QUE-TEM-VÍNCULO-EMPREGATICIO.doc" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Despacho de Viaturas - PM <small style="color:#999"> - SESDEC</small></td>
+													<td><a class="azul" href="http://187.53.61.64/NetDispatcher" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Emissao/Validação - Certidão Nada Consta Servidor DER-RO <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://certidao.der.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Expresso Livre Webmail <small style="color:#999"> - </small></td>
+													<td><a class="azul" href="https://expresso.ro.gov.br/login.php" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Ficha Financeira <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://sead.sefin.ro.gov.br/AcessoServicos.aspx?ReturnUrl=%2fServicos.aspx" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Formulário Inconsistência <small style="color:#999"> - CAERD</small></td>
+													<td><a class="azul" href="http://www.caerd-ro.com.br/formulario-inconsistencia.php" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Guia Prático de Redação DER-RO 2017 <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="https://rondonia.ro.gov.br/publicacao/manual-de-redacao-der-ro/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Modelo AVAC <small style="color:#999"> - CAERD</small></td>
+													<td><a class="azul" href="http://www.caerd-ro.com.br/modelo-de-avac.php" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Morada Nova <small style="color:#999"> - SEAS</small></td>
+													<td><a class="azul" href="http://moradanova.sistemas.nro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Observatorio <small style="color:#999"> - SESDEC</small></td>
+													<td><a class="azul" href="http://187.53.61.51/services" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Ordem de Serviço <small style="color:#999"> - SESAU</small></td>
+													<td><a class="azul" href="http://castanheira.sesau.ro.gov.br/osweb/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Ordem de Serviço <small style="color:#999"> - </small></td>
+													<td><a class="azul" href="http://csti.deti.ro.gov.br/os/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Plano anual de manutenção de Rodovias 2016 (MAPAS) <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="https://www.google.com/maps/d/viewer?mid=1hPnkz1Bpfj6H6ovG1NcS_KzQYNY" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Portal do Contribuinte <small style="color:#999"> - </small></td>
+													<td><a class="azul" href="http://portal.intranet.sefin.ro.gov.br/PortalContribuinte/login.jsp" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Portal do Servidor <small style="color:#999"> - SEDAM</small></td>
+													<td><a class="azul" href="http://portaldoservidor.sistemas.ro.gov.br/Autenticacao/Login" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Protocolo Web <small style="color:#999"> - </small></td>
+													<td><a class="azul" href="http://protocolo.sistemas.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Recadastramento Iperon <small style="color:#999"> - IPERON</small></td>
+													<td><a class="azul" href="http://recadastramento.iperon.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Regimento Interno <small style="color:#999"> - CAERD</small></td>
+													<td><a class="azul" href="http://www.caerd-ro.com.br/codigo-de-etica.php" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Requerimento para licença médica <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://rondonia.ro.gov.br/wp-content/uploads/2015/05/REQUERIMENTO-PARA-LICENÇA-MÉDICA.doc" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Requerimento para solicitações <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://rondonia.ro.gov.br/wp-content/uploads/2015/03/Requerimento-Padr%C3%A3o-1.pdf" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>S-Mobile <small style="color:#999"> - SESDEC</small></td>
+													<td><a class="azul" href="http://10.0.200.244/Smobile/login.aspx?ReturnUrl=%2fSMobile" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Serviços de tecnologia (abrir chamado) <small style="color:#999"> - SETIC</small></td>
+													<td><a class="azul" href="https://atendimento.detic.ro.gov.br/index.php?noAUTO=1" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SGPP <small style="color:#999"> - </small></td>
+													<td><a class="azul" href="http://sgpp.deti.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SIAD <small style="color:#999"> - SESAU</small></td>
+													<td><a class="azul" href="https://castanheira.sesau.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SIGECON <small style="color:#999"> - SEPOG</small></td>
+													<td><a class="azul" href="http://sigecon.sepog.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SIPLAG <small style="color:#999"> - SEPOG</small></td>
+													<td><a class="azul" href="http://siplag.sepog.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SISPAR <small style="color:#999"> - </small></td>
+													<td><a class="azul" href="http://sispar.sistemas.ro.gov.br/ " target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Sistema Cadastro Digital de Obras (MAPAS) - Em andamento <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="https://www.google.com/maps/d/viewer?mid=1G_b8glPMWlEB-7T38rL33W6vMGI" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Sistema de Patrimônio <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="http://intranet.der.ro.gov.br/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SITAFE Web <small style="color:#999"> - SEGEP</small></td>
+													<td><a class="azul" href="http://www.portal.sefin.ro.gov.br/SitafeWeb/login.action" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Solicitação de estagiário <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://rondonia.ro.gov.br/wp-content/uploads/2015/05/SOLICITAÇÃO-DE-ESTAGIÁRIOS.xls" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Solicitação de veículos <small style="color:#999"> - CAERD</small></td>
+													<td><a class="azul" href="http://www.caerd-ro.com.br/solicitacao-de-veiculos.php" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>SPP <small style="color:#999"> - </small></td>
+													<td><a class="azul" href="http://spp.deti.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Termo aditivo de estagiário <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://rondonia.ro.gov.br/wp-content/uploads/2015/05/TERMO-ADITIVO-DE-ESTAGIÁRIO.xls" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Termo de concessão de recesso de estágio <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://rondonia.ro.gov.br/wp-content/uploads/2015/05/TERMO-DE-CONCESSÃO-DE-RECESSO-DE-ESTÁGIO.doc" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Termo de desligamento de estagiário <small style="color:#999"> - JUCER</small></td>
+													<td><a class="azul" href="https://rondonia.ro.gov.br/wp-content/uploads/2015/05/TERMO-DE-DESLIGAMENTO-DE-ESTAGIÁRIO.xls" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Webmail <small style="color:#999"> - IDARON</small></td>
+													<td><a class="azul" href="http://webmail.ro.gov.br/webmail/" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>Webmail <small style="color:#999"> - SEPOG</small></td>
+													<td><a class="azul" href="http://webmail.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>												<tr>
+													<td>WebMail - Expresso Livre <small style="color:#999"> - DER</small></td>
+													<td><a class="azul" href="https://expresso.deti.ro.gov.br" target="_blank"><i class="icon icon-arrow-right"></i> Abrir</a></td>
+												</tr>										</tbody>
+									</table>						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal">Fechar</button>
+				</div>
+			</div>	<h5 class="azul m0 pt-sans-narrow">Palácio Rio Madeira</h5> 	<div class="container-barra-titulo">
+		<div class="barra-titulo azul"></div>
+	</div><p class="m0 mt10"><small>Atendimento ao público: das 7h30 às 13h30, de segunda a sexta-feira</small></p>					<!-- /Serviços -->
+
+				</div>
+
+			</div>
+			<!-- /Sidebar -->
+		</div>
+	</div>
+</section>
+
+
+	<div class="container hidden-print">
+		<div class="row">
+			<div class="span12">
+				<hr style="margin-top:1.2em">
+			</div>
+		</div>
+	</div>	<!-- Mídias Sociais -->	<!-- /Mídias Sociais -->
+
+	<!-- Banners -->
+	<div class="container-fluid"><div class="container"><div class="row" style="display:flex; flex-wrap:wrap; justify-content: center;"><div class="span2 mt10" style="width:170px">							<div class="thumbnail">								<a class="banner"  href="https://rondonia.ro.gov.br/wp-content/uploads/2019/09/Book-Rondonia-V12.pdf">
+									<img src="https://rondonia.ro.gov.br/wp-content/uploads/2019/09/RODAPE-BANNER-PLANO-ESTRATEGICO-1.png" alt="Banner" style="width: 100%;">
+								</a>
+							</div></div><div class="span2 mt10" style="width:170px">							<div class="thumbnail">								<a class="banner" target="_blank" href="http://observatorio.sepog.ro.gov.br/">
+									<img src="https://rondonia.ro.gov.br/wp-content/uploads/2019/07/logo.gob_.redm_.png" alt="Banner" style="width: 100%;">
+								</a>
+							</div></div><div class="span2 mt10" style="width:170px">							<div class="thumbnail">								<a class="banner" target="_blank" href="http://transparencia.ro.gov.br/">
+									<img src="https://rondonia.ro.gov.br/wp-content/uploads/2014/11/transparencia-170-110.jpg" alt="Banner" style="width: 100%;">
+								</a>
+							</div></div><div class="span2 mt10" style="width:170px">							<div class="thumbnail">								<a class="banner" target="_blank" href="http://www.sistemas.ro.gov.br/">
+									<img src="https://rondonia.ro.gov.br/wp-content/uploads/2014/11/sistemas-170-110.jpg" alt="Banner" style="width: 100%;">
+								</a>
+							</div></div><div class="span2 mt10" style="width:170px">							<div class="thumbnail">								<a class="banner" target="_blank" href="http://sispar.sistemas.ro.gov.br/">
+									<img src="https://rondonia.ro.gov.br/wp-content/uploads/2019/11/BI-05-170x110.png" alt="Banner" style="width: 100%;">
+								</a>
+							</div></div><div class="span2 mt10" style="width:170px">							<div class="thumbnail">								<a class="banner" target="_blank" href="https://rondonia.ro.gov.br/ouvidoria/institucional/faca-a-sua-manifestacao/">
+									<img src="https://rondonia.ro.gov.br/wp-content/uploads/2019/07/Rodape-01.png" alt="Banner" style="width: 100%;">
+								</a>
+							</div></div></div></div></div>	<!-- /Banners -->
+
+	<!-- Rodapé -->
+	<footer class="container-fluid hidden-print">
+		<div class="container">
+			<div class="row acessibilidade pt-sans-narrow">
+				<!-- Menu Portal -->
+				<div class="span6">
+					<ul id="menu-portal-rodape" class="menu-global-rodape m0"><li id="menu-item-1731" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1731"><a href="https://rondonia.ro.gov.br/">Portal</a></li>
+<li id="menu-item-1732" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1732"><a href="https://rondonia.ro.gov.br/portal/programas/">Programas</a></li>
+<li id="menu-item-1735" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1735"><a href="https://rondonia.ro.gov.br/portal/publicacoes/">Publicações</a></li>
+<li id="menu-item-1734" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1734"><a href="https://rondonia.ro.gov.br/portal/noticias/">Notícias</a></li>
+<li id="menu-item-37814" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-37814"><a href="https://rondonia.ro.gov.br/portal/telefones-voip/">Telefones Voip</a></li>
+<li id="menu-item-1733" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1733"><a href="https://rondonia.ro.gov.br/portal/contato/">Contato</a></li>
+</ul>				</div>
+				<!-- /Menu Portal -->
+				<!-- Menu Acessibilidade -->
+				<div class="span6">
+					<ul class="acessibilidade pull-right visible-desktop visible-tablet">
+						<!-- <li><a href="#"><i class="icon icon-font"></i></a></li>
+						<li><a href="#">+<i class="icon icon-font"></i></a></li>
+						<li><a href="#"><i class="icon icon-print"></i> Imprimir</a></li>
+						<li><a href="#"><i class="icon icon-sitemap"></i> Mapa do Site</a></li> -->
+						<!-- <li><a href="#"><i class="icon icon-question-circle"></i> Ajuda</a></li> -->
+						<li><a href="http://antigo.rondonia.ro.gov.br" target="_blank"><i class="icon icon-globe"></i> Portal Antigo</a></li>
+					</ul>
+				</div>
+				<!-- Menu Acessibilidade -->
+			</div>
+			<div class="row principal">
+				<!-- Logo -->
+				<div class="span1 mt10">
+					<a href="https://rondonia.ro.gov.br">
+						<img src="http://img.sistemas.ro.gov.br/portal/brasao-rondonia.png" alt="Governo do Estado de Rondônia">
+					</a>
+				</div>
+				<!-- /Logo -->
+				<!-- Nome Entidade -->
+				<div class="span11 pt-sans-narrow visible-desktop">
+					<h3>
+						<a href="https://rondonia.ro.gov.br">
+							<small>Portal do Governo do</small><br><b>Estado de Rondônia</b>
+						</a>
+					</h3>
+				</div>
+				<!-- /Nome Entidade -->
+			</div>
+			<div class="row copyright">
+				<!-- Endereço -->
+				<div class="span6">
+					<b>Palácio Rio Madeira</b> - Av. Farquar, 2986 - Bairro Pedrinhas<br>
+					CEP 76.801-470 - Porto Velho, RO
+				</div>
+				<!-- /Endereço -->
+				<!-- Copyright -->
+				<div class="span6 text-right visible-desktop">
+					&copy; 2022 <b>Governo do Estado de Rondônia</b><br>
+					Todos os Direitos Reservados
+				</div>
+				<!-- /Copyright -->
+			</div>
+		</div>
+	</footer>
+	<!-- /Rodapé -->
+
+	<!-- Scripts -->
+	<script type='text/javascript' src='https://js.sistemas.ro.gov.br/all.min.js' id='js-all-js'></script>
+<script type='text/javascript' src='https://js.sistemas.ro.gov.br/portal.qa.js' id='js-portal-js'></script>
+<script type='text/javascript' src='https://rondonia.ro.gov.br/wp-includes/js/wp-embed.js?ver=5.8.2' id='wp-embed-js'></script>
+	<script type="text/javascript">
+		// Data Table
+		!function ($) {
+			$(function() {
+								$("header.portal .row.global > ul").lavaLamp({
+					padding: 6,
+					height: "4px",
+					autoFirst: true,
+					placement: "bottom",
+					activeClass: "active",
+					coordPlacement: "-3px",
+					background: "url(http://img.sistemas.ro.gov.br/portal/bg-lavalamp.png) transparent no-repeat bottom center"
+				});
+
+				$("header.entidade .entidade-nav > div > ul").lavaLamp({
+					padding: 5,
+					height: "4px",
+					autoFirst: true,
+					placement: "bottom",
+					activeClass: "active",
+					coordPlacement: "0px",
+					background: "url(http://img.sistemas.ro.gov.br/portal/bg-lavalamp-entidade.png) transparent no-repeat bottom center"
+				});
+
+				$(".row.global nav li:not(.lava-lamp), .entidade-nav > div > ul > li:not(.lava-lamp)").last().css("border", "none");
+			});
+		}(window.jQuery);
+
+		// Analytics Google
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-49242991-1', 'ro.gov.br');
+		ga('send', 'pageview');
+
+		// Facebook plugin
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '325964054281248',
+				xfbml      : true,
+				version    : 'v2.2'
+			});
+		};
+		(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+
+		// Lauch Modal
+		$(window).on('load',function(){
+			$('#myModal').modal('show');
+		});
+
+		$('.entry span[id*="more-"]').parent('p').css('clear', 'both');
+	</script>
+	<!-- /Scripts -->
+
+</body>
+</html>
