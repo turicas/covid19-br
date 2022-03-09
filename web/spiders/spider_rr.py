@@ -13,9 +13,13 @@ class Covid19RRSpider(BaseCovid19Spider):
     def parse(self, response):
         date = response.body_as_unicode().split("Atualizado em")[1].split()[0]
         day, month, year = date.split("/")
-        self.add_report(date=datetime.date(int(year), int(month), int(day)), url=self.start_urls[0])
+        self.add_report(
+            date=datetime.date(int(year), int(month), int(day)), url=self.start_urls[0]
+        )
 
-        table = rows.import_from_html(io.BytesIO(response.body), encoding=response.encoding)
+        table = rows.import_from_html(
+            io.BytesIO(response.body), encoding=response.encoding
+        )
         for row in table:
             if (row.confirmados, row.obitos) == (None, None):
                 continue

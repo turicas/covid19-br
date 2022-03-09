@@ -17,7 +17,10 @@ POPULATION_SCHEMA_PATH = SCHEMA_PATH / "populacao-por-municipio.csv"
 
 @lru_cache(maxsize=2)
 def cities(year):
-    table = rows.import_from_csv(POPULATION_DATA_PATH[year], force_types=load_schema(str(POPULATION_SCHEMA_PATH)),)
+    table = rows.import_from_csv(
+        POPULATION_DATA_PATH[year],
+        force_types=load_schema(str(POPULATION_SCHEMA_PATH)),
+    )
     cities = defaultdict(dict)
     for row in table:
         cities[row.state][row.city] = row

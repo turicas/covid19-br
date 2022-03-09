@@ -7,7 +7,7 @@ docker-build:
 	docker image build -t covid19-br .
 
 docker-run-spiders:
-	docker container run --rm --name covid19-br --volume $(PWD)/data/output:/app/data/output covid19-br ./run-spiders.sh
+	docker container run --rm --name covid19-br -v $(PWD)/data:/app/data covid19-br python covid19br/run_spider.py
 
 docker-run: docker-build
 	docker container run --rm --name covid19-br --volume $(PWD)/data/output:/app/data/output covid19-br ./run.sh

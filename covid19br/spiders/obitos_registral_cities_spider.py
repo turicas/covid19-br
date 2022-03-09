@@ -11,7 +11,9 @@ from rows.date.utils import today
 class DeathsSpider(scrapy.Spider):
     name = "obitos_registral_cities"
     cities_url = "https://transparencia.registrocivil.org.br/api/covid-cities"
-    registral_url = "https://transparencia.registrocivil.org.br/api/covid-covid-registral"
+    registral_url = (
+        "https://transparencia.registrocivil.org.br/api/covid-covid-registral"
+    )
 
     causes_map = {
         "sars": "SRAG",
@@ -34,7 +36,11 @@ class DeathsSpider(scrapy.Spider):
         )
 
     def make_registral_request(
-        self, city, ep_week, callback, dont_cache=False,
+        self,
+        city,
+        ep_week,
+        callback,
+        dont_cache=False,
     ):
         # TODO: get start/end date from ep_week
         # TODO: rename ep_week to epiweek
@@ -47,11 +53,18 @@ class DeathsSpider(scrapy.Spider):
         return scrapy.Request(
             url=urljoin(self.registral_url, "?" + urlencode(data)),
             callback=callback,
-            meta={"row": data, "city_name": city["nome"], "ep_week": ep_week, "dont_cache": dont_cache,},
+            meta={
+                "row": data,
+                "city_name": city["nome"],
+                "ep_week": ep_week,
+                "dont_cache": dont_cache,
+            },
         )
 
     def start_requests(self):
-        yield self.make_cities_request(total=100, callback=self.parse_cities_request, dont_cache=False)
+        yield self.make_cities_request(
+            total=100, callback=self.parse_cities_request, dont_cache=False
+        )
 
     def parse_cities_request(self, response):
         cities = json.loads(response.body)
@@ -72,7 +85,10 @@ class DeathsSpider(scrapy.Spider):
                     # Cache more than 4 weeks ago
                     should_cache = (current_week.week - weeknum) > 4
                     yield self.make_registral_request(
-                        city=city, ep_week=ep_week, callback=self.parse_registral_request, dont_cache=not should_cache,
+                        city=city,
+                        ep_week=ep_week,
+                        callback=self.parse_registral_request,
+                        dont_cache=not should_cache,
                     )
 
     def add_causes(self, row, data):

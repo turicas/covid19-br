@@ -5,8 +5,8 @@ import rows
 
 from . import demographics
 
-
 NULL = (None, "")
+
 
 def extract_boletim(state, data):
     table = rows.import_from_dicts(
@@ -79,8 +79,12 @@ def extract_caso(state, data):
             }
             confirmed = row["confirmed"]
             deaths = row["deaths"]
-            if (confirmed in NULL and deaths not in NULL) or (deaths in NULL and confirmed not in NULL):
-                message = f"ERROR: only one field is filled for {date_str}, {state}, {city}"
+            if (confirmed in NULL and deaths not in NULL) or (
+                deaths in NULL and confirmed not in NULL
+            ):
+                message = (
+                    f"ERROR: only one field is filled for {date_str}, {state}, {city}"
+                )
                 raise ValueError(message)
             result.append(row)
 
@@ -103,8 +107,12 @@ def extract_caso(state, data):
                 row_city_code = None
             else:
                 row_city_code = demographics.city_code(row["state"], row["city"])
-                row_population_2019 = demographics.city_population(row["state"], row["city"], year=2019)
-                row_population_2020 = demographics.city_population(row["state"], row["city"], year=2020)
+                row_population_2019 = demographics.city_population(
+                    row["state"], row["city"], year=2019
+                )
+                row_population_2020 = demographics.city_population(
+                    row["state"], row["city"], year=2020
+                )
         elif row["place_type"] == "state":
             row_city_code = demographics.state_code(row["state"])
             row_population_2019 = demographics.state_population(row["state"], year=2019)
@@ -115,12 +123,20 @@ def extract_caso(state, data):
         row_deaths = row["deaths"]
         row_confirmed = row["confirmed"]
         confirmed_per_100k = (
-            100_000 * (row_confirmed / row_population_2020) if row_confirmed and row_population_2020 else None
+            100_000 * (row_confirmed / row_population_2020)
+            if row_confirmed and row_population_2020
+            else None
         )
-        death_rate = row_deaths / row_confirmed if row_deaths is not None and row_confirmed not in (None, 0) else 0
+        death_rate = (
+            row_deaths / row_confirmed
+            if row_deaths is not None and row_confirmed not in (None, 0)
+            else 0
+        )
         row["estimated_population_2019"] = row_population_2019
         row["estimated_population"] = row_population_2020
         row["city_ibge_code"] = row_city_code
-        row["confirmed_per_100k_inhabitants"] = f"{confirmed_per_100k:.5f}" if confirmed_per_100k else None
+        row["confirmed_per_100k_inhabitants"] = (
+            f"{confirmed_per_100k:.5f}" if confirmed_per_100k else None
+        )
         row["death_rate"] = f"{death_rate:.4f}"
         yield row

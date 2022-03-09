@@ -15,7 +15,9 @@ class TotalDeathsSpider(BaseRegistroCivilSpider):
     start_date = datetime.date(2015, 1, 1)
     end_date = today()
 
-    def make_state_request(self, start_date, end_date, state, callback, dont_cache=False):
+    def make_state_request(
+        self, start_date, end_date, state, callback, dont_cache=False
+    ):
         data = [
             ("start_date", str(start_date)),
             ("end_date", str(end_date)),

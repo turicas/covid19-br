@@ -13,4 +13,6 @@ COPY requirements-development.txt .
 RUN pip install --no-cache-dir -U pip \
     && pip install --no-cache-dir -r requirements-development.txt
 
+COPY . .
+
 VOLUME [ "/app" ]

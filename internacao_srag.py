@@ -1,4 +1,3 @@
-import argparse
 import csv
 from pathlib import Path
 
@@ -7,7 +6,6 @@ import rows
 from tqdm import tqdm
 
 from covid19br.vacinacao import calculate_age_range
-
 
 CKAN_URL = "https://opendatasus.saude.gov.br/"
 SRAG_DATASETS = (
@@ -87,7 +85,10 @@ def convert_row(row):
     new["dias_internacao_a_alta"] = diff_days
 
     diff_days = None
-    if new["classi_fin"] == "5" and None not in (new.get("dose_2_cov"), new["dt_sin_pri"]):
+    if new["classi_fin"] == "5" and None not in (
+        new.get("dose_2_cov"),
+        new["dt_sin_pri"],
+    ):
         diff_days = (new["dt_sin_pri"] - new["dose_2_cov"]).days
     new["dias_primeiros_sintomas_a_2a_dose"] = diff_days
 

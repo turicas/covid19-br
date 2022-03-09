@@ -71,7 +71,9 @@ class COVID19Spreadsheet:
             row = dict(zip(header, row))
             for key, value in row.items():
                 if "_percent" in key:
-                    row[key] = rows.fields.PercentField.deserialize(value.replace(",", "."))
+                    row[key] = rows.fields.PercentField.deserialize(
+                        value.replace(",", ".")
+                    )
                 elif key.endswith("_date") or "_data_" in key:
                     row[key] = rows.fields.DateField.deserialize(value)
                 elif (
@@ -153,7 +155,9 @@ def file_metadata(filename, chunk_size=8 * 1024 * 1024):
         total_bytes = progress.n
 
     new_lines = 0
-    with open_compressed(filename, mode="rb") as fobj, tqdm(unit_scale=True, unit="B") as progress:
+    with open_compressed(filename, mode="rb") as fobj, tqdm(
+        unit_scale=True, unit="B"
+    ) as progress:
         finished = False
         finish_with_new_line = False
         while not finished:
@@ -190,7 +194,9 @@ def main():
         state_data = spreadsheet.state_data
         total_confirmed = sum(row["confirmed"] for row in state_data)
         total_deaths = sum(row["deaths"] for row in state_data)
-        all_bulletins_published_today = set(row["data_boletim"] for row in state_data) == {str(today)}
+        all_bulletins_published_today = set(
+            row["data_boletim"] for row in state_data
+        ) == {str(today)}
         if all_bulletins_published_today:
             missing_bulletins_text = [
                 "* Hoje todas as secretarias estaduais publicaram boletins! o/",
@@ -209,7 +215,9 @@ def main():
                 elif ms == "parcial":
                     status = "atualização parcial"
                 else:
-                    last_date = datetime.datetime.strptime(state["data_boletim"], "%Y-%m-%d").strftime("%d/%m")
+                    last_date = datetime.datetime.strptime(
+                        state["data_boletim"], "%Y-%m-%d"
+                    ).strftime("%d/%m")
                     status = f"sem dados hoje (último: {last_date})"
                 missing_state_data[status].append(state["state"])
             total_missing = sum([len(item) for item in missing_state_data.values()])
@@ -230,7 +238,9 @@ def main():
         diff_states.sort(key=lambda row: row["novas_mortes_percent"], reverse=True)
         for state in diff_states[:5]:
             state_new_deaths = format_number_br(state["novas_mortes"])
-            state_new_deaths_percent = (state["novas_mortes_percent"] * 100).quantize(Decimal("0.01"))
+            state_new_deaths_percent = (state["novas_mortes_percent"] * 100).quantize(
+                Decimal("0.01")
+            )
             line = f"- {state['today_state']}: +{state_new_deaths.rjust(3)} ({format_number_br(state_new_deaths_percent)}%)"
             if state["diff_dias"] > 1:
                 line += f" -- dif. p/ {state['diff_dias']} dias"
@@ -238,7 +248,9 @@ def main():
         top_increase_confirmed = []
         diff_states.sort(key=lambda row: row["novos_casos_percent"], reverse=True)
         for state in diff_states[:5]:
-            state_new_confirmed_percent = (state["novos_casos_percent"] * 100).quantize(Decimal("0.01"))
+            state_new_confirmed_percent = (state["novos_casos_percent"] * 100).quantize(
+                Decimal("0.01")
+            )
             line = f"- {state['today_state']}: +{format_number_br(state_new_confirmed_percent)}%"
             if state["diff_dias"] > 1:
                 line += f" -- dif. p/ {state['diff_dias']} dias"
@@ -256,11 +268,13 @@ def main():
             "missing_bulletins": "\n".join(missing_bulletins_text),
         }
         context_smaller = context.copy()
-        context_smaller.update({
-            "top_increase_deaths": "\n".join(top_increase_deaths[:3]),
-            "top_increase_confirmed": "\n".join(top_increase_confirmed[:3]),
-            "missing_bulletins": "\n".join(missing_bulletins_text),
-        })
+        context_smaller.update(
+            {
+                "top_increase_deaths": "\n".join(top_increase_deaths[:3]),
+                "top_increase_confirmed": "\n".join(top_increase_confirmed[:3]),
+                "missing_bulletins": "\n".join(missing_bulletins_text),
+            }
+        )
         path = Path(__file__).parent / "templates"
         result = []
         for filename in sorted(path.glob("boletim-*.txt")):

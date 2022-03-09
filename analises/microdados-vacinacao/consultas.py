@@ -16,7 +16,10 @@ def main():
     args = parser.parse_args()
 
     if args.database_url is None:
-        print("ERROR: you must specify --database-url or set DATABASE_URL environment variable.", file=sys.stderr)
+        print(
+            "ERROR: you must specify --database-url or set DATABASE_URL environment variable.",
+            file=sys.stderr,
+        )
         exit(1)
     elif not Path(args.sql_filename).absolute().exists():
         print(f"ERROR: file {repr(args.sql_filename)} not found")
