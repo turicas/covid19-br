@@ -153,7 +153,10 @@ class RioGrandeDoNorteBulletinExtractor:
 
             city = " ".join(city_words)
             confirmed = self._separate_grouped_values(confirmed_objs[0])
-            deaths = self._separate_grouped_values(deaths_objs[0])
+            if deaths_objs:
+                deaths = self._separate_grouped_values(deaths_objs[0])
+            else:
+                deaths = None
             yield city, confirmed, deaths
 
     @staticmethod

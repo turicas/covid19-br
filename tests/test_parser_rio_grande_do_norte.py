@@ -1,10 +1,6 @@
 import csv
 from pathlib import Path
 
-import sys
-sys.path.append("/Users/appsimples/MyProjects/covid19-br")
-
-
 from covid19br.parsers.rio_grande_do_norte import RioGrandeDoNorteBulletinExtractor
 
 
@@ -28,3 +24,8 @@ def run_parser_asserts(pdf_filename):
 
 def test_01():
     run_parser_asserts(Path("tests/data/RN/RN-2022-03-11.pdf"))
+
+
+def test_02():
+    # in this case, the city "Pedra Preta" does not have any value for "deaths"
+    run_parser_asserts(Path("tests/data/RN/RN-2022-01-13.pdf"))
