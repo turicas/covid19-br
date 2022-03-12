@@ -4,7 +4,10 @@ import re
 from rows.plugins import pdf
 from rows.fields import slug
 
-from covid19br.common.data_normalization_utils import RowsPtBrIntegerField, NormalizationUtils
+from covid19br.common.data_normalization_utils import (
+    RowsPtBrIntegerField,
+    NormalizationUtils,
+)
 
 REGEXP_PTBR_DATE = re.compile("^[0-9]+ de [^ ]+ de [0-9]+$")
 
@@ -58,14 +61,18 @@ class RondoniaBulletinExtractor:
 
         doc = pdf.PyMuPDFTesseractBackend(self.filename)
         for page_number, page in enumerate(doc.pages, start=1):
-            if page_number in (3,  4):
+            if page_number in (3, 4):
                 # We won't use `merge_x` since there's no way to pass a
                 # threshold - then we need to group objects manually.
                 # NOTE: using `dpi` values different than 270 (even greater
                 # values) will make Tesseract identify some numbers as letters.
-                original_objs = doc.page_objects(page, dpi=270, lang="por", merge_x=False)
+                original_objs = doc.page_objects(
+                    page, dpi=270, lang="por", merge_x=False
+                )
                 line_height = original_objs[0].y1 - original_objs[0].y0
-                groups = pdf.group_objects("y", original_objs, threshold=-line_height / 10)
+                groups = pdf.group_objects(
+                    "y", original_objs, threshold=-line_height / 10
+                )
                 objs = []
                 for group in groups:
                     objs.extend(pdf.group_objects("y", group, check_group=check_group))
@@ -86,7 +93,11 @@ class RondoniaBulletinExtractor:
         """
         found = False
         for page_objects in self._get_pages():
-            page_text = " ".join(str(obj.text or "").strip() for obj in page_objects if str(obj.text or "").strip())
+            page_text = " ".join(
+                str(obj.text or "").strip()
+                for obj in page_objects
+                if str(obj.text or "").strip()
+            )
             if "porto velho" in page_text.lower():
                 found = True
                 break
@@ -115,7 +126,9 @@ class RondoniaBulletinExtractor:
         groups = pdf.group_objects("y", objs, check_group=pdf.object_contains_center)
         len_counter = Counter(len(group.objects) for group in groups)
         most_common_len, _ = len_counter.most_common(1)[0]
-        possible_rows = [group for group in groups if len(group.objects) == most_common_len]
+        possible_rows = [
+            group for group in groups if len(group.objects) == most_common_len
+        ]
         possible_objs = []
         for group in possible_rows:
             possible_objs.extend(group.objects)
@@ -123,15 +136,11 @@ class RondoniaBulletinExtractor:
         last_obj = sorted(possible_objs, key=lambda obj: obj.y1, reverse=True)[0]
         first_y, last_y = first_obj.y0, last_obj.y1
         obj_municipio = find_first_by_texts(objs, ("município", "municipio"))
-        obj_total = last_obj = find_first_by_texts(objs, ("total geral", ))
+        obj_total = last_obj = find_first_by_texts(objs, ("total geral",))
 
         # Select all the objects on the table
         table_objs = sorted(
-            [
-                group
-                for group in objs
-                if group.y0 >= first_y and group.y0 <= last_y
-            ],
+            [group for group in objs if group.y0 >= first_y and group.y0 <= last_y],
             key=lambda obj: (obj.y0, obj.x0),
         )
         if obj_municipio is not None and obj_municipio not in table_objs:
@@ -141,13 +150,22 @@ class RondoniaBulletinExtractor:
         # Get table lines
         lines = [
             [obj.text for obj in line]
-            for line in pdf.group_objects("y", table_objs, check_group=pdf.object_contains_center)
+            for line in pdf.group_objects(
+                "y", table_objs, check_group=pdf.object_contains_center
+            )
         ]
 
         if obj_municipio is not None:
             header = lines.pop(0)
         else:  # Header not found
-            header = ["Município", "Casos Totais", "Óbitos Totais", "Curados Totais", "Casos Ativos", "Letalidade"]
+            header = [
+                "Município",
+                "Casos Totais",
+                "Óbitos Totais",
+                "Curados Totais",
+                "Casos Ativos",
+                "Letalidade",
+            ]
 
         yield header
         yield from lines
@@ -155,7 +173,9 @@ class RondoniaBulletinExtractor:
     @property
     def data(self):
         if self.date is not None and self.date < datetime.date(2021, 1, 18):
-            raise RuntimeError("This parser does not work for bulletins before 2021-01-18")
+            raise RuntimeError(
+                "This parser does not work for bulletins before 2021-01-18"
+            )
         objs = self._get_page_objects()
         lines = self._get_table_lines(objs)
         header = next(lines)
@@ -167,7 +187,9 @@ class RondoniaBulletinExtractor:
                 row[key] = RowsPtBrIntegerField.deserialize(row[key])
             municipio = row["municipio"].strip()
             yield {
-                "municipio": municipio if not municipio.lower().startswith("total") else "TOTAL NO ESTADO",
+                "municipio": municipio
+                if not municipio.lower().startswith("total")
+                else "TOTAL NO ESTADO",
                 "confirmados": row.get("casos_totais", row.get("casos")),
                 "mortes": row.get("obitos_totais", row.get("obitos")),
             }
