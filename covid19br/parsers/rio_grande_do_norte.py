@@ -46,8 +46,11 @@ class RioGrandeDoNorteBulletinExtractor:
     def __init__(self, filename):
         self.doc = pdf.PyMuPDFBackend(filename)
 
-    @property
-    def date(self):
+        self.date = self._extract_date()
+        if self.date and self.date < datetime.date(2021, 6, 7):
+            raise RuntimeError("This parser does not work for bulletins before 2021-06-07")
+
+    def _extract_date(self):
         first_objects = list(
             next(self.doc.text_objects(
                 starts_after=re.compile("ATUALIZADO EM"),

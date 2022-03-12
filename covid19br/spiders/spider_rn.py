@@ -41,9 +41,13 @@ class SpiderRN(BaseCovid19Spider):
         with tempfile.NamedTemporaryFile(mode="wb", suffix=".pdf") as tmp:
             tmp.write(response.body)
 
-            extractor = RioGrandeDoNorteBulletinExtractor(tmp.name)
-            date = extractor.date
+            try:
+                extractor = RioGrandeDoNorteBulletinExtractor(tmp.name)
+            except RuntimeError:
+                self.logger.error("This parser does not work for bulletins before 2021-06-06")
+                return
 
+            date = extractor.date
             deaths, confirmed = extractor.official_totals
             bulletin = StateTotalBulletinModel(
                 date=date,
