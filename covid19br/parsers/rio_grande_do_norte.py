@@ -108,7 +108,7 @@ class RioGrandeDoNorteBulletinExtractor:
             )
             if page_number == 2:
                 starts_after = re.compile("Grande do Norte, 2020.+")
-            elif page_number == 6:
+            elif page_number == self._get_last_table_page_number():
                 ends_before = re.compile("Fonte:.+")
             selected_objects = self.doc.text_objects(
                 starts_after=starts_after,
@@ -171,3 +171,8 @@ class RioGrandeDoNorteBulletinExtractor:
         if "," in nums[-1]:  # the column was merged with the right neighbor
             return nums[-2]
         return nums[1]  # the column was merged with the left neighbor
+
+    def _get_last_table_page_number(self):
+        if self.date and self.date < datetime.date(2021, 6, 24):
+            return 7
+        return 6
