@@ -173,7 +173,7 @@ class SpiderRO(BaseCovid19Spider):
         table_rows = table.xpath(".//tr")
         _title, _header, *rows = table_rows
         for row in rows:
-            city, confirmed, deaths = row.xpath(".//td//text()").extract()
+            city, confirmed, deaths, *extra = row.xpath(".//td//text()").extract()
             if "Total" in city:
                 bulletin = StateTotalBulletinModel(
                     date=date,
