@@ -1,6 +1,6 @@
+from collections import defaultdict
 import re
 import scrapy
-from collections import defaultdict
 
 from covid19br.common.base_spider import BaseCovid19Spider
 from covid19br.common.constants import State, ReportQuality
@@ -21,6 +21,7 @@ class SpiderRO(BaseCovid19Spider):
     news_base_url = "https://rondonia.ro.gov.br/"
     news_query_params = "?s=boletim+coronavirus"
     panel_url = "https://covid19.sesau.ro.gov.br/"
+    pdf_reports_url = "https://rondonia.ro.gov.br/covid-19/noticias/relatorios-de-acoes-sci/"
 
     def pre_init(self):
         self.requested_dates = list(self.requested_dates)
@@ -28,6 +29,7 @@ class SpiderRO(BaseCovid19Spider):
     def start_requests(self):
         yield scrapy.Request(self.news_base_url + self.news_query_params)
         yield scrapy.Request(self.panel_url, callback=self.parse_panel)
+        yield scrapy.Request(self.pdf_reports_url, callback=self.parse_pdfs_page)
 
     def parse(self, response, **kwargs):
         news_per_date = defaultdict(list)
@@ -86,8 +88,26 @@ class SpiderRO(BaseCovid19Spider):
         )
         self.add_new_bulletin_to_report(bulletin, update_date)
 
+    def parse_pdfs_page(self, response):
+        divs = response.xpath("//a[contains(@href, '.pdf') and contains(text(), 'Sala')]")
+        pdf_per_date = {}
+        for div in divs:
+            pdf_url = div.xpath("./@href").get()
+            pdf_date = self._extract_date_from_pdf_url(pdf_url)
+            bulletin_name = div.xpath(".//text()").extract_first().replace("\xa0", " ").upper()
+            if pdf_date in pdf_per_date and not "RETIFICADO" in bulletin_name:
+                continue
+            pdf_per_date[pdf_date] = pdf_url
+
+        for date in pdf_per_date:
+            if date in self.requested_dates:
+                yield scrapy.Request(pdf_per_date[date], callback=self.parse_pdf_report, cb_kwargs={"date": date})
+
+    def parse_pdf_report(self, response, date):
+        pass
+
     def _extract_cities_from_news(self, response, date):
-        table = response.xpath("//div[@class = 'entry mt10']//tbody")[0]
+        table = response.xpath("//div[@class='entry mt10']//tbody")[0]
         table_rows = table.xpath(".//tr")
         _title, _header, *rows = table_rows
         for row in rows:
@@ -124,3 +144,23 @@ class SpiderRO(BaseCovid19Spider):
                 source=response.request.url + " | Corpo da notícia",
             )
             self.add_new_bulletin_to_report(bulletin, date)
+
+    def _extract_date_from_pdf_url(self, pdf_url: str):
+        *rest, relevant_content = pdf_url.split("uploads/")
+        if not rest:
+            *rest, relevant_content = pdf_url.split("data.portal.sistemas.ro.gov.br/")
+
+        year, *_, text_with_date = relevant_content.split("/")
+        year = self.normalizer.ensure_integer(year)
+        text_with_date = re.sub(r'[.-]', r' ', text_with_date)
+
+        # fix cases like "0 8 de Março de 2022"
+        text_with_date = re.sub(r'(\d) (\d)', r'$1$2', text_with_date)
+        # fix cases like "28de Agosto de 2021"
+        text_with_date = re.sub(r'(\d+)(de)', r'\1 \2', text_with_date)
+
+        try:
+            return self.normalizer.extract_in_full_date(text_with_date, default_year=year)
+        except ValueError:
+            # TODO: implement a mechanism to infer the date based on the report number edition
+            pass
