@@ -59,7 +59,9 @@ class SpiderRN(BaseCovid19Spider):
             self.add_new_bulletin_to_report(bulletin, date)
 
             for row in extractor.data:
-                city, confirmed, deaths = row
+                city = row['municipio']
+                confirmed = row['confirmados']
+                deaths = row['mortes']
                 if city == "rn":
                     bulletin = StateTotalBulletinModel(
                         date=date,

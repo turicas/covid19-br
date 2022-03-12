@@ -94,7 +94,11 @@ class RioGrandeDoNorteBulletinExtractor:
             city = slug(city).replace("_", " ")
             confirmed = NormalizationUtils.ensure_integer(confirmed)
             deaths = NormalizationUtils.ensure_integer(deaths)
-            yield city, confirmed, deaths
+            yield {
+                "municipio": city,
+                "confirmados": confirmed,
+                "mortes": deaths,
+            }
 
     def _get_table_lines(self):
         for page_number in range(2, 7):
