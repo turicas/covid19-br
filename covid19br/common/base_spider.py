@@ -101,6 +101,10 @@ class BaseCovid19Spider(scrapy.Spider, ABC):
         report = self._get_or_create_report(date)
         report.add_warning(slug, description)
 
+    def add_note_in_report(self, date: datetime.date, note: str):
+        report = self._get_or_create_report(date)
+        report.add_note(note)
+
     def _get_or_create_report(self, date: datetime.date):
         report = self.reports.get(date)
         if not report:
