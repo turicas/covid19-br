@@ -1,10 +1,13 @@
+import logging
 from collections import defaultdict
 import re
 import scrapy
+import tempfile
 
 from covid19br.common.base_spider import BaseCovid19Spider
 from covid19br.common.constants import State, ReportQuality
 from covid19br.common.models.bulletin_models import StateTotalBulletinModel, CountyBulletinModel
+from covid19br.parsers.rondonia import RondoniaBulletinExtractor
 
 REGEXP_CASES = re.compile("Casos confirmados[  ]+–[  ]+([0-9.]+)")
 REGEXP_DEATHS = re.compile("Óbitos[  ]+–[  ]+([0-9.]+)[  ]+[(]")
@@ -28,8 +31,8 @@ class SpiderRO(BaseCovid19Spider):
 
     def start_requests(self):
         yield scrapy.Request(self.news_base_url + self.news_query_params)
-        yield scrapy.Request(self.panel_url, callback=self.parse_panel)
         yield scrapy.Request(self.pdf_reports_url, callback=self.parse_pdfs_page)
+        yield scrapy.Request(self.panel_url, callback=self.parse_panel)
 
     def parse(self, response, **kwargs):
         news_per_date = defaultdict(list)
@@ -104,7 +107,39 @@ class SpiderRO(BaseCovid19Spider):
                 yield scrapy.Request(pdf_per_date[date], callback=self.parse_pdf_report, cb_kwargs={"date": date})
 
     def parse_pdf_report(self, response, date):
-        pass
+        with tempfile.NamedTemporaryFile(mode="wb") as tmp:
+            tmp.write(response.body)
+            try:
+                extractor = RondoniaBulletinExtractor(tmp.name)
+            except RuntimeError:  # The file is not a PDF (probably HTML)
+                logging.log(logging.ERROR, f"File is not PDF for bulletin: {response.request.url}")
+                return
+            try:
+                bulletin_data = extractor.data
+            except RuntimeError:
+                logging.log(logging.ERROR, "This parser does not work for bulletins before 2021-01-18")
+                return
+
+            bulletin_date = extractor.date or date
+            for row in bulletin_data:
+                if row["municipio"] == "TOTAL NO ESTADO":
+                    bulletin = StateTotalBulletinModel(
+                        date=date,
+                        state=self.state,
+                        confirmed_cases=row["confirmados"],
+                        deaths=row["mortes"],
+                        source=response.request.url,
+                    )
+                else:
+                    bulletin = CountyBulletinModel(
+                        date=date,
+                        state=self.state,
+                        city=row["municipio"],
+                        confirmed_cases=row["confirmados"],
+                        deaths=row["mortes"],
+                        source=response.request.url,
+                    )
+                self.add_new_bulletin_to_report(bulletin, bulletin_date)
 
     def _extract_cities_from_news(self, response, date):
         table = response.xpath("//div[@class='entry mt10']//tbody")[0]

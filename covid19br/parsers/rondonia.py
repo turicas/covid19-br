@@ -1,18 +1,13 @@
+from collections import Counter
 import datetime
 import re
-from collections import Counter
-from pathlib import Path
-from urllib.parse import urlparse
-
-import rows
 from rows.plugins import pdf
 from rows.fields import slug
 
-from covid19br.common.data_normalization_utils import RowsPtBrIntegerField
+from covid19br.common.data_normalization_utils import RowsPtBrIntegerField, NormalizationUtils
 
-
-MONTHS = "jan fev mar abr mai jun jul ago set out nov dez".split()
 REGEXP_PTBR_DATE = re.compile("^[0-9]+ de [^ ]+ de [0-9]+$")
+
 
 def find_first_by_texts(objs, possible_texts):
     """Find the first TextObject which matches one of the possible texts"""
@@ -26,109 +21,38 @@ def find_first_by_texts(objs, possible_texts):
     return None
 
 
-def extract_date_from_url(url):
-    """Extracts date from bulletin URL, if possible"""
-
-    filename = Path(urlparse(url).path).name
-    parts = filename.lower().replace(".pdf", "").split("rio-")
-    if len(parts) != 2:
-        return None
-    date_parts = parts[1].split("-de-")
-    if len(date_parts) != 3:
-        return None
-    elif date_parts[1][:3] not in MONTHS:
-        return None
-
-    result = re.compile("([0-9]+) ([^ ]+) ([0-9]{4})").findall(" ".join(date_parts))
-    if not result:
-        return None
-    day, month, year = result[0]
-    return datetime.date(int(year), MONTHS.index(month.lower()[:3]) + 1, int(day))
-
-
-def get_links():
-    # There's no way to define the bulletin date based on URL for all links, so
-    # we use `extract_date` (which reads from the PDF itself) when cannot parse
-    # from URL.
-    import requests
-    from scrapy.http import HtmlResponse, Request
-
-    # Make a request using requests as of it was scrapy (will be deleted once
-    # it's integrated into BaseSpider)
-    list_url = "https://rondonia.ro.gov.br/covid-19/noticias/relatorios-de-acoes-sci/"
-    http_response = requests.get(list_url, headers={"User-Agent": "Mozilla"})
-    response = HtmlResponse(
-        url=list_url,
-        request=Request(url=list_url),
-        body=http_response.content,
-        headers=http_response.headers,
-    )
-
-    # Extract bulletins' links from HTML
-    links = response.xpath("//a[contains(@href, '.pdf') and contains(text(), 'Sala')]")
-    urls = set()
-    bulletins = []
-    for link in links:
-        url = link.attrib["href"]
-        text = link.xpath(".//text()").extract_first().replace("\xa0", " ")
-        edition = text.split(" | RELATÓRIO ")[1]
-        if "RETIFICADO" in edition.upper():
-            edition = edition.split()[0]
-        edition = int(edition)
-        if url in urls:
-            # If the URL is already there, it was from the newer version of the
-            # bulletin ("retificado"), so we skip
-            continue
-
-        urls.add(url)
-        bulletins.append({
-            "date": extract_date_from_url(url),
-            "edition": edition,
-            "url": url,
-        })
-    return bulletins
-
-
-class RondoniaParser:
+class RondoniaBulletinExtractor:
     # Works for PDF files >= 2021-01-18 (bulletin #290)
 
-    def __init__(self, filename, ocr=None):
-        self.filename = filename
-
+    def __init__(self, filename, use_ocr=False):
         # Check if the file is really a PDF
         with open(filename, mode="rb") as fobj:
             sample = fobj.read(1024)
             if not sample.startswith(b"%PDF"):
                 raise RuntimeError("This file is not a PDF")
 
-        self.ocr = ocr
+        self.filename = filename
+        self.doc = pdf.PyMuPDFBackend(filename)
+        self.use_ocr = use_ocr
         self._date = -1
-
-        if self.ocr is None and self.date == datetime.date(2021, 5, 2):
-            # This date has multiple hidden objects, so force using OCR
-            self.ocr = True
 
     @property
     def date(self):
         if self._date == -1:
-            doc = pdf.PyMuPDFBackend(self.filename)
             date = None
-            objects = next(doc.text_objects())
+            objects = next(self.doc.text_objects())
             for obj in objects:
                 if REGEXP_PTBR_DATE.match(obj.text.strip()):
                     date = obj.text.strip()
                     break
-            day, month, year = date.split(" de ")
-            self._date = datetime.date(int(year), MONTHS.index(month.lower()[:3]) + 1, int(day))
+            self._date = NormalizationUtils.extract_in_full_date(date)
         return self._date
 
     def _get_pages_text(self):
-        doc = pdf.PyMuPDFBackend(self.filename)
-        for page_objects in doc.text_objects(page_numbers=(3, 4)):
+        for page_objects in self.doc.text_objects(page_numbers=(3, 4)):
             yield page_objects
 
     def _get_pages_ocr(self):
-
         def check_group(axis, obj1, obj2, threshold):
             return pdf.check_merge_x(obj1, obj2, threshold)
 
@@ -148,10 +72,10 @@ class RondoniaParser:
                 yield objs
 
     def _get_pages(self):
-        if not self.ocr:
-            yield from self._get_pages_text()
-        else:
+        if self.use_ocr or self.date == datetime.date(2021, 5, 2):
+            # This date has multiple hidden objects, so force using OCR
             yield from self._get_pages_ocr()
+        yield from self._get_pages_text()
 
     def _get_page_objects(self):
         """Get page objects in which the table is (will filter out unneeded ones)
@@ -260,7 +184,7 @@ if __name__ == "__main__":
     parser.add_argument("output_filename")
     args = parser.parse_args()
 
-    parser = RondoniaParser(args.input_filename, ocr=args.ocr)
+    parser = RondoniaBulletinExtractor(args.input_filename, use_ocr=args.ocr)
     date = parser.date
     print(f"Extracting table for date {date}...")
 

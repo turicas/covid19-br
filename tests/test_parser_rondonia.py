@@ -1,7 +1,7 @@
 import csv
 from pathlib import Path
 
-from covid19br.parsers.rondonia import RondoniaParser
+from covid19br.parsers.rondonia import RondoniaBulletinExtractor
 
 
 def sorted_dicts(data):
@@ -12,7 +12,7 @@ def sorted_dicts(data):
 def run_parser_asserts(pdf_filename):
     expected_csv = pdf_filename.parent / pdf_filename.name.replace(".pdf", ".csv")
     try:
-        parser = RondoniaParser(pdf_filename)
+        parser = RondoniaBulletinExtractor(pdf_filename)
     except RuntimeError:  # Not a PDF
         assert not expected_csv.exists(), "File is not a PDF but a CSV was found"
     else:
