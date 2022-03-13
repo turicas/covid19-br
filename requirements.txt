@@ -1,6 +1,7 @@
 # Spiders
 cached-property
 --only-binary pymupdf
+pytesseract
 
 # Main
 Pillow

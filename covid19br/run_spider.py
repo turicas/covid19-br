@@ -13,6 +13,7 @@ from covid19br.spiders.spider_ba import SpiderBA
 from covid19br.spiders.spider_ce import SpiderCE
 from covid19br.spiders.spider_pr import SpiderPR
 from covid19br.spiders.spider_rn import SpiderRN
+from covid19br.spiders.spider_ro import SpiderRO
 from covid19br.spiders.spider_sp import SpiderSP
 from covid19br.spiders.spider_to import SpiderTO
 
@@ -22,6 +23,7 @@ AVAILABLE_SPIDERS = [
     SpiderCE,
     SpiderPR,
     SpiderRN,
+    SpiderRO,
     SpiderSP,
     SpiderTO,
 ]
@@ -184,6 +186,9 @@ elif args.filename_pattern and args.filename_pattern[-4:] != ".csv":
 
 else:
     spiders = get_spiders_to_run(args.states)
+    if not spiders:
+        raise ValueError(f"BAD PARAMETER: No state '{args.states}' found")
+
     date_params = build_date_parameters(args.start_date, args.end_date, args.dates_list)
 
     process = CrawlerProcess()
