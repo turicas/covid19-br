@@ -1,12 +1,18 @@
 import re
 import scrapy
+import tempfile
 
 from covid19br.common.base_spider import BaseCovid19Spider
 from covid19br.common.constants import State, ReportQuality
-from covid19br.common.models.bulletin_models import StateTotalBulletinModel
+from covid19br.common.models.bulletin_models import (
+    StateTotalBulletinModel,
+    CountyBulletinModel,
+)
+from covid19br.parsers.acre import AcreBulletinExtractor
 
-
-REGEXP_CASES = re.compile("o Acre registra ([0-9.]+)(?:.+) de contaminação pela doença")
+REGEXP_CASES = re.compile(
+    "O número de infectados (?:passou )?(?:subiu )?(?:para )?(?:permanece.? )?(?:em )?([0-9.]+) em todo o estado"
+)
 REGEXP_DEATHS = re.compile(
     "o número oficial de mortes por covid-19 (?:.+) ([0-9.]+)[,]? em todo o estado"
 )
