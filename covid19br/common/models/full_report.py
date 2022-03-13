@@ -127,26 +127,20 @@ class FullReportModel:
             self._auto_calculated_total.increase_deaths(bulletin.deaths)
 
     def check_total_death_cases(self) -> bool:
-        if not self._official_total_bulletins:
-            return False
-        auto_calculated_deaths = self._auto_calculated_total.deaths
-        return all(
-            [
-                auto_calculated_deaths == official_bulletin.deaths
-                for official_bulletin in self._official_total_bulletins
-            ]
-        )
+        death_cases_values = set()
+        if self._auto_calculated_total.has_deaths:
+            death_cases_values.add(self._auto_calculated_total.deaths)
+        for official_bulletin in self._official_total_bulletins:
+            death_cases_values.add(official_bulletin.deaths)
+        return len(death_cases_values) == 1
 
     def check_total_confirmed_cases(self) -> bool:
-        if not self._official_total_bulletins:
-            return False
-        auto_calculated_cases = self._auto_calculated_total.confirmed_cases
-        return all(
-            [
-                auto_calculated_cases == official_bulletin.confirmed_cases
-                for official_bulletin in self._official_total_bulletins
-            ]
-        )
+        confirmed_cases_values = set()
+        if self._auto_calculated_total.has_confirmed_cases:
+            confirmed_cases_values.add(self._auto_calculated_total.confirmed_cases)
+        for official_bulletin in self._official_total_bulletins:
+            confirmed_cases_values.add(official_bulletin.confirmed_cases)
+        return len(confirmed_cases_values) == 1
 
     def to_csv_rows(self):
         rows = []
@@ -357,9 +351,7 @@ class FullReportModel:
                     "são apenas a soma automática dos dados dos municípios."
                 ),
             )
-        elif not self._auto_calculated_total.is_empty and (
-            not self.check_total_confirmed_cases() or not self.check_total_death_cases()
-        ):
+        if not self.check_total_confirmed_cases() or not self.check_total_death_cases():
             sources_data = "\n".join(
                 [
                     f"Fonte {{ {' | '.join(bulletin.sources)} }}: "
