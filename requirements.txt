@@ -23,7 +23,8 @@ splinter==0.15.0
 tqdm
 
 # Spiders
---only-binary pymupdf
+pymupdf
+pytesseract
 
 # Web server
 flask
