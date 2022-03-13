@@ -80,7 +80,58 @@ class SpiderAC(BaseCovid19Spider):
         )
 
     def parse_pdf_bulletin(self, response, date):
-        print(f"Let's que let's {response.request.url}")
+        source = response.request.url
+        with tempfile.NamedTemporaryFile(mode="wb", suffix=".pdf") as tmp:
+            tmp.write(response.body)
+
+            extractor = AcreBulletinExtractor(tmp.name)
+
+            pdf_date = extractor.date
+            if pdf_date and pdf_date != date:
+                self.logger.warning(
+                    f"PDF date does not match for pdf {source}. Aborting extraction."
+                )
+                return
+
+            pdf_official_total = extractor.official_total
+            if pdf_official_total:
+                bulletin = StateTotalBulletinModel(
+                    date=date,
+                    state=self.state,
+                    confirmed_cases=pdf_official_total["confirmados"],
+                    deaths=pdf_official_total["mortes"],
+                    source=response.request.url + " | Painel na primeira pag. do pdf.",
+                )
+                self.add_new_bulletin_to_report(bulletin, date)
+
+            pdf_data = list(extractor.data)
+            if not pdf_data:
+                if "parcial" not in source.lower():
+                    self.logger.error(
+                        f"Couldn't extract data from pdf that is not parcial. Pdf source: {source}."
+                    )
+                return
+
+            for row in pdf_data:
+                if row["municipio"].lower() == "total":
+                    bulletin = StateTotalBulletinModel(
+                        date=date,
+                        state=self.state,
+                        confirmed_cases=row["confirmados"],
+                        deaths=row["mortes"],
+                        source=response.request.url
+                        + " | Tabela com dados dos municípios do pdf.",
+                    )
+                else:
+                    bulletin = CountyBulletinModel(
+                        date=date,
+                        state=self.state,
+                        city=row["municipio"],
+                        confirmed_cases=row["confirmados"],
+                        deaths=row["mortes"],
+                        source=response.request.url,
+                    )
+                self.add_new_bulletin_to_report(bulletin, date)
 
     def _extract_cases_and_deaths_from_news(self, response, date):
         body_text = " ".join(
