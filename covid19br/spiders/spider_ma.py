@@ -7,7 +7,10 @@ from datetime import datetime
 
 from covid19br.common.base_spider import BaseCovid19Spider
 from covid19br.common.constants import State, ReportQuality
-from covid19br.common.models.bulletin_models import CountyBulletinModel, StateTotalBulletinModel
+from covid19br.common.models.bulletin_models import (
+    CountyBulletinModel,
+    StateTotalBulletinModel,
+)
 
 CITY_NAME_CSV_COLUMN = 0
 CONFIRMED_CASES_CSV_COLUMN = 1
@@ -18,9 +21,7 @@ class SpiderMA(BaseCovid19Spider):
     state = State.MA
     name = State.MA.value
     information_delay_in_days = 0
-    report_qualities = [
-        ReportQuality.COUNTY_BULLETINS,
-    ]
+    report_qualities = [ReportQuality.COUNTY_BULLETINS]
 
     base_url = "https://www.saude.ma.gov.br/boletins-covid-19"
 
@@ -40,12 +41,14 @@ class SpiderMA(BaseCovid19Spider):
         bulletins_per_date = defaultdict(dict)
         divs = response.xpath("//div[@class='wpb_wrapper']//a")
         for div in divs:
-            div_text = self.normalizer.remove_accentuation((div.xpath("./text()").get() or "").lower())
+            div_text = self.normalizer.remove_accentuation(
+                (div.xpath("./text()").get() or "").lower()
+            )
             div_url = div.xpath("./@href").get()
-            if 'dados gerais em csv' in div_text:
+            if "dados gerais em csv" in div_text:
                 date = self._extract_date_from_csv_name(div_url)
                 bulletins_per_date[date]["csv"] = div_url
-            elif 'boletim epidemiologic' in div_text:
+            elif "boletim epidemiologic" in div_text:
                 date = self.normalizer.extract_in_full_date(div_text)
                 bulletins_per_date[date]["pdf"] = div_url
 
@@ -70,9 +73,7 @@ class SpiderMA(BaseCovid19Spider):
     def parse_reports_csv(self, response, date):
         # TODO: handle files that need to be opened in universal-newline mode (ex: csv from 2022-03-06)
         data = rows.import_from_csv(
-            io.BytesIO(response.body),
-            encoding="latin-1",
-            dialect="excel-semicolon"
+            io.BytesIO(response.body), encoding="latin-1", dialect="excel-semicolon"
         )
         # remove empty lines at the end of the file
         data = [row for row in data if row[CITY_NAME_CSV_COLUMN]]
@@ -112,17 +113,36 @@ class SpiderMA(BaseCovid19Spider):
 
         pdf_date = self._get_pdf_date(first_page_objs)
         if pdf_date and pdf_date != date:
-            self.logger.warning(f"PDF date does not match for pdf {source}. Aborting extraction.")
+            self.logger.warning(
+                f"PDF date does not match for pdf {source}. Aborting extraction."
+            )
             return
 
-        confirmed_cases_label = next(obj for obj in first_page_objs if obj.text.lower() == "confirmados")
-        deaths_label = next(obj for obj in first_page_objs if obj.text.lower() == 'óbitos')
+        confirmed_cases_label = next(
+            obj for obj in first_page_objs if obj.text.lower() == "confirmados"
+        )
+        deaths_label = next(
+            obj for obj in first_page_objs if obj.text.lower() == "óbitos"
+        )
 
         # select the number above and on the left of confirmed_cases_label
-        confirmed_cases = next(obj for obj in first_page_objs if self._is_only_number(obj.text) and obj.y0 < confirmed_cases_label.y0 and obj.x0 < confirmed_cases_label.x0)
+        confirmed_cases = next(
+            obj
+            for obj in first_page_objs
+            if self._is_only_number(obj.text)
+            and obj.y0 < confirmed_cases_label.y0
+            and obj.x0 < confirmed_cases_label.x0
+        )
         # select the numbers above and that are in the same column as deaths_label and pick the closest one
         deaths, *_ = sorted(
-            [obj for obj in first_page_objs if self._is_only_number(obj.text) and obj.y0 < deaths_label.y0 and obj.x0 < deaths_label.x0 and obj.x1 > deaths_label.x1],
+            [
+                obj
+                for obj in first_page_objs
+                if self._is_only_number(obj.text)
+                and obj.y0 < deaths_label.y0
+                and obj.x0 < deaths_label.x0
+                and obj.x1 > deaths_label.x1
+            ],
             key=lambda obj: deaths_label.y0 - obj.y0,
         ) or [None]
 
