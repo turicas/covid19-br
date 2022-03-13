@@ -8,17 +8,10 @@ from rows.plugins import pdf
 from covid19br.common.constants import State
 from covid19br.common.data_normalization_utils import NormalizationUtils
 from covid19br.common.demographic_utils import DemographicUtils
+from covid19br.parsers.extractor_utils import match_object_from_regexp
 
 REGEXP_DAY_MONTH = re.compile("([0-9]+) de (.+)$")
 REGEXP_YEAR = re.compile("^de ([0-9]{4})$")
-
-
-def match_object_from_regexp(regexp, objects):
-    """Return the matching result for"""
-    for obj in objects:
-        result = regexp.findall(obj.text)
-        if result:
-            return result
 
 
 def parse_int(value):
