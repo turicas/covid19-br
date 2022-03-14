@@ -44,11 +44,14 @@ class RioGrandeDoNorteBulletinExtractor:
     demographics = DemographicUtils()
 
     def __init__(self, filename):
+        self.filename = filename
         self.doc = pdf.PyMuPDFBackend(filename)
 
         self.date = self._extract_date()
         if self.date and self.date < datetime.date(2021, 6, 7):
             raise RuntimeError("This parser does not work for bulletins before 2021-06-07")
+
+        self._total_pdf_pages = None
 
     def _extract_date(self):
         first_objects = list(
@@ -108,7 +111,7 @@ class RioGrandeDoNorteBulletinExtractor:
             )
             if page_number == 2:
                 starts_after = re.compile("Grande do Norte, 2020.+")
-            elif page_number == self._get_last_table_page_number():
+            elif page_number == self.last_table_page_number:
                 ends_before = re.compile("Fonte:.+")
             selected_objects = self.doc.text_objects(
                 starts_after=starts_after,
@@ -175,7 +178,8 @@ class RioGrandeDoNorteBulletinExtractor:
             return nums[-2]
         return nums[1]  # the column was merged with the left neighbor
 
-    def _get_last_table_page_number(self):
-        if self.date and self.date < datetime.date(2021, 6, 24):
-            return 7
-        return 6
+    @property
+    def last_table_page_number(self):
+        if not self._total_pdf_pages:
+            self._total_pdf_pages = pdf.number_of_pages(self.filename)
+        return self._total_pdf_pages - 1
