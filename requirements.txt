@@ -1,3 +1,8 @@
+# Spiders
+cached-property
+--only-binary pymupdf
+pytesseract
+
 # Main
 Pillow
 cached_property
@@ -21,10 +26,6 @@ scrapy
 selenium==3.141.0
 splinter==0.15.0
 tqdm
-
-# Spiders
-pymupdf
-pytesseract
 
 # Web server
 flask
