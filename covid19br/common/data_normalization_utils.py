@@ -8,7 +8,9 @@ import rows
 CURRENT_YEAR = date.today().year
 MONTHS = "jan fev mar abr mai jun jul ago set out nov dez".split()
 
-REGEXP_IN_FULL_DATE = re.compile("([0-9]{1,2})(?: +de)? ([^ ]+)(?: de ([0-9]{4}))?")
+REGEXP_IN_FULL_DATE = re.compile(
+    "([0-9]{1,2})(?: +de)? ([^ ]+)(?: de)?(?: ([0-9]{4}))?"
+)
 REGEXP_NUMERIC_DATE = re.compile("([0-9]{2})[/-]([0-9]{2})[/-]([0-9]{2,4})[ .]?")
 
 
