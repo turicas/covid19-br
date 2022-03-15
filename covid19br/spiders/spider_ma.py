@@ -5,16 +5,15 @@ import scrapy
 from collections import defaultdict
 from datetime import datetime
 
+import tempfile
+
 from covid19br.common.base_spider import BaseCovid19Spider
 from covid19br.common.constants import State, ReportQuality
 from covid19br.common.models.bulletin_models import (
     CountyBulletinModel,
     StateTotalBulletinModel,
 )
-
-CITY_NAME_CSV_COLUMN = 0
-CONFIRMED_CASES_CSV_COLUMN = 1
-DEATH_CASES_CSV_COLUMN = 2
+from covid19br.parsers.MA.maranhao_csv import MaranhaoCSVBulletinExtractor
 
 
 class SpiderMA(BaseCovid19Spider):
@@ -71,40 +70,35 @@ class SpiderMA(BaseCovid19Spider):
                     )
 
     def parse_reports_csv(self, response, date):
-        # TODO: handle files that need to be opened in universal-newline mode (ex: csv from 2022-03-06)
-        data = rows.import_from_csv(
-            io.BytesIO(response.body), encoding="latin-1", dialect="excel-semicolon"
-        )
-        # remove empty lines at the end of the file
-        data = [row for row in data if row[CITY_NAME_CSV_COLUMN]]
+        with tempfile.NamedTemporaryFile(mode="wb", suffix=".pdf") as tmp:
+            tmp.write(response.body)
+            extractor = MaranhaoCSVBulletinExtractor(tmp.name)
+            for report in extractor.data:
+                name = report["municipio"].lower()
+                deaths = report["mortes"]
+                cases = report["confirmados"]
 
-        _headers, county_reports = data[:2], data[2:]
-        for report in county_reports:
-            name = report[CITY_NAME_CSV_COLUMN].lower()
-            deaths = report[DEATH_CASES_CSV_COLUMN]
-            cases = report[CONFIRMED_CASES_CSV_COLUMN]
-
-            if "revisão" in name:
-                self.add_note_in_report(date, f"- Nota no csv: {name}")
-            elif "total" in name:
-                bulletin = StateTotalBulletinModel(
-                    date=date,
-                    state=self.state,
-                    deaths=deaths,
-                    confirmed_cases=cases,
-                    source=response.request.url,
-                )
-                self.add_new_bulletin_to_report(bulletin, date)
-            else:
-                bulletin = CountyBulletinModel(
-                    date=date,
-                    state=self.state,
-                    city=name,
-                    confirmed_cases=cases,
-                    deaths=deaths,
-                    source=response.request.url,
-                )
-                self.add_new_bulletin_to_report(bulletin, date)
+                if "revisão" in name:
+                    self.add_note_in_report(date, f"- Nota no csv: {name}")
+                elif "total" in name:
+                    bulletin = StateTotalBulletinModel(
+                        date=date,
+                        state=self.state,
+                        deaths=deaths,
+                        confirmed_cases=cases,
+                        source=response.request.url,
+                    )
+                    self.add_new_bulletin_to_report(bulletin, date)
+                else:
+                    bulletin = CountyBulletinModel(
+                        date=date,
+                        state=self.state,
+                        city=name,
+                        confirmed_cases=cases,
+                        deaths=deaths,
+                        source=response.request.url,
+                    )
+                    self.add_new_bulletin_to_report(bulletin, date)
 
     def parse_report_pdf(self, response, date):
         source = response.request.url
