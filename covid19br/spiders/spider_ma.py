@@ -1,10 +1,8 @@
 import io
 import re
-import rows
 import scrapy
 from collections import defaultdict
 from datetime import datetime
-
 import tempfile
 
 from covid19br.common.base_spider import BaseCovid19Spider
@@ -14,6 +12,7 @@ from covid19br.common.models.bulletin_models import (
     StateTotalBulletinModel,
 )
 from covid19br.parsers.MA.maranhao_csv import MaranhaoCSVBulletinExtractor
+from covid19br.parsers.MA.maranhao_pdf import MaranhaoPdfBulletinExtractor
 
 
 class SpiderMA(BaseCovid19Spider):
@@ -102,57 +101,25 @@ class SpiderMA(BaseCovid19Spider):
 
     def parse_report_pdf(self, response, date):
         source = response.request.url
-        doc = rows.plugins.pdf.PyMuPDFBackend(io.BytesIO(response.body))
-        first_page_objs = next(doc.text_objects())
+        file = io.BytesIO(response.body)
+        extractor = MaranhaoPdfBulletinExtractor(file)
 
-        pdf_date = self._get_pdf_date(first_page_objs)
+        pdf_date = extractor.date
         if pdf_date and pdf_date != date:
             self.logger.warning(
                 f"PDF date does not match for pdf {source}. Aborting extraction."
             )
             return
 
-        confirmed_cases_label = next(
-            obj for obj in first_page_objs if obj.text.lower() == "confirmados"
-        )
-        deaths_label = next(
-            obj for obj in first_page_objs if obj.text.lower() == "óbitos"
-        )
-
-        # select the number above and on the left of confirmed_cases_label
-        confirmed_cases = next(
-            obj
-            for obj in first_page_objs
-            if self._is_only_number(obj.text)
-            and obj.y0 < confirmed_cases_label.y0
-            and obj.x0 < confirmed_cases_label.x0
-        )
-        # select the numbers above and that are in the same column as deaths_label and pick the closest one
-        deaths, *_ = sorted(
-            [
-                obj
-                for obj in first_page_objs
-                if self._is_only_number(obj.text)
-                and obj.y0 < deaths_label.y0
-                and obj.x0 < deaths_label.x0
-                and obj.x1 > deaths_label.x1
-            ],
-            key=lambda obj: deaths_label.y0 - obj.y0,
-        ) or [None]
-
+        official_total = extractor.official_total
         bulletin = StateTotalBulletinModel(
             date=date,
             state=self.state,
-            deaths=deaths.text,
-            confirmed_cases=confirmed_cases.text,
-            source=response.request.url,
+            deaths=official_total["confirmados"],
+            confirmed_cases=official_total["mortes"],
+            source=source,
         )
         self.add_new_bulletin_to_report(bulletin, date)
-
-    def _get_pdf_date(self, text_objs):
-        for obj in text_objs:
-            if "BOLETIM ATUALIZADO" in obj.text:
-                return self.normalizer.extract_numeric_date(obj.text)
 
     @staticmethod
     def _extract_date_from_csv_name(csv_name) -> datetime.date:
@@ -164,7 +131,3 @@ class SpiderMA(BaseCovid19Spider):
             else:
                 month, day = date_month[2:4], date_month[0:2]
             return datetime(int(year), int(month), int(day)).date()
-
-    @staticmethod
-    def _is_only_number(value):
-        return re.compile("^([0-9.]+)$").findall(value.strip())
