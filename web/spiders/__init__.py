@@ -9,6 +9,7 @@ from .spider_pe import Covid19PESpider
 from .spider_pr import Covid19PRSpider
 from .spider_rn import Covid19RNSpider
 from .spider_rr import Covid19RRSpider
+from .spider_se import Covid19SESpider
 
 SPIDERS = [
     Covid19CESpider,
@@ -17,6 +18,7 @@ SPIDERS = [
     Covid19PRSpider,
     Covid19RNSpider,
     Covid19RRSpider,
+    Covid19SESpider,
 ]
 STATE_SPIDERS = {SpiderClass.name: SpiderClass for SpiderClass in SPIDERS}
 # TODO: do autodiscovery from base class' subclasses
