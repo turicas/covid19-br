@@ -1,6 +1,6 @@
 import argparse
-from datetime import datetime
 import sys
+from datetime import datetime
 from pathlib import Path
 
 import rows
@@ -12,6 +12,7 @@ from covid19br.common.data_normalization_utils import NormalizationUtils
 from covid19br.spiders.spider_ba import SpiderBA
 from covid19br.spiders.spider_ce import SpiderCE
 from covid19br.spiders.spider_pr import SpiderPR
+from covid19br.spiders.spider_rj import SpiderRJ
 from covid19br.spiders.spider_ro import SpiderRO
 from covid19br.spiders.spider_sp import SpiderSP
 from covid19br.spiders.spider_to import SpiderTO
@@ -24,6 +25,7 @@ AVAILABLE_SPIDERS = [
     SpiderRO,
     SpiderSP,
     SpiderTO,
+    SpiderRJ
 ]
 
 
