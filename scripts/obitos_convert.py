@@ -12,7 +12,7 @@ from covid19br.utils import brazilian_epidemiological_week, one_day
 from obitos_spider import DeathsSpider
 
 RESPIRATORY_DEATH_CAUSES = list(DeathsSpider.causes_map["respiratory"].values())
-YEAR_CHOICES = (2019, 2020)
+YEAR_CHOICES = (2019, 2020, 2021)
 PREFIX_CHOICES = ("deaths", "new_deaths")
 
 

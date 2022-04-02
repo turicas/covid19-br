@@ -105,7 +105,7 @@ class DeathsSpider(BaseRegistroCivilSpider):
 
     def start_requests_after_login(self):
         for state in STATES:
-            for year in [2020, 2019]:
+            for year in [2021, 2020, 2019]:
                 yield self.make_chart_request(
                     "respiratory",
                     start_date=datetime.date(year, 1, 1),
