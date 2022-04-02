@@ -28,3 +28,6 @@ docker-deploy:
 
 docker-validate: docker-build
 	docker container run --rm --name covid19-br --volume $(PWD)/data/output:/app/data/output covid19-br ./validate.sh
+
+docker-get-insumos: docker-build
+	docker container run --env-file ./.env --rm --name covid19-br --volume $(PWD)/data:/app/data covid19-br ./get_insumos.sh
